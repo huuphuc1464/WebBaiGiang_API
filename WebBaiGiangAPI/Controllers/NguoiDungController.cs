@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +18,10 @@ namespace WebBaiGiangAPI.Controllers
     public class NguoiDungController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private string patternPass = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-~=`{}[\]:"";'<>?,./]).{8,}$";
+        private string patternEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+        private string patternSDT = @"^(0)[1-9][0-9]{8}$";
+        private string patternMSSV = @"^(04|03)(01|02|03|04|06|07|08|09|12|61|62|63|64|65|66|67|68|69)\d{2}(\d{1})\d{3}$";
 
         public NguoiDungController(AppDbContext context)
         {
@@ -23,26 +29,26 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // GET: api/NguoiDung
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<NguoiDung>>> GetNguoiDung()
-        //{
-        //    try
-        //    {
-        //        var nguoiDungs = await _context.NguoiDungs.ToListAsync();
+        /*[HttpGet]
+        public async Task<ActionResult<IEnumerable<NguoiDung>>> GetNguoiDung()
+        {
+            try
+            {
+                var nguoiDungs = await _context.NguoiDungs.ToListAsync();
 
-        //        if (!nguoiDungs.Any())
-        //        {
-        //            return NoContent();
-        //        }
+                if (!nguoiDungs.Any())
+                {
+                    return NoContent();
+                }
 
-        //        return Ok(nguoiDungs);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Ghi log lỗi tại đây nếu cần
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "Lỗi khi lấy danh sách người dùng: " + ex.Message);
-        //    }
-        //}
+                return Ok(nguoiDungs);
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi tại đây nếu cần
+                return StatusCode(StatusCodes.Status500InternalServerError, "Lỗi khi lấy danh sách người dùng: " + ex.Message);
+            }
+        }*/
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetNguoiDungs()
@@ -50,9 +56,9 @@ namespace WebBaiGiangAPI.Controllers
             try
             {
                 var nguoiDungs = await _context.NguoiDungs
-                    .Include(nd => nd.Khoa) // Join với bảng Khoa
-                    .Include(nd => nd.BoMon) // Join với bảng BoMon
-                    .Include(nd => nd.Quyen) // Join với bảng Quyen
+                    .Include(nd => nd.Khoa)
+                    .Include(nd => nd.BoMon)
+                    .Include(nd => nd.Quyen)
                     .Select(nd => new
                     {
                         nd.MaNguoiDung,
@@ -69,22 +75,10 @@ namespace WebBaiGiangAPI.Controllers
                         nd.SDT,
                         nd.GioiTinh,
                         nd.NgaySinh,
-                        nd.TrangThai,
-                        Khoa = new
-                        {
-                            nd.Khoa.MaKhoa,
-                            nd.Khoa.TenKhoa
-                        },
-                        BoMon = new
-                        {
-                            nd.BoMon.MaBoMon,
-                            nd.BoMon.TenBoMon
-                        },
-                        Quyen = new
-                        {
-                            nd.Quyen.MaQuyen,
-                            nd.Quyen.TenQuyen
-                        }
+                        nd.TrangThai,              
+                        nd.Khoa.TenKhoa,
+                        nd.BoMon.TenBoMon,
+                        nd.Quyen.TenQuyen,
                     })
                     .ToListAsync();
 
@@ -104,9 +98,34 @@ namespace WebBaiGiangAPI.Controllers
 
        // GET: api/NguoiDung/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<NguoiDung>> GetNguoiDung(string id)
+        public async Task<ActionResult<object>> GetNguoiDung(string id)
         {
-            var nguoiDung = await _context.NguoiDungs.FindAsync(id);
+            var nguoiDung = await _context.NguoiDungs
+                .Include(nd => nd.Khoa)
+                .Include(nd => nd.BoMon)
+                .Include(nd => nd.Quyen)
+                .Select(nd => new
+                {
+                    nd.MaNguoiDung,
+                    nd.MaQuyen,
+                    nd.MaKhoa,
+                    nd.MaBoMon,
+                    nd.Email,
+                    nd.Password,
+                    nd.HoTen,
+                    nd.Lop,
+                    nd.DiaChi,
+                    nd.AnhDaiDien,
+                    nd.MSSV,
+                    nd.SDT,
+                    nd.GioiTinh,
+                    nd.NgaySinh,
+                    nd.TrangThai,
+                    nd.Khoa.TenKhoa,
+                    nd.BoMon.TenBoMon,
+                    nd.Quyen.TenQuyen,
+                })
+                .FirstOrDefaultAsync();
 
             if (nguoiDung == null)
             {
@@ -117,7 +136,6 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // PUT: api/NguoiDung/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNguoiDung(string id, NguoiDung nguoiDung)
         {
@@ -147,8 +165,7 @@ namespace WebBaiGiangAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/NguoiDung
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /* POST: api/NguoiDung
         [HttpPost]
         public async Task<ActionResult<NguoiDung>> PostNguoiDung(NguoiDung nguoiDung)
         {
@@ -170,16 +187,21 @@ namespace WebBaiGiangAPI.Controllers
             }
 
             return CreatedAtAction(nameof(GetNguoiDung), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
-        }
+        }*/
+
         [HttpPost]
         [Route("/api/NguoiDung/DangKyNguoiDung")]
-        public async Task<ActionResult<NguoiDung>> DangKyNguoiDung(string maQuyen, string maKhoa, string maBoMon, string email, string password, string hoTen, string Lop, string diaChi, string anhDaiDien, string mssv, string sdt, string gioiTinh, DateOnly ngaySinh)
+        public async Task<IActionResult> DangKyNguoiDung([FromForm] NguoiDung nguoiDung, [FromForm] IFormFile anhDaiDien1)
         {
             var passwordHasher = new PasswordHasher<NguoiDung>();
+
+            // Lấy mã người dùng lớn nhất
             var maxMaNguoiDung = await _context.NguoiDungs
                 .OrderByDescending(nd => nd.MaNguoiDung)
                 .Select(nd => nd.MaNguoiDung)
                 .FirstOrDefaultAsync();
+
+            // Tạo mã người dùng
             var newMaNguoiDung = "";
             if (maxMaNguoiDung != null)
             {
@@ -187,33 +209,161 @@ namespace WebBaiGiangAPI.Controllers
                 var numberPart = int.Parse(maxMaNguoiDung.Substring(2)); // Bỏ ký tự 'ND'
 
                 // Tăng lên 1 và tạo mã mới
-                 newMaNguoiDung = "ND" + (numberPart + 1).ToString("D1"); // Format D3 để giữ 3 chữ số
+                newMaNguoiDung = "ND" + (numberPart + 1).ToString("D1");
             }
             else
             {
                 // Nếu bảng rỗng, đặt giá trị mặc định
-                 newMaNguoiDung = "ND1";
+                newMaNguoiDung = "ND1";
+            }
+            nguoiDung.MaNguoiDung = newMaNguoiDung;
+
+            // Kiểm tra dữ liệu theo validate
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new
+                {
+                    message = "Dữ liệu nhập vào không hợp lệ",
+                    title = "One or more validation errors occurred.",
+                    status = 400,
+                    errors,
+                    traceId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                });
             }
 
-            NguoiDung nguoiDung = new NguoiDung()
+            /* Kiểm tra password theo định dạng
+                Độ dài: tối thiểu 8 kí tự 
+                - bao gồm:
+                   + Chữ in hoa: A, B, ...,Z
+                   + chữ in thường: a, b, ...,z
+                   + Chữ số và ký tự đb (!@#$%^&*()_+-~=\`{}[]:";'<>?,./)
+             */
+            if (!Regex.IsMatch(nguoiDung.Password, patternPass))
             {
-                MaNguoiDung = newMaNguoiDung,
-                MaQuyen = maQuyen,
-                MaBoMon = maBoMon,
-                MaKhoa = maKhoa,
-                Email = email,
-                Password = passwordHasher.HashPassword(null, password),
-                HoTen = hoTen,
-                Lop = Lop,
-                DiaChi = diaChi,
-                AnhDaiDien = anhDaiDien,
-                MSSV = mssv,
-                SDT = sdt,
-                GioiTinh = gioiTinh,
-                NgaySinh = ngaySinh,
-                TrangThai = "1",
+                return BadRequest(new
+                {
+                    message = "Password không hợp lệ",
+                    data = nguoiDung
+                });
+            }
+
+            nguoiDung.Password = passwordHasher.HashPassword(nguoiDung, nguoiDung.Password);
+
+            // Kiểm tra email
+            if (!Regex.IsMatch(nguoiDung.Email, patternEmail))
+            {
+                return BadRequest(new
+                {
+                    message = "Email không hợp lệ",
+                    data = nguoiDung
+                });
+            }
+
+            // Kiểm tra sdt
+            if (!Regex.IsMatch(nguoiDung.SDT, patternSDT))
+            {
+                return BadRequest(new
+                {
+                    message = "Số điện thoại không hợp lệ",
+                    data = nguoiDung
+                });
+            }
+
+            // Kiểm tra giới tính
+            if (nguoiDung.GioiTinh != "Nam" && nguoiDung.GioiTinh != "Nữ")
+            {
+                return BadRequest(new
+                {
+                    message = "Giới tính chỉ chấp nhận giá trị Nam hoặc Nữ",
+                    data = nguoiDung
+                });
+            }
+
+            // Loại bỏ khoảng trắng dư thừa
+            nguoiDung.HoTen = Regex.Replace(nguoiDung.HoTen.Trim(), @"\s+", " ");
+            nguoiDung.DiaChi = Regex.Replace(nguoiDung.DiaChi.Trim(), @"\s+", " ");
+            nguoiDung.Lop = Regex.Replace(nguoiDung.Lop.Trim(), @"\s+", " ");
+
+            /* Kiểm tra MSSV
+             Quy tắc đặt MSSV theo mã đào tạo trường CĐ Kỹ Thuật Cao Thắng (CKC)
+            [mã bậc(mã số)].[mã ngành(mã số)].[khoá(hai số cuối của năm)].[mã loại hình đào tạo(mã số)].[số thứ tự] */
+            if (!string.IsNullOrEmpty(nguoiDung.MSSV) && !Regex.IsMatch(nguoiDung.MSSV, patternMSSV))
+            {
+                return BadRequest(new
+                {
+                    message = "MSSV không đúng định dạng của trường Cao đẳng Kỹ Thuật Cao Thắng",
+                    data = nguoiDung
+                });
+            }
+
+            // Kiểm tra tồn tại
+            if (_context.NguoiDungs.Any(u => u.Email == nguoiDung.Email))
+            {
+                return Conflict(new { message = "Email đã tồn tại trong hệ thống." });
             };
+
+            if (_context.NguoiDungs.Any(u => u.SDT == nguoiDung.SDT))
+            {
+                return Conflict(new { message = "SDT đã tồn tại trong hệ thống." });
+            };
+
+            if (_context.NguoiDungs.Any(u => u.MSSV == nguoiDung.MSSV))
+            {
+                return Conflict(new { message = "MSSV đã tồn tại trong hệ thống." });
+            };
+
+            //Xử lý upload ảnh
+            if (anhDaiDien1 != null && anhDaiDien1.Length > 0)
+            {
+                // Kiểm tra loại file (chỉ chấp nhận ảnh PNG, JPG, JPEG)
+                var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
+                var fileExtension = Path.GetExtension(anhDaiDien1.FileName).ToLower();
+                if (!allowedExtensions.Contains(fileExtension))
+                {
+                    return BadRequest(new { message = "Chỉ chấp nhận file ảnh định dạng PNG, JPG, JPEG." });
+                }
+
+                // Tạo tên file duy nhất
+                string uniqueFileName = $"{nguoiDung.MaNguoiDung}{fileExtension}";
+
+                // Đường dẫn thư mục lưu file
+                string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "AnhNguoiDung");
+
+                // Tạo thư mục nếu chưa tồn tại
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                // Đường dẫn đầy đủ của file
+                string filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                // Lưu file vào local
+                try
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await anhDaiDien1.CopyToAsync(stream);
+                    }
+                    // Gán đường dẫn file cho thuộc tính AnhDaiDien của nguoiDung
+                    nguoiDung.AnhDaiDien = uniqueFileName;
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, new { message = "Lỗi khi lưu ảnh.", error = ex.Message });
+                }
+            }
+            nguoiDung.TrangThai = "1";
+
             _context.NguoiDungs.Add(nguoiDung);
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -233,7 +383,41 @@ namespace WebBaiGiangAPI.Controllers
             return CreatedAtAction(nameof(GetNguoiDung), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
         }
 
-        // DELETE: api/NguoiDung/5
+        [HttpPost("DangNhap")]
+        public async Task<IActionResult> DangNhap (string email,  string password)
+        {
+            // Tìm người dùng theo email
+            var user = await _context.NguoiDungs.SingleOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                return Unauthorized(new 
+                { 
+                    message = "Email không tồn tại",
+                });
+            }
+            // Kiểm tra mật khẩu (đã băm)
+            var passwordHasher = new PasswordHasher<NguoiDung>();
+            var verificationResult = passwordHasher.VerifyHashedPassword(user, user.Password, password);
+
+            if (verificationResult == PasswordVerificationResult.Failed)
+            {
+                return Unauthorized(new { message = "Mật khẩu không chính xác", email = email});
+            }
+
+            if (user.TrangThai == "0")
+            {
+                return StatusCode(403, new { message = "Tài khoản của bạn đã bị khóa" });
+            }
+
+            // Đăng nhập thành công
+            return Ok(new
+            {
+                message = "Đăng nhập thành công",
+                data = user,
+            });
+        }
+
+        //DELETE: api/NguoiDung/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNguoiDung(string id)
         {
@@ -242,8 +426,8 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return NotFound();
             }
-
-            _context.NguoiDungs.Remove(nguoiDung);
+            nguoiDung.TrangThai = "0";
+            //_context.NguoiDungs.Remove(nguoiDung);
             await _context.SaveChangesAsync();
 
             return NoContent();

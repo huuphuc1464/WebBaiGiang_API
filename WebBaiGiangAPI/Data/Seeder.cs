@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WebBaiGiangAPI.Models;
 
 namespace WebBaiGiangAPI.Data
@@ -17,15 +18,68 @@ namespace WebBaiGiangAPI.Data
                 }
 
                 // Thêm dữ liệu mẫu
+                context.Khoas.AddRange(
+                    new Khoa
+                    {
+                        MaKhoa = "K1",
+                        TenKhoa = "CNTT",
+                        TrangThai = "1"
+                    },
+                    new Khoa
+                    {
+                        MaKhoa = "K2",
+                        TenKhoa = "KTDN",
+                        TrangThai = "1"
+                    }
+                );
+                context.BoMons.AddRange(
+                    new BoMon
+                    {
+                        MaBoMon = "BM1",
+                        MaKhoa = "K1",
+                        TenBoMon = "Lập trình web",
+                        TrangThai = "1"
+                    },
+                    new BoMon
+                    {
+                        MaBoMon = "BM2",
+                        MaKhoa = "K1",
+                        TenBoMon = "Lập trình di động", 
+                        TrangThai = "1"
+                    },
+                    new BoMon
+                    { 
+                        MaBoMon = "BM3",
+                        MaKhoa = "K2",
+                        TenBoMon = "Kế toán",
+                        TrangThai = "1"
+                    }
+                );
+                context.Quyens.AddRange(
+                    new Quyen
+                    {
+                        MaQuyen = "Q1",
+                        TenQuyen = "Giảng viên",
+                        TrangThai = "1"
+                    },
+                    new Quyen
+                    {
+                        MaQuyen = "Q2",
+                        TenQuyen = "Sinh viên",
+                        TrangThai = "2"
+                    }
+                    );
+
+                var passwordHasher = new PasswordHasher<NguoiDung>();
                 context.NguoiDungs.AddRange(
                     new NguoiDung
                     {
-                        MaNguoiDung = "1",
-                        MaQuyen = "1",
-                        MaKhoa = "030",
-                        MaBoMon = "6",
+                        MaNguoiDung = "ND1",
+                        MaQuyen = "Q1",
+                        MaKhoa = "K1",
+                        MaBoMon = "BM1",
                         Email = "example1@mail.com",
-                        Password = "password1",
+                        Password = passwordHasher.HashPassword(null, "password1"),
                         HoTen = "Tran Huu Phuc",
                         Lop = "CDTH22WEBC ",
                         DiaChi = "123 Street",
@@ -38,12 +92,12 @@ namespace WebBaiGiangAPI.Data
                     },
                     new NguoiDung
                     {
-                        MaNguoiDung = "2",
-                        MaQuyen = "2",
-                        MaKhoa = "030",
-                        MaBoMon = "6",
+                        MaNguoiDung = "ND2",
+                        MaQuyen = "Q2",
+                        MaKhoa = "K2",
+                        MaBoMon = "BM2",
                         Email = "example2@mail.com",
-                        Password = "password2",
+                        Password = passwordHasher.HashPassword(null, "password2"),
                         HoTen = "Nguyen Van A",
                         Lop = "CNTT01",
                         DiaChi = "456 Street",
@@ -55,7 +109,7 @@ namespace WebBaiGiangAPI.Data
                         TrangThai = "1"
                     }
                 );
-
+                
                 context.SaveChanges();
             }
         }

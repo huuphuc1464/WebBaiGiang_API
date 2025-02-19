@@ -95,7 +95,7 @@ namespace WebBaiGiangAPI.Migrations
                     MSSV = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     SDT = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     GioiTinh = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgaySinh = table.Column<DateOnly>(type: "date", nullable: false),
                     TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
                 },
                 constraints: table =>

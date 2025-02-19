@@ -21,32 +21,6 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
-    "Method": "PostNguoiDung",
-    "RelativePath": "api/NguoiDung",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "nguoiDung",
-        "Type": "WebBaiGiangAPI.Models.NguoiDung",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "WebBaiGiangAPI.Models.NguoiDung",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
     "Method": "GetNguoiDung",
     "RelativePath": "api/NguoiDung/{id}",
     "HttpMethod": "GET",
@@ -59,17 +33,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "WebBaiGiangAPI.Models.NguoiDung",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
@@ -117,32 +81,37 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "maQuyen",
+        "Name": "MaNguoiDung",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "maKhoa",
+        "Name": "MaQuyen",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "maBoMon",
+        "Name": "MaKhoa",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "email",
+        "Name": "MaBoMon",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "password",
+        "Name": "Email",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "hoTen",
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "HoTen",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -152,67 +121,217 @@
         "IsRequired": false
       },
       {
-        "Name": "diaChi",
+        "Name": "DiaChi",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "anhDaiDien",
+        "Name": "AnhDaiDien",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "mssv",
+        "Name": "MSSV",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "sdt",
+        "Name": "SDT",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "gioiTinh",
+        "Name": "GioiTinh",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "ngaySinh",
+        "Name": "NgaySinh",
         "Type": "System.DateOnly",
         "IsRequired": false
+      },
+      {
+        "Name": "TrangThai",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Khoa.MaKhoa",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Khoa.TenKhoa",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Khoa.TrangThai",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Khoa.BoMons",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.BoMon, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Khoa.NguoiDungs",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.NguoiDung, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.MaBoMon",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.MaKhoa",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.TenBoMon",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.TrangThai",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.Khoa.MaKhoa",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.Khoa.TenKhoa",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.Khoa.TrangThai",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.Khoa.BoMons",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.BoMon, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.Khoa.NguoiDungs",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.NguoiDung, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.HocPhans",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.HocPhan, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "BoMon.NguoiDungs",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.NguoiDung, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Quyen.MaQuyen",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Quyen.TenQuyen",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Quyen.TrangThai",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Quyen.NguoiDungs",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.NguoiDung, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DanhGias",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.DanhGia, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DangKyLopHocs",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.DangKyLopHoc, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "NopBaiTaps",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.NopBaiTap, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DiemDanhs",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.DiemDanh, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "BangDiems",
+        "Type": "System.Collections.Generic.ICollection\u00601[[WebBaiGiangAPI.Models.BangDiem, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "WebBaiGiangAPI.Models.NguoiDung",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "WebBaiGiangAPI.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
+    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
+    "Method": "DangNhap",
+    "RelativePath": "api/NguoiDung/DangNhap",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.WeatherForecast, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
   }
 ]

@@ -68,18 +68,18 @@ namespace WebBaiGiangAPI.Models
 
         // Foreign keys & Navigation properties
         [ForeignKey("MaKhoa")]
-        public Khoa Khoa { get; set; }
+        public Khoa? Khoa { get; set; } 
 
         [ForeignKey("MaBoMon")]
-        public BoMon BoMon { get; set; }
+        public BoMon? BoMon { get; set; }
 
         [ForeignKey("MaQuyen")]
-        public Quyen Quyen { get; set; }
+        public Quyen? Quyen { get; set; }
 
-        public ICollection<DanhGia> DanhGias { get; set; }
-        public ICollection<DangKyLopHoc> DangKyLopHocs { get; set; }
-        public ICollection<NopBaiTap> NopBaiTaps { get; set; }
-        public ICollection<DiemDanh> DiemDanhs { get; set; }
-        public ICollection<BangDiem> BangDiems { get; set; }
+        public ICollection<DanhGia> DanhGias { get; set; } = new List<DanhGia>();
+        public ICollection<DangKyLopHoc> DangKyLopHocs { get; set; } = new List<DangKyLopHoc>();
+        public ICollection<NopBaiTap> NopBaiTaps { get; set; } = new List<NopBaiTap>();
+        public ICollection<DiemDanh> DiemDanhs { get; set; } = new List<DiemDanh>();
+        public ICollection<BangDiem> BangDiems { get; set; } = new List<BangDiem>();
     }
 }

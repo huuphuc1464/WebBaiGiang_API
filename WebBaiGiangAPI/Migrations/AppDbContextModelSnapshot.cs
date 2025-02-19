@@ -546,8 +546,8 @@ namespace WebBaiGiangAPI.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime>("NgaySinh")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("NgaySinh")
+                        .HasColumnType("date");
 
                     b.Property<string>("Password")
                         .IsRequired()

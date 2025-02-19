@@ -1,12 +1,20 @@
 {
   "Version": 1,
-  "Hash": "3z/cqMhHKBhiteEtZSeKQSn6kzwlOArjZA23bAtC1ho=",
+  "Hash": "FI0Cz9nh3eyCkBwx21P23PnkIwzexVof2eouX9R7I9c=",
   "Source": "WebBaiGiangAPI",
   "BasePath": "_content/WebBaiGiangAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "WebBaiGiangAPI\\wwwroot",
+      "Source": "WebBaiGiangAPI",
+      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
+      "BasePath": "_content/WebBaiGiangAPI",
+      "Pattern": "**"
+    }
+  ],
   "Assets": [],
   "Endpoints": []
 }

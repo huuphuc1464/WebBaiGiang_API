@@ -12,7 +12,7 @@ using WebBaiGiangAPI.Data;
 namespace WebBaiGiangAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250218075124_InitialCreate")]
+    [Migration("20250219012426_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -549,8 +549,8 @@ namespace WebBaiGiangAPI.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)");
 
-                    b.Property<DateTime>("NgaySinh")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("NgaySinh")
+                        .HasColumnType("date");
 
                     b.Property<string>("Password")
                         .IsRequired()
