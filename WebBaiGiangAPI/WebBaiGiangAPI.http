@@ -1,0 +1,6 @@
+@WebBaiGiangAPI_HostAddress = http://localhost:5063
+
+GET {{WebBaiGiangAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,1293 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "WebBaiGiangAPI",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/NguoiDung": {
+      "get": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NguoiDung"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NguoiDung"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NguoiDung"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/NguoiDung/{id}": {
+      "get": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NguoiDung"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NguoiDung"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NguoiDung"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/NguoiDung/DangKyNguoiDung": {
+      "post": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "parameters": [
+          {
+            "name": "maQuyen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maKhoa",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maBoMon",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hoTen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Lop",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "diaChi",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "anhDaiDien",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mssv",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sdt",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gioiTinh",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ngaySinh",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NguoiDung"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BaiGiang": {
+        "required": [
+          "chuong",
+          "hinhAnh",
+          "link",
+          "maLop",
+          "noiDung",
+          "tenBaiGiang",
+          "trangThai",
+          "video"
+        ],
+        "type": "object",
+        "properties": {
+          "maBaiGiang": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "hinhAnh": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "moTa": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "chuong": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "tenBaiGiang": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "link": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "video": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "noiDung": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "lop": {
+            "$ref": "#/components/schemas/Lop"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BaiTap": {
+        "required": [
+          "maLop",
+          "maNguoiTao",
+          "ngayBatDau",
+          "ngayTao",
+          "noiDung",
+          "tenBaiTap"
+        ],
+        "type": "object",
+        "properties": {
+          "maBaiTap": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maNguoiTao": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "tenBaiTap": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "noiDung": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "linkBaiTap": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "fileBaiTap": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "hanNop": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ngayTao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ngayBatDau": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "lop": {
+            "$ref": "#/components/schemas/Lop"
+          },
+          "nguoiTao": {
+            "$ref": "#/components/schemas/NguoiDung"
+          },
+          "nopBaiTaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NopBaiTap"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BangDiem": {
+        "required": [
+          "chuyenCan",
+          "heSo1",
+          "heSo2",
+          "maLop",
+          "maSinhVien",
+          "tbkt",
+          "thiLan1",
+          "tongKetLan1"
+        ],
+        "type": "object",
+        "properties": {
+          "maBangDiem": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maSinhVien": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "chuyenCan": {
+            "type": "number",
+            "format": "double"
+          },
+          "heSo1": {
+            "type": "number",
+            "format": "double"
+          },
+          "heSo2": {
+            "type": "number",
+            "format": "double"
+          },
+          "thiLan1": {
+            "type": "number",
+            "format": "double"
+          },
+          "thiLan2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tbkt": {
+            "type": "number",
+            "format": "double"
+          },
+          "tongKetLan1": {
+            "type": "number",
+            "format": "double"
+          },
+          "tongKetLan2": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lop": {
+            "$ref": "#/components/schemas/Lop"
+          },
+          "sinhVien": {
+            "$ref": "#/components/schemas/NguoiDung"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BoMon": {
+        "required": [
+          "maKhoa",
+          "tenBoMon",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maBoMon": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maKhoa": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "tenBoMon": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "khoa": {
+            "$ref": "#/components/schemas/Khoa"
+          },
+          "hocPhans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HocPhan"
+            },
+            "nullable": true
+          },
+          "nguoiDungs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NguoiDung"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DangKyLopHoc": {
+        "required": [
+          "maLop",
+          "maSinhVien",
+          "ngayDangKy",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maDangKy": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maSinhVien": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "ngayDangKy": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "sinhVien": {
+            "$ref": "#/components/schemas/NguoiDung"
+          },
+          "lop": {
+            "$ref": "#/components/schemas/Lop"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DanhGia": {
+        "required": [
+          "maLop",
+          "maSinhVien",
+          "ngayDanhGia",
+          "noiDungDanhGia",
+          "soDiem",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maDanhGia": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maSinhVien": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "noiDungDanhGia": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "soDiem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngayDanhGia": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "sinhVien": {
+            "$ref": "#/components/schemas/NguoiDung"
+          },
+          "lop": {
+            "$ref": "#/components/schemas/Lop"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiemDanh": {
+        "required": [
+          "maLop",
+          "maSinhVien",
+          "ngayHoc",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maDiemDanh": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maSinhVien": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "ngayHoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "sinhVien": {
+            "$ref": "#/components/schemas/NguoiDung"
+          },
+          "lop": {
+            "$ref": "#/components/schemas/Lop"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HocPhan": {
+        "required": [
+          "anhDaiDien",
+          "diemDanhGia",
+          "hinhThucHoc",
+          "lanCapNhatCuoi",
+          "loaiHocPhan",
+          "maBaiGiang",
+          "maBaiTap",
+          "maBoMon",
+          "maGiangVien",
+          "ngayBatDau",
+          "noiDung",
+          "soLuongSinhVien",
+          "soTiet",
+          "soTinChi",
+          "tenHocPhan",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maHocPhan": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maBoMon": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maGiangVien": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maBaiGiang": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maBaiTap": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "tenHocPhan": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "anhDaiDien": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "moTaNgan": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "moTaChiTiet": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "diemDanhGia": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soLuongSinhVien": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lanCapNhatCuoi": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fileDeCuong": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "ngayBatDau": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hinhThucHoc": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "noiDung": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "soTiet": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soTinChi": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "loaiHocPhan": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "boMon": {
+            "$ref": "#/components/schemas/BoMon"
+          },
+          "giangVien": {
+            "$ref": "#/components/schemas/NguoiDung"
+          },
+          "baiGiang": {
+            "$ref": "#/components/schemas/BaiGiang"
+          },
+          "baiTap": {
+            "$ref": "#/components/schemas/BaiTap"
+          },
+          "lops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lop"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Khoa": {
+        "required": [
+          "tenKhoa",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maKhoa": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "tenKhoa": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "boMons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BoMon"
+            },
+            "nullable": true
+          },
+          "nguoiDungs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NguoiDung"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Lop": {
+        "required": [
+          "hocKy",
+          "maHocPhan",
+          "namHoc",
+          "phongHoc",
+          "tenLop",
+          "trangThaiHoc",
+          "trangThaiLop"
+        ],
+        "type": "object",
+        "properties": {
+          "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maHocPhan": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "hocKy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tenLop": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "phongHoc": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string"
+          },
+          "namHoc": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trangThaiLop": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "trangThaiHoc": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "hocPhan": {
+            "$ref": "#/components/schemas/HocPhan"
+          },
+          "baiGiangs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaiGiang"
+            },
+            "nullable": true
+          },
+          "dangKyLopHocs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DangKyLopHoc"
+            },
+            "nullable": true
+          },
+          "diemDanhs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiemDanh"
+            },
+            "nullable": true
+          },
+          "bangDiems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BangDiem"
+            },
+            "nullable": true
+          },
+          "danhGias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DanhGia"
+            },
+            "nullable": true
+          },
+          "baiTaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaiTap"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NguoiDung": {
+        "required": [
+          "anhDaiDien",
+          "diaChi",
+          "email",
+          "gioiTinh",
+          "hoTen",
+          "lop",
+          "maBoMon",
+          "maKhoa",
+          "maQuyen",
+          "ngaySinh",
+          "password",
+          "sdt"
+        ],
+        "type": "object",
+        "properties": {
+          "maNguoiDung": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maQuyen": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maKhoa": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maBoMon": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "hoTen": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "lop": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string"
+          },
+          "diaChi": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "anhDaiDien": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "mssv": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "sdt": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "gioiTinh": {
+            "maxLength": 3,
+            "minLength": 0,
+            "type": "string"
+          },
+          "ngaySinh": {
+            "type": "string",
+            "format": "date"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "khoa": {
+            "$ref": "#/components/schemas/Khoa"
+          },
+          "boMon": {
+            "$ref": "#/components/schemas/BoMon"
+          },
+          "quyen": {
+            "$ref": "#/components/schemas/Quyen"
+          },
+          "danhGias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DanhGia"
+            },
+            "nullable": true
+          },
+          "dangKyLopHocs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DangKyLopHoc"
+            },
+            "nullable": true
+          },
+          "nopBaiTaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NopBaiTap"
+            },
+            "nullable": true
+          },
+          "diemDanhs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiemDanh"
+            },
+            "nullable": true
+          },
+          "bangDiems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BangDiem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NopBaiTap": {
+        "required": [
+          "fileNop",
+          "maBaiTap",
+          "maSinhVien",
+          "ngayNop",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maNopBai": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "maBaiTap": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maSinhVien": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "fileNop": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "ngayNop": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "baiTap": {
+            "$ref": "#/components/schemas/BaiTap"
+          },
+          "sinhVien": {
+            "$ref": "#/components/schemas/NguoiDung"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Quyen": {
+        "required": [
+          "tenQuyen",
+          "trangThai"
+        ],
+        "type": "object",
+        "properties": {
+          "maQuyen": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "tenQuyen": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "trangThai": {
+            "maxLength": 1,
+            "minLength": 0,
+            "type": "string"
+          },
+          "nguoiDungs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NguoiDung"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
