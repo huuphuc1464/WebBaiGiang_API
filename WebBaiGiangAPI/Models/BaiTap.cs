@@ -18,6 +18,11 @@ namespace WebBaiGiangAPI.Models
         [Required]
         [StringLength(10)]
         [Column(TypeName = "varchar(10)")]
+        public string MaHocPhan { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        [Column(TypeName = "varchar(10)")]
         public string MaNguoiTao { get; set; }
 
         [Required]
@@ -51,6 +56,9 @@ namespace WebBaiGiangAPI.Models
 
         [ForeignKey("MaNguoiTao")]
         public NguoiDung NguoiTao { get; set; }
+
+        [ForeignKey("MaHocPhan")]
+        public HocPhan HocPhan { get; set; }
 
         public ICollection<NopBaiTap> NopBaiTaps { get; set; }
     }

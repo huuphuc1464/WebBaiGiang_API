@@ -38,27 +38,6 @@ namespace WebBaiGiangAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ThongTinWebs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TenWeb = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Logo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    SDT = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Facebook = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Gmail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Fax = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Website = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ThongTinWebs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "BoMons",
                 columns: table => new
                 {
@@ -122,61 +101,12 @@ namespace WebBaiGiangAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BaiGiangs",
-                columns: table => new
-                {
-                    MaBaiGiang = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    MaLop = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    HinhAnh = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MoTa = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Chuong = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    TenBaiGiang = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Link = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Video = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    NoiDung = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BaiGiangs", x => x.MaBaiGiang);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BaiTaps",
-                columns: table => new
-                {
-                    MaBaiTap = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    MaLop = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    MaNguoiTao = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    TenBaiTap = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    NoiDung = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    LinkBaiTap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FileBaiTap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    HanNop = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BaiTaps", x => x.MaBaiTap);
-                    table.ForeignKey(
-                        name: "FK_BaiTaps_NguoiDungs_MaNguoiTao",
-                        column: x => x.MaNguoiTao,
-                        principalTable: "NguoiDungs",
-                        principalColumn: "MaNguoiDung",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "HocPhans",
                 columns: table => new
                 {
                     MaHocPhan = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
                     MaBoMon = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
                     MaGiangVien = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    MaBaiGiang = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    MaBaiTap = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
                     TenHocPhan = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     AnhDaiDien = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MoTaNgan = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -197,18 +127,6 @@ namespace WebBaiGiangAPI.Migrations
                 {
                     table.PrimaryKey("PK_HocPhans", x => x.MaHocPhan);
                     table.ForeignKey(
-                        name: "FK_HocPhans_BaiGiangs_MaBaiGiang",
-                        column: x => x.MaBaiGiang,
-                        principalTable: "BaiGiangs",
-                        principalColumn: "MaBaiGiang",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_HocPhans_BaiTaps_MaBaiTap",
-                        column: x => x.MaBaiTap,
-                        principalTable: "BaiTaps",
-                        principalColumn: "MaBaiTap",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_HocPhans_BoMons_MaBoMon",
                         column: x => x.MaBoMon,
                         principalTable: "BoMons",
@@ -223,28 +141,29 @@ namespace WebBaiGiangAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "NopBaiTaps",
+                name: "ThongTinWebs",
                 columns: table => new
                 {
-                    MaNopBai = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    MaBaiTap = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    MaSinhVien = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    FileNop = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    NgayNop = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenWeb = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Logo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DiaChi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    SDT = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Facebook = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Gmail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Fax = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Website = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MaNguoiThayDoiCuoi = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    ThoiGianThayDoiCuoi = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NopBaiTaps", x => x.MaNopBai);
+                    table.PrimaryKey("PK_ThongTinWebs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NopBaiTaps_BaiTaps_MaBaiTap",
-                        column: x => x.MaBaiTap,
-                        principalTable: "BaiTaps",
-                        principalColumn: "MaBaiTap",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_NopBaiTaps_NguoiDungs_MaSinhVien",
-                        column: x => x.MaSinhVien,
+                        name: "FK_ThongTinWebs_NguoiDungs_MaNguoiThayDoiCuoi",
+                        column: x => x.MaNguoiThayDoiCuoi,
                         principalTable: "NguoiDungs",
                         principalColumn: "MaNguoiDung",
                         onDelete: ReferentialAction.Cascade);
@@ -272,6 +191,79 @@ namespace WebBaiGiangAPI.Migrations
                         principalTable: "HocPhans",
                         principalColumn: "MaHocPhan",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BaiGiangs",
+                columns: table => new
+                {
+                    MaBaiGiang = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    MaHocPhan = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    MaLop = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    HinhAnh = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MoTa = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Chuong = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    TenBaiGiang = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Video = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NoiDung = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BaiGiangs", x => x.MaBaiGiang);
+                    table.ForeignKey(
+                        name: "FK_BaiGiangs_HocPhans_MaHocPhan",
+                        column: x => x.MaHocPhan,
+                        principalTable: "HocPhans",
+                        principalColumn: "MaHocPhan",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BaiGiangs_Lops_MaLop",
+                        column: x => x.MaLop,
+                        principalTable: "Lops",
+                        principalColumn: "MaLop",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BaiTaps",
+                columns: table => new
+                {
+                    MaBaiTap = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    MaLop = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    MaHocPhan = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    MaNguoiTao = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    TenBaiTap = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    NoiDung = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LinkBaiTap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FileBaiTap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    HanNop = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BaiTaps", x => x.MaBaiTap);
+                    table.ForeignKey(
+                        name: "FK_BaiTaps_HocPhans_MaHocPhan",
+                        column: x => x.MaHocPhan,
+                        principalTable: "HocPhans",
+                        principalColumn: "MaHocPhan",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BaiTaps_Lops_MaLop",
+                        column: x => x.MaLop,
+                        principalTable: "Lops",
+                        principalColumn: "MaLop",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BaiTaps_NguoiDungs_MaNguoiTao",
+                        column: x => x.MaNguoiTao,
+                        principalTable: "NguoiDungs",
+                        principalColumn: "MaNguoiDung",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -390,10 +382,48 @@ namespace WebBaiGiangAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "NopBaiTaps",
+                columns: table => new
+                {
+                    MaNopBai = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    MaBaiTap = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    MaSinhVien = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    FileNop = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NgayNop = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NopBaiTaps", x => x.MaNopBai);
+                    table.ForeignKey(
+                        name: "FK_NopBaiTaps_BaiTaps_MaBaiTap",
+                        column: x => x.MaBaiTap,
+                        principalTable: "BaiTaps",
+                        principalColumn: "MaBaiTap",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NopBaiTaps_NguoiDungs_MaSinhVien",
+                        column: x => x.MaSinhVien,
+                        principalTable: "NguoiDungs",
+                        principalColumn: "MaNguoiDung",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BaiGiangs_MaHocPhan",
+                table: "BaiGiangs",
+                column: "MaHocPhan");
+
             migrationBuilder.CreateIndex(
                 name: "IX_BaiGiangs_MaLop",
                 table: "BaiGiangs",
                 column: "MaLop");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BaiTaps_MaHocPhan",
+                table: "BaiTaps",
+                column: "MaHocPhan");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BaiTaps_MaLop",
@@ -451,16 +481,6 @@ namespace WebBaiGiangAPI.Migrations
                 column: "MaSinhVien");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HocPhans_MaBaiGiang",
-                table: "HocPhans",
-                column: "MaBaiGiang");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HocPhans_MaBaiTap",
-                table: "HocPhans",
-                column: "MaBaiTap");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_HocPhans_MaBoMon",
                 table: "HocPhans",
                 column: "MaBoMon");
@@ -500,33 +520,17 @@ namespace WebBaiGiangAPI.Migrations
                 table: "NopBaiTaps",
                 column: "MaSinhVien");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_BaiGiangs_Lops_MaLop",
-                table: "BaiGiangs",
-                column: "MaLop",
-                principalTable: "Lops",
-                principalColumn: "MaLop",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_BaiTaps_Lops_MaLop",
-                table: "BaiTaps",
-                column: "MaLop",
-                principalTable: "Lops",
-                principalColumn: "MaLop",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.CreateIndex(
+                name: "IX_ThongTinWebs_MaNguoiThayDoiCuoi",
+                table: "ThongTinWebs",
+                column: "MaNguoiThayDoiCuoi");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_BaiGiangs_Lops_MaLop",
-                table: "BaiGiangs");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_BaiTaps_Lops_MaLop",
-                table: "BaiTaps");
+            migrationBuilder.DropTable(
+                name: "BaiGiangs");
 
             migrationBuilder.DropTable(
                 name: "BangDiems");
@@ -547,16 +551,13 @@ namespace WebBaiGiangAPI.Migrations
                 name: "ThongTinWebs");
 
             migrationBuilder.DropTable(
+                name: "BaiTaps");
+
+            migrationBuilder.DropTable(
                 name: "Lops");
 
             migrationBuilder.DropTable(
                 name: "HocPhans");
-
-            migrationBuilder.DropTable(
-                name: "BaiGiangs");
-
-            migrationBuilder.DropTable(
-                name: "BaiTaps");
 
             migrationBuilder.DropTable(
                 name: "NguoiDungs");

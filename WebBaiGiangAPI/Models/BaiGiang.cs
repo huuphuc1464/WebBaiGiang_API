@@ -9,7 +9,10 @@ namespace WebBaiGiangAPI.Models
         [StringLength(10)]
         [Column(TypeName = "varchar(10)")]
         public string MaBaiGiang { get; set; }
-
+        [Required]
+        [StringLength(10)]
+        [Column(TypeName = "varchar(10)")]
+        public string MaHocPhan { get; set; }
         [Required]
         [StringLength(10)]
         [Column(TypeName = "varchar(10)")]
@@ -50,5 +53,8 @@ namespace WebBaiGiangAPI.Models
         // Foreign key
         [ForeignKey("MaLop")]
         public Lop Lop { get; set; }
+
+        [ForeignKey("MaHocPhan")]
+        public HocPhan HocPhan { get; set; }
     }
 }

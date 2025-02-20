@@ -1,20 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebBaiGiangAPI.Models
 {
-    public class ThongTinWeb
+    public class ThongTinWebDTO
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [StringLength(100)]
         public string TenWeb { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Logo { get; set; }
 
         [Required]
         [StringLength(150)]
@@ -43,15 +35,5 @@ namespace WebBaiGiangAPI.Models
         [Required]
         [StringLength(50)]
         public string Website { get; set; }
-
-        [Required]
-        [StringLength(10)]
-        public string MaNguoiThayDoiCuoi { get; set; }
-
-        [Required]
-        public DateTime ThoiGianThayDoiCuoi { get; set;}
-
-        [ForeignKey("MaNguoiThayDoiCuoi")]
-        public NguoiDung NguoiDung { get; set; }
     }
 }

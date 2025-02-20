@@ -21,43 +21,6 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
-    "Method": "GetNguoiDung",
-    "RelativePath": "api/NguoiDung/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
-    "Method": "PutNguoiDung",
-    "RelativePath": "api/NguoiDung/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "nguoiDung",
-        "Type": "WebBaiGiangAPI.Models.NguoiDung",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
     "Method": "DeleteNguoiDung",
     "RelativePath": "api/NguoiDung/{id}",
     "HttpMethod": "DELETE",
@@ -330,6 +293,281 @@
         "Name": "password",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
+    "Method": "DoiMatKhau",
+    "RelativePath": "api/NguoiDung/DoiMatKhau",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maNguoiDung",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "matKhauCu",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "matKhauMoi",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "xacNhanMatKhau",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
+    "Method": "GetNguoiDung",
+    "RelativePath": "api/NguoiDung/id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
+    "Method": "ThayDoiThongTin",
+    "RelativePath": "api/NguoiDung/ThayDoiThongTin",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "MaNguoiDung",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MaKhoa",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MaBoMon",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "HoTen",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Lop",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DiaChi",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AnhDaiDien",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MSSV",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDT",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "GioiTinh",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NgaySinh",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ThongTinWebController",
+    "Method": "GetThongTinWebs",
+    "RelativePath": "api/ThongTinWeb",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.ThongTinWeb, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ThongTinWebController",
+    "Method": "DoiThongTinWeb",
+    "RelativePath": "api/ThongTinWeb/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "maND",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TenWeb",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DiaChi",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SDT",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Facebook",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Gmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Fax",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Website",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
+    "Method": "DanhSachLopHoc",
+    "RelativePath": "DanhSachLopHoc/{hk}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "hk",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

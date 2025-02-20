@@ -81,18 +81,18 @@ namespace WebBaiGiangAPI.Data
                 .HasForeignKey(hp => hp.MaGiangVien)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // --- HocPhan - BaiGiang ---
-            modelBuilder.Entity<HocPhan>()
-                .HasOne(hp => hp.BaiGiang)
+            // --- BaiGiang - HocPhan ---
+            modelBuilder.Entity<BaiGiang>()
+                .HasOne(bg => bg.HocPhan)
                 .WithMany()
-                .HasForeignKey(hp => hp.MaBaiGiang)
+                .HasForeignKey(bg => bg.MaHocPhan)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // --- HocPhan - BaiTap ---
-            modelBuilder.Entity<HocPhan>()
-                .HasOne(hp => hp.BaiTap)
+            // --- BaiTap - HocPhan ---
+            modelBuilder.Entity<BaiTap>()
+                .HasOne(bt => bt.HocPhan)
                 .WithMany()
-                .HasForeignKey(hp => hp.MaBaiTap)
+                .HasForeignKey(bt => bt.MaHocPhan)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // --- BaiGiang - Lop ---
@@ -186,6 +186,13 @@ namespace WebBaiGiangAPI.Data
                 .HasOne(bd => bd.SinhVien)
                 .WithMany(nd => nd.BangDiems)
                 .HasForeignKey(bd => bd.MaSinhVien)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // --- ThongTinWebs - NguoiDung ---
+            modelBuilder.Entity<ThongTinWeb>()
+                .HasOne(tt => tt.NguoiDung)
+                .WithMany()
+                .HasForeignKey(tt => tt.MaNguoiThayDoiCuoi)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

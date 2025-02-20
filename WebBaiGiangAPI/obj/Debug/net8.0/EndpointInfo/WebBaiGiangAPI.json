@@ -10,15 +10,6 @@
         "tags": [
           "NguoiDung"
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success",
@@ -46,7 +37,7 @@
         }
       }
     },
-    "/api/NguoiDung/{id}": {
+    "/api/NguoiDung/id": {
       "get": {
         "tags": [
           "NguoiDung"
@@ -54,95 +45,12 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "string"
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "NguoiDung"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NguoiDung"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NguoiDung"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/NguoiDung"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "NguoiDung"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -621,6 +529,492 @@
           }
         }
       }
+    },
+    "/api/NguoiDung/DoiMatKhau": {
+      "post": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "parameters": [
+          {
+            "name": "maNguoiDung",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "matKhauCu",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "matKhauMoi",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "xacNhanMatKhau",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/NguoiDung/ThayDoiThongTin": {
+      "put": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "DiaChi",
+                  "Email",
+                  "GioiTinh",
+                  "HoTen",
+                  "Lop",
+                  "MaBoMon",
+                  "MaKhoa",
+                  "MaNguoiDung",
+                  "NgaySinh",
+                  "SDT"
+                ],
+                "type": "object",
+                "properties": {
+                  "MaNguoiDung": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "MaKhoa": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "MaBoMon": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "HoTen": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Lop": {
+                    "maxLength": 30,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "DiaChi": {
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "AnhDaiDien": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "MSSV": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "SDT": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "GioiTinh": {
+                    "maxLength": 3,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "NgaySinh": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "anhDaiDien1": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "MaNguoiDung": {
+                  "style": "form"
+                },
+                "MaKhoa": {
+                  "style": "form"
+                },
+                "MaBoMon": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "HoTen": {
+                  "style": "form"
+                },
+                "Lop": {
+                  "style": "form"
+                },
+                "DiaChi": {
+                  "style": "form"
+                },
+                "AnhDaiDien": {
+                  "style": "form"
+                },
+                "MSSV": {
+                  "style": "form"
+                },
+                "SDT": {
+                  "style": "form"
+                },
+                "GioiTinh": {
+                  "style": "form"
+                },
+                "NgaySinh": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/DanhSachLopHoc/{hk}": {
+      "get": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "parameters": [
+          {
+            "name": "hk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/NguoiDung/{id}": {
+      "delete": {
+        "tags": [
+          "NguoiDung"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ThongTinWeb": {
+      "get": {
+        "tags": [
+          "ThongTinWeb"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ThongTinWeb"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ThongTinWeb"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ThongTinWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ThongTinWeb/{id}": {
+      "put": {
+        "tags": [
+          "ThongTinWeb"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "maND",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "DiaChi",
+                  "Email",
+                  "Facebook",
+                  "Fax",
+                  "Gmail",
+                  "SDT",
+                  "TenWeb",
+                  "Website"
+                ],
+                "type": "object",
+                "properties": {
+                  "TenWeb": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "DiaChi": {
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "SDT": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Facebook": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Gmail": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Fax": {
+                    "maxLength": 20,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Website": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "logoDoi": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "TenWeb": {
+                  "style": "form"
+                },
+                "DiaChi": {
+                  "style": "form"
+                },
+                "SDT": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Facebook": {
+                  "style": "form"
+                },
+                "Gmail": {
+                  "style": "form"
+                },
+                "Fax": {
+                  "style": "form"
+                },
+                "Website": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -630,6 +1024,7 @@
           "chuong",
           "hinhAnh",
           "link",
+          "maHocPhan",
           "maLop",
           "noiDung",
           "tenBaiGiang",
@@ -643,6 +1038,11 @@
             "minLength": 0,
             "type": "string",
             "nullable": true
+          },
+          "maHocPhan": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
           },
           "maLop": {
             "maxLength": 10,
@@ -692,12 +1092,16 @@
           },
           "lop": {
             "$ref": "#/components/schemas/Lop"
+          },
+          "hocPhan": {
+            "$ref": "#/components/schemas/HocPhan"
           }
         },
         "additionalProperties": false
       },
       "BaiTap": {
         "required": [
+          "maHocPhan",
           "maLop",
           "maNguoiTao",
           "ngayBatDau",
@@ -714,6 +1118,11 @@
             "nullable": true
           },
           "maLop": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maHocPhan": {
             "maxLength": 10,
             "minLength": 0,
             "type": "string"
@@ -769,6 +1178,9 @@
           },
           "nguoiTao": {
             "$ref": "#/components/schemas/NguoiDung"
+          },
+          "hocPhan": {
+            "$ref": "#/components/schemas/HocPhan"
           },
           "nopBaiTaps": {
             "type": "array",
@@ -1048,8 +1460,6 @@
           "hinhThucHoc",
           "lanCapNhatCuoi",
           "loaiHocPhan",
-          "maBaiGiang",
-          "maBaiTap",
           "maBoMon",
           "maGiangVien",
           "ngayBatDau",
@@ -1074,16 +1484,6 @@
             "type": "string"
           },
           "maGiangVien": {
-            "maxLength": 10,
-            "minLength": 0,
-            "type": "string"
-          },
-          "maBaiGiang": {
-            "maxLength": 10,
-            "minLength": 0,
-            "type": "string"
-          },
-          "maBaiTap": {
             "maxLength": 10,
             "minLength": 0,
             "type": "string"
@@ -1165,12 +1565,6 @@
           },
           "giangVien": {
             "$ref": "#/components/schemas/NguoiDung"
-          },
-          "baiGiang": {
-            "$ref": "#/components/schemas/BaiGiang"
-          },
-          "baiTap": {
-            "$ref": "#/components/schemas/BaiTap"
           },
           "lops": {
             "type": "array",
@@ -1540,6 +1934,86 @@
               "$ref": "#/components/schemas/NguoiDung"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ThongTinWeb": {
+        "required": [
+          "diaChi",
+          "email",
+          "facebook",
+          "fax",
+          "gmail",
+          "logo",
+          "maNguoiThayDoiCuoi",
+          "sdt",
+          "tenWeb",
+          "thoiGianThayDoiCuoi",
+          "website"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tenWeb": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "logo": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "diaChi": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "sdt": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "facebook": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "gmail": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "fax": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "website": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maNguoiThayDoiCuoi": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "thoiGianThayDoiCuoi": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nguoiDung": {
+            "$ref": "#/components/schemas/NguoiDung"
           }
         },
         "additionalProperties": false

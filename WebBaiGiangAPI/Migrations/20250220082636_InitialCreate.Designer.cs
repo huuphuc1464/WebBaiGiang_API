@@ -12,7 +12,7 @@ using WebBaiGiangAPI.Data;
 namespace WebBaiGiangAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250219012426_InitialCreate")]
+    [Migration("20250220082636_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -46,6 +46,11 @@ namespace WebBaiGiangAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("MaHocPhan")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
                     b.Property<string>("MaLop")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -78,6 +83,8 @@ namespace WebBaiGiangAPI.Migrations
 
                     b.HasKey("MaBaiGiang");
 
+                    b.HasIndex("MaHocPhan");
+
                     b.HasIndex("MaLop");
 
                     b.ToTable("BaiGiangs");
@@ -101,6 +108,11 @@ namespace WebBaiGiangAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("MaHocPhan")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("MaLop")
                         .IsRequired()
@@ -134,6 +146,8 @@ namespace WebBaiGiangAPI.Migrations
                         .HasColumnType("nvarchar(1)");
 
                     b.HasKey("MaBaiTap");
+
+                    b.HasIndex("MaHocPhan");
 
                     b.HasIndex("MaLop");
 
@@ -358,16 +372,6 @@ namespace WebBaiGiangAPI.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)");
 
-                    b.Property<string>("MaBaiGiang")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaBaiTap")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
                     b.Property<string>("MaBoMon")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -416,10 +420,6 @@ namespace WebBaiGiangAPI.Migrations
                         .HasColumnType("nvarchar(1)");
 
                     b.HasKey("MaHocPhan");
-
-                    b.HasIndex("MaBaiGiang");
-
-                    b.HasIndex("MaBaiTap");
 
                     b.HasIndex("MaBoMon");
 
@@ -675,6 +675,11 @@ namespace WebBaiGiangAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("MaNguoiThayDoiCuoi")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
                     b.Property<string>("SDT")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -685,6 +690,9 @@ namespace WebBaiGiangAPI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<DateTime>("ThoiGianThayDoiCuoi")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Website")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -692,22 +700,38 @@ namespace WebBaiGiangAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MaNguoiThayDoiCuoi");
+
                     b.ToTable("ThongTinWebs");
                 });
 
             modelBuilder.Entity("WebBaiGiangAPI.Models.BaiGiang", b =>
                 {
+                    b.HasOne("WebBaiGiangAPI.Models.HocPhan", "HocPhan")
+                        .WithMany()
+                        .HasForeignKey("MaHocPhan")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
                         .WithMany("BaiGiangs")
                         .HasForeignKey("MaLop")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("HocPhan");
+
                     b.Navigation("Lop");
                 });
 
             modelBuilder.Entity("WebBaiGiangAPI.Models.BaiTap", b =>
                 {
+                    b.HasOne("WebBaiGiangAPI.Models.HocPhan", "HocPhan")
+                        .WithMany()
+                        .HasForeignKey("MaHocPhan")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
                         .WithMany("BaiTaps")
                         .HasForeignKey("MaLop")
@@ -719,6 +743,8 @@ namespace WebBaiGiangAPI.Migrations
                         .HasForeignKey("MaNguoiTao")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("HocPhan");
 
                     b.Navigation("Lop");
 
@@ -814,18 +840,6 @@ namespace WebBaiGiangAPI.Migrations
 
             modelBuilder.Entity("WebBaiGiangAPI.Models.HocPhan", b =>
                 {
-                    b.HasOne("WebBaiGiangAPI.Models.BaiGiang", "BaiGiang")
-                        .WithMany()
-                        .HasForeignKey("MaBaiGiang")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("WebBaiGiangAPI.Models.BaiTap", "BaiTap")
-                        .WithMany()
-                        .HasForeignKey("MaBaiTap")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("WebBaiGiangAPI.Models.BoMon", "BoMon")
                         .WithMany("HocPhans")
                         .HasForeignKey("MaBoMon")
@@ -837,10 +851,6 @@ namespace WebBaiGiangAPI.Migrations
                         .HasForeignKey("MaGiangVien")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("BaiGiang");
-
-                    b.Navigation("BaiTap");
 
                     b.Navigation("BoMon");
 
@@ -902,6 +912,17 @@ namespace WebBaiGiangAPI.Migrations
                     b.Navigation("BaiTap");
 
                     b.Navigation("SinhVien");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.ThongTinWeb", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "NguoiDung")
+                        .WithMany()
+                        .HasForeignKey("MaNguoiThayDoiCuoi")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NguoiDung");
                 });
 
             modelBuilder.Entity("WebBaiGiangAPI.Models.BaiTap", b =>

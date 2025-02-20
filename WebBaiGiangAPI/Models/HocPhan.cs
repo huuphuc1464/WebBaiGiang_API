@@ -21,16 +21,6 @@ namespace WebBaiGiangAPI.Models
         public string MaGiangVien { get; set; }
 
         [Required]
-        [StringLength(10)]
-        [Column(TypeName = "varchar(10)")]
-        public string MaBaiGiang { get; set; }
-
-        [Required]
-        [StringLength(10)]
-        [Column(TypeName = "varchar(10)")]
-        public string MaBaiTap { get; set; }
-
-        [Required]
         [StringLength(100)]
         public string TenHocPhan { get; set; }
 
@@ -88,12 +78,6 @@ namespace WebBaiGiangAPI.Models
 
         [ForeignKey("MaGiangVien")]
         public NguoiDung GiangVien { get; set; }
-
-        [ForeignKey("MaBaiGiang")]
-        public BaiGiang BaiGiang { get; set; }
-
-        [ForeignKey("MaBaiTap")]
-        public BaiTap BaiTap { get; set; }
 
         // Một học phần có thể liên quan đến nhiều lớp
         public ICollection<Lop> Lops { get; set; }

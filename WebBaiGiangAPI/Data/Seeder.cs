@@ -69,7 +69,21 @@ namespace WebBaiGiangAPI.Data
                         TrangThai = "2"
                     }
                     );
-
+                context.ThongTinWebs.AddRange(
+                    new ThongTinWeb
+                    {
+                        TenWeb = "Web bài giảng",
+                        Logo = "logo.png",
+                        DiaChi = "65 Huỳnh Thúc Kháng",
+                        SDT = "0933307352",
+                        Email = "huuphuc1702@gmail.com",
+                        Facebook = "http://facebook.com/123",
+                        Gmail = "huuphuc1702@gmail.com",
+                        Fax = "+84 123 456 789",
+                        Website = "http://webbaigiang.com",
+                        MaNguoiThayDoiCuoi = "ND1",
+                        ThoiGianThayDoiCuoi = DateTime.Now,
+                    });
                 var passwordHasher = new PasswordHasher<NguoiDung>();
                 context.NguoiDungs.AddRange(
                     new NguoiDung

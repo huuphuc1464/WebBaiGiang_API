@@ -1,148 +1,58 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\28608fd4-870c-4641-bd4c-be887cb392e2.png'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND3.png'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/28608fd4-870c-4641-bd4c-be887cb392e2.png</RelativePath>
+      <RelativePath>AnhNguoiDung/ND3.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
+      <Fingerprint>rn35frj51o</Fingerprint>
+      <Integrity>x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\28608fd4-870c-4641-bd4c-be887cb392e2.png'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND3.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\30bba23f-2971-4560-bb39-75be109dc9ef.png'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND4.png'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/30bba23f-2971-4560-bb39-75be109dc9ef.png</RelativePath>
+      <RelativePath>AnhNguoiDung/ND4.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
+      <Fingerprint>rn35frj51o</Fingerprint>
+      <Integrity>x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\30bba23f-2971-4560-bb39-75be109dc9ef.png'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND4.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\424c1cca-b7d1-4939-b084-66a8784c6012.png'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LogoWeb\logo.png'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/424c1cca-b7d1-4939-b084-66a8784c6012.png</RelativePath>
+      <RelativePath>LogoWeb/logo.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
+      <Fingerprint>ic1ck9jlbb</Fingerprint>
+      <Integrity>LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\424c1cca-b7d1-4939-b084-66a8784c6012.png'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\6d1de538-f697-4326-84f6-88e441ab8709.png'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/6d1de538-f697-4326-84f6-88e441ab8709.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\6d1de538-f697-4326-84f6-88e441ab8709.png'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\6d5f9a63-d2e7-4860-8149-4c3719bfe205.png'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/6d5f9a63-d2e7-4860-8149-4c3719bfe205.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\6d5f9a63-d2e7-4860-8149-4c3719bfe205.png'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\b3b69c91-4d67-46ce-99e0-fa6fd159f689.png'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/b3b69c91-4d67-46ce-99e0-fa6fd159f689.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\b3b69c91-4d67-46ce-99e0-fa6fd159f689.png'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND7.png'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/ND7.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND7.png'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND8.png'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>AnhNguoiDung/ND8.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>igp1sfrwh1</Fingerprint>
-      <Integrity>3uBdE1GpYJjr6ryhktT1C/ntQvg14haPgR+cslif/vE=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\AnhNguoiDung\ND8.png'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LogoWeb\logo.png'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

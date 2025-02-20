@@ -2,12 +2,17 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using WebBaiGiangAPI.Models;
 
 public class SwaggerFileOperationFilter : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
+        // Chỉ xử lý các phương thức không phải GET
+        if (context.ApiDescription.HttpMethod == "GET")
+        {
+            return; // Không thay đổi gì cho các phương thức GET
+        }
+
         // Lấy danh sách các tham số từ [FromForm]
         var formParameters = context.MethodInfo.GetParameters()
             .Where(p => p.GetCustomAttribute<FromFormAttribute>() != null);
@@ -67,4 +72,3 @@ public class SwaggerFileOperationFilter : IOperationFilter
         }
     }
 }
-
