@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using WebBaiGiangAPI.Data;
 using WebBaiGiangAPI.Models;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace WebBaiGiangAPI.Controllers
 {
@@ -174,20 +177,17 @@ namespace WebBaiGiangAPI.Controllers
         public async Task<IActionResult> DangKyNguoiDung([FromForm] NguoiDung nguoiDung, [FromForm] IFormFile anhDaiDien1)
         {
             var passwordHasher = new PasswordHasher<NguoiDung>();
-
             // Lấy mã người dùng lớn nhất
             var maxMaNguoiDung = await _context.NguoiDungs
                 .OrderByDescending(nd => nd.MaNguoiDung)
                 .Select(nd => nd.MaNguoiDung)
                 .FirstOrDefaultAsync();
-
             // Tạo mã người dùng
             var newMaNguoiDung = "";
             if (maxMaNguoiDung != null)
             {
                 // Lấy phần số từ chuỗi
                 var numberPart = int.Parse(maxMaNguoiDung.Substring(2)); // Bỏ ký tự 'ND'
-
                 // Tăng lên 1 và tạo mã mới
                 newMaNguoiDung = "ND" + (numberPart + 1).ToString("D1");
             }
@@ -370,20 +370,15 @@ namespace WebBaiGiangAPI.Controllers
             var user = await _context.NguoiDungs.SingleOrDefaultAsync(u => u.Email == email);
             if (user == null)
             {
-                return Unauthorized(new
-                {
-                    message = "Email không tồn tại",
-                });
+                return Unauthorized(new { message = "Email không tồn tại" });
             }
             // Kiểm tra mật khẩu (đã băm)
             var passwordHasher = new PasswordHasher<NguoiDung>();
             var verificationResult = passwordHasher.VerifyHashedPassword(user, user.Password, password);
-
             if (verificationResult == PasswordVerificationResult.Failed)
             {
                 return Unauthorized(new { message = "Mật khẩu không chính xác", email = email });
             }
-
             if (user.TrangThai == "0")
             {
                 return StatusCode(403, new { message = "Tài khoản của bạn đã bị khóa" });
@@ -392,7 +387,7 @@ namespace WebBaiGiangAPI.Controllers
             // Đăng nhập thành công
             return Ok(new
             {
-                message = "Đăng nhập thành công",
+                message = "Đăng nhập thành công", 
                 data = user,
             });
         }
@@ -478,17 +473,12 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
             // Kiểm tra tài khoản tồn tại
             var user = await _context.NguoiDungs.SingleOrDefaultAsync(u => u.MaNguoiDung == nguoiDung.MaNguoiDung && u.TrangThai == "1");
             if (user == null)
             {
-                return Unauthorized(new
-                {
-                    message = "Người dùng không tồn tại",
-                });
+                return Unauthorized(new { message = "Người dùng không tồn tại" });
             }
-
             // Kiểm tra email
             if (!Regex.IsMatch(nguoiDung.Email, patternEmail))
             {
@@ -498,7 +488,6 @@ namespace WebBaiGiangAPI.Controllers
                     data = nguoiDung
                 });
             }
-
             // Kiểm tra sdt
             if (!Regex.IsMatch(nguoiDung.SDT, patternSDT))
             {
@@ -508,7 +497,6 @@ namespace WebBaiGiangAPI.Controllers
                     data = nguoiDung
                 });
             }
-
             // Kiểm tra giới tính
             if (nguoiDung.GioiTinh != "Nam" && nguoiDung.GioiTinh != "Nữ")
             {
@@ -518,12 +506,10 @@ namespace WebBaiGiangAPI.Controllers
                     data = nguoiDung
                 });
             }
-
             // Loại bỏ khoảng trắng dư thừa
             nguoiDung.HoTen = Regex.Replace(nguoiDung.HoTen.Trim(), @"\s+", " ");
             nguoiDung.DiaChi = Regex.Replace(nguoiDung.DiaChi.Trim(), @"\s+", " ");
             nguoiDung.Lop = Regex.Replace(nguoiDung.Lop.Trim(), @"\s+", " ");
-
             /* Kiểm tra MSSV
              Quy tắc đặt MSSV theo mã đào tạo trường CĐ Kỹ Thuật Cao Thắng (CKC)
             [mã bậc(mã số)].[mã ngành(mã số)].[khoá(hai số cuối của năm)].[mã loại hình đào tạo(mã số)].[số thứ tự] */
