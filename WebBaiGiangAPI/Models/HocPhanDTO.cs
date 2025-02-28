@@ -1,10 +1,9 @@
-﻿    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
-    public class HocPhan
+    public class HocPhanDTO
     {
         [Key]
         [StringLength(10)]
@@ -67,18 +66,5 @@ namespace WebBaiGiangAPI.Models
         [Required]
         [StringLength(1)]
         public string TrangThai { get; set; }
-
-        // Foreign keys & Navigation properties
-        [ForeignKey("MaBoMon")]
-        [JsonIgnore]
-        public BoMon? BoMon { get; set; }
-
-        [ForeignKey("MaGiangVien")]
-        [JsonIgnore]
-        public NguoiDung? GiangVien { get; set; }
-
-        // Một học phần có thể liên quan đến nhiều lớp
-        [JsonIgnore]
-        public ICollection<Lop> Lops { get; set; } = new List<Lop>();
     }
 }

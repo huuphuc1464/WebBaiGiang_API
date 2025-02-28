@@ -1,16 +1,8 @@
 {
   "Files": [
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND3.png",
-      "PackagePath": "staticwebassets\\AnhNguoiDung\\ND3.png"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND4.png",
-      "PackagePath": "staticwebassets\\AnhNguoiDung\\ND4.png"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LogoWeb\\logo.png",
-      "PackagePath": "staticwebassets\\LogoWeb\\logo.png"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\HocPhan\\HP1.png",
+      "PackagePath": "staticwebassets\\HocPhan\\HP1.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebBaiGiangAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

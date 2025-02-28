@@ -9,38 +9,41 @@ namespace WebBaiGiangAPI.Models
         [StringLength(10)]
         [Column(TypeName = "varchar(10)")]
         public string MaBaiGiang { get; set; }
+
         [Required]
         [StringLength(10)]
         [Column(TypeName = "varchar(10)")]
         public string MaHocPhan { get; set; }
+
         [Required]
         [StringLength(10)]
         [Column(TypeName = "varchar(10)")]
         public string MaLop { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string HinhAnh { get; set; }
+        //[Required]
+        //[StringLength(50)]
+        //public string HinhAnh { get; set; }
 
         [StringLength(255)]
+        [Column(TypeName = "nvarchar(255)")]
         public string MoTa { get; set; }
 
         [Required]
         [StringLength(10)]
-        [Column(TypeName = "varchar(10)")]
+        [Column(TypeName = "nvarchar(10)")]
         public string Chuong { get; set; }
 
         [Required]
         [StringLength(100)]
+        [Column(TypeName = "nvarchar(100)")]
         public string TenBaiGiang { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Link { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Video { get; set; }
+        //[Required]
+        //[StringLength(50)]
+        //public string Video { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -56,5 +59,7 @@ namespace WebBaiGiangAPI.Models
 
         [ForeignKey("MaHocPhan")]
         public HocPhan HocPhan { get; set; }
+
+        public ICollection<FileBaiGiang> FileBaiGiangs { get; set; } = new List<FileBaiGiang>();
     }
 }

@@ -5,6 +5,372 @@
     "version": "v1"
   },
   "paths": {
+    "/api/HocPhan": {
+      "get": {
+        "tags": [
+          "HocPhan"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HocPhan"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HocPhan"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HocPhan"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HocPhan/{id}": {
+      "get": {
+        "tags": [
+          "HocPhan"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HocPhan"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HocPhan"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HocPhan"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HocPhan"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HocPhan"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HocPhan"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HocPhan"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HocPhan"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/HocPhan/ThemHocPhan": {
+      "post": {
+        "tags": [
+          "HocPhan"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "AnhDaiDien",
+                  "HinhThucHoc",
+                  "LanCapNhatCuoi",
+                  "LoaiHocPhan",
+                  "MaBoMon",
+                  "MaGiangVien",
+                  "NgayBatDau",
+                  "NoiDung",
+                  "SoTiet",
+                  "SoTinChi",
+                  "TenHocPhan",
+                  "TrangThai"
+                ],
+                "type": "object",
+                "properties": {
+                  "MaHocPhan": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "MaBoMon": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "MaGiangVien": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "TenHocPhan": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "AnhDaiDien": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "MoTaNgan": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "MoTaChiTiet": {
+                    "maxLength": 255,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "DiemDanhGia": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "SoLuongSinhVien": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "LanCapNhatCuoi": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "NgayBatDau": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "HinhThucHoc": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "NoiDung": {
+                    "maxLength": 255,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "SoTiet": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "SoTinChi": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "LoaiHocPhan": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "TrangThai": {
+                    "maxLength": 1,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "anhDaiDien": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "MaHocPhan": {
+                  "style": "form"
+                },
+                "MaBoMon": {
+                  "style": "form"
+                },
+                "MaGiangVien": {
+                  "style": "form"
+                },
+                "TenHocPhan": {
+                  "style": "form"
+                },
+                "AnhDaiDien": {
+                  "style": "form"
+                },
+                "MoTaNgan": {
+                  "style": "form"
+                },
+                "MoTaChiTiet": {
+                  "style": "form"
+                },
+                "DiemDanhGia": {
+                  "style": "form"
+                },
+                "SoLuongSinhVien": {
+                  "style": "form"
+                },
+                "LanCapNhatCuoi": {
+                  "style": "form"
+                },
+                "NgayBatDau": {
+                  "style": "form"
+                },
+                "HinhThucHoc": {
+                  "style": "form"
+                },
+                "NoiDung": {
+                  "style": "form"
+                },
+                "SoTiet": {
+                  "style": "form"
+                },
+                "SoTinChi": {
+                  "style": "form"
+                },
+                "LoaiHocPhan": {
+                  "style": "form"
+                },
+                "TrangThai": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/NguoiDung": {
       "get": {
         "tags": [
@@ -1022,14 +1388,11 @@
       "BaiGiang": {
         "required": [
           "chuong",
-          "hinhAnh",
-          "link",
           "maHocPhan",
           "maLop",
           "noiDung",
           "tenBaiGiang",
-          "trangThai",
-          "video"
+          "trangThai"
         ],
         "type": "object",
         "properties": {
@@ -1046,11 +1409,6 @@
           },
           "maLop": {
             "maxLength": 10,
-            "minLength": 0,
-            "type": "string"
-          },
-          "hinhAnh": {
-            "maxLength": 50,
             "minLength": 0,
             "type": "string"
           },
@@ -1073,12 +1431,8 @@
           "link": {
             "maxLength": 50,
             "minLength": 0,
-            "type": "string"
-          },
-          "video": {
-            "maxLength": 50,
-            "minLength": 0,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "noiDung": {
             "maxLength": 255,
@@ -1095,6 +1449,13 @@
           },
           "hocPhan": {
             "$ref": "#/components/schemas/HocPhan"
+          },
+          "fileBaiGiangs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileBaiGiang"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1453,10 +1814,42 @@
         },
         "additionalProperties": false
       },
+      "FileBaiGiang": {
+        "required": [
+          "duongDan",
+          "loaiFile",
+          "maBaiGiang"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maBaiGiang": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "duongDan": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "loaiFile": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "baiGiang": {
+            "$ref": "#/components/schemas/BaiGiang"
+          }
+        },
+        "additionalProperties": false
+      },
       "HocPhan": {
         "required": [
           "anhDaiDien",
-          "diemDanhGia",
           "hinhThucHoc",
           "lanCapNhatCuoi",
           "loaiHocPhan",
@@ -1464,7 +1857,6 @@
           "maGiangVien",
           "ngayBatDau",
           "noiDung",
-          "soLuongSinhVien",
           "soTiet",
           "soTinChi",
           "tenHocPhan",
@@ -1522,12 +1914,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "fileDeCuong": {
-            "maxLength": 50,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
-          },
           "ngayBatDau": {
             "type": "string",
             "format": "date-time"
@@ -1559,19 +1945,6 @@
             "maxLength": 1,
             "minLength": 0,
             "type": "string"
-          },
-          "boMon": {
-            "$ref": "#/components/schemas/BoMon"
-          },
-          "giangVien": {
-            "$ref": "#/components/schemas/NguoiDung"
-          },
-          "lops": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Lop"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false

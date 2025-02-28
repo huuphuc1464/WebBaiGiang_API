@@ -114,13 +114,12 @@ namespace WebBaiGiangAPI.Migrations
                     DiemDanhGia = table.Column<int>(type: "int", nullable: false),
                     SoLuongSinhVien = table.Column<int>(type: "int", nullable: false),
                     LanCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FileDeCuong = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HinhThucHoc = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NoiDung = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     SoTiet = table.Column<int>(type: "int", nullable: false),
                     SoTinChi = table.Column<int>(type: "int", nullable: false),
-                    LoaiHocPhan = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    LoaiHocPhan = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
                 },
                 constraints: table =>
@@ -200,12 +199,10 @@ namespace WebBaiGiangAPI.Migrations
                     MaBaiGiang = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
                     MaHocPhan = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
                     MaLop = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    HinhAnh = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MoTa = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Chuong = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    Chuong = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     TenBaiGiang = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Link = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Video = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NoiDung = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     TrangThai = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
                 },
@@ -383,6 +380,27 @@ namespace WebBaiGiangAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FileBaiGiangs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaBaiGiang = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    DuongDan = table.Column<string>(type: "varchar(50)", maxLength: 10, nullable: false),
+                    LoaiFile = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FileBaiGiangs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FileBaiGiangs_BaiGiangs_MaBaiGiang",
+                        column: x => x.MaBaiGiang,
+                        principalTable: "BaiGiangs",
+                        principalColumn: "MaBaiGiang",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NopBaiTaps",
                 columns: table => new
                 {
@@ -481,6 +499,11 @@ namespace WebBaiGiangAPI.Migrations
                 column: "MaSinhVien");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FileBaiGiangs_MaBaiGiang",
+                table: "FileBaiGiangs",
+                column: "MaBaiGiang");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_HocPhans_MaBoMon",
                 table: "HocPhans",
                 column: "MaBoMon");
@@ -530,9 +553,6 @@ namespace WebBaiGiangAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BaiGiangs");
-
-            migrationBuilder.DropTable(
                 name: "BangDiems");
 
             migrationBuilder.DropTable(
@@ -545,10 +565,16 @@ namespace WebBaiGiangAPI.Migrations
                 name: "DiemDanhs");
 
             migrationBuilder.DropTable(
+                name: "FileBaiGiangs");
+
+            migrationBuilder.DropTable(
                 name: "NopBaiTaps");
 
             migrationBuilder.DropTable(
                 name: "ThongTinWebs");
+
+            migrationBuilder.DropTable(
+                name: "BaiGiangs");
 
             migrationBuilder.DropTable(
                 name: "BaiTaps");

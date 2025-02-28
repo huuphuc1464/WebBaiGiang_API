@@ -12,6 +12,7 @@ namespace WebBaiGiangAPI.Models
 
         [Required]
         [StringLength(100)]
+        [Column(TypeName = "nvarchar(100)")]
         public string TenKhoa { get; set; }
 
         [Required]

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YLGij5Q1g0mip+r7EjEP1mU4HlRzXuI5fMSnVm2VZZc=",
+  "Hash": "aPvL7O8g80FX0h0rOe4KuJlPe6rC6dcz4VfTpZKASx4=",
   "Source": "WebBaiGiangAPI",
   "BasePath": "_content/WebBaiGiangAPI",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND3.png",
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\HocPhan\\HP1.png",
       "SourceId": "WebBaiGiangAPI",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
       "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "AnhNguoiDung/ND3#[.{fingerprint}]?.png",
+      "RelativePath": "HocPhan/HP1#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,59 +31,17 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "rn35frj51o",
-      "Integrity": "x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=",
+      "Fingerprint": "w6nc0pw77k",
+      "Integrity": "mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\AnhNguoiDung\\ND3.png"
-    },
-    {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND4.png",
-      "SourceId": "WebBaiGiangAPI",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
-      "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "AnhNguoiDung/ND4#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "rn35frj51o",
-      "Integrity": "x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\AnhNguoiDung\\ND4.png"
-    },
-    {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LogoWeb\\logo.png",
-      "SourceId": "WebBaiGiangAPI",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
-      "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "LogoWeb/logo#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "ic1ck9jlbb",
-      "Integrity": "LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\LogoWeb\\logo.png"
+      "OriginalItemSpec": "wwwroot\\HocPhan\\HP1.png"
     }
   ],
   "Endpoints": [
     {
-      "Route": "AnhNguoiDung/ND3.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND3.png",
+      "Route": "HocPhan/HP1.png",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\HocPhan\\HP1.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -92,7 +50,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "57539"
+          "Value": "603416"
         },
         {
           "Name": "Content-Type",
@@ -100,11 +58,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=\""
+          "Value": "\"mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 20 Feb 2025 08:12:34 GMT"
+          "Value": "Wed, 26 Feb 2025 03:47:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -114,13 +72,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8="
+          "Value": "sha256-mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ="
         }
       ]
     },
     {
-      "Route": "AnhNguoiDung/ND3.rn35frj51o.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND3.png",
+      "Route": "HocPhan/HP1.w6nc0pw77k.png",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\HocPhan\\HP1.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -129,7 +87,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "57539"
+          "Value": "603416"
         },
         {
           "Name": "Content-Type",
@@ -137,11 +95,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=\""
+          "Value": "\"mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 20 Feb 2025 08:12:34 GMT"
+          "Value": "Wed, 26 Feb 2025 03:47:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -151,179 +109,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "rn35frj51o"
+          "Value": "w6nc0pw77k"
         },
         {
           "Name": "label",
-          "Value": "AnhNguoiDung/ND3.png"
+          "Value": "HocPhan/HP1.png"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8="
-        }
-      ]
-    },
-    {
-      "Route": "AnhNguoiDung/ND4.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND4.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "57539"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 20 Feb 2025 08:14:26 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8="
-        }
-      ]
-    },
-    {
-      "Route": "AnhNguoiDung/ND4.rn35frj51o.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\AnhNguoiDung\\ND4.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "57539"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 20 Feb 2025 08:14:26 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "rn35frj51o"
-        },
-        {
-          "Name": "label",
-          "Value": "AnhNguoiDung/ND4.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-x8z5rmXH0uoj0SG17QQxW/hkyNujqFbn/PI6lJOyvO8="
-        }
-      ]
-    },
-    {
-      "Route": "LogoWeb/logo.ic1ck9jlbb.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LogoWeb\\logo.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "781991"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 20 Feb 2025 08:41:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ic1ck9jlbb"
-        },
-        {
-          "Name": "label",
-          "Value": "LogoWeb/logo.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU="
-        }
-      ]
-    },
-    {
-      "Route": "LogoWeb/logo.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LogoWeb\\logo.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "781991"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 20 Feb 2025 08:41:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU="
+          "Value": "sha256-mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ="
         }
       ]
     }

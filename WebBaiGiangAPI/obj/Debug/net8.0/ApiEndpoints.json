@@ -1,5 +1,214 @@
 [
   {
+    "ContainingType": "WebBaiGiangAPI.Controllers.HocPhanController",
+    "Method": "GetHocPhans",
+    "RelativePath": "api/HocPhan",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.HocPhan, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.HocPhanController",
+    "Method": "GetHocPhan",
+    "RelativePath": "api/HocPhan/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.HocPhan",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.HocPhanController",
+    "Method": "PutHocPhan",
+    "RelativePath": "api/HocPhan/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "hocPhan",
+        "Type": "WebBaiGiangAPI.Models.HocPhan",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.HocPhanController",
+    "Method": "DeleteHocPhan",
+    "RelativePath": "api/HocPhan/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.HocPhanController",
+    "Method": "ThemHocPhan",
+    "RelativePath": "api/HocPhan/ThemHocPhan",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "MaHocPhan",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MaBoMon",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MaGiangVien",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TenHocPhan",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AnhDaiDien",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MoTaNgan",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MoTaChiTiet",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DiemDanhGia",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SoLuongSinhVien",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "LanCapNhatCuoi",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "NgayBatDau",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "HinhThucHoc",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NoiDung",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SoTiet",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SoTinChi",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "LoaiHocPhan",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TrangThai",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBaiGiangAPI.Controllers.NguoiDungController",
     "Method": "GetNguoiDungs",
     "RelativePath": "api/NguoiDung",

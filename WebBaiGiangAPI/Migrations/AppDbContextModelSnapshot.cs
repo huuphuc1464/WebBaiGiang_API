@@ -31,12 +31,7 @@ namespace WebBaiGiangAPI.Migrations
                     b.Property<string>("Chuong")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("HinhAnh")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Link")
                         .IsRequired()
@@ -72,11 +67,6 @@ namespace WebBaiGiangAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)");
-
-                    b.Property<string>("Video")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("MaBaiGiang");
 
@@ -337,6 +327,36 @@ namespace WebBaiGiangAPI.Migrations
                     b.ToTable("DiemDanhs");
                 });
 
+            modelBuilder.Entity("WebBaiGiangAPI.Models.FileBaiGiang", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DuongDan")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("LoaiFile")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("MaBaiGiang")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaBaiGiang");
+
+                    b.ToTable("FileBaiGiangs");
+                });
+
             modelBuilder.Entity("WebBaiGiangAPI.Models.HocPhan", b =>
                 {
                     b.Property<string>("MaHocPhan")
@@ -351,11 +371,6 @@ namespace WebBaiGiangAPI.Migrations
                     b.Property<int>("DiemDanhGia")
                         .HasColumnType("int");
 
-                    b.Property<string>("FileDeCuong")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("HinhThucHoc")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -367,7 +382,7 @@ namespace WebBaiGiangAPI.Migrations
                     b.Property<string>("LoaiHocPhan")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("MaBoMon")
                         .IsRequired()
@@ -835,6 +850,17 @@ namespace WebBaiGiangAPI.Migrations
                     b.Navigation("SinhVien");
                 });
 
+            modelBuilder.Entity("WebBaiGiangAPI.Models.FileBaiGiang", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.BaiGiang", "BaiGiang")
+                        .WithMany("FileBaiGiangs")
+                        .HasForeignKey("MaBaiGiang")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BaiGiang");
+                });
+
             modelBuilder.Entity("WebBaiGiangAPI.Models.HocPhan", b =>
                 {
                     b.HasOne("WebBaiGiangAPI.Models.BoMon", "BoMon")
@@ -920,6 +946,11 @@ namespace WebBaiGiangAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("NguoiDung");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.BaiGiang", b =>
+                {
+                    b.Navigation("FileBaiGiangs");
                 });
 
             modelBuilder.Entity("WebBaiGiangAPI.Models.BaiTap", b =>

@@ -298,7 +298,7 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return Conflict(new { message = "MSSV đã tồn tại trong hệ thống." });
             };
-
+            
             //Xử lý upload ảnh
             if (anhDaiDien1 != null && anhDaiDien1.Length > 0)
             {
@@ -314,7 +314,7 @@ namespace WebBaiGiangAPI.Controllers
                 string uniqueFileName = $"{nguoiDung.MaNguoiDung}{fileExtension}";
 
                 // Đường dẫn thư mục lưu file
-                string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "AnhNguoiDung");
+                string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "NguoiDung");
 
                 // Tạo thư mục nếu chưa tồn tại
                 if (!Directory.Exists(uploadPath))

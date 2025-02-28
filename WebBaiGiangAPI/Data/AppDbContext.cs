@@ -23,6 +23,7 @@ namespace WebBaiGiangAPI.Data
         public DbSet<NopBaiTap> NopBaiTaps { get; set; }
         public DbSet<DiemDanh> DiemDanhs { get; set; }
         public DbSet<BangDiem> BangDiems { get; set; }
+        public DbSet<FileBaiGiang> FileBaiGiangs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +39,12 @@ namespace WebBaiGiangAPI.Data
                 entity.Property(e => e.TongKetLan1).HasColumnType("decimal(18,2)");
                 entity.Property(e => e.TongKetLan2).HasColumnType("decimal(18,2)");
             });
+            // --- BaiGiang - FileBaiGiang ---
+            modelBuilder.Entity<FileBaiGiang>()
+                .HasOne(fbg => fbg.BaiGiang)
+                .WithMany(bg => bg.FileBaiGiangs)
+                .HasForeignKey(fbg => fbg.MaBaiGiang)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // --- Khoa - BoMon ---
             modelBuilder.Entity<BoMon>()
