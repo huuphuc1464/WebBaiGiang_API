@@ -31,7 +31,7 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        Seeder.Initialize(services);
+        SeedData.Initialize(services);
     }
     catch (Exception ex)
     {

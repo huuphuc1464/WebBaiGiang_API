@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\hocphancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\hocphancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\nguoidungcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\nguoidungcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HocPhanController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\HocPhanController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HocPhanController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\HocPhanController.cs",
-              "RelativeToolTip": "Controllers\\HocPhanController.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAuwHoAAAArAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAIAwwCQAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T08:22:43.045Z",
+              "WhenOpened": "2025-02-28T03:34:51.472Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NguoiDungController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\NguoiDungController.cs",
-              "RelativeDocumentMoniker": "Controllers\\NguoiDungController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\NguoiDungController.cs",
-              "RelativeToolTip": "Controllers\\NguoiDungController.cs",
-              "ViewState": "AgIAAA4BAAAAAAAAAAAkwDwBAABeAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Data\\SeedData.cs",
+              "RelativeDocumentMoniker": "Data\\SeedData.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Data\\SeedData.cs*",
+              "RelativeToolTip": "Data\\SeedData.cs*",
+              "ViewState": "AgIAANgBAAAAAAAAAADgv+UBAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T07:48:57.762Z",
+              "WhenOpened": "2025-02-28T03:28:07.678Z",
               "EditorCaption": ""
             }
           ]

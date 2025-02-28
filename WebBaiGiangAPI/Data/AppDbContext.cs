@@ -8,199 +8,349 @@ namespace WebBaiGiangAPI.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         { }
-
-        public DbSet<Khoa> Khoas { get; set; }
-        public DbSet<BoMon> BoMons { get; set; }
-        public DbSet<HocPhan> HocPhans { get; set; }
-        public DbSet<BaiGiang> BaiGiangs { get; set; }
-        public DbSet<NguoiDung> NguoiDungs { get; set; }
-        public DbSet<Quyen> Quyens { get; set; }
-        public DbSet<Lop> Lops { get; set; }
-        public DbSet<DanhGia> DanhGias { get; set; }
-        public DbSet<BaiTap> BaiTaps { get; set; }
-        public DbSet<ThongTinWeb> ThongTinWebs { get; set; }
-        public DbSet<DangKyLopHoc> DangKyLopHocs { get; set; }
-        public DbSet<NopBaiTap> NopBaiTaps { get; set; }
-        public DbSet<DiemDanh> DiemDanhs { get; set; }
-        public DbSet<BangDiem> BangDiems { get; set; }
-        public DbSet<FileBaiGiang> FileBaiGiangs { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<LoginLevel> LoginLevels { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Month> Months { get; set; }
+        public DbSet<ExamType> ExamTypes { get; set; }
+        public DbSet<SchoolYear> SchoolYears { get; set; }
+        public DbSet<Semester> Semesters { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<UsersLog> UserLogs { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<LessonFile> LessonFiles { get; set; }
+        public DbSet<TeacherClass> TeacherClasses { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<QuizQuestion> QuizQuestions { get; set; }
+        public DbSet<QuizResult> QuizResults { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<Marks> Marks { get; set; }
+        public DbSet<AttendanceMarks> AttendanceMarks { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Submit> Submits { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Files> Files { get; set; }
+        public DbSet<StudentClass> StudentClasses { get; set; }
+        public DbSet<ClassCourse> ClassCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // --- User Entity ---
+            modelBuilder.Entity<Users>()
+                .HasOne(u => u.Department)
+                .WithMany(d => d.Users)
+                .HasForeignKey(u => u.UsersDepartmentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Users>()
+                .HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u => u.UsersRoleId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Users>()
+                .HasOne(u => u.LoginLevel)
+                .WithMany(ll => ll.Users)
+                .HasForeignKey(u => u.UserLevelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Users>()
+                .HasOne(u => u.City)
+                .WithMany(c => c.Users)
+                .HasForeignKey(u => u.UsersCity)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Users>()
+                .HasOne(u => u.State)
+                .WithMany(s => s.Users)
+                .HasForeignKey(u => u.UsersState)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Users>()
+                .HasOne(u => u.Country)
+                .WithMany(cn => cn.Users)
+                .HasForeignKey(u => u.UsersCountry)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- UserLog ---
+            modelBuilder.Entity<UsersLog>()
+                .HasOne(ul => ul.Users)
+                .WithMany(u => u.UsersLog)
+                .HasForeignKey(ul => ul.UlogUsersId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // --- Class ---
+            modelBuilder.Entity<Class>()
+                .HasOne(c => c.Semester)
+                .WithMany(s => s.Classes)
+                .HasForeignKey(c => c.ClassSemesterId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Class>()
+                .HasOne(c => c.SchoolYear)
+                .WithMany(sy => sy.Classes)
+                .HasForeignKey(c => c.ClassSyearId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Feedback ---
+            modelBuilder.Entity<Feedback>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.Feedbacks)
+                .HasForeignKey(f => f.FeedbackUsersId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Feedback>()
+                .HasOne(f => f.Classes)
+                .WithMany(c => c.Feedbacks)
+                .HasForeignKey(f => f.FeedbackClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Lesson ---
+            modelBuilder.Entity<Lesson>()
+                .HasOne(l => l.Classes)
+                .WithMany(c => c.Lessons)
+                .HasForeignKey(l => l.LessonClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Lesson>()
+                .HasOne(l => l.Course)
+                .WithMany(c => c.Lessons)
+                .HasForeignKey(l => l.LessonCourseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- LessonFile ---
+            modelBuilder.Entity<LessonFile>()
+                .HasOne(lf => lf.Lesson)
+                .WithMany(l => l.LessonFiles)
+                .HasForeignKey(lf => lf.LfLessonId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // --- TeacherClass ---
+            modelBuilder.Entity<TeacherClass>()
+                .HasOne(tc => tc.User)
+                .WithMany(u => u.TeacherClasses)
+                .HasForeignKey(tc => tc.TcUsersId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TeacherClass>()
+                .HasOne(tc => tc.Classes)
+                .WithMany(c => c.TeacherClasses)
+                .HasForeignKey(tc => tc.TcClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Student (StudentId là FK đến User) ---
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Users)
+                .WithOne()
+                .HasForeignKey<Student>(s => s.StudentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // --- Subject ---
+            modelBuilder.Entity<Subject>()
+                .HasOne(sub => sub.Classes)
+                .WithMany(c => c.Subjects)
+                .HasForeignKey(sub => sub.SubjectClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Quiz ---
+            modelBuilder.Entity<Quiz>()
+                .HasOne(q => q.Classes)
+                .WithMany(c => c.Quizzes)
+                .HasForeignKey(q => q.QuizClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Quiz>()
+                .HasOne(q => q.Teacher)
+                .WithMany(u => u.Quizzes)
+                .HasForeignKey(q => q.QuizTeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- QuizQuestion ---
+            modelBuilder.Entity<QuizQuestion>()
+                .HasOne(qq => qq.Quiz)
+                .WithMany(q => q.QuizQuestions)
+                .HasForeignKey(qq => qq.QqQuizId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // --- QuizResult ---
+            modelBuilder.Entity<QuizResult>()
+                .HasOne(qr => qr.Quiz)
+                .WithMany(q => q.QuizResults)
+                .HasForeignKey(qr => qr.QrQuizId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<QuizResult>()
+                .HasOne(qr => qr.Student)
+                .WithMany(s => s.QuizResults)
+                .HasForeignKey(qr => qr.QrStudentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // --- Exam ---
+            modelBuilder.Entity<Exam>()
+                .HasOne(e => e.ExamType)
+                .WithMany(et => et.Exams)
+                .HasForeignKey(e => e.ExamEtypeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Exam>()
+                .HasOne(e => e.Month)
+                .WithMany(m => m.Exams)
+                .HasForeignKey(e => e.ExamMonth)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Marks ---
+            modelBuilder.Entity<Marks>()
+                .HasOne(m => m.Exam)
+                .WithMany(e => e.Marks)
+                .HasForeignKey(m => m.MarksExamId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Marks>()
+                .HasOne(m => m.Student)
+                .WithMany(s => s.Marks)
+                .HasForeignKey(m => m.MarksStudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Marks>()
+                .HasOne(m => m.Subject)
+                .WithMany(sub => sub.Marks)
+                .HasForeignKey(m => m.MarksSubjectId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Marks>()
+                .HasOne(m => m.Semester)
+                .WithMany(se => se.Marks)
+                .HasForeignKey(m => m.MarksSemesterId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- AttendanceMark ---
+            modelBuilder.Entity<AttendanceMarks>()
+                .HasOne(am => am.Student)
+                .WithMany(s => s.AttendanceMarks)
+                .HasForeignKey(am => am.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AttendanceMarks>()
+                .HasOne(am => am.Classes)
+                .WithMany(c => c.AttendanceMarks)
+                .HasForeignKey(am => am.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Assignment ---
+            modelBuilder.Entity<Assignment>()
+                .HasOne(a => a.TeacherClass)
+                .WithMany(tc => tc.Assignments)
+                .HasForeignKey(a => a.AssignmentTeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Assignment>()
+                .HasOne(a => a.Classes)
+                .WithMany(c => c.Assignments)
+                .HasForeignKey(a => a.AssignmentClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Submit ---
+            modelBuilder.Entity<Submit>()
+                .HasOne(su => su.Assignment)
+                .WithMany(a => a.Submits)
+                .HasForeignKey(su => su.SubmitAssignmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Submit>()
+                .HasOne(su => su.Student)
+                .WithMany(s => s.Submits)
+                .HasForeignKey(su => su.SubmitStudentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // --- Announcement ---
+            modelBuilder.Entity<Announcement>()
+                .HasOne(a => a.Classes)
+                .WithMany(c => c.Announcements)
+                .HasForeignKey(a => a.AnnouncementClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Announcement>()
+                .HasOne(a => a.Teacher)
+                .WithMany(u => u.Announcements)
+                .HasForeignKey(a => a.AnnouncementTeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Event ---
+            modelBuilder.Entity<Event>()
+                .HasOne(e => e.Classes)
+                .WithMany(c => c.Events)
+                .HasForeignKey(e => e.EventClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Event>()
+                .HasOne(e => e.Teacher)
+                .WithMany(u => u.Events)
+                .HasForeignKey(e => e.EventTeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Message ---
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany(u => u.SentMessages)
+                .HasForeignKey(m => m.MessageSenderId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Receiver)
+                .WithMany(u => u.ReceivedMessages)
+                .HasForeignKey(m => m.MessageReceiverId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- Files ---
+            modelBuilder.Entity<Files>()
+                .HasOne(f => f.Classes)
+                .WithMany(c => c.Files)
+                .HasForeignKey(f => f.FilesClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Files>()
+                .HasOne(f => f.Teacher)
+                .WithMany(u => u.Files)
+                .HasForeignKey(f => f.FilesTeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- StudentClass ---
+            modelBuilder.Entity<StudentClass>()
+                .HasOne(c => c.Student)
+                .WithMany(s => s.StudentClasses)
+                .HasForeignKey(c => c.ScStudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<StudentClass>()
+                .HasOne(sc => sc.Classes)
+                .WithMany(c => c.StudentClasses)
+                .HasForeignKey(c => c.ScClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // --- ClassCourse ---
+            modelBuilder.Entity<ClassCourse>()
+                .HasOne(cc => cc.Classes)
+                .WithMany(c => c.ClassCourses)
+                .HasForeignKey(cc => cc.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ClassCourse>()
+                .HasOne(cc => cc.Course)
+                .WithMany(c => c.ClassCourses)
+                .HasForeignKey(cc => cc.CourseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<BangDiem>(entity =>
-            {
-                entity.Property(e => e.ChuyenCan).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.HeSo1).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.HeSo2).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.ThiLan1).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.ThiLan2).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.TBKT).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.TongKetLan1).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.TongKetLan2).HasColumnType("decimal(18,2)");
-            });
-            // --- BaiGiang - FileBaiGiang ---
-            modelBuilder.Entity<FileBaiGiang>()
-                .HasOne(fbg => fbg.BaiGiang)
-                .WithMany(bg => bg.FileBaiGiangs)
-                .HasForeignKey(fbg => fbg.MaBaiGiang)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- Khoa - BoMon ---
-            modelBuilder.Entity<BoMon>()
-                .HasOne(bm => bm.Khoa)
-                .WithMany(k => k.BoMons)
-                .HasForeignKey(bm => bm.MaKhoa)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- Khoa - NguoiDung ---
-            modelBuilder.Entity<NguoiDung>()
-                .HasOne(nd => nd.Khoa)
-                .WithMany(k => k.NguoiDungs)
-                .HasForeignKey(nd => nd.MaKhoa)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- BoMon - HocPhan ---
-            modelBuilder.Entity<HocPhan>()
-                .HasOne(hp => hp.BoMon)
-                .WithMany(bm => bm.HocPhans)
-                .HasForeignKey(hp => hp.MaBoMon)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- BoMon - NguoiDung ---
-            modelBuilder.Entity<NguoiDung>()
-                .HasOne(nd => nd.BoMon)
-                .WithMany(bm => bm.NguoiDungs)
-                .HasForeignKey(nd => nd.MaBoMon)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- NguoiDung - Quyen ---
-            modelBuilder.Entity<NguoiDung>()
-                .HasOne(nd => nd.Quyen)
-                .WithMany(q => q.NguoiDungs)
-                .HasForeignKey(nd => nd.MaQuyen)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- HocPhan - GiangVien ---
-            modelBuilder.Entity<HocPhan>()
-                .HasOne(hp => hp.GiangVien)
-                .WithMany()
-                .HasForeignKey(hp => hp.MaGiangVien)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- BaiGiang - HocPhan ---
-            modelBuilder.Entity<BaiGiang>()
-                .HasOne(bg => bg.HocPhan)
-                .WithMany()
-                .HasForeignKey(bg => bg.MaHocPhan)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- BaiTap - HocPhan ---
-            modelBuilder.Entity<BaiTap>()
-                .HasOne(bt => bt.HocPhan)
-                .WithMany()
-                .HasForeignKey(bt => bt.MaHocPhan)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- BaiGiang - Lop ---
-            modelBuilder.Entity<BaiGiang>()
-                .HasOne(bg => bg.Lop)
-                .WithMany(l => l.BaiGiangs)
-                .HasForeignKey(bg => bg.MaLop)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- Lop - HocPhan ---
-            modelBuilder.Entity<Lop>()
-                .HasOne(l => l.HocPhan)
-                .WithMany(hp => hp.Lops)
-                .HasForeignKey(l => l.MaHocPhan)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- DanhGia - NguoiDung & Lop ---
-            modelBuilder.Entity<DanhGia>()
-                .HasOne(dg => dg.SinhVien)
-                .WithMany(nd => nd.DanhGias)
-                .HasForeignKey(dg => dg.MaSinhVien)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<DanhGia>()
-                .HasOne(dg => dg.Lop)
-                .WithMany(l => l.DanhGias)
-                .HasForeignKey(dg => dg.MaLop)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- BaiTap - Lop ---
-            modelBuilder.Entity<BaiTap>()
-                .HasOne(bt => bt.Lop)
-                .WithMany(l => l.BaiTaps)
-                .HasForeignKey(bt => bt.MaLop)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- BaiTap - NguoiTao (NguoiDung) ---
-            modelBuilder.Entity<BaiTap>()
-                .HasOne(bt => bt.NguoiTao)
-                .WithMany()
-                .HasForeignKey(bt => bt.MaNguoiTao)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // --- DangKyLopHoc - NguoiDung & Lop ---
-            modelBuilder.Entity<DangKyLopHoc>()
-                .HasOne(dkl => dkl.SinhVien)
-                .WithMany(nd => nd.DangKyLopHocs)
-                .HasForeignKey(dkl => dkl.MaSinhVien)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<DangKyLopHoc>()
-                .HasOne(dkl => dkl.Lop)
-                .WithMany(l => l.DangKyLopHocs)
-                .HasForeignKey(dkl => dkl.MaLop)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- NopBaiTap - BaiTap & NguoiDung ---
-            modelBuilder.Entity<NopBaiTap>()
-                .HasOne(nbt => nbt.BaiTap)
-                .WithMany(bt => bt.NopBaiTaps)
-                .HasForeignKey(nbt => nbt.MaBaiTap)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<NopBaiTap>()
-                .HasOne(nbt => nbt.SinhVien)
-                .WithMany(nd => nd.NopBaiTaps)
-                .HasForeignKey(nbt => nbt.MaSinhVien)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- DiemDanh - NguoiDung & Lop ---
-            modelBuilder.Entity<DiemDanh>()
-                .HasOne(dd => dd.SinhVien)
-                .WithMany(nd => nd.DiemDanhs)
-                .HasForeignKey(dd => dd.MaSinhVien)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<DiemDanh>()
-                .HasOne(dd => dd.Lop)
-                .WithMany(l => l.DiemDanhs)
-                .HasForeignKey(dd => dd.MaLop)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- BangDiem - NguoiDung & Lop ---
-            modelBuilder.Entity<BangDiem>()
-                .HasOne(bd => bd.Lop)
-                .WithMany(l => l.BangDiems)
-                .HasForeignKey(bd => bd.MaLop)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<BangDiem>()
-                .HasOne(bd => bd.SinhVien)
-                .WithMany(nd => nd.BangDiems)
-                .HasForeignKey(bd => bd.MaSinhVien)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // --- ThongTinWebs - NguoiDung ---
-            modelBuilder.Entity<ThongTinWeb>()
-                .HasOne(tt => tt.NguoiDung)
-                .WithMany()
-                .HasForeignKey(tt => tt.MaNguoiThayDoiCuoi)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

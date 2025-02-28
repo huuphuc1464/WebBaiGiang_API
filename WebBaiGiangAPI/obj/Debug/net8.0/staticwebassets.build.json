@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aPvL7O8g80FX0h0rOe4KuJlPe6rC6dcz4VfTpZKASx4=",
+  "Hash": "FI0Cz9nh3eyCkBwx21P23PnkIwzexVof2eouX9R7I9c=",
   "Source": "WebBaiGiangAPI",
   "BasePath": "_content/WebBaiGiangAPI",
   "Mode": "Default",
@@ -15,111 +15,6 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [
-    {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\HocPhan\\HP1.png",
-      "SourceId": "WebBaiGiangAPI",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
-      "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "HocPhan/HP1#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "w6nc0pw77k",
-      "Integrity": "mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\HocPhan\\HP1.png"
-    }
-  ],
-  "Endpoints": [
-    {
-      "Route": "HocPhan/HP1.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\HocPhan\\HP1.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "603416"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 26 Feb 2025 03:47:36 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ="
-        }
-      ]
-    },
-    {
-      "Route": "HocPhan/HP1.w6nc0pw77k.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\HocPhan\\HP1.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "603416"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 26 Feb 2025 03:47:36 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "w6nc0pw77k"
-        },
-        {
-          "Name": "label",
-          "Value": "HocPhan/HP1.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-mDsw6MUCChKU4qFwxstwFc7GBNEdzv4NiuRRyEDaZJQ="
-        }
-      ]
-    }
-  ]
+  "Assets": [],
+  "Endpoints": []
 }

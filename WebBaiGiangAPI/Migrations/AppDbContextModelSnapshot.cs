@@ -22,992 +22,1718 @@ namespace WebBaiGiangAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BaiGiang", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Announcement", b =>
                 {
-                    b.Property<string>("MaBaiGiang")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("Chuong")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Link")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("MaHocPhan")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaLop")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MoTa")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("NoiDung")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("TenBaiGiang")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaBaiGiang");
-
-                    b.HasIndex("MaHocPhan");
-
-                    b.HasIndex("MaLop");
-
-                    b.ToTable("BaiGiangs");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BaiTap", b =>
-                {
-                    b.Property<string>("MaBaiTap")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("FileBaiTap")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("HanNop")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LinkBaiTap")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("MaHocPhan")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaLop")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaNguoiTao")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<DateTime>("NgayBatDau")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("NgayTao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NoiDung")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("TenBaiTap")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaBaiTap");
-
-                    b.HasIndex("MaHocPhan");
-
-                    b.HasIndex("MaLop");
-
-                    b.HasIndex("MaNguoiTao");
-
-                    b.ToTable("BaiTaps");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BangDiem", b =>
-                {
-                    b.Property<string>("MaBangDiem")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<decimal>("ChuyenCan")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("HeSo1")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("HeSo2")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("MaLop")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaSinhVien")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<decimal>("TBKT")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ThiLan1")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("ThiLan2")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TongKetLan1")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("TongKetLan2")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("MaBangDiem");
-
-                    b.HasIndex("MaLop");
-
-                    b.HasIndex("MaSinhVien");
-
-                    b.ToTable("BangDiems");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BoMon", b =>
-                {
-                    b.Property<string>("MaBoMon")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaKhoa")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("TenBoMon")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaBoMon");
-
-                    b.HasIndex("MaKhoa");
-
-                    b.ToTable("BoMons");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.DangKyLopHoc", b =>
-                {
-                    b.Property<string>("MaDangKy")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaLop")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaSinhVien")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<DateTime>("NgayDangKy")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaDangKy");
-
-                    b.HasIndex("MaLop");
-
-                    b.HasIndex("MaSinhVien");
-
-                    b.ToTable("DangKyLopHocs");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.DanhGia", b =>
-                {
-                    b.Property<string>("MaDanhGia")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaLop")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaSinhVien")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<DateTime>("NgayDanhGia")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NoiDungDanhGia")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("SoDiem")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaDanhGia");
-
-                    b.HasIndex("MaLop");
-
-                    b.HasIndex("MaSinhVien");
-
-                    b.ToTable("DanhGias");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.DiemDanh", b =>
-                {
-                    b.Property<string>("MaDiemDanh")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaLop")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaSinhVien")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<DateTime>("NgayHoc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaDiemDanh");
-
-                    b.HasIndex("MaLop");
-
-                    b.HasIndex("MaSinhVien");
-
-                    b.ToTable("DiemDanhs");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.FileBaiGiang", b =>
-                {
-                    b.Property<int>("Id")
+                    b.Property<int>("AnnouncementId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnnouncementId"));
 
-                    b.Property<string>("DuongDan")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("LoaiFile")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("MaBaiGiang")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MaBaiGiang");
-
-                    b.ToTable("FileBaiGiangs");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.HocPhan", b =>
-                {
-                    b.Property<string>("MaHocPhan")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("AnhDaiDien")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("DiemDanhGia")
+                    b.Property<int>("AnnouncementClassId")
                         .HasColumnType("int");
 
-                    b.Property<string>("HinhThucHoc")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("LanCapNhatCuoi")
+                    b.Property<DateTime>("AnnouncementDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LoaiHocPhan")
+                    b.Property<string>("AnnouncementDescription")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaBoMon")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                    b.Property<int>("AnnouncementTeacherId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("MaGiangVien")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MoTaChiTiet")
+                    b.Property<string>("AnnouncementTitle")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("MoTaNgan")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.HasKey("AnnouncementId");
 
-                    b.Property<DateTime>("NgayBatDau")
+                    b.HasIndex("AnnouncementClassId");
+
+                    b.HasIndex("AnnouncementTeacherId");
+
+                    b.ToTable("Announcements");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Assignment", b =>
+                {
+                    b.Property<int>("AssignmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssignmentId"));
+
+                    b.Property<int>("AssignmentClassId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AssignmentCreateAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("NoiDung")
+                    b.Property<DateTime?>("AssignmentDeadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AssignmentDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AssignmentFilename")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("SoLuongSinhVien")
+                    b.Property<DateTime>("AssignmentStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("AssignmentStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("SoTiet")
+                    b.Property<int?>("AssignmentTeacherId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SoTinChi")
+                    b.Property<string>("AssignmentTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("AssignmentId");
+
+                    b.HasIndex("AssignmentClassId");
+
+                    b.HasIndex("AssignmentTeacherId");
+
+                    b.ToTable("Assignments");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.AttendanceMarks", b =>
+                {
+                    b.Property<int>("AttendanceMarksId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("TenHocPhan")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttendanceMarksId"));
+
+                    b.Property<DateTime>("AttendanceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AttendanceStatus")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AttendanceMarksId");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("AttendanceMarks");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.City", b =>
+                {
+                    b.Property<int>("CityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityId"));
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("CityId");
+
+                    b.HasIndex("CityName")
+                        .IsUnique();
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Class", b =>
+                {
+                    b.Property<int>("ClassId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassId"));
+
+                    b.Property<string>("ClassDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassSemesterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassSyearId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("ClassUpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ClassId");
+
+                    b.HasIndex("ClassSemesterId");
+
+                    b.HasIndex("ClassSyearId");
+
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.ClassCourse", b =>
+                {
+                    b.Property<int>("CcId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CcId"));
+
+                    b.Property<string>("CcDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CcId");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("ClassCourses");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Country", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CountryId"));
+
+                    b.Property<string>("CountryName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("CountryId");
+
+                    b.HasIndex("CountryName")
+                        .IsUnique();
+
+                    b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Course", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
+
+                    b.Property<string>("CourseDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseImage")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaHocPhan");
-
-                    b.HasIndex("MaBoMon");
-
-                    b.HasIndex("MaGiangVien");
-
-                    b.ToTable("HocPhans");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.Khoa", b =>
-                {
-                    b.Property<string>("MaKhoa")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("TenKhoa")
+                    b.Property<string>("CourseShortdescription")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TrangThai")
+                    b.Property<string>("CourseTitle")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.HasKey("MaKhoa");
-
-                    b.ToTable("Khoas");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.Lop", b =>
-                {
-                    b.Property<string>("MaLop")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<int>("HocKy")
+                    b.Property<int>("CourseTotalSemester")
                         .HasColumnType("int");
 
-                    b.Property<string>("MaHocPhan")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                    b.Property<DateTime?>("CourseUpdateAt")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("NamHoc")
-                        .HasColumnType("int");
+                    b.HasKey("CourseId");
 
-                    b.Property<string>("PhongHoc")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("TenLop")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("TrangThaiHoc")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.Property<string>("TrangThaiLop")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaLop");
-
-                    b.HasIndex("MaHocPhan");
-
-                    b.ToTable("Lops");
+                    b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.NguoiDung", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Department", b =>
                 {
-                    b.Property<string>("MaNguoiDung")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("AnhDaiDien")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"));
+
+                    b.Property<string>("DepartmentCode")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("DiaChi")
+                    b.Property<string>("DepartmentDescription")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("DepartmentTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("DepartmentId");
+
+                    b.HasIndex("DepartmentCode")
+                        .IsUnique();
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Event", b =>
+                {
+                    b.Property<int>("EventId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventId"));
+
+                    b.Property<int>("EventClassId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EventDateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EventDateStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EventTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EventTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("EventId");
+
+                    b.HasIndex("EventClassId");
+
+                    b.HasIndex("EventTeacherId");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Exam", b =>
+                {
+                    b.Property<int>("ExamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExamId"));
+
+                    b.Property<string>("ExamDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExamEtypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExamMonth")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExamTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("ExamId");
+
+                    b.HasIndex("ExamEtypeId");
+
+                    b.HasIndex("ExamMonth");
+
+                    b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.ExamType", b =>
+                {
+                    b.Property<int>("EtypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EtypeId"));
+
+                    b.Property<string>("EtypeDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EtypeTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("EtypeId");
+
+                    b.ToTable("ExamTypes");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Feedback", b =>
+                {
+                    b.Property<int>("FeedbackId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeedbackId"));
+
+                    b.Property<int>("FeedbackClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FeedbackContent")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("FeedbackDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FeedbackRate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FeedbackStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FeedbackUsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FeedbackId");
+
+                    b.HasIndex("FeedbackClassId");
+
+                    b.HasIndex("FeedbackUsersId");
+
+                    b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Files", b =>
+                {
+                    b.Property<int>("FilesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FilesId"));
+
+                    b.Property<int>("FilesClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilesDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilesFilename")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("FilesTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilesTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("FilesId");
+
+                    b.HasIndex("FilesClassId");
+
+                    b.HasIndex("FilesTeacherId");
+
+                    b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Lesson", b =>
+                {
+                    b.Property<int>("LessonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LessonId"));
+
+                    b.Property<string>("LessonChapter")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("LessonClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LessonCourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LessonDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LessonName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("LessonStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LessonWeek")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("LessonId");
+
+                    b.HasIndex("LessonClassId");
+
+                    b.HasIndex("LessonCourseId");
+
+                    b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.LessonFile", b =>
+                {
+                    b.Property<int>("LfId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LfId"));
+
+                    b.Property<string>("LfFilename")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("LfLessonId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LfType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("LfId");
+
+                    b.HasIndex("LfLessonId");
+
+                    b.ToTable("LessonFiles");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.LoginLevel", b =>
+                {
+                    b.Property<int>("LevelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LevelId"));
+
+                    b.Property<string>("LevelDescription")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("LevelTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("LevelId");
+
+                    b.ToTable("LoginLevels");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Marks", b =>
+                {
+                    b.Property<int>("MarksId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MarksId"));
+
+                    b.Property<string>("MarksDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MarksExamId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("MarksPractical")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("MarksSemesterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MarksStudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MarksSubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("MarksWritten")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("MarksId");
+
+                    b.HasIndex("MarksExamId");
+
+                    b.HasIndex("MarksSemesterId");
+
+                    b.HasIndex("MarksStudentId");
+
+                    b.HasIndex("MarksSubjectId");
+
+                    b.ToTable("Marks");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Message", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
+
+                    b.Property<string>("MessageContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MessageReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MessageSenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MessageSenderType")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("GioiTinh")
+                    b.Property<string>("MessageSubject")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("MessageType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("MessageReceiverId");
+
+                    b.HasIndex("MessageSenderId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Month", b =>
+                {
+                    b.Property<int>("MonthId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MonthId"));
+
+                    b.Property<string>("MonthTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("MonthId");
+
+                    b.HasIndex("MonthTitle")
+                        .IsUnique();
+
+                    b.ToTable("Months");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Quiz", b =>
+                {
+                    b.Property<int>("QuizId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizId"));
+
+                    b.Property<int>("QuizClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuizDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuizTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuizTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("QuizId");
+
+                    b.HasIndex("QuizClassId");
+
+                    b.HasIndex("QuizTeacherId");
+
+                    b.ToTable("Quizzes");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.QuizQuestion", b =>
+                {
+                    b.Property<int>("QqId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QqId"));
+
+                    b.Property<string>("QqCorrect")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("QqDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QqOption1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QqOption2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QqOption3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QqOption4")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QqQuestion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QqQuizId")
+                        .HasColumnType("int");
+
+                    b.HasKey("QqId");
+
+                    b.HasIndex("QqQuizId");
+
+                    b.ToTable("QuizQuestions");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.QuizResult", b =>
+                {
+                    b.Property<int>("QrId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QrId"));
+
+                    b.Property<int>("QrAnswer")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("QrDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("QrQuizId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QrStudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QrTotalQuestion")
+                        .HasColumnType("int");
+
+                    b.HasKey("QrId");
+
+                    b.HasIndex("QrQuizId");
+
+                    b.HasIndex("QrStudentId");
+
+                    b.ToTable("QuizResults");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("RoleId");
+
+                    b.HasIndex("RoleName")
+                        .IsUnique();
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.SchoolYear", b =>
+                {
+                    b.Property<int>("SyearId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SyearId"));
+
+                    b.Property<string>("SyearDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SyearTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("SyearId");
+
+                    b.HasIndex("SyearTitle")
+                        .IsUnique();
+
+                    b.ToTable("SchoolYears");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Semester", b =>
+                {
+                    b.Property<int>("SemesterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SemesterId"));
+
+                    b.Property<string>("SemesterDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SemesterTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("SemesterId");
+
+                    b.ToTable("Semesters");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.State", b =>
+                {
+                    b.Property<int>("StateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StateId"));
+
+                    b.Property<string>("StateName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("StateId");
+
+                    b.HasIndex("StateName")
+                        .IsUnique();
+
+                    b.ToTable("States");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Student", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("StudentDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentFatherName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("StudentRollno")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("StudentId");
+
+                    b.HasIndex("StudentCode")
+                        .IsUnique();
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.StudentClass", b =>
+                {
+                    b.Property<int>("ScId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScId"));
+
+                    b.Property<int>("ScClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ScDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ScStudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ScId");
+
+                    b.HasIndex("ScClassId");
+
+                    b.HasIndex("ScStudentId");
+
+                    b.ToTable("StudentClasses");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Subject", b =>
+                {
+                    b.Property<int>("SubjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectId"));
+
+                    b.Property<int>("SubjectClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubjectDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("SubjectId");
+
+                    b.HasIndex("SubjectClassId");
+
+                    b.HasIndex("SubjectTitle")
+                        .IsUnique();
+
+                    b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Submit", b =>
+                {
+                    b.Property<int>("SubmitId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubmitId"));
+
+                    b.Property<int>("SubmitAssignmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SubmitFile")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("SubmitStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubmitStudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubmitId");
+
+                    b.HasIndex("SubmitAssignmentId");
+
+                    b.HasIndex("SubmitStudentId");
+
+                    b.ToTable("Submits");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.TeacherClass", b =>
+                {
+                    b.Property<int>("TcId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TcId"));
+
+                    b.Property<int>("TcClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TcDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TcUsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TcId");
+
+                    b.HasIndex("TcClassId");
+
+                    b.HasIndex("TcUsersId");
+
+                    b.ToTable("TeacherClasses");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Users", b =>
+                {
+                    b.Property<int>("UsersId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsersId"));
+
+                    b.Property<string>("UserGender")
                         .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
-                    b.Property<string>("HoTen")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("UserLevelId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Lop")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("MSSV")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("MaBoMon")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaKhoa")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaQuyen")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<DateOnly>("NgaySinh")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("UsersAdd")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("SDT")
+                    b.Property<int?>("UsersCity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UsersCountry")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersDepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly?>("UsersDob")
+                        .HasColumnType("date");
+
+                    b.Property<string>("UsersEmail")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UsersImage")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UsersMobile")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaNguoiDung");
-
-                    b.HasIndex("MaBoMon");
-
-                    b.HasIndex("MaKhoa");
-
-                    b.HasIndex("MaQuyen");
-
-                    b.ToTable("NguoiDungs");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.NopBaiTap", b =>
-                {
-                    b.Property<string>("MaNopBai")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("FileNop")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("MaBaiTap")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("MaSinhVien")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<DateTime>("NgayNop")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("MaNopBai");
-
-                    b.HasIndex("MaBaiTap");
-
-                    b.HasIndex("MaSinhVien");
-
-                    b.ToTable("NopBaiTaps");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.Quyen", b =>
-                {
-                    b.Property<string>("MaQuyen")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("TenQuyen")
+                    b.Property<string>("UsersName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("TrangThai")
+                    b.Property<string>("UsersPassword")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.HasKey("MaQuyen");
+                    b.Property<int>("UsersRoleId")
+                        .HasColumnType("int");
 
-                    b.ToTable("Quyens");
+                    b.Property<int?>("UsersState")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsersUsername")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("UsersId");
+
+                    b.HasIndex("UserLevelId");
+
+                    b.HasIndex("UsersCity");
+
+                    b.HasIndex("UsersCountry");
+
+                    b.HasIndex("UsersDepartmentId");
+
+                    b.HasIndex("UsersEmail")
+                        .IsUnique();
+
+                    b.HasIndex("UsersMobile")
+                        .IsUnique();
+
+                    b.HasIndex("UsersRoleId");
+
+                    b.HasIndex("UsersState");
+
+                    b.HasIndex("UsersUsername")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.ThongTinWeb", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.UsersLog", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UlogId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UlogId"));
 
-                    b.Property<string>("DiaChi")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Facebook")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Fax")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Gmail")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Logo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("MaNguoiThayDoiCuoi")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("SDT")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("TenWeb")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("ThoiGianThayDoiCuoi")
+                    b.Property<DateTime>("UlogLoginDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Website")
+                    b.Property<DateTime?>("UlogLogoutDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UlogUsername")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UlogUsersId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("MaNguoiThayDoiCuoi");
+                    b.HasKey("UlogId");
 
-                    b.ToTable("ThongTinWebs");
+                    b.HasIndex("UlogUsersId");
+
+                    b.ToTable("UserLogs");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BaiGiang", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Announcement", b =>
                 {
-                    b.HasOne("WebBaiGiangAPI.Models.HocPhan", "HocPhan")
-                        .WithMany()
-                        .HasForeignKey("MaHocPhan")
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Announcements")
+                        .HasForeignKey("AnnouncementClassId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
-                        .WithMany("BaiGiangs")
-                        .HasForeignKey("MaLop")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HocPhan");
-
-                    b.Navigation("Lop");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BaiTap", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.HocPhan", "HocPhan")
-                        .WithMany()
-                        .HasForeignKey("MaHocPhan")
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Teacher")
+                        .WithMany("Announcements")
+                        .HasForeignKey("AnnouncementTeacherId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
-                        .WithMany("BaiTaps")
-                        .HasForeignKey("MaLop")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Classes");
 
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "NguoiTao")
-                        .WithMany()
-                        .HasForeignKey("MaNguoiTao")
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Assignment", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Assignments")
+                        .HasForeignKey("AssignmentClassId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("HocPhan");
+                    b.HasOne("WebBaiGiangAPI.Models.TeacherClass", "TeacherClass")
+                        .WithMany("Assignments")
+                        .HasForeignKey("AssignmentTeacherId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Lop");
+                    b.Navigation("Classes");
 
-                    b.Navigation("NguoiTao");
+                    b.Navigation("TeacherClass");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BangDiem", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.AttendanceMarks", b =>
                 {
-                    b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
-                        .WithMany("BangDiems")
-                        .HasForeignKey("MaLop")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "SinhVien")
-                        .WithMany("BangDiems")
-                        .HasForeignKey("MaSinhVien")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lop");
-
-                    b.Navigation("SinhVien");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BoMon", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.Khoa", "Khoa")
-                        .WithMany("BoMons")
-                        .HasForeignKey("MaKhoa")
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("AttendanceMarks")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Khoa");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.DangKyLopHoc", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
-                        .WithMany("DangKyLopHocs")
-                        .HasForeignKey("MaLop")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "SinhVien")
-                        .WithMany("DangKyLopHocs")
-                        .HasForeignKey("MaSinhVien")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lop");
-
-                    b.Navigation("SinhVien");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.DanhGia", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
-                        .WithMany("DanhGias")
-                        .HasForeignKey("MaLop")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "SinhVien")
-                        .WithMany("DanhGias")
-                        .HasForeignKey("MaSinhVien")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lop");
-
-                    b.Navigation("SinhVien");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.DiemDanh", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.Lop", "Lop")
-                        .WithMany("DiemDanhs")
-                        .HasForeignKey("MaLop")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "SinhVien")
-                        .WithMany("DiemDanhs")
-                        .HasForeignKey("MaSinhVien")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lop");
-
-                    b.Navigation("SinhVien");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.FileBaiGiang", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.BaiGiang", "BaiGiang")
-                        .WithMany("FileBaiGiangs")
-                        .HasForeignKey("MaBaiGiang")
+                    b.HasOne("WebBaiGiangAPI.Models.Student", "Student")
+                        .WithMany("AttendanceMarks")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("BaiGiang");
+                    b.Navigation("Classes");
+
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.HocPhan", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Class", b =>
                 {
-                    b.HasOne("WebBaiGiangAPI.Models.BoMon", "BoMon")
-                        .WithMany("HocPhans")
-                        .HasForeignKey("MaBoMon")
+                    b.HasOne("WebBaiGiangAPI.Models.Semester", "Semester")
+                        .WithMany("Classes")
+                        .HasForeignKey("ClassSemesterId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "GiangVien")
-                        .WithMany()
-                        .HasForeignKey("MaGiangVien")
+                    b.HasOne("WebBaiGiangAPI.Models.SchoolYear", "SchoolYear")
+                        .WithMany("Classes")
+                        .HasForeignKey("ClassSyearId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("BoMon");
+                    b.Navigation("SchoolYear");
 
-                    b.Navigation("GiangVien");
+                    b.Navigation("Semester");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.Lop", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.ClassCourse", b =>
                 {
-                    b.HasOne("WebBaiGiangAPI.Models.HocPhan", "HocPhan")
-                        .WithMany("Lops")
-                        .HasForeignKey("MaHocPhan")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HocPhan");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.NguoiDung", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.BoMon", "BoMon")
-                        .WithMany("NguoiDungs")
-                        .HasForeignKey("MaBoMon")
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("ClassCourses")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WebBaiGiangAPI.Models.Khoa", "Khoa")
-                        .WithMany("NguoiDungs")
-                        .HasForeignKey("MaKhoa")
+                    b.HasOne("WebBaiGiangAPI.Models.Course", "Course")
+                        .WithMany("ClassCourses")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WebBaiGiangAPI.Models.Quyen", "Quyen")
-                        .WithMany("NguoiDungs")
-                        .HasForeignKey("MaQuyen")
+                    b.Navigation("Classes");
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Event", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Events")
+                        .HasForeignKey("EventClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Teacher")
+                        .WithMany("Events")
+                        .HasForeignKey("EventTeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Classes");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Exam", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.ExamType", "ExamType")
+                        .WithMany("Exams")
+                        .HasForeignKey("ExamEtypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Month", "Month")
+                        .WithMany("Exams")
+                        .HasForeignKey("ExamMonth")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ExamType");
+
+                    b.Navigation("Month");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Feedback", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("FeedbackClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "User")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("FeedbackUsersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Classes");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Files", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Files")
+                        .HasForeignKey("FilesClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Teacher")
+                        .WithMany("Files")
+                        .HasForeignKey("FilesTeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Classes");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Lesson", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Lessons")
+                        .HasForeignKey("LessonClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Course", "Course")
+                        .WithMany("Lessons")
+                        .HasForeignKey("LessonCourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Classes");
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.LessonFile", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Lesson", "Lesson")
+                        .WithMany("LessonFiles")
+                        .HasForeignKey("LfLessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BoMon");
-
-                    b.Navigation("Khoa");
-
-                    b.Navigation("Quyen");
+                    b.Navigation("Lesson");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.NopBaiTap", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Marks", b =>
                 {
-                    b.HasOne("WebBaiGiangAPI.Models.BaiTap", "BaiTap")
-                        .WithMany("NopBaiTaps")
-                        .HasForeignKey("MaBaiTap")
+                    b.HasOne("WebBaiGiangAPI.Models.Exam", "Exam")
+                        .WithMany("Marks")
+                        .HasForeignKey("MarksExamId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("WebBaiGiangAPI.Models.Semester", "Semester")
+                        .WithMany("Marks")
+                        .HasForeignKey("MarksSemesterId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("WebBaiGiangAPI.Models.Student", "Student")
+                        .WithMany("Marks")
+                        .HasForeignKey("MarksStudentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("WebBaiGiangAPI.Models.Subject", "Subject")
+                        .WithMany("Marks")
+                        .HasForeignKey("MarksSubjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Semester");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Message", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Receiver")
+                        .WithMany("ReceivedMessages")
+                        .HasForeignKey("MessageReceiverId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Sender")
+                        .WithMany("SentMessages")
+                        .HasForeignKey("MessageSenderId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Quiz", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Quizzes")
+                        .HasForeignKey("QuizClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Teacher")
+                        .WithMany("Quizzes")
+                        .HasForeignKey("QuizTeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Classes");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.QuizQuestion", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Quiz", "Quiz")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QqQuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "SinhVien")
-                        .WithMany("NopBaiTaps")
-                        .HasForeignKey("MaSinhVien")
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.QuizResult", b =>
+                {
+                    b.HasOne("WebBaiGiangAPI.Models.Quiz", "Quiz")
+                        .WithMany("QuizResults")
+                        .HasForeignKey("QrQuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BaiTap");
-
-                    b.Navigation("SinhVien");
-                });
-
-            modelBuilder.Entity("WebBaiGiangAPI.Models.ThongTinWeb", b =>
-                {
-                    b.HasOne("WebBaiGiangAPI.Models.NguoiDung", "NguoiDung")
-                        .WithMany()
-                        .HasForeignKey("MaNguoiThayDoiCuoi")
+                    b.HasOne("WebBaiGiangAPI.Models.Student", "Student")
+                        .WithMany("QuizResults")
+                        .HasForeignKey("QrStudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("NguoiDung");
+                    b.Navigation("Quiz");
+
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BaiGiang", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Student", b =>
                 {
-                    b.Navigation("FileBaiGiangs");
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Users")
+                        .WithOne()
+                        .HasForeignKey("WebBaiGiangAPI.Models.Student", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BaiTap", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.StudentClass", b =>
                 {
-                    b.Navigation("NopBaiTaps");
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("StudentClasses")
+                        .HasForeignKey("ScClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Student", "Student")
+                        .WithMany("StudentClasses")
+                        .HasForeignKey("ScStudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Classes");
+
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.BoMon", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Subject", b =>
                 {
-                    b.Navigation("HocPhans");
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("Subjects")
+                        .HasForeignKey("SubjectClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("NguoiDungs");
+                    b.Navigation("Classes");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.HocPhan", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Submit", b =>
                 {
-                    b.Navigation("Lops");
+                    b.HasOne("WebBaiGiangAPI.Models.Assignment", "Assignment")
+                        .WithMany("Submits")
+                        .HasForeignKey("SubmitAssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebBaiGiangAPI.Models.Student", "Student")
+                        .WithMany("Submits")
+                        .HasForeignKey("SubmitStudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Assignment");
+
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.Khoa", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.TeacherClass", b =>
                 {
-                    b.Navigation("BoMons");
+                    b.HasOne("WebBaiGiangAPI.Models.Class", "Classes")
+                        .WithMany("TeacherClasses")
+                        .HasForeignKey("TcClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("NguoiDungs");
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "User")
+                        .WithMany("TeacherClasses")
+                        .HasForeignKey("TcUsersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Classes");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.Lop", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Users", b =>
                 {
-                    b.Navigation("BaiGiangs");
+                    b.HasOne("WebBaiGiangAPI.Models.LoginLevel", "LoginLevel")
+                        .WithMany("Users")
+                        .HasForeignKey("UserLevelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("BaiTaps");
+                    b.HasOne("WebBaiGiangAPI.Models.City", "City")
+                        .WithMany("Users")
+                        .HasForeignKey("UsersCity")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("BangDiems");
+                    b.HasOne("WebBaiGiangAPI.Models.Country", "Country")
+                        .WithMany("Users")
+                        .HasForeignKey("UsersCountry")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("DangKyLopHocs");
+                    b.HasOne("WebBaiGiangAPI.Models.Department", "Department")
+                        .WithMany("Users")
+                        .HasForeignKey("UsersDepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("DanhGias");
+                    b.HasOne("WebBaiGiangAPI.Models.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("UsersRoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("DiemDanhs");
+                    b.HasOne("WebBaiGiangAPI.Models.State", "State")
+                        .WithMany("Users")
+                        .HasForeignKey("UsersState")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("LoginLevel");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("State");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.NguoiDung", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.UsersLog", b =>
                 {
-                    b.Navigation("BangDiems");
+                    b.HasOne("WebBaiGiangAPI.Models.Users", "Users")
+                        .WithMany("UsersLog")
+                        .HasForeignKey("UlogUsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("DangKyLopHocs");
-
-                    b.Navigation("DanhGias");
-
-                    b.Navigation("DiemDanhs");
-
-                    b.Navigation("NopBaiTaps");
+                    b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("WebBaiGiangAPI.Models.Quyen", b =>
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Assignment", b =>
                 {
-                    b.Navigation("NguoiDungs");
+                    b.Navigation("Submits");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.City", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Class", b =>
+                {
+                    b.Navigation("Announcements");
+
+                    b.Navigation("Assignments");
+
+                    b.Navigation("AttendanceMarks");
+
+                    b.Navigation("ClassCourses");
+
+                    b.Navigation("Events");
+
+                    b.Navigation("Feedbacks");
+
+                    b.Navigation("Files");
+
+                    b.Navigation("Lessons");
+
+                    b.Navigation("Quizzes");
+
+                    b.Navigation("StudentClasses");
+
+                    b.Navigation("Subjects");
+
+                    b.Navigation("TeacherClasses");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Country", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Course", b =>
+                {
+                    b.Navigation("ClassCourses");
+
+                    b.Navigation("Lessons");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Department", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Exam", b =>
+                {
+                    b.Navigation("Marks");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.ExamType", b =>
+                {
+                    b.Navigation("Exams");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Lesson", b =>
+                {
+                    b.Navigation("LessonFiles");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.LoginLevel", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Month", b =>
+                {
+                    b.Navigation("Exams");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Quiz", b =>
+                {
+                    b.Navigation("QuizQuestions");
+
+                    b.Navigation("QuizResults");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.SchoolYear", b =>
+                {
+                    b.Navigation("Classes");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Semester", b =>
+                {
+                    b.Navigation("Classes");
+
+                    b.Navigation("Marks");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.State", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Student", b =>
+                {
+                    b.Navigation("AttendanceMarks");
+
+                    b.Navigation("Marks");
+
+                    b.Navigation("QuizResults");
+
+                    b.Navigation("StudentClasses");
+
+                    b.Navigation("Submits");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Subject", b =>
+                {
+                    b.Navigation("Marks");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.TeacherClass", b =>
+                {
+                    b.Navigation("Assignments");
+                });
+
+            modelBuilder.Entity("WebBaiGiangAPI.Models.Users", b =>
+                {
+                    b.Navigation("Announcements");
+
+                    b.Navigation("Events");
+
+                    b.Navigation("Feedbacks");
+
+                    b.Navigation("Files");
+
+                    b.Navigation("Quizzes");
+
+                    b.Navigation("ReceivedMessages");
+
+                    b.Navigation("SentMessages");
+
+                    b.Navigation("TeacherClasses");
+
+                    b.Navigation("UsersLog");
                 });
 #pragma warning restore 612, 618
         }
