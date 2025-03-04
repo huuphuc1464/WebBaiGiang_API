@@ -7,6 +7,9 @@ using WebBaiGiangAPI.Data;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebBaiGiangAPI.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,9 +77,53 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Token chỉ có hiệu lực trong 30 phút
+    options.SlidingExpiration = false;
+    options.Events = new CookieAuthenticationEvents
+    {
+        OnRedirectToAccessDenied = context =>
+        {
+            context.Response.Redirect("/auth/logout-google");
+            return Task.CompletedTask;
+        },
+        OnRedirectToLogin = context =>
+        {
+            context.Response.Redirect("/auth/logout-google");
+            return Task.CompletedTask;
+        }
+    };
+})
+.AddGoogle(options =>
+{
+    options.ClientId = "82468203109-vve147pek30kr98ma6gh0d3qv4l945n8.apps.googleusercontent.com";
+    options.ClientSecret = "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";
+    options.Scope.Add("openid");
+    options.Scope.Add("profile");
+    options.Scope.Add("email");
+    options.SaveTokens = true; // Quan trọng! Lưu token để lấy sau này.
+});
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<OtpService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 
 var app = builder.Build();
+app.UseCors("AllowAll");
 
 using (var scope = app.Services.CreateScope())
 {
@@ -99,6 +146,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+        c.ConfigObject.AdditionalItems["https"] = true;
     });
 }
 app.UseHttpsRedirection();

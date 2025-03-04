@@ -534,4 +534,10 @@ D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\WebBaiGiangAPI.runti
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\WebBaiGiangAPI.pdb
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\WebBaiGiangAPI.genruntimeconfig.cache
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\ref\WebBaiGiangAPI.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\MailKit.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\MimeKit.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

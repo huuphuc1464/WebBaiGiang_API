@@ -1,4 +1,6 @@
 ﻿using Jose;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,8 +10,11 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using WebBaiGiangAPI.Data;
 using WebBaiGiangAPI.Models;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WebBaiGiangAPI.Controllers
 {
@@ -20,12 +25,19 @@ namespace WebBaiGiangAPI.Controllers
         private readonly IConfiguration _configuration;
         private readonly AppDbContext _context;
         private readonly IJwtService _jwtService;
+        private readonly EmailService _emailService;
+        private readonly OtpService _otpService;
+        private string patternEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+        private string patternPass = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-~=`{}[\]:"";'<>?,./]).{8,}$";
 
-        public AuthController(IConfiguration configuration, AppDbContext context, IJwtService jwtService)
+        public AuthController(IConfiguration configuration, AppDbContext context, 
+            IJwtService jwtService, EmailService emailService, OtpService otpService)
         {
             _configuration = configuration;
             _context = context;
             _jwtService = jwtService;
+            _emailService = emailService;
+            _otpService = otpService;
         }
 
         [HttpPost("login")]
@@ -133,5 +145,168 @@ namespace WebBaiGiangAPI.Controllers
             return Ok(new { message = "Logged out successfully!" });
         }
 
+        [HttpPost("send-otp")]
+        public async Task<IActionResult> SendOtp(string email)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(email))
+                {
+                    return BadRequest(new { message = "Vui lòng nhập email." });
+                }
+                if (!Regex.IsMatch(email, patternEmail))
+                {
+                    return BadRequest(new { message = "Email không hợp lệ." });
+                }
+                var otp = new Random().Next(100000, 999999).ToString();
+                var emailSent = await _emailService.SendEmailAsync(email, otp);
+                if (!emailSent)
+                {
+                    return StatusCode(500, "Gửi OTP thất bại. Vui lòng thử lại.");
+                }
+                _otpService.StoreOtp(email, otp);
+                return Ok( new { message = "OTP đã được gửi." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi hệ thống: {ex.Message}");
+            }
+        }
+
+        [HttpPost("verify-otp")]
+        public IActionResult VerifyOtp(string email, string otp)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest(new { message = "Vui lòng nhập email." });
+            }
+            if (!Regex.IsMatch(email, patternEmail))
+            {
+                return BadRequest(new { message = "Email không hợp lệ." });
+            }
+            if (_otpService.ValidateOtp(email, otp))
+            {
+                _otpService.RemoveOtp(email);
+                return Ok( new { message = "Xác minh thành công. Bạn có thể đặt lại mật khẩu." });
+            }
+            return BadRequest(new { message = "Mã OTP không hợp lệ hoặc đã hết hạn." });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(string email, string password)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(email))
+                {
+                    return BadRequest(new { message = "Vui lòng nhập email." });
+                }
+                if (!Regex.IsMatch(email, patternEmail))
+                {
+                    return BadRequest(new { message = "Email không hợp lệ." });
+                }
+                if (!Regex.IsMatch(password, patternPass))
+                {
+                    return BadRequest(new { message = "Password không đúng định dạng." });
+                }
+                var user = await _context.Users.SingleOrDefaultAsync(u => u.UsersEmail == email);
+
+                // Kiểm tra tồn tại tài khoản
+                if (user == null)
+                {
+                    return Unauthorized(new { message = "Người dùng không tồn tại" });
+                }
+                var passwordHasher = new PasswordHasher<Users>();
+                user.UsersPassword = passwordHasher.HashPassword(user, user.UsersPassword);
+                _context.SaveChanges();
+                return Ok("Mật khẩu đã được đặt lại thành công.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Lỗi hệ thống: {ex.Message}" });
+            }
+        }
+
+        [HttpGet("login-google")]
+        public IActionResult LoginWithGoogle()
+        {
+            var redirectUrl = Url.Action("GoogleResponse", "Auth", null, Request.Scheme);
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet("google-response")]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            if (!authenticateResult.Succeeded)
+            {
+                return BadRequest("Google authentication failed.");
+            }
+
+            var properties = authenticateResult.Properties;
+            var tokens = properties?.Items;
+
+            // Log tất cả token để kiểm tra
+            if (tokens != null)
+            {
+                foreach (var token in tokens)
+                {
+                    Console.WriteLine($"{token.Key}: {token.Value}");
+                }
+            }
+
+            var accessToken = properties?.GetTokenValue("access_token");
+            var idToken = properties?.GetTokenValue("id_token");
+
+            if (accessToken == null && idToken == null)
+            {
+                return BadRequest("Không lấy được token. Kiểm tra cấu hình Google API.");
+            }
+
+            var claims = authenticateResult.Principal?.Identities.FirstOrDefault()?.Claims;
+            var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            var name = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+
+            return Ok(new
+            {
+                Message = "Xác thực thành công!",
+                Name = name,
+                Email = email,
+                AccessToken = accessToken,
+                IdToken = idToken
+            });
+        }
+
+        [HttpGet("logout-google")]
+        public async Task<IActionResult> LogoutGoogle()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok( new { message = "Đã đăng xuất" });
+        }
+
+        [HttpGet("user-info")]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync();
+            if (!authenticateResult.Succeeded)
+                return BadRequest("Google authentication failed.");
+
+            var accessToken = authenticateResult.Properties.GetTokenValue("access_token");
+            if (string.IsNullOrEmpty(accessToken))
+                return BadRequest("Không lấy được Access Token.");
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var response = await client.GetAsync("https://www.googleapis.com/oauth2/v3/userinfo");
+            if (!response.IsSuccessStatusCode)
+                return BadRequest("Không thể lấy thông tin người dùng.");
+
+            var userInfo = await response.Content.ReadAsStringAsync();
+            return Ok(userInfo);
+        }
+
     }
 }
+
