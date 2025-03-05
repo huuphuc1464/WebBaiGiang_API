@@ -158,8 +158,32 @@
         }
       }
     },
-    "/api/Auth/user-info": {
+    "/api/Auth/login-github": {
       "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Auth/github-response": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Auth/logout-github": {
+      "post": {
         "tags": [
           "Auth"
         ],
@@ -396,11 +420,8 @@
       "Users": {
         "required": [
           "userLevelId",
-          "usersDepartmentId",
           "usersEmail",
-          "usersMobile",
           "usersName",
-          "usersPassword",
           "usersRoleId",
           "usersUsername"
         ],
@@ -426,8 +447,8 @@
           },
           "usersPassword": {
             "maxLength": 255,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "usersEmail": {
             "maxLength": 255,
@@ -436,8 +457,8 @@
           },
           "usersMobile": {
             "maxLength": 10,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "usersDob": {
             "type": "string",

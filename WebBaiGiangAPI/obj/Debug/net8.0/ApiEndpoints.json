@@ -1,6 +1,16 @@
 [
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.AuthController",
+    "Method": "GitHubResponse",
+    "RelativePath": "api/Auth/github-response",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AuthController",
     "Method": "GoogleResponse",
     "RelativePath": "api/Auth/google-response",
     "HttpMethod": "GET",
@@ -32,6 +42,16 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.AuthController",
+    "Method": "LoginWithGitHub",
+    "RelativePath": "api/Auth/login-github",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AuthController",
     "Method": "LoginWithGoogle",
     "RelativePath": "api/Auth/login-google",
     "HttpMethod": "GET",
@@ -45,6 +65,16 @@
     "Method": "Logout",
     "RelativePath": "api/Auth/logout",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AuthController",
+    "Method": "LogoutGithub",
+    "RelativePath": "api/Auth/logout-github",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
@@ -95,16 +125,6 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.AuthController",
-    "Method": "GetUserInfo",
-    "RelativePath": "api/Auth/user-info",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

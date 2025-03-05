@@ -109,6 +109,16 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("profile");
     options.Scope.Add("email");
     options.SaveTokens = true; // Quan trọng! Lưu token để lấy sau này.
+})
+.AddOAuth("GitHub", options =>
+{
+    options.ClientId = "Ov23liuHEt1qMiYVQoVH";
+    options.ClientSecret = "c484f41075592eff2efd0952ac2df0a546b2e93a";
+    options.CallbackPath = new PathString("/signin-github");
+    options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
+    options.TokenEndpoint = "https://github.com/login/oauth/access_token";
+    options.UserInformationEndpoint = "https://api.github.com/user";
+    options.SaveTokens = true;
 });
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddMemoryCache();

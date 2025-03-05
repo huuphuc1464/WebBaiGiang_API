@@ -15,6 +15,7 @@ using WebBaiGiangAPI.Data;
 using WebBaiGiangAPI.Models;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Newtonsoft.Json;
 
 namespace WebBaiGiangAPI.Controllers
 {
@@ -100,6 +101,7 @@ namespace WebBaiGiangAPI.Controllers
             user_log.UlogLoginDate = DateTime.Now;
             _context.UserLogs.Add(user_log);
             await _context.SaveChangesAsync();
+            var userLog = new UsersLog();
             return Ok(new { jwttoken = jwt, data = user });
         }
 
@@ -243,6 +245,129 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest("Google authentication failed.");
             }
+            var properties = authenticateResult.Properties;
+            var tokens = properties?.Items;
+
+            // Log tất cả token để kiểm tra
+            if (tokens != null)
+            {
+                foreach (var token in tokens)
+                {
+                    Console.WriteLine($"{token.Key}: {token.Value}");
+                }
+            }
+
+            var accessToken = properties?.GetTokenValue("access_token");
+            if (string.IsNullOrEmpty(accessToken))
+                return BadRequest("Không lấy được Access Token.");
+
+            var idToken = properties?.GetTokenValue("id_token");
+
+            if (accessToken == null && idToken == null)
+            {
+                return BadRequest("Không lấy được token. Kiểm tra cấu hình Google API.");
+            }
+
+            var claims = authenticateResult.Principal?.Identities.FirstOrDefault()?.Claims;
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var response = await client.GetAsync("https://www.googleapis.com/oauth2/v3/userinfo");
+            if (!response.IsSuccessStatusCode)
+                return BadRequest("Không thể lấy thông tin người dùng.");
+
+            // Đọc dữ liệu trả về từ Google
+            var userInfoJson = await response.Content.ReadAsStringAsync();
+
+            // Chuyển từ JSON string thành Dictionary
+            var userInfo = JsonConvert.DeserializeObject<Dictionary<string, object>>(userInfoJson);
+            string googleEmail = userInfo.ContainsKey("email") ? userInfo["email"]?.ToString() : null;
+
+            // Kiểm tra và lưu thông tin user mới
+            var existUser = await _context.Users.SingleOrDefaultAsync(u => u.UsersEmail == googleEmail);
+            if (existUser == null)
+            {
+                Users users = new Users();
+                users.UsersRoleId = 3;
+                users.UserLevelId = 2;
+                users.UsersName = userInfo.ContainsKey("name") ? userInfo["name"]?.ToString() : null;
+                users.UsersEmail = googleEmail;
+                users.UsersImage = userInfo.ContainsKey("picture") ? userInfo["picture"]?.ToString() : null;
+                users.UsersUsername = googleEmail;
+                users.UsersDepartmentId = 1;
+                users.UsersMobile = "N" + userInfo["sub"].ToString().Substring(0, 9);
+                _context.Users.Add(users);
+                _context.SaveChanges();
+            }
+
+            // Lấy thông tin user và lưu vào user_log
+            var userIF = await _context.Users.SingleOrDefaultAsync(u => u.UsersEmail == googleEmail);
+            var userLog = new UsersLog();
+            userLog.UlogUsersId = userIF.UsersId;
+            userLog.UlogUsername = userIF.UsersUsername;
+            userLog.UlogLoginDate = DateTime.Now;
+            _context.UserLogs.Add(userLog);
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                message = "Xác thực thành công!",
+                accessToken = accessToken,
+                idToken = idToken,
+                userinfo = userInfo 
+            });
+        }
+
+        [HttpGet("logout-google")]
+        public async Task<IActionResult> LogoutGoogle()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var username = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            if (username == null)
+            {
+                return Unauthorized(new { message = "Bạn đã đăng xuất rồi, vui lòng thử lại" });
+            }
+            var user_log = _context.UserLogs
+                .Where(u => u.UlogUsername == username)
+                .OrderByDescending(u => u.UlogId)
+                .FirstOrDefault();
+
+            var user = _context.Users.SingleOrDefault(u => u.UsersUsername == username);
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Tài khoản không tồn tại" });
+            }
+            if (user_log == null)
+            {
+                return Unauthorized(new { message = "Bạn chưa đăng nhập, không thể đăng xuất" });
+            }
+            if (user_log.UlogLogoutDate != null)
+            {
+                return Unauthorized(new { message = "Bạn đã đăng xuất rồi, vui lòng thử lại" });
+            }
+
+            // Kiểm tra user và lưu vào user_log
+            user_log.UlogLogoutDate = DateTime.Now;
+            _context.Update(user_log);
+            _context.SaveChanges();
+            return Ok( new { message = "Logout Successful" });
+        }
+
+        [HttpGet("login-github")]
+        public IActionResult LoginWithGitHub()
+        {
+            var redirectUrl = Url.Action("GitHubResponse", "Auth", null, Request.Scheme);
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            return Challenge(properties, "GitHub");
+        }
+
+        [HttpGet("github-response")]
+        public async Task<IActionResult> GitHubResponse()
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync();
+            if (!authenticateResult.Succeeded)
+                return BadRequest(new { message = "GitHub authentication failed." });
 
             var properties = authenticateResult.Properties;
             var tokens = properties?.Items;
@@ -257,55 +382,119 @@ namespace WebBaiGiangAPI.Controllers
             }
 
             var accessToken = properties?.GetTokenValue("access_token");
-            var idToken = properties?.GetTokenValue("id_token");
 
-            if (accessToken == null && idToken == null)
+            if (string.IsNullOrEmpty(accessToken))
             {
-                return BadRequest("Không lấy được token. Kiểm tra cấu hình Google API.");
+                return BadRequest(new { message = "Không lấy được access token." });
             }
 
-            var claims = authenticateResult.Principal?.Identities.FirstOrDefault()?.Claims;
-            var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var name = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-
-            return Ok(new
+            // Gọi API GitHub để lấy tất cả thông tin
+            using (var httpClient = new HttpClient())
             {
-                Message = "Xác thực thành công!",
-                Name = name,
-                Email = email,
-                AccessToken = accessToken,
-                IdToken = idToken
-            });
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+                httpClient.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
+
+                var response = await httpClient.GetAsync("https://api.github.com/user");
+                if (!response.IsSuccessStatusCode)
+                {
+                    return BadRequest( new { message = "Không thể lấy thông tin từ GitHub API."});
+                }
+
+                var userJson = await response.Content.ReadAsStringAsync();
+                var userData = System.Text.Json.JsonDocument.Parse(userJson).RootElement;
+                var githubEmail = userData.GetProperty("email").ToString();
+                var existUser = await _context.Users.SingleOrDefaultAsync(u => u.UsersEmail == githubEmail);
+                var userName = userData.TryGetProperty("login", out var login) ? login.GetString() : null;
+                if (existUser == null)
+                {
+                    Users users = new Users();
+                    users.UsersRoleId = 3;
+                    users.UserLevelId = 3;
+                    users.UsersName = userData.TryGetProperty("name", out var nameElement) ? nameElement.GetString() : null;
+                    users.UsersEmail = githubEmail;
+                    users.UsersImage = userData.TryGetProperty("avatar_url", out var avatar) ? avatar.GetString() : null;
+                    users.UsersUsername = userName;
+                    users.UsersAdd = userData.TryGetProperty("location", out var location) ? location.GetString() : null;
+                    users.UsersDepartmentId = 1;
+                    users.UsersMobile = "N" + userData.GetProperty("id").ToString().Substring(0, 9);
+                    _context.Users.Add(users);
+                    _context.SaveChanges();
+                }
+                
+                // Lấy thông tin user và lưu vào user_log
+                var userIF = await _context.Users.SingleOrDefaultAsync(u => u.UsersUsername == userName);
+                var userLog = new UsersLog();
+                userLog.UlogUsersId = userIF.UsersId;
+                userLog.UlogUsername = userIF.UsersUsername;
+                userLog.UlogLoginDate = DateTime.Now;
+                _context.UserLogs.Add(userLog);
+                _context.SaveChanges();
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, userName),
+                    new Claim(ClaimTypes.Email, githubEmail),
+                    new Claim("AccessToken", accessToken) // Lưu access token vào Claims
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                // Lưu Access Token vào AuthenticationProperties
+                var authProperties = new AuthenticationProperties();
+                authProperties.StoreTokens(new List<AuthenticationToken>
+                {
+                    new AuthenticationToken { Name = "access_token", Value = accessToken }
+                });
+
+                // Lưu Claims và Access Token vào HttpContext
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authProperties);
+                return Ok(new
+                {
+                    Message = "Xác thực GitHub thành công!",
+                    AccessToken = accessToken,
+                    User = userData
+                });
+            }
         }
 
-        [HttpGet("logout-google")]
-        public async Task<IActionResult> LogoutGoogle()
+        [HttpPost("logout-github")]
+        public async Task<IActionResult> LogoutGithub()
         {
+            // Lấy username từ Claims
+            var username = HttpContext.User.Identity?.Name;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized(new { message = "Bạn đã đăng xuất rồi, vui lòng thử lại" });
+            }
+
+            // Lấy log đăng nhập gần nhất
+            var userLog = await _context.UserLogs
+                .Where(u => u.UlogUsername == username)
+                .OrderByDescending(u => u.UlogId)
+                .FirstOrDefaultAsync();
+
+            if (userLog == null)
+            {
+                return Unauthorized(new { message = "Bạn chưa đăng nhập, không thể đăng xuất!" });
+            }
+
+            if (userLog.UlogLogoutDate != null)
+            {
+                return Unauthorized(new { message = "Bạn đã đăng xuất rồi, vui lòng thử lại!" });
+            }
+
+            // Cập nhật log đăng xuất
+            userLog.UlogLogoutDate = DateTime.Now;
+            _context.Update(userLog);
+            await _context.SaveChangesAsync();
+
+            // Thực hiện đăng xuất
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Ok( new { message = "Đã đăng xuất" });
+
+            return Ok(new { message = "Đăng xuất thành công!" });
         }
 
-        [HttpGet("user-info")]
-        public async Task<IActionResult> GetUserInfo()
-        {
-            var authenticateResult = await HttpContext.AuthenticateAsync();
-            if (!authenticateResult.Succeeded)
-                return BadRequest("Google authentication failed.");
-
-            var accessToken = authenticateResult.Properties.GetTokenValue("access_token");
-            if (string.IsNullOrEmpty(accessToken))
-                return BadRequest("Không lấy được Access Token.");
-
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-            var response = await client.GetAsync("https://www.googleapis.com/oauth2/v3/userinfo");
-            if (!response.IsSuccessStatusCode)
-                return BadRequest("Không thể lấy thông tin người dùng.");
-
-            var userInfo = await response.Content.ReadAsStringAsync();
-            return Ok(userInfo);
-        }
 
     }
 }

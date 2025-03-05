@@ -25,17 +25,15 @@ namespace WebBaiGiangAPI.Models
         [MaxLength(255)]
         public string UsersUsername { get; set; }
 
-        [Required]
         [MaxLength(255)]
-        public string UsersPassword { get; set; }
+        public string? UsersPassword { get; set; }
 
         [Required]
         [MaxLength(255)]
         public string UsersEmail { get; set; }
 
-        [Required]
         [MaxLength(10)]
-        public string UsersMobile { get; set; }
+        public string? UsersMobile { get; set; }
 
         public DateOnly? UsersDob { get; set; }
 
@@ -49,7 +47,6 @@ namespace WebBaiGiangAPI.Models
         public int? UsersState { get; set; }
         public int? UsersCountry { get; set; }
 
-        [Required]
         public int UsersDepartmentId { get; set; }
 
         [Required]

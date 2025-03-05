@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WebBaiGiangAPI.Models;
 
 namespace WebBaiGiangAPI.Data
@@ -61,9 +62,9 @@ namespace WebBaiGiangAPI.Data
                 {
                     var loginLevels = new LoginLevel[]
                     {
-                    new LoginLevel { LevelTitle = "Cao", LevelDescription = "Cấp độ cao" },
-                    new LoginLevel { LevelTitle = "Trung bình", LevelDescription = "Cấp độ trung bình" },
-                    new LoginLevel { LevelTitle = "Thấp", LevelDescription = "Cấp độ thấp" }
+                    new LoginLevel { LevelTitle = "Username", LevelDescription = "Đăng nhập bằng Username" },
+                    new LoginLevel { LevelTitle = "Google", LevelDescription = "Đăng nhập bằng Google" },
+                    new LoginLevel { LevelTitle = "Github", LevelDescription = "Đăng nhập bằng Github" }
                     };
                     foreach (var ll in loginLevels)
                     {
@@ -93,6 +94,7 @@ namespace WebBaiGiangAPI.Data
                 {
                     var departments = new Department[]
                     {
+                    new Department { DepartmentTitle = "Rỗng", DepartmentCode = "NULL", DepartmentDescription = "Rỗng" },
                     new Department { DepartmentTitle = "Khoa CNTT", DepartmentCode = "IT", DepartmentDescription = "Khoa Công nghệ thông tin" },
                     new Department { DepartmentTitle = "Khoa Kinh tế", DepartmentCode = "EC", DepartmentDescription = "Khoa Kinh tế" }
                     };
@@ -192,6 +194,8 @@ namespace WebBaiGiangAPI.Data
                 // ------------------ Seed Users ------------------
                 if (!context.Users.Any())
                 {
+                    var passwordHasher = new PasswordHasher<Users>();
+
                     var users = new Users[]
                     {
                     new Users
@@ -201,7 +205,7 @@ namespace WebBaiGiangAPI.Data
                         UserLevelId = 1,
                         UsersName = "Admin User",
                         UsersUsername = "admin",
-                        UsersPassword = "123",
+                        UsersPassword = passwordHasher.HashPassword(null,"123"),
                         UsersEmail = "admin@example.com",
                         UsersMobile = "0123456789"
                     },
@@ -212,7 +216,7 @@ namespace WebBaiGiangAPI.Data
                         UserLevelId = 2,
                         UsersName = "Teacher User",
                         UsersUsername = "teacher",
-                        UsersPassword = "123",
+                        UsersPassword = passwordHasher.HashPassword(null,"123"),
                         UsersEmail = "teacher@example.com",
                         UsersMobile = "0987654321"
                     }
