@@ -140,10 +140,10 @@ namespace WebBaiGiangAPI.Controllers
                 return BadRequest(ModelState);
             }
             // Kiểm tra tài khoản tồn tại
-            var saveuser = await _context.Users.SingleOrDefaultAsync(u => u.UsersId == user.UsersId);
+            var saveuser = await _context.Users.SingleOrDefaultAsync(u => u.UsersId == user.UsersId && u.UsersRoleId == 2);
             if (saveuser == null)
             {
-                return Unauthorized(new { message = "Người dùng không tồn tại" });
+                return Unauthorized(new { message = "Giáo viên không tồn tại" });
             }
             // Kiểm tra email
             if (!Regex.IsMatch(user.UsersEmail, patternEmail))

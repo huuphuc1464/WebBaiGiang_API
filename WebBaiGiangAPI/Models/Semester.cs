@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -17,8 +18,9 @@ namespace WebBaiGiangAPI.Models
 
         public string SemesterDescription { get; set; }
 
+        [JsonIgnore]
         public ICollection<Class> Classes { get; set; } = new List<Class>();
-
+        [JsonIgnore]
         public ICollection<Marks> Marks { get; set; } = new List<Marks>();
 
     }

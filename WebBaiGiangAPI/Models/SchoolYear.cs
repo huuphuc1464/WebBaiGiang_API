@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -16,6 +17,7 @@ namespace WebBaiGiangAPI.Models
         public string SyearTitle { get; set; }
 
         public string SyearDescription { get; set; }
+        [JsonIgnore]
         public ICollection<Class> Classes { get; set; } = new List<Class>();
     }
 }

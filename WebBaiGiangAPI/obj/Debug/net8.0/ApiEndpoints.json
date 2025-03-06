@@ -279,6 +279,214 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SchoolYearsController",
+    "Method": "AddSchoolYear",
+    "RelativePath": "api/SchoolYears/add-school-year",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schoolYear",
+        "Type": "WebBaiGiangAPI.Models.SchoolYear",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.SchoolYear",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SchoolYearsController",
+    "Method": "DeleteSchoolYear",
+    "RelativePath": "api/SchoolYears/delete-school-year",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SchoolYearsController",
+    "Method": "GetSchoolYear",
+    "RelativePath": "api/SchoolYears/get-school-year",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.SchoolYear",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SchoolYearsController",
+    "Method": "GetSchoolYears",
+    "RelativePath": "api/SchoolYears/get-school-years",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.SchoolYear, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SchoolYearsController",
+    "Method": "UpdateSchoolYear",
+    "RelativePath": "api/SchoolYears/update-school-yaer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schoolYear",
+        "Type": "WebBaiGiangAPI.Models.SchoolYear",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SemestersController",
+    "Method": "AddSemester",
+    "RelativePath": "api/Semesters/add-semester",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "semester",
+        "Type": "WebBaiGiangAPI.Models.Semester",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Semester",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SemestersController",
+    "Method": "DeleteSemester",
+    "RelativePath": "api/Semesters/delete-semester",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SemestersController",
+    "Method": "GetSemester",
+    "RelativePath": "api/Semesters/get-semester",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Semester",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SemestersController",
+    "Method": "GetSemesters",
+    "RelativePath": "api/Semesters/get-semesters",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.Semester, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SemestersController",
+    "Method": "UpadteSemester",
+    "RelativePath": "api/Semesters/update-semester",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "semester",
+        "Type": "WebBaiGiangAPI.Models.Semester",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
     "Method": "AddTeacher",
     "RelativePath": "api/Teacher/add-teacher",
