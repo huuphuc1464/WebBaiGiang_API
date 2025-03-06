@@ -38,24 +38,6 @@ namespace WebBaiGiangAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    CourseId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    CourseTotalSemester = table.Column<int>(type: "int", nullable: false),
-                    CourseImage = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    CourseShortdescription = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CourseUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.CourseId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
@@ -68,6 +50,31 @@ namespace WebBaiGiangAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Departments", x => x.DepartmentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    CourseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CourseDepartmentId = table.Column<int>(type: "int", nullable: false),
+                    CourseTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    CourseTotalSemester = table.Column<int>(type: "int", nullable: false),
+                    CourseImage = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CourseShortdescription = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.CourseId);
+                    table.ForeignKey(
+                        name: "FK_Courses_Departments_CourseDepartmentId",
+                        column: x => x.CourseDepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

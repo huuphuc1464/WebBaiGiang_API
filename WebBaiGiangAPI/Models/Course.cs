@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -9,6 +10,9 @@ namespace WebBaiGiangAPI.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CourseId { get; set; }
+
+        [Required]
+        public int CourseDepartmentId { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -27,7 +31,11 @@ namespace WebBaiGiangAPI.Models
         
         public DateTime? CourseUpdateAt { get; set; }
 
-        public ICollection<Lesson> Lessons { get; set; }
+        [JsonIgnore]
+        [ForeignKey("CourseDepartmentId")]
+        public Department? Department { get; set; }
+
+        public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
 
         public ICollection<ClassCourse> ClassCourses { get; set; } = new List<ClassCourse>();
 

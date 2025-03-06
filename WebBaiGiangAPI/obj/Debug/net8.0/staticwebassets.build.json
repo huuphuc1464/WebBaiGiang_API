@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FI0Cz9nh3eyCkBwx21P23PnkIwzexVof2eouX9R7I9c=",
+  "Hash": "zg3A9AW+MAxaQS2wJLB90LaFcgG4DygCEHUVGFH4ths=",
   "Source": "WebBaiGiangAPI",
   "BasePath": "_content/WebBaiGiangAPI",
   "Mode": "Default",
@@ -15,6 +15,317 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": [
+    {
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc1.jpg",
+      "SourceId": "WebBaiGiangAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
+      "BasePath": "_content/WebBaiGiangAPI",
+      "RelativePath": "Users/phuc1#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xw03g4vd9m",
+      "Integrity": "YfezekfpCCE/1BWwoBYcNkMN9fXDkJvKv6fubUeOhoY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Users\\phuc1.jpg"
+    },
+    {
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc2.png",
+      "SourceId": "WebBaiGiangAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
+      "BasePath": "_content/WebBaiGiangAPI",
+      "RelativePath": "Users/phuc2#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ic1ck9jlbb",
+      "Integrity": "LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Users\\phuc2.png"
+    },
+    {
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc3.png",
+      "SourceId": "WebBaiGiangAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
+      "BasePath": "_content/WebBaiGiangAPI",
+      "RelativePath": "Users/phuc3#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gisss7k757",
+      "Integrity": "WJfe2y2Mj/5QRH9siaY0x9V/IlpYEfuxPyIGgXv5PcI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Users\\phuc3.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "Users/phuc1.jpg",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "445040"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YfezekfpCCE/1BWwoBYcNkMN9fXDkJvKv6fubUeOhoY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 06 Mar 2025 01:32:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YfezekfpCCE/1BWwoBYcNkMN9fXDkJvKv6fubUeOhoY="
+        }
+      ]
+    },
+    {
+      "Route": "Users/phuc1.xw03g4vd9m.jpg",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "445040"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YfezekfpCCE/1BWwoBYcNkMN9fXDkJvKv6fubUeOhoY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 06 Mar 2025 01:32:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xw03g4vd9m"
+        },
+        {
+          "Name": "label",
+          "Value": "Users/phuc1.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YfezekfpCCE/1BWwoBYcNkMN9fXDkJvKv6fubUeOhoY="
+        }
+      ]
+    },
+    {
+      "Route": "Users/phuc2.ic1ck9jlbb.png",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc2.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "781991"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 06 Mar 2025 01:39:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ic1ck9jlbb"
+        },
+        {
+          "Name": "label",
+          "Value": "Users/phuc2.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU="
+        }
+      ]
+    },
+    {
+      "Route": "Users/phuc2.png",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc2.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "781991"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 06 Mar 2025 01:39:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LqZGFXsFMlzo1cp2IZYiicBca8kCZmVWST707RE2OBU="
+        }
+      ]
+    },
+    {
+      "Route": "Users/phuc3.gisss7k757.png",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc3.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "284800"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WJfe2y2Mj/5QRH9siaY0x9V/IlpYEfuxPyIGgXv5PcI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 06 Mar 2025 01:47:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gisss7k757"
+        },
+        {
+          "Name": "label",
+          "Value": "Users/phuc3.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WJfe2y2Mj/5QRH9siaY0x9V/IlpYEfuxPyIGgXv5PcI="
+        }
+      ]
+    },
+    {
+      "Route": "Users/phuc3.png",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phuc3.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "284800"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WJfe2y2Mj/5QRH9siaY0x9V/IlpYEfuxPyIGgXv5PcI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 06 Mar 2025 01:47:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WJfe2y2Mj/5QRH9siaY0x9V/IlpYEfuxPyIGgXv5PcI="
+        }
+      ]
+    }
+  ]
 }

@@ -174,6 +174,34 @@ namespace WebBaiGiangAPI.Controllers
                     data = user
                 });
             }
+            // Kiểm tra ngày sinh
+            if (user.UsersDob >= DateOnly.FromDateTime(DateTime.Today))
+            {
+                return BadRequest(new
+                {
+                    message = "Ngày sinh không thể lớn hơn ngày hiện tại",
+                    data = user
+                });
+            }
+            else
+            {
+                DateOnly ngayHienTai = DateOnly.FromDateTime(DateTime.Today);
+                int tuoi = ngayHienTai.Year - user.UsersDob.Value.Year;
+
+                if (ngayHienTai < user.UsersDob.Value.AddYears(tuoi))
+                {
+                    tuoi--;
+                }
+
+                if (tuoi < 18)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Bạn chưa đủ 18 tuổi.",
+                        data = user
+                    });
+                }
+            }
             // Loại bỏ khoảng trắng dư thừa
             saveuser.UsersName = Regex.Replace(user.UsersName.Trim(), @"\s+", " ");
             saveuser.UsersAdd = Regex.Replace(user.UsersAdd.Trim(), @"\s+", " ");
@@ -359,6 +387,34 @@ namespace WebBaiGiangAPI.Controllers
                     message = "Giới tính chỉ chấp nhận giá trị Nam hoặc Nữ",
                     data = user
                 });
+            }
+            // Kiểm tra ngày sinh
+            if (user.UsersDob >= DateOnly.FromDateTime(DateTime.Today))
+            {
+                return BadRequest(new
+                {
+                    message = "Ngày sinh không thể lớn hơn ngày hiện tại",
+                    data = user
+                });
+            }
+            else
+            {
+                DateOnly ngayHienTai = DateOnly.FromDateTime(DateTime.Today);
+                int tuoi = ngayHienTai.Year - user.UsersDob.Value.Year;
+
+                if (ngayHienTai < user.UsersDob.Value.AddYears(tuoi))
+                {
+                    tuoi--;
+                }
+
+                if (tuoi < 18)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Bạn chưa đủ 18 tuổi.",
+                        data = user
+                    });
+                }
             }
             saveUser.UserGender = user.UserGender;
             // Loại bỏ khoảng trắng dư thừa

@@ -181,8 +181,8 @@ namespace WebBaiGiangAPI.Data
                 {
                     var courses = new Course[]
                     {
-                    new Course { CourseTitle = "Lập trình C#", CourseTotalSemester = 1 },
-                    new Course { CourseTitle = "Lập trình Java", CourseTotalSemester = 1 }
+                    new Course { CourseDepartmentId = 1, CourseTitle = "Lập trình C#", CourseTotalSemester = 1 },
+                    new Course { CourseDepartmentId = 2, CourseTitle = "Lập trình Java", CourseTotalSemester = 1 }
                     };
                     foreach (var course in courses)
                     {
