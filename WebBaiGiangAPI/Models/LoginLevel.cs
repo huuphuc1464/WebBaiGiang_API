@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -15,6 +16,7 @@ namespace WebBaiGiangAPI.Models
 
         [MaxLength(255)]
         public string LevelDescription { get; set; }
+        [JsonIgnore]
         public ICollection<Users> Users { get; set; } = new List<Users>();
 
     }

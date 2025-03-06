@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -21,7 +22,7 @@ namespace WebBaiGiangAPI.Models
         [Required]
         [MaxLength(50)]
         public string DepartmentCode { get; set; }
-
+        [JsonIgnore]
         public ICollection<Users> Users { get; set; } = new List<Users>();
     }
 }

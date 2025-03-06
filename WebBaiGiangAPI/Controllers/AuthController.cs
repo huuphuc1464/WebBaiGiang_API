@@ -248,15 +248,6 @@ namespace WebBaiGiangAPI.Controllers
             var properties = authenticateResult.Properties;
             var tokens = properties?.Items;
 
-            // Log tất cả token để kiểm tra
-            if (tokens != null)
-            {
-                foreach (var token in tokens)
-                {
-                    Console.WriteLine($"{token.Key}: {token.Value}");
-                }
-            }
-
             var accessToken = properties?.GetTokenValue("access_token");
             if (string.IsNullOrEmpty(accessToken))
                 return BadRequest("Không lấy được Access Token.");
@@ -286,9 +277,9 @@ namespace WebBaiGiangAPI.Controllers
             // Kiểm tra và lưu thông tin user mới
             var existUser = await _context.Users.SingleOrDefaultAsync(u => u.UsersEmail == googleEmail);
             if (existUser == null)
-            {
+            {            
                 Users users = new Users();
-                users.UsersRoleId = 3;
+                users.UsersRoleId = 2;
                 users.UserLevelId = 2;
                 users.UsersName = userInfo.ContainsKey("name") ? userInfo["name"]?.ToString() : null;
                 users.UsersEmail = googleEmail;
@@ -309,12 +300,47 @@ namespace WebBaiGiangAPI.Controllers
             _context.UserLogs.Add(userLog);
             _context.SaveChanges();
 
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var keyString = _configuration["Jwt:Key"];
+            if (string.IsNullOrEmpty(keyString))
+            {
+                throw new Exception("Jwt:Key không được tìm thấy trong appsettings.json!");
+            }
+            var key = Encoding.UTF8.GetBytes(keyString);
+            Console.WriteLine("Key tạo token (Base64): " + Convert.ToBase64String(key));
+
+            var issuer = _configuration["Jwt:Issuer"];
+            var audience = _configuration["Jwt:Audience"];
+
+            if (string.IsNullOrEmpty(issuer) || string.IsNullOrEmpty(audience))
+            {
+                throw new Exception("Issuer hoặc Audience bị thiếu trong appsettings.json!");
+            }
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, googleEmail),
+                    new Claim(ClaimTypes.Role, "teacher"),
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                IssuedAt = DateTime.UtcNow,
+                NotBefore = DateTime.UtcNow,
+                Issuer = issuer,
+                Audience = audience,
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var jwt = tokenHandler.WriteToken(token);
             return Ok(new
             {
                 message = "Xác thực thành công!",
                 accessToken = accessToken,
                 idToken = idToken,
-                userinfo = userInfo 
+                userinfo = userInfo,
+                jwt = jwt,
             });
         }
 
@@ -408,7 +434,7 @@ namespace WebBaiGiangAPI.Controllers
                 if (existUser == null)
                 {
                     Users users = new Users();
-                    users.UsersRoleId = 3;
+                    users.UsersRoleId = 2;
                     users.UserLevelId = 3;
                     users.UsersName = userData.TryGetProperty("name", out var nameElement) ? nameElement.GetString() : null;
                     users.UsersEmail = githubEmail;
@@ -448,11 +474,47 @@ namespace WebBaiGiangAPI.Controllers
 
                 // Lưu Claims và Access Token vào HttpContext
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authProperties);
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var keyString = _configuration["Jwt:Key"];
+                if (string.IsNullOrEmpty(keyString))
+                {
+                    throw new Exception("Jwt:Key không được tìm thấy trong appsettings.json!");
+                }
+                var key = Encoding.UTF8.GetBytes(keyString);
+                Console.WriteLine("Key tạo token (Base64): " + Convert.ToBase64String(key));
+
+                var issuer = _configuration["Jwt:Issuer"];
+                var audience = _configuration["Jwt:Audience"];
+
+                if (string.IsNullOrEmpty(issuer) || string.IsNullOrEmpty(audience))
+                {
+                    throw new Exception("Issuer hoặc Audience bị thiếu trong appsettings.json!");
+                }
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim(ClaimTypes.Name, userName),
+                        new Claim(ClaimTypes.Role, "teacher"),
+                    }),
+                    Expires = DateTime.UtcNow.AddMinutes(30),
+                    IssuedAt = DateTime.UtcNow,
+                    NotBefore = DateTime.UtcNow,
+                    Issuer = issuer,
+                    Audience = audience,
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var jwt = tokenHandler.WriteToken(token);
                 return Ok(new
                 {
                     Message = "Xác thực GitHub thành công!",
                     AccessToken = accessToken,
-                    User = userData
+                    User = userData,
+                    Jwt = jwt,
                 });
             }
         }

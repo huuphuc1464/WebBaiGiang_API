@@ -58,27 +58,27 @@ namespace WebBaiGiangAPI.Models
         // Navigation properties
         [JsonIgnore]
         [ForeignKey("UsersDepartmentId")]
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
 
         [JsonIgnore]
         [ForeignKey("UsersRoleId")]
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
 
         [JsonIgnore]
         [ForeignKey("UserLevelId")]
-        public LoginLevel LoginLevel { get; set; }
+        public LoginLevel? LoginLevel { get; set; }
 
         [JsonIgnore]
         [ForeignKey("UsersCity")]
-        public City City { get; set; }
+        public City? City { get; set; }
 
         [JsonIgnore]
         [ForeignKey("UsersState")]
-        public State State { get; set; }
+        public State? State { get; set; }
 
         [JsonIgnore]
         [ForeignKey("UsersCountry")]
-        public Country Country { get; set; }
+        public Country? Country { get; set; }
         [JsonIgnore] 
         public ICollection<UsersLog> UsersLog { get; set; } = new List<UsersLog>();
         [JsonIgnore]

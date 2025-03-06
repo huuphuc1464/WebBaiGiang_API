@@ -20,8 +20,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.OperationFilter<SwaggerFileOperationFilter>();
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEB BAI GIANG API", Version = "v1" });
-
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -159,6 +159,7 @@ if (app.Environment.IsDevelopment())
         c.ConfigObject.AdditionalItems["https"] = true;
     });
 }
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

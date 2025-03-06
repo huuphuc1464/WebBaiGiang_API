@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -15,7 +16,7 @@ namespace WebBaiGiangAPI.Models
         [Required]
         [MaxLength(255)]
         public string CityName { get; set; }
-
+        [JsonIgnore]
         public ICollection<Users> Users { get; set; } = new List<Users>();
     }
 }

@@ -26,6 +26,15 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -59,6 +68,15 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -87,6 +105,15 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -115,6 +142,15 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -187,6 +223,465 @@
         "tags": [
           "Auth"
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Teacher/get-teachers": {
+      "get": {
+        "tags": [
+          "Teacher"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Teacher/get-teacher": {
+      "get": {
+        "tags": [
+          "Teacher"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Teacher/update-teacher": {
+      "put": {
+        "tags": [
+          "Teacher"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "UserLevelId",
+                  "UsersEmail",
+                  "UsersName",
+                  "UsersRoleId",
+                  "UsersUsername"
+                ],
+                "type": "object",
+                "properties": {
+                  "UsersId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersRoleId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersName": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "UsersUsername": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersPassword": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersEmail": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersMobile": {
+                    "maxLength": 10,
+                    "type": "string"
+                  },
+                  "UsersDob": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "UsersImage": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersAdd": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersCity": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersState": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersCountry": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersDepartmentId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UserLevelId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UserGender": {
+                    "maxLength": 3,
+                    "type": "string"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "anhdaidien": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "UsersId": {
+                  "style": "form"
+                },
+                "UsersRoleId": {
+                  "style": "form"
+                },
+                "UsersName": {
+                  "style": "form"
+                },
+                "UsersUsername": {
+                  "style": "form"
+                },
+                "UsersPassword": {
+                  "style": "form"
+                },
+                "UsersEmail": {
+                  "style": "form"
+                },
+                "UsersMobile": {
+                  "style": "form"
+                },
+                "UsersDob": {
+                  "style": "form"
+                },
+                "UsersImage": {
+                  "style": "form"
+                },
+                "UsersAdd": {
+                  "style": "form"
+                },
+                "UsersCity": {
+                  "style": "form"
+                },
+                "UsersState": {
+                  "style": "form"
+                },
+                "UsersCountry": {
+                  "style": "form"
+                },
+                "UsersDepartmentId": {
+                  "style": "form"
+                },
+                "UserLevelId": {
+                  "style": "form"
+                },
+                "UserGender": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Teacher/add-teacher": {
+      "post": {
+        "tags": [
+          "Teacher"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "UserLevelId",
+                  "UsersEmail",
+                  "UsersName",
+                  "UsersRoleId",
+                  "UsersUsername"
+                ],
+                "type": "object",
+                "properties": {
+                  "UsersId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersRoleId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersName": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "UsersUsername": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersPassword": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersEmail": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersMobile": {
+                    "maxLength": 10,
+                    "type": "string"
+                  },
+                  "UsersDob": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "UsersImage": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersAdd": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "UsersCity": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersState": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersCountry": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsersDepartmentId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UserLevelId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UserGender": {
+                    "maxLength": 3,
+                    "type": "string"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "anhdaidien": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "UsersId": {
+                  "style": "form"
+                },
+                "UsersRoleId": {
+                  "style": "form"
+                },
+                "UsersName": {
+                  "style": "form"
+                },
+                "UsersUsername": {
+                  "style": "form"
+                },
+                "UsersPassword": {
+                  "style": "form"
+                },
+                "UsersEmail": {
+                  "style": "form"
+                },
+                "UsersMobile": {
+                  "style": "form"
+                },
+                "UsersDob": {
+                  "style": "form"
+                },
+                "UsersImage": {
+                  "style": "form"
+                },
+                "UsersAdd": {
+                  "style": "form"
+                },
+                "UsersCity": {
+                  "style": "form"
+                },
+                "UsersState": {
+                  "style": "form"
+                },
+                "UsersCountry": {
+                  "style": "form"
+                },
+                "UsersDepartmentId": {
+                  "style": "form"
+                },
+                "UserLevelId": {
+                  "style": "form"
+                },
+                "UserGender": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -250,6 +745,11 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Users"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
               }
             }
           }
@@ -348,6 +848,11 @@
               "schema": {
                 "$ref": "#/components/schemas/Users"
               }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
             }
           }
         },
@@ -372,6 +877,15 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -407,6 +921,15 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"

@@ -20,7 +20,6 @@ namespace WebBaiGiangAPI.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IJwtService _jwtService;
-
         private string patternPass = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-~=`{}[\]:"";'<>?,./]).{8,}$";
         private string patternEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
         private string patternSDT = @"^(0)[1-9][0-9]{8}$";
