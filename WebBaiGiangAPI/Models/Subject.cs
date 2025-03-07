@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -22,8 +23,9 @@ namespace WebBaiGiangAPI.Models
         public string? SubjectDescription { get; set; }
 
         [ForeignKey("SubjectClassId")]
-        public Class Classes { get; set; }
-
+        [JsonIgnore]
+        public Class? Classes { get; set; }
+        [JsonIgnore]
         public ICollection<Marks> Marks { get; set; } = new List<Marks>();
 
     }

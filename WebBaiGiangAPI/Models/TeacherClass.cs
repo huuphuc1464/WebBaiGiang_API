@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -18,10 +19,14 @@ namespace WebBaiGiangAPI.Models
         public string? TcDescription { get; set; }
 
         [ForeignKey("TcUsersId")]
-        public Users User { get; set; } 
+        [JsonIgnore]
+        public Users? User { get; set; } 
 
         [ForeignKey("TcClassId")]
-        public Class Classes { get; set; }
+        [JsonIgnore]
+        public Class? Classes { get; set; }
+
+        [JsonIgnore]
         public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
 
     }

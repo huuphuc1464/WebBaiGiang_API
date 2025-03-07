@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -14,74 +15,60 @@ namespace WebBaiGiangAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClassesController : ControllerBase
+    public class SubjectsController : ControllerBase
     {
         private readonly AppDbContext _context;
         private readonly IJwtService _jwtService;
-
-        public ClassesController(AppDbContext context, IJwtService jwtService)
+        public SubjectsController(AppDbContext context, IJwtService jwtService)
         {
             _context = context;
-            _jwtService = jwtService;
+            _jwtService = jwtService;   
         }
 
-        [HttpGet("get-classes")]
-        public async Task<ActionResult<IEnumerable<Class>>> GetClasses()
+        [HttpGet("get-subjects")]
+        public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects()
         {
             var errorResult = KiemTraTokenTeacher();
             if (errorResult != null)
             {
                 return errorResult;
             }
-            var classes = await _context.Classes.ToListAsync();
-            if (classes == null)
+            var subjects = await _context.Subjects.ToListAsync();
+            if (subjects == null)
             {
                 return NotFound(new
                 {
-                    message = "Hiện tại không có lớp học nào"
+                    message = "Hiện tại không có môn học nào"
                 });
             }
             return Ok(new
             {
-                message = "Danh sách lớp học",
-                data = classes
+                message = "Danh sách môn học",
+                data = subjects
             });
         }
 
-        [HttpGet("get-class")]
-        public async Task<ActionResult<Class>> GetClass(int id)
+        [HttpGet("get-subject")]
+        public async Task<ActionResult<Subject>> GetSubject(int id)
         {
             var errorResult = KiemTraTokenTeacher();
             if (errorResult != null)
             {
                 return errorResult;
             }
-            var result = from c in _context.Classes
-                         join s in _context.Semesters on c.ClassSemesterId equals s.SemesterId
-                         join y in _context.SchoolYears on c.ClassSyearId equals y.SyearId
-                         where c.ClassId == id
-                         select new {
-                            c.ClassId,
-                            c.ClassTitle,
-                            c.ClassDescription,
-                            c.ClassUpdateAt,
-                            s.SemesterTitle,
-                            s.SemesterDescription,
-                            y.SyearDescription,
-                            y.SyearTitle,
-                         };
-            if (result == null || !result.Any())
+            var result = await _context.Subjects.FindAsync(id);
+            if (result == null)
             {
                 return NotFound(new
                 {
-                    message = "Lớp học không tồn tại"
+                    message = "Môn học không tồn tại"
                 });
             }
             return Ok(result);
         }
 
-        [HttpPut("update-class")]
-        public async Task<IActionResult> UpdateClass(Class @class)
+        [HttpPut("update-subject")]
+        public async Task<IActionResult> UpdateSubject(Subject subject)
         {
             var errorResult = KiemTraTokenTeacher();
             if (errorResult != null)
@@ -92,31 +79,30 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!_context.Semesters.Any(s => s.SemesterId == @class.ClassSemesterId))
+            if (!_context.Classes.Any(s => s.ClassId == subject.SubjectClassId))
             {
                 return BadRequest(new
                 {
-                    message = "Học kỳ không tồn tại",
-                    data = @class
+                    message = "Lớp học không tồn tại",
+                    data = subject
                 });
             }
-            if (!_context.SchoolYears.Any(sy => sy.SyearId == @class.ClassSyearId))
+            if (_context.Subjects.Any(s => s.SubjectTitle == subject.SubjectTitle && s.SubjectId != subject.SubjectId))
             {
                 return BadRequest(new
                 {
-                    message = "Năm học không tồn tại",
-                    data = @class
+                    message = "Môn học đã tồn tại",
+                    data = subject,
                 });
             }
-            var c = await _context.Classes.SingleOrDefaultAsync(c => c.ClassId == @class.ClassId);
-            if (c == null)
+            var s = await _context.Subjects.SingleOrDefaultAsync(s => s.SubjectId == subject.SubjectId);
+            if (s == null)
             {
-                return BadRequest(new { message = "Lớp học không tồn tại" });
+                return BadRequest(new { message = "Môn học không tồn tại" });
             }
 
-            c.ClassTitle = Regex.Replace(@class.ClassTitle.Trim(), @"\s+", " ");
-            c.ClassDescription = Regex.Replace(@class.ClassDescription.Trim(), @"\s+", " ");
-            c.ClassUpdateAt = DateTime.Now;
+            s.SubjectTitle = Regex.Replace(subject.SubjectTitle.Trim(), @"\s+", " ");
+            s.SubjectDescription = Regex.Replace(subject.SubjectDescription.Trim(), @"\s+", " ");
 
             try
             {
@@ -124,11 +110,11 @@ namespace WebBaiGiangAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClassExists(@class.ClassId))
+                if (!SubjectExists(subject.SubjectId))
                 {
                     return Conflict(new
                     {
-                        message = "Lớp học không tồn tại"
+                        message = "Môn học không tồn tại"
                     });
                 }
                 else
@@ -139,13 +125,13 @@ namespace WebBaiGiangAPI.Controllers
 
             return Ok(new
             {
-                message = "Thay đổi thông tin lớp học thành công",
-                data = c
+                message = "Thay đổi thông tin môn học thành công",
+                data = s
             });
         }
 
-        [HttpPost("add-class")]
-        public async Task<ActionResult<Class>> AddClass(Class lopHoc)
+        [HttpPost("add-subject")]
+        public async Task<ActionResult<Subject>> PostSubject(Subject subject)
         {
             var errorResult = KiemTraTokenTeacher();
             if (errorResult != null)
@@ -156,37 +142,38 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!_context.Semesters.Any(s => s.SemesterId == lopHoc.ClassSemesterId))
-            {
-                return BadRequest( new
-                {
-                    message = "Học kỳ không tồn tại",
-                    data = lopHoc
-                });
-            }
-            if (!_context.SchoolYears.Any(sy => sy.SyearId == lopHoc.ClassSyearId))
+            if (!_context.Subjects.Any(s => s.SubjectClassId == subject.SubjectClassId))
             {
                 return BadRequest(new
                 {
-                    message = "Năm học không tồn tại",
-                    data = lopHoc
+                    message = "Lớp học không tồn tại",
+                    data = subject
                 });
             }
-            lopHoc.ClassTitle = Regex.Replace(lopHoc.ClassTitle.Trim(), @"\s+", " ");
-            lopHoc.ClassDescription = Regex.Replace(lopHoc.ClassDescription.Trim(), @"\s+", " ");
-            lopHoc.ClassUpdateAt = DateTime.Now;
-            _context.Classes.Add(lopHoc);
+            
+            subject.SubjectTitle = Regex.Replace(subject.SubjectTitle.Trim(), @"\s+", " ");
+
+            if (_context.Subjects.Any(s => s.SubjectTitle == subject.SubjectTitle))
+            {
+                return BadRequest(new
+                {
+                    message = "Môn học đã tồn tại",
+                    data = subject
+                });
+            }
+            subject.SubjectDescription = Regex.Replace(subject.SubjectDescription.Trim(), @"\s+", " ");
+            _context.Subjects.Add(subject);
             await _context.SaveChangesAsync();
 
             return Ok(new
             {
-                message = "Thêm lớp học thành công",
-                data = lopHoc
+                message = "Thêm môn học thành công",
+                data = subject
             });
         }
 
-        [HttpDelete("delete-class")]
-        public async Task<IActionResult> DeleteClass(int id)
+        [HttpDelete("delete-subject")]
+        public async Task<IActionResult> DeleteSubject(int id)
         {
             try
             {
@@ -195,26 +182,25 @@ namespace WebBaiGiangAPI.Controllers
                 {
                     return errorResult;
                 }
-                var @class = await _context.Classes.FindAsync(id);
-                if (@class == null)
+                var subject = await _context.Subjects.FindAsync(id);
+                if (subject == null)
                 {
-                    return NotFound(new { message = "Lớp học không tồn tại" });
+                    return NotFound(new { message = "Môn học không tồn tại" });
                 }
 
-                _context.Classes.Remove(@class);
+                _context.Subjects.Remove(subject);
                 await _context.SaveChangesAsync();
 
-                return Conflict(new { message = "Xóa lớp học thành công" });
+                return Conflict(new { message = "Xóa môn học thành công" });
             }
-            catch (Exception ex) 
+            catch (Exception)
             {
-                return NotFound(new { message = "Không thể xóa, lớp học đang liên kết với bảng khác" });
+                return NotFound(new { message = "Không thể xóa, môn học đang liên kết với bảng khác" });
             }
         }
-
-        private bool ClassExists(int id)
+        private bool SubjectExists(int id)
         {
-            return _context.Classes.Any(e => e.ClassId == id);
+            return _context.Subjects.Any(e => e.SubjectId == id);
         }
         private ActionResult? KiemTraTokenTeacher()
         {
