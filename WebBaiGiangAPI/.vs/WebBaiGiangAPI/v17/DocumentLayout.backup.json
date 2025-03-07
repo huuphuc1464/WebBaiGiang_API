@@ -3,39 +3,23 @@
   "WorkspaceRootPath": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\teacherclassescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\teacherclassescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\semesterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\semesterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\subjectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\subjectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\classescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\classescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\models\\teacherclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:models\\teacherclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\assignmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\assignmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\HK6\\TTTN\\NguoiDungController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -45,7 +29,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -53,118 +37,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TeacherClass.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\TeacherClass.cs",
-              "RelativeDocumentMoniker": "Models\\TeacherClass.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\TeacherClass.cs",
-              "RelativeToolTip": "Models\\TeacherClass.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBoAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T03:03:39.137Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TeacherClassesController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\TeacherClassesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TeacherClassesController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\TeacherClassesController.cs*",
-              "RelativeToolTip": "Controllers\\TeacherClassesController.cs*",
-              "ViewState": "AgIAAIIAAAAAAAAAAAA4wJAAAAApAAAAAAAAAA==",
+              "Title": "StudentsController.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\StudentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StudentsController.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\StudentsController.cs",
+              "RelativeToolTip": "Controllers\\StudentsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T02:33:16.76Z",
+              "WhenOpened": "2025-03-07T08:00:30.336Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SubjectsController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\SubjectsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SubjectsController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\SubjectsController.cs",
-              "RelativeToolTip": "Controllers\\SubjectsController.cs",
-              "ViewState": "AgIAAHAAAAAAAAAAAAAAAIEAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T01:29:05.692Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ClassesController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\ClassesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ClassesController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\ClassesController.cs",
-              "RelativeToolTip": "Controllers\\ClassesController.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAAAkwAMBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T08:13:19.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SemestersController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\SemestersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SemestersController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\SemestersController.cs",
-              "RelativeToolTip": "Controllers\\SemestersController.cs",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAkwOcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T06:22:57.847Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DepartmentsController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\DepartmentsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DepartmentsController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\DepartmentsController.cs",
-              "RelativeToolTip": "Controllers\\DepartmentsController.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAowHoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T01:56:21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAwCEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T01:25:07.826Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Users.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Users.cs",
-              "RelativeDocumentMoniker": "Models\\Users.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Users.cs",
-              "RelativeToolTip": "Models\\Users.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T01:15:43.18Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "NguoiDungController.cs",
               "DocumentMoniker": "D:\\HK6\\TTTN\\NguoiDungController.cs",
               "RelativeDocumentMoniker": "..\\..\\NguoiDungController.cs",
               "ToolTip": "D:\\HK6\\TTTN\\NguoiDungController.cs",
               "RelativeToolTip": "..\\..\\NguoiDungController.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAAAEsCAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAJ8BAAAAAAAAAAAAABYCAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T01:24:14.984Z"
+              "WhenOpened": "2025-03-07T07:50:08.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAOYAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T03:59:13.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AssignmentsController.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AssignmentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AssignmentsController.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AssignmentsController.cs",
+              "RelativeToolTip": "Controllers\\AssignmentsController.cs",
+              "ViewState": "AgIAAGQBAAAAAAAAAAAkwHkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T03:32:31.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Subject.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Subject.cs",
+              "RelativeDocumentMoniker": "Models\\Subject.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Subject.cs",
+              "RelativeToolTip": "Models\\Subject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T03:27:08.113Z",
+              "EditorCaption": ""
             }
           ]
         }

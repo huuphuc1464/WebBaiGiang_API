@@ -50,6 +50,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.6.1, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.10.0, )"

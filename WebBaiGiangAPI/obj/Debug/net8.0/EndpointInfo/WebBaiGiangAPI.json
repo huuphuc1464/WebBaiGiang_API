@@ -5,6 +5,518 @@
     "version": "v1"
   },
   "paths": {
+    "/api/Assignments/get-assignments": {
+      "get": {
+        "tags": [
+          "Assignments"
+        ],
+        "parameters": [
+          {
+            "name": "tID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Assignments/get-assignment": {
+      "get": {
+        "tags": [
+          "Assignments"
+        ],
+        "parameters": [
+          {
+            "name": "teacherID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "assignmentID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Assignments/get-all-assignments": {
+      "get": {
+        "tags": [
+          "Assignments"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Assignments/get-all-assignment": {
+      "get": {
+        "tags": [
+          "Assignments"
+        ],
+        "parameters": [
+          {
+            "name": "assignmentID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Assignments/update-assignment": {
+      "put": {
+        "tags": [
+          "Assignments"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "AssignmentClassId",
+                  "AssignmentStart",
+                  "AssignmentTitle"
+                ],
+                "type": "object",
+                "properties": {
+                  "AssignmentId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignmentTitle": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "AssignmentFilename": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "AssignmentDescription": {
+                    "type": "string"
+                  },
+                  "AssignmentTeacherId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignmentClassId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignmentDeadline": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AssignmentCreateAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AssignmentStart": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AssignmentStatus": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "AssignmentId": {
+                  "style": "form"
+                },
+                "AssignmentTitle": {
+                  "style": "form"
+                },
+                "AssignmentFilename": {
+                  "style": "form"
+                },
+                "AssignmentDescription": {
+                  "style": "form"
+                },
+                "AssignmentTeacherId": {
+                  "style": "form"
+                },
+                "AssignmentClassId": {
+                  "style": "form"
+                },
+                "AssignmentDeadline": {
+                  "style": "form"
+                },
+                "AssignmentCreateAt": {
+                  "style": "form"
+                },
+                "AssignmentStart": {
+                  "style": "form"
+                },
+                "AssignmentStatus": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Assignments/add-assignment": {
+      "post": {
+        "tags": [
+          "Assignments"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "AssignmentClassId",
+                  "AssignmentStart",
+                  "AssignmentTitle"
+                ],
+                "type": "object",
+                "properties": {
+                  "AssignmentId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignmentTitle": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "AssignmentFilename": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "AssignmentDescription": {
+                    "type": "string"
+                  },
+                  "AssignmentTeacherId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignmentClassId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignmentDeadline": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AssignmentCreateAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AssignmentStart": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AssignmentStatus": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "AssignmentId": {
+                  "style": "form"
+                },
+                "AssignmentTitle": {
+                  "style": "form"
+                },
+                "AssignmentFilename": {
+                  "style": "form"
+                },
+                "AssignmentDescription": {
+                  "style": "form"
+                },
+                "AssignmentTeacherId": {
+                  "style": "form"
+                },
+                "AssignmentClassId": {
+                  "style": "form"
+                },
+                "AssignmentDeadline": {
+                  "style": "form"
+                },
+                "AssignmentCreateAt": {
+                  "style": "form"
+                },
+                "AssignmentStart": {
+                  "style": "form"
+                },
+                "AssignmentStatus": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Assignments/delete-assignment": {
+      "delete": {
+        "tags": [
+          "Assignments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Auth/login": {
       "post": {
         "tags": [
@@ -2391,6 +2903,63 @@
   },
   "components": {
     "schemas": {
+      "Assignment": {
+        "required": [
+          "assignmentClassId",
+          "assignmentCreateAt",
+          "assignmentStart",
+          "assignmentTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "assignmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assignmentTitle": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "assignmentFilename": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "assignmentDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "assignmentTeacherId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "assignmentClassId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assignmentDeadline": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assignmentCreateAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "assignmentStart": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "assignmentStatus": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Class": {
         "required": [
           "classSemesterId",

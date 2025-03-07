@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
-    public class Assignment
+    public class AssignmentDTO
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,23 +25,10 @@ namespace WebBaiGiangAPI.Models
 
         public DateTime? AssignmentDeadline { get; set; }
 
-        [Required]
         public DateTime AssignmentCreateAt { get; set; }
 
         [Required]
         public DateTime AssignmentStart { get; set; }
-
         public int? AssignmentStatus { get; set; }
-
-        [ForeignKey("AssignmentTeacherId")]
-        [JsonIgnore]
-        public Users? Users { get; set; }
-
-        [ForeignKey("AssignmentClassId")]
-        [JsonIgnore]
-        public Class? Classes { get; set; }
-        [JsonIgnore]
-        public ICollection<Submit> Submits { get; set; } = new List<Submit>();
-
     }
 }

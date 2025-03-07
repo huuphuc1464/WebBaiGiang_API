@@ -25,9 +25,5 @@ namespace WebBaiGiangAPI.Models
         [ForeignKey("TcClassId")]
         [JsonIgnore]
         public Class? Classes { get; set; }
-
-        [JsonIgnore]
-        public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
-
     }
 }

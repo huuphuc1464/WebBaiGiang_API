@@ -74,7 +74,7 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.CourseDepartmentId,
                         principalTable: "Departments",
                         principalColumn: "DepartmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -566,7 +566,7 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.StudentId,
                         principalTable: "Users",
                         principalColumn: "UsersId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -615,7 +615,7 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.UlogUsersId,
                         principalTable: "Users",
                         principalColumn: "UsersId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -636,7 +636,7 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.LfLessonId,
                         principalTable: "Lessons",
                         principalColumn: "LessonId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -662,7 +662,7 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.QqQuizId,
                         principalTable: "Quizzes",
                         principalColumn: "QuizId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -756,13 +756,13 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.QrQuizId,
                         principalTable: "Quizzes",
                         principalColumn: "QuizId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_QuizResults_Students_QrStudentId",
                         column: x => x.QrStudentId,
                         principalTable: "Students",
                         principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -818,10 +818,10 @@ namespace WebBaiGiangAPI.Migrations
                         principalColumn: "ClassId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Assignments_TeacherClasses_AssignmentTeacherId",
+                        name: "FK_Assignments_Users_AssignmentTeacherId",
                         column: x => x.AssignmentTeacherId,
-                        principalTable: "TeacherClasses",
-                        principalColumn: "TcId",
+                        principalTable: "Users",
+                        principalColumn: "UsersId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -845,13 +845,13 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.SubmitAssignmentId,
                         principalTable: "Assignments",
                         principalColumn: "AssignmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Submits_Students_SubmitStudentId",
                         column: x => x.SubmitStudentId,
                         principalTable: "Students",
                         principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
