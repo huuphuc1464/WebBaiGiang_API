@@ -159,6 +159,10 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return errorResult;
             }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             if (_context.Departments.Any(d => d.DepartmentCode == department.DepartmentCode))
             {
                 return BadRequest(new
