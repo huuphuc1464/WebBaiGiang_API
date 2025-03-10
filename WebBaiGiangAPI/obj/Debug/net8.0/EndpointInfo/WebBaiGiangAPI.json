@@ -1569,6 +1569,218 @@
         }
       }
     },
+    "/api/Students/get-students": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Students/get-student": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Students/update-student": {
+      "put": {
+        "tags": [
+          "Students"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentDTO"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Students/add-student": {
+      "post": {
+        "tags": [
+          "Students"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentDTO"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Students/import-student": {
+      "post": {
+        "tags": [
+          "Students"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Subjects/get-subjects": {
       "get": {
         "tags": [
@@ -2899,6 +3111,210 @@
           }
         }
       }
+    },
+    "/api/UsersLogs": {
+      "get": {
+        "tags": [
+          "UsersLogs"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersLog"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersLog"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersLog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UsersLogs"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersLog"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersLog"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersLog"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UsersLogs/{id}": {
+      "get": {
+        "tags": [
+          "UsersLogs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UsersLogs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersLog"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersLog"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersLog"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UsersLogs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2956,6 +3372,45 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AttendanceMarks": {
+        "required": [
+          "attendanceDate",
+          "attendanceStatus",
+          "classId",
+          "studentId"
+        ],
+        "type": "object",
+        "properties": {
+          "attendanceMarksId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "classId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "attendanceDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "attendanceStatus": {
+            "maxLength": 5,
+            "minLength": 1,
+            "type": "string"
+          },
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          },
+          "classes": {
+            "$ref": "#/components/schemas/Class"
           }
         },
         "additionalProperties": false
@@ -3026,6 +3481,311 @@
         },
         "additionalProperties": false
       },
+      "Exam": {
+        "required": [
+          "examEtypeId",
+          "examMonth",
+          "examTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "examId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "examTitle": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "examEtypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "examMonth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "examDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "examType": {
+            "$ref": "#/components/schemas/ExamType"
+          },
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "marks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Marks"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamType": {
+        "required": [
+          "etypeTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "etypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "etypeTitle": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "etypeDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "exams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Exam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Marks": {
+        "type": "object",
+        "properties": {
+          "marksId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "marksExamId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marksStudentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marksSubjectId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marksWritten": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "marksPractical": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "marksSemesterId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marksDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "exam": {
+            "$ref": "#/components/schemas/Exam"
+          },
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/Subject"
+          },
+          "semester": {
+            "$ref": "#/components/schemas/Semester"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Month": {
+        "required": [
+          "monthTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "monthId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "monthTitle": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "exams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Exam"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Quiz": {
+        "required": [
+          "quizClassId",
+          "quizTeacherId",
+          "quizTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "quizId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quizClassId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quizTeacherId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quizTitle": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "quizDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "classes": {
+            "$ref": "#/components/schemas/Class"
+          },
+          "teacher": {
+            "$ref": "#/components/schemas/Users"
+          },
+          "quizQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuizQuestion"
+            },
+            "nullable": true
+          },
+          "quizResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuizResult"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizQuestion": {
+        "required": [
+          "qqCorrect",
+          "qqOption1",
+          "qqOption2",
+          "qqOption3",
+          "qqOption4",
+          "qqQuestion",
+          "qqQuizId"
+        ],
+        "type": "object",
+        "properties": {
+          "qqId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qqQuizId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qqQuestion": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "qqOption1": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "qqOption2": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "qqOption3": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "qqOption4": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "qqCorrect": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "qqDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "quiz": {
+            "$ref": "#/components/schemas/Quiz"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizResult": {
+        "required": [
+          "qrAnswer",
+          "qrDate",
+          "qrQuizId",
+          "qrStudentId",
+          "qrTotalQuestion"
+        ],
+        "type": "object",
+        "properties": {
+          "qrId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrQuizId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrStudentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrTotalQuestion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrAnswer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quiz": {
+            "$ref": "#/components/schemas/Quiz"
+          },
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          }
+        },
+        "additionalProperties": false
+      },
       "SchoolYear": {
         "required": [
           "syearTitle"
@@ -3070,6 +3830,207 @@
         },
         "additionalProperties": false
       },
+      "Student": {
+        "required": [
+          "studentCode"
+        ],
+        "type": "object",
+        "properties": {
+          "studentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentCode": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "studentRollno": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "studentFatherName": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "studentDetails": {
+            "type": "string",
+            "nullable": true
+          },
+          "users": {
+            "$ref": "#/components/schemas/Users"
+          },
+          "quizResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuizResult"
+            },
+            "nullable": true
+          },
+          "marks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Marks"
+            },
+            "nullable": true
+          },
+          "attendanceMarks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttendanceMarks"
+            },
+            "nullable": true
+          },
+          "submits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Submit"
+            },
+            "nullable": true
+          },
+          "studentClasses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StudentClass"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudentClass": {
+        "required": [
+          "scClassId",
+          "scStudentId"
+        ],
+        "type": "object",
+        "properties": {
+          "scId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scStudentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scClassId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          },
+          "classes": {
+            "$ref": "#/components/schemas/Class"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudentDTO": {
+        "required": [
+          "studentCode",
+          "usersEmail",
+          "usersName",
+          "usersUsername"
+        ],
+        "type": "object",
+        "properties": {
+          "usersId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usersName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "usersUsername": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "usersPassword": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "usersEmail": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "usersMobile": {
+            "maxLength": 10,
+            "type": "string",
+            "nullable": true
+          },
+          "usersDob": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "usersImage": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "usersAdd": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "usersCity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "usersState": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "usersCountry": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "usersDepartmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userGender": {
+            "maxLength": 3,
+            "type": "string",
+            "nullable": true
+          },
+          "studentCode": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "studentRollno": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "studentFatherName": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "studentDetails": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Subject": {
         "required": [
           "subjectClassId",
@@ -3093,6 +4054,49 @@
           "subjectDescription": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Submit": {
+        "required": [
+          "submitAssignmentId",
+          "submitDate",
+          "submitFile",
+          "submitStudentId"
+        ],
+        "type": "object",
+        "properties": {
+          "submitId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "submitAssignmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "submitStudentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "submitFile": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "submitDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "submitStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assignment": {
+            "$ref": "#/components/schemas/Assignment"
+          },
+          "student": {
+            "$ref": "#/components/schemas/Student"
           }
         },
         "additionalProperties": false
@@ -3208,6 +4212,42 @@
             "maxLength": 3,
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsersLog": {
+        "required": [
+          "ulogLoginDate",
+          "ulogUsername",
+          "ulogUsersId"
+        ],
+        "type": "object",
+        "properties": {
+          "ulogId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ulogUsersId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ulogUsername": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "ulogLoginDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ulogLogoutDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "users": {
+            "$ref": "#/components/schemas/Users"
           }
         },
         "additionalProperties": false
