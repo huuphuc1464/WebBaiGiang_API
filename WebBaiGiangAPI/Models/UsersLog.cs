@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -22,6 +23,7 @@ namespace WebBaiGiangAPI.Models
         public DateTime? UlogLogoutDate { get; set; }
 
         [ForeignKey("UlogUsersId")]
-        public Users Users { get; set; }
+        [JsonIgnore]
+        public Users? Users { get; set; }
     }
 }

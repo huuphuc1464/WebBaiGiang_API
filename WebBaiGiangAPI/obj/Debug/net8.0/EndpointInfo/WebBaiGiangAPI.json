@@ -948,6 +948,395 @@
         }
       }
     },
+    "/api/Courses/get-courses": {
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Courses/get-course": {
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Courses/update-course": {
+      "put": {
+        "tags": [
+          "Courses"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "CourseDepartmentId",
+                  "CourseTitle",
+                  "CourseTotalSemester"
+                ],
+                "type": "object",
+                "properties": {
+                  "CourseId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CourseDepartmentId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CourseTitle": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "CourseTotalSemester": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CourseImage": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "CourseShortdescription": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "CourseDescription": {
+                    "type": "string"
+                  },
+                  "CourseUpdateAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "CourseId": {
+                  "style": "form"
+                },
+                "CourseDepartmentId": {
+                  "style": "form"
+                },
+                "CourseTitle": {
+                  "style": "form"
+                },
+                "CourseTotalSemester": {
+                  "style": "form"
+                },
+                "CourseImage": {
+                  "style": "form"
+                },
+                "CourseShortdescription": {
+                  "style": "form"
+                },
+                "CourseDescription": {
+                  "style": "form"
+                },
+                "CourseUpdateAt": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Courses/add-course": {
+      "post": {
+        "tags": [
+          "Courses"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "CourseDepartmentId",
+                  "CourseTitle",
+                  "CourseTotalSemester"
+                ],
+                "type": "object",
+                "properties": {
+                  "CourseId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CourseDepartmentId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CourseTitle": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "CourseTotalSemester": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CourseImage": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "CourseShortdescription": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "CourseDescription": {
+                    "type": "string"
+                  },
+                  "CourseUpdateAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "CourseId": {
+                  "style": "form"
+                },
+                "CourseDepartmentId": {
+                  "style": "form"
+                },
+                "CourseTitle": {
+                  "style": "form"
+                },
+                "CourseTotalSemester": {
+                  "style": "form"
+                },
+                "CourseImage": {
+                  "style": "form"
+                },
+                "CourseShortdescription": {
+                  "style": "form"
+                },
+                "CourseDescription": {
+                  "style": "form"
+                },
+                "CourseUpdateAt": {
+                  "style": "form"
+                },
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Courses/delete-course": {
+      "delete": {
+        "tags": [
+          "Courses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Departments/get-departments": {
       "get": {
         "tags": [
@@ -3112,7 +3501,7 @@
         }
       }
     },
-    "/api/UsersLogs": {
+    "/api/UsersLogs/get-user-logs": {
       "get": {
         "tags": [
           "UsersLogs"
@@ -3143,57 +3532,6 @@
                   "items": {
                     "$ref": "#/components/schemas/UsersLog"
                   }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "UsersLogs"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsersLog"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsersLog"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsersLog"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsersLog"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsersLog"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsersLog"
                 }
               }
             }
@@ -3201,7 +3539,7 @@
         }
       }
     },
-    "/api/UsersLogs/{id}": {
+    "/api/UsersLogs/get-user-log": {
       "get": {
         "tags": [
           "UsersLogs"
@@ -3209,8 +3547,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -3239,7 +3576,104 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/UsersLogs/get-user-logs-by-teacher": {
+      "get": {
+        "tags": [
+          "UsersLogs"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersLog"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersLog"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersLog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UsersLogs/get-user-log-by-teacher": {
+      "get": {
+        "tags": [
+          "UsersLogs"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UsersLogs/{id}": {
       "put": {
         "tags": [
           "UsersLogs"
@@ -3284,7 +3718,9 @@
             "description": "Success"
           }
         }
-      },
+      }
+    },
+    "/api/UsersLogs/delete-user-log": {
       "delete": {
         "tags": [
           "UsersLogs"
@@ -3292,8 +3728,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -3448,6 +3883,53 @@
           "classUpdateAt": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Course": {
+        "required": [
+          "courseDepartmentId",
+          "courseTitle",
+          "courseTotalSemester"
+        ],
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "courseDepartmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "courseTitle": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "courseTotalSemester": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "courseImage": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "courseShortdescription": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "courseDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseUpdateAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4245,9 +4727,6 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
-          },
-          "users": {
-            "$ref": "#/components/schemas/Users"
           }
         },
         "additionalProperties": false
