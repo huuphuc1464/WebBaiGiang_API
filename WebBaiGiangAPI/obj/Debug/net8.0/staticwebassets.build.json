@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6rtM9IfxVBAUkgfwN7g1hTR+ahBnURtQNTtyqM4/jYo=",
+  "Hash": "FI0Cz9nh3eyCkBwx21P23PnkIwzexVof2eouX9R7I9c=",
   "Source": "WebBaiGiangAPI",
   "BasePath": "_content/WebBaiGiangAPI",
   "Mode": "Default",
@@ -15,111 +15,6 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [
-    {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Course\\3.png",
-      "SourceId": "WebBaiGiangAPI",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
-      "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "Course/3#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "nq2q8wt7ou",
-      "Integrity": "X6hsWu3eLKsQNvUgy48N3CIHMuByVGxvlHwwULulM2c=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Course\\3.png"
-    }
-  ],
-  "Endpoints": [
-    {
-      "Route": "Course/3.nq2q8wt7ou.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Course\\3.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "13252"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"X6hsWu3eLKsQNvUgy48N3CIHMuByVGxvlHwwULulM2c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 09:09:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "nq2q8wt7ou"
-        },
-        {
-          "Name": "label",
-          "Value": "Course/3.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-X6hsWu3eLKsQNvUgy48N3CIHMuByVGxvlHwwULulM2c="
-        }
-      ]
-    },
-    {
-      "Route": "Course/3.png",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Course\\3.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "13252"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"X6hsWu3eLKsQNvUgy48N3CIHMuByVGxvlHwwULulM2c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 10 Mar 2025 09:09:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-X6hsWu3eLKsQNvUgy48N3CIHMuByVGxvlHwwULulM2c="
-        }
-      ]
-    }
-  ]
+  "Assets": [],
+  "Endpoints": []
 }
