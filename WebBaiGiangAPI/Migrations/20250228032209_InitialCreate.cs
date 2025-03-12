@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -773,7 +774,10 @@ namespace WebBaiGiangAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ScStudentId = table.Column<int>(type: "int", nullable: false),
                     ScClassId = table.Column<int>(type: "int", nullable: false),
-                    ScDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ScDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ScToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ScCreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ScStatus = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

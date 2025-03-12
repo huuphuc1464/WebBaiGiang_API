@@ -350,7 +350,6 @@ D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Composition.H
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Composition.Runtime.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Composition.TypedParts.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Drawing.Common.dll
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Memory.Data.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
@@ -543,7 +542,6 @@ D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\Microsoft.Extensions
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\Microsoft.Extensions.WebEncoders.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\EPPlus.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\EPPlus.Interfaces.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\EPPlus.System.Drawing.dll
@@ -551,3 +549,4 @@ D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\Microsoft.Extensions
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\Microsoft.IO.RecyclableMemoryStream.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

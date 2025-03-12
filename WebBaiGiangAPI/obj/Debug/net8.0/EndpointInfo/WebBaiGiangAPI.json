@@ -2155,6 +2155,143 @@
         }
       }
     },
+    "/api/StudentClasses/invite-students": {
+      "post": {
+        "tags": [
+          "StudentClasses"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StudentClasses/confirm-invitation": {
+      "get": {
+        "tags": [
+          "StudentClasses"
+        ],
+        "parameters": [
+          {
+            "name": "tokenConfirm",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StudentClasses/get-confirmed-students": {
+      "get": {
+        "tags": [
+          "StudentClasses"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StudentClasses/remove-student": {
+      "delete": {
+        "tags": [
+          "StudentClasses"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "studentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Students/get-students": {
       "get": {
         "tags": [
@@ -4608,6 +4745,7 @@
       "StudentClass": {
         "required": [
           "scClassId",
+          "scStatus",
           "scStudentId"
         ],
         "type": "object",
@@ -4628,11 +4766,17 @@
             "type": "string",
             "nullable": true
           },
-          "student": {
-            "$ref": "#/components/schemas/Student"
+          "scToken": {
+            "type": "string",
+            "nullable": true
           },
-          "classes": {
-            "$ref": "#/components/schemas/Class"
+          "scCreateAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "scStatus": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
