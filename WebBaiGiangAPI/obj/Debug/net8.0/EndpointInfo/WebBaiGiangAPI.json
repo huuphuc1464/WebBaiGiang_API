@@ -5,6 +5,281 @@
     "version": "v1"
   },
   "paths": {
+    "/api/Announcements/get-announcements": {
+      "get": {
+        "tags": [
+          "Announcements"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Announcement"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Announcement"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Announcement"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Announcements/get-announcement-by-id": {
+      "get": {
+        "tags": [
+          "Announcements"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Announcements/get-announcement-by-teacher-id": {
+      "get": {
+        "tags": [
+          "Announcements"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Announcements/get-announcement-by-class-id": {
+      "get": {
+        "tags": [
+          "Announcements"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Announcements/update-announcement": {
+      "put": {
+        "tags": [
+          "Announcements"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Announcement"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Announcement"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Announcement"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Announcements/add-announcement": {
+      "post": {
+        "tags": [
+          "Announcements"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Announcement"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Announcement"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Announcement"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Announcement"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Announcements/delete-announcement": {
+      "delete": {
+        "tags": [
+          "Announcements"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Assignments/get-assignments": {
       "get": {
         "tags": [
@@ -1992,6 +2267,478 @@
       "delete": {
         "tags": [
           "Events"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Exams/get-exams": {
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Exam"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Exam"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Exam"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Exams/get-exam-by-id": {
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Exams/get-exam-by-type-id": {
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Exams/get-exam-by-month-id": {
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Exams/update-exam": {
+      "put": {
+        "tags": [
+          "Exams"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Exam"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Exam"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Exam"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Exams/add-exam": {
+      "post": {
+        "tags": [
+          "Exams"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Exam"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Exam"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Exam"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exam"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Exams/delete-exam": {
+      "delete": {
+        "tags": [
+          "Exams"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ExamTypes/get-exam-types": {
+      "get": {
+        "tags": [
+          "ExamTypes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExamType"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExamType"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExamType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ExamTypes/get-exam-type": {
+      "get": {
+        "tags": [
+          "ExamTypes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamType"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ExamTypes/update-exam-type": {
+      "put": {
+        "tags": [
+          "ExamTypes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamType"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamType"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamType"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ExamTypes/add-exam-type": {
+      "post": {
+        "tags": [
+          "ExamTypes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamType"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamType"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamType"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamType"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ExamTypes/delete-exam-type": {
+      "delete": {
+        "tags": [
+          "ExamTypes"
         ],
         "parameters": [
           {
@@ -4358,6 +5105,43 @@
   },
   "components": {
     "schemas": {
+      "Announcement": {
+        "required": [
+          "announcementClassId",
+          "announcementDate",
+          "announcementTeacherId",
+          "announcementTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "announcementId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "announcementClassId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "announcementTeacherId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "announcementTitle": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "announcementDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "announcementDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "Assignment": {
         "required": [
           "assignmentClassId",
@@ -4671,19 +5455,6 @@
           "examDescription": {
             "type": "string",
             "nullable": true
-          },
-          "examType": {
-            "$ref": "#/components/schemas/ExamType"
-          },
-          "month": {
-            "$ref": "#/components/schemas/Month"
-          },
-          "marks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Marks"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4705,13 +5476,6 @@
           },
           "etypeDescription": {
             "type": "string",
-            "nullable": true
-          },
-          "exams": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Exam"
-            },
             "nullable": true
           }
         },
@@ -4769,31 +5533,6 @@
           },
           "semester": {
             "$ref": "#/components/schemas/Semester"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Month": {
-        "required": [
-          "monthTitle"
-        ],
-        "type": "object",
-        "properties": {
-          "monthId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "monthTitle": {
-            "maxLength": 255,
-            "minLength": 1,
-            "type": "string"
-          },
-          "exams": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Exam"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebBaiGiangAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5b5a062e97c91abf4f3950f98bdf47ed80df197")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+237ef73c2c5ca8b1105a5aaaefdbde26c4f11a34")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebBaiGiangAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebBaiGiangAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

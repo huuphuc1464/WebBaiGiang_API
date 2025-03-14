@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\services\\zoomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:services\\zoomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\examtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\examtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\announcementscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\announcementscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\assignmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\assignmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EA5AAFB9-E778-4B9D-B160-B3B95884E8E8}|WebBaiGiangAPI.csproj|d:\\hk6\\tttn\\webbaigiang_api\\webbaigiangapi\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,7 +41,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 294,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -61,96 +49,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EmailService.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Services\\EmailService.cs",
-              "RelativeDocumentMoniker": "Services\\EmailService.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Services\\EmailService.cs",
-              "RelativeToolTip": "Services\\EmailService.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAgwMIAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ExamsController.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\ExamsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ExamsController.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\ExamsController.cs",
+              "RelativeToolTip": "Controllers\\ExamsController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAIwKQAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T02:39:59.329Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Event.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Event.cs",
-              "RelativeDocumentMoniker": "Models\\Event.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Event.cs",
-              "RelativeToolTip": "Models\\Event.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwCEAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T03:10:41.253Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T09:34:00.657Z",
+              "WhenOpened": "2025-03-14T08:06:27.664Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ZoomService.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Services\\ZoomService.cs",
-              "RelativeDocumentMoniker": "Services\\ZoomService.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Services\\ZoomService.cs",
-              "RelativeToolTip": "Services\\ZoomService.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAgwPsAAAAAAAAAAAAAAA==",
+              "Title": "ExamTypesController.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\ExamTypesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ExamTypesController.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\ExamTypesController.cs",
+              "RelativeToolTip": "Controllers\\ExamTypesController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwEEAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T09:31:29.529Z",
+              "WhenOpened": "2025-03-14T07:33:04.884Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EventsController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\EventsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\EventsController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\EventsController.cs*",
-              "RelativeToolTip": "Controllers\\EventsController.cs*",
-              "ViewState": "AgIAABwBAAAAAAAAAAAswBoBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "AnnouncementsController.cs",
+              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AnnouncementsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AnnouncementsController.cs",
+              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AnnouncementsController.cs",
+              "RelativeToolTip": "Controllers\\AnnouncementsController.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAUwKEAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T07:08:11.282Z",
+              "WhenOpened": "2025-03-14T06:29:04.798Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBMAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T04:26:40.378Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "AssignmentsController.cs",
               "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AssignmentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\AssignmentsController.cs",
               "ToolTip": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Controllers\\AssignmentsController.cs",
               "RelativeToolTip": "Controllers\\AssignmentsController.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAA5wCkBAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAswCkBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T04:26:08.877Z"
+              "WhenOpened": "2025-03-12T04:26:08.877Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "Users.cs",
               "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Users.cs",
               "RelativeDocumentMoniker": "Models\\Users.cs",
@@ -162,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "Student.cs",
               "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Student.cs",
               "RelativeDocumentMoniker": "Models\\Student.cs",
@@ -174,7 +125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
               "Title": "NguoiDungController.cs",
               "DocumentMoniker": "D:\\HK6\\TTTN\\NguoiDungController.cs",
               "RelativeDocumentMoniker": "..\\..\\NguoiDungController.cs",
@@ -186,7 +137,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 7,
               "Title": "Subject.cs",
               "DocumentMoniker": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\Models\\Subject.cs",
               "RelativeDocumentMoniker": "Models\\Subject.cs",

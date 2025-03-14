@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -25,9 +26,11 @@ namespace WebBaiGiangAPI.Models
         public DateTime AnnouncementDate { get; set; }
 
         [ForeignKey("AnnouncementClassId")]
-        public Class Classes { get; set; }
+        [JsonIgnore]
+        public Class? Classes { get; set; }
 
         [ForeignKey("AnnouncementTeacherId")]
-        public Users Teacher { get; set; }
+        [JsonIgnore]
+        public Users? Teacher { get; set; }
     }
 }

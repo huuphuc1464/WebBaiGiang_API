@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -23,11 +24,13 @@ namespace WebBaiGiangAPI.Models
         public string? ExamDescription { get; set; }
 
         [ForeignKey("ExamEtypeId")]
-        public ExamType ExamType { get; set; } 
+        [JsonIgnore]
+        public ExamType? ExamType { get; set; } 
 
         [ForeignKey("ExamMonth")]
-        public Month Month { get; set; }
-
+        [JsonIgnore]
+        public Month? Month { get; set; }
+        [JsonIgnore]
         public ICollection<Marks> Marks { get; set; } = new List<Marks>();
 
     }

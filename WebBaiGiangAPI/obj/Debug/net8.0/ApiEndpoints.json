@@ -1,5 +1,161 @@
 [
   {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AnnouncementsController",
+    "Method": "AddAnnouncement",
+    "RelativePath": "api/Announcements/add-announcement",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "announcement",
+        "Type": "WebBaiGiangAPI.Models.Announcement",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Announcement",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AnnouncementsController",
+    "Method": "DeleteAnnouncement",
+    "RelativePath": "api/Announcements/delete-announcement",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AnnouncementsController",
+    "Method": "GetAnnouncementByClassId",
+    "RelativePath": "api/Announcements/get-announcement-by-class-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Announcement",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AnnouncementsController",
+    "Method": "GetAnnouncementById",
+    "RelativePath": "api/Announcements/get-announcement-by-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Announcement",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AnnouncementsController",
+    "Method": "GetAnnouncementByTeacherId",
+    "RelativePath": "api/Announcements/get-announcement-by-teacher-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Announcement",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AnnouncementsController",
+    "Method": "GetAnnouncements",
+    "RelativePath": "api/Announcements/get-announcements",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.Announcement, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AnnouncementsController",
+    "Method": "UpdateAnnouncement",
+    "RelativePath": "api/Announcements/update-announcement",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "announcement",
+        "Type": "WebBaiGiangAPI.Models.Announcement",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBaiGiangAPI.Controllers.AssignmentsController",
     "Method": "AddAssignment",
     "RelativePath": "api/Assignments/add-assignment",
@@ -1172,6 +1328,266 @@
       {
         "Name": "event",
         "Type": "WebBaiGiangAPI.Models.Event",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamsController",
+    "Method": "PostExam",
+    "RelativePath": "api/Exams/add-exam",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "exam",
+        "Type": "WebBaiGiangAPI.Models.Exam",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Exam",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamsController",
+    "Method": "DeleteExam",
+    "RelativePath": "api/Exams/delete-exam",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamsController",
+    "Method": "GetExamById",
+    "RelativePath": "api/Exams/get-exam-by-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Exam",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamsController",
+    "Method": "GetExamByMonthId",
+    "RelativePath": "api/Exams/get-exam-by-month-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Exam",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamsController",
+    "Method": "GetExamByTypeId",
+    "RelativePath": "api/Exams/get-exam-by-type-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.Exam",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamsController",
+    "Method": "GetExams",
+    "RelativePath": "api/Exams/get-exams",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.Exam, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamsController",
+    "Method": "UpdateExam",
+    "RelativePath": "api/Exams/update-exam",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "exam",
+        "Type": "WebBaiGiangAPI.Models.Exam",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamTypesController",
+    "Method": "AddExamType",
+    "RelativePath": "api/ExamTypes/add-exam-type",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examType",
+        "Type": "WebBaiGiangAPI.Models.ExamType",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.ExamType",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamTypesController",
+    "Method": "DeleteExamType",
+    "RelativePath": "api/ExamTypes/delete-exam-type",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamTypesController",
+    "Method": "GetExamType",
+    "RelativePath": "api/ExamTypes/get-exam-type",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebBaiGiangAPI.Models.ExamType",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamTypesController",
+    "Method": "GetExamTypes",
+    "RelativePath": "api/ExamTypes/get-exam-types",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.ExamType, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ExamTypesController",
+    "Method": "UpdateExamType",
+    "RelativePath": "api/ExamTypes/update-exam-type",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examType",
+        "Type": "WebBaiGiangAPI.Models.ExamType",
         "IsRequired": true
       }
     ],
