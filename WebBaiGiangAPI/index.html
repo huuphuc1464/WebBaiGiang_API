@@ -1,63 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<!--<!DOCTYPE html>
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Ký Người Dùng</title>
+    <title>Danh sách sự kiện Zoom</title>
+    <script>
+        async function loadEvents() {
+            let response = await fetch("https://localhost:7166/api/Events/get-events");
+            let events = await response.json();
+
+            console.log("Dữ liệu API trả về:", events); // Kiểm tra dữ liệu API
+
+            let eventList = document.getElementById("eventList");
+            eventList.innerHTML = "";
+
+            events.forEach(event => {
+                console.log("Sự kiện:", event); // Kiểm tra từng sự kiện
+
+                let item = document.createElement("li");
+                item.innerHTML = `<strong>${event.eventTitle || "Không có tiêu đề"}</strong> <br>
+                          🕒 ${event.eventDateStart || "Không có"} - ${event.eventDateEnd || "Không có"} <br>
+                          🔗 <a href="${event.eventZoomLink || "#"}" target="_blank">Tham gia Zoom</a> <br>
+                          🔑 Mật khẩu: ${event.eventPassword || "Không có"}`;
+                eventList.appendChild(item);
+            });
+        }
+
+
+        window.onload = loadEvents;
+    </script>
 </head>
 <body>
-    <h1>Đăng Ký Người Dùng</h1>
-    <form action="https://localhost:7166/api/NguoiDung/DangKyNguoiDung" method="POST" enctype="multipart/form-data">
-
-        <!-- Họ và Tên -->
-        <label for="HoTen">Họ và Tên:</label><br>
-        <input type="text" id="HoTen" name="HoTen" placeholder="Nhập họ và tên" required><br><br>
-
-        <!-- Email -->
-        <label for="Email">Email:</label><br>
-        <input type="email" id="Email" name="Email" placeholder="Nhập email" required><br><br>
-
-        <!-- Mật khẩu -->
-        <label for="Password">Mật khẩu:</label><br>
-        <input type="password" id="Password" name="Password" placeholder="Nhập mật khẩu" required><br><br>
-
-        <!-- Số điện thoại -->
-        <label for="SDT">Số điện thoại:</label><br>
-        <input type="tel" id="SDT" name="SDT" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required><br><br>
-
-        <!-- Giới tính -->
-        <label for="GioiTinh">Giới tính:</label><br>
-        <select id="GioiTinh" name="GioiTinh" required>
-            <option value="Nam">Nam</option>
-            <option value="Nữ">Nữ</option>
-            <option value="Khác">Khác</option>
-        </select><br><br>
-
-        <!-- Địa chỉ -->
-        <label for="DiaChi">Địa chỉ:</label><br>
-        <input type="text" id="DiaChi" name="DiaChi" placeholder="Nhập địa chỉ" required><br><br>
-
-        <!-- Lớp -->
-        <label for="Lop">Lớp:</label><br>
-        <input type="text" id="Lop" name="Lop" placeholder="Nhập tên lớp" required><br><br>
-
-        <!-- MSSV -->
-        <label for="MSSV">MSSV:</label><br>
-        <input type="text" id="MSSV" name="MSSV" placeholder="Nhập mã số sinh viên"><br><br>
-
-        <!-- Ảnh đại diện -->
-        <label for="AnhDaiDien">Ảnh đại diện:</label><br>
-        <input type="file" id="AnhDaiDien" name="anhDaiDien1" accept=".jpg, .jpeg, .png" required><br><br>
-
-        <input type="hidden" name="MaKhoa" value="K1" />
-        <input type="hidden" name="MaBoMon" value="BM1" />
-        <input type="hidden" name="MaQuyen" value="Q2" />
-        <input type="hidden" name="TrangThai" value="1" />
-        <input type="hidden" name="MaNguoiDung" value="null" />
-        <input type="hidden" name="AnhDaiDien" value="null" />
-
-        <!-- Nút submit -->
-        <button type="submit">Đăng Ký</button>
-    </form>
+    <h2>Danh sách Sự kiện Zoom</h2>
+    <ul id="eventList"></ul>
 </body>
-</html>
+</html>-->
+
+<button onclick="createZoomEvent()">Tạo sự kiện Zoom</button>
+<p id="zoom-link"></p>
+
+<script>
+    async function createZoomEvent() {
+        const response = await fetch("https://localhost:7166/api/Events/create-event", { method: "POST" });
+        const data = await response.json();
+        document.getElementById("zoom-link").innerHTML = `<a href="${data.join_url}" target="_blank">Tham gia Zoom</a>`;
+    }
+</script>
+
+

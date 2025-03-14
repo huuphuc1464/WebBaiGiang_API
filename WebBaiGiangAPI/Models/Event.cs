@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -26,11 +27,15 @@ namespace WebBaiGiangAPI.Models
 
         [Required]
         public DateTime EventDateEnd { get; set; }
+        public string? EventZoomLink { get; set; }
+        public string? EventPassword { get; set; }
 
         [ForeignKey("EventClassId")]
-        public Class Classes { get; set; }
+        [JsonIgnore]
+        public Class? Classes { get; set; }
 
         [ForeignKey("EventTeacherId")]
-        public Users Teacher { get; set; }
+        [JsonIgnore]
+        public Users? Teacher { get; set; }
     }
 }

@@ -412,7 +412,9 @@ namespace WebBaiGiangAPI.Migrations
                     EventTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     EventDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EventDateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EventDateEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EventDateEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EventZoomLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EventPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
                 },
                 constraints: table =>
                 {

@@ -114,7 +114,6 @@ namespace WebBaiGiangAPI.Controllers
             });
         }
 
-
         [HttpGet("get-user-log-by-teacher")]
         public async Task<ActionResult<UsersLog>> GetUsersLogByTeacher(int id, int teacherId)
         {

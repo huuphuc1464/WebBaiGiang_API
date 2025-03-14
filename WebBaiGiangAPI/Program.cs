@@ -131,6 +131,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
+builder.Services.AddHttpClient<ZoomService>();
 
 var app = builder.Build();
 app.UseCors("AllowAll");
