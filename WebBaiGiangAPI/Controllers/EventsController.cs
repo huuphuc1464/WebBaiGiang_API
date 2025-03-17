@@ -26,42 +26,6 @@ namespace WebBaiGiangAPI.Controllers
             _zoomService = zoomService;
             _jwtService = jwtService;
         }
-        [HttpPost("create-event")]
-        public async Task<IActionResult> CreateZoomEvent([FromBody] Event dataEvent)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (!_context.Users.Any(t => t.UsersId == dataEvent.EventTeacherId && t.UsersRoleId == 2))
-            {
-                return BadRequest("Giáo viên không tồn tại");
-            }
-            if (!_context.Classes.Any(c => c.ClassId == dataEvent.EventClassId))
-            {
-                return BadRequest("Lớp học không tồn tại");
-            }
-            if (dataEvent.EventDateStart < DateTime.Now)
-            {
-                return Conflict("Vui lòng nhập thời gian bắt đầu lớn hơn thời gian hiện tại");
-            }
-            if (dataEvent.EventDateStart > dataEvent.EventDateEnd)
-            {
-                return Conflict("Vui lòng nhập thời gian kết thúc lớn hơn thời gian bắt đầu");
-            }
-            dataEvent.EventDescription = Regex.Replace(dataEvent.EventDescription.Trim(), @"\s+", " ");
-            dataEvent.EventTitle = Regex.Replace(dataEvent.EventTitle.Trim(), @"\s+", " ");
-            var zoomEvent = await _zoomService.CreateZoomEventAsync(dataEvent);
-            Announcement announcement = new Announcement();
-            announcement.AnnouncementClassId = dataEvent.EventClassId;
-            announcement.AnnouncementTeacherId = dataEvent.EventTeacherId;
-            announcement.AnnouncementTitle = dataEvent.EventTitle;
-            announcement.AnnouncementDescription = dataEvent.EventDescription;
-            announcement.AnnouncementDate = DateTime.Now;
-            _context.Announcements.Add(announcement);
-            _context.SaveChanges();
-            return Ok(new { message = "Zoom Event created successfully", join_url = zoomEvent.EventZoomLink });
-        }
 
         [HttpGet("get-events")]
         public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
@@ -159,6 +123,43 @@ namespace WebBaiGiangAPI.Controllers
             }
 
             return Ok(@event);
+        }
+        
+        [HttpPost("create-event")]
+        public async Task<IActionResult> CreateZoomEvent([FromBody] Event dataEvent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!_context.Users.Any(t => t.UsersId == dataEvent.EventTeacherId && t.UsersRoleId == 2))
+            {
+                return BadRequest("Giáo viên không tồn tại");
+            }
+            if (!_context.Classes.Any(c => c.ClassId == dataEvent.EventClassId))
+            {
+                return BadRequest("Lớp học không tồn tại");
+            }
+            if (dataEvent.EventDateStart < DateTime.Now)
+            {
+                return Conflict("Vui lòng nhập thời gian bắt đầu lớn hơn thời gian hiện tại");
+            }
+            if (dataEvent.EventDateStart > dataEvent.EventDateEnd)
+            {
+                return Conflict("Vui lòng nhập thời gian kết thúc lớn hơn thời gian bắt đầu");
+            }
+            dataEvent.EventDescription = Regex.Replace(dataEvent.EventDescription.Trim(), @"\s+", " ");
+            dataEvent.EventTitle = Regex.Replace(dataEvent.EventTitle.Trim(), @"\s+", " ");
+            var zoomEvent = await _zoomService.CreateZoomEventAsync(dataEvent);
+            Announcement announcement = new Announcement();
+            announcement.AnnouncementClassId = dataEvent.EventClassId;
+            announcement.AnnouncementTeacherId = dataEvent.EventTeacherId;
+            announcement.AnnouncementTitle = dataEvent.EventTitle;
+            announcement.AnnouncementDescription = dataEvent.EventDescription;
+            announcement.AnnouncementDate = DateTime.Now;
+            _context.Announcements.Add(announcement);
+            _context.SaveChanges();
+            return Ok(new { message = "Zoom Event created successfully", join_url = zoomEvent.EventZoomLink });
         }
 
         [HttpPut("update-event")]

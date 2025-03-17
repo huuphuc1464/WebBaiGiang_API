@@ -705,6 +705,37 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
+    "Method": "Search",
+    "RelativePath": "api/ClassCourses/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyword",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "minRating",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
     "Method": "UpdateClassCourse",
     "RelativePath": "api/ClassCourses/update-class-course",
     "HttpMethod": "PUT",

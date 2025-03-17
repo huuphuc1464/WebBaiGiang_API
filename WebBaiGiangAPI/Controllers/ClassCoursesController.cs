@@ -228,6 +228,93 @@ namespace WebBaiGiangAPI.Controllers
             }
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> Search(
+        string? keyword = "",
+        int? minRating = null, // Lọc theo số sao đánh giá (có thể null)
+        int page = 1,
+        int pageSize = 10)
+        {
+            // Chuẩn hóa từ khóa và tách thành danh sách từ
+            var keywords = keyword?.ToLower().Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+
+            var query = from co in _context.Courses
+                        join de in _context.Departments on co.CourseDepartmentId equals de.DepartmentId into dept
+                        from de in dept.DefaultIfEmpty()
+                        join cc in _context.ClassCourses on co.CourseId equals cc.CourseId into classCourse
+                        from cc in classCourse.DefaultIfEmpty()
+                        join cl in _context.Classes on cc.ClassId equals cl.ClassId into classes
+                        from cl in classes.DefaultIfEmpty()
+                        join tc in _context.TeacherClasses on cl.ClassId equals tc.TcClassId into teacherClass
+                        from tc in teacherClass.DefaultIfEmpty()
+                        join u in _context.Users on tc.TcUsersId equals u.UsersId into users
+                        from u in users.DefaultIfEmpty()
+                        join f in _context.Feedbacks on cl.ClassId equals f.FeedbackClassId into feedbacks
+                        from f in feedbacks.DefaultIfEmpty()
+                        where keywords.Length == 0 || // Nếu không có từ khóa thì lấy tất cả
+                            keywords.Any(kw =>
+                                (co.CourseTitle != null && co.CourseTitle.ToLower().Contains(kw)) ||
+                                (co.CourseShortdescription != null && co.CourseShortdescription.ToLower().Contains(kw)) ||
+                                (co.CourseDescription != null && co.CourseDescription.ToLower().Contains(kw)) ||
+                                (de != null && de.DepartmentTitle != null && de.DepartmentTitle.ToLower().Contains(kw)) ||
+                                (cl != null && cl.ClassTitle != null && cl.ClassTitle.ToLower().Contains(kw)) ||
+                                (tc != null && u != null && u.UsersName.ToLower().Contains(kw))
+                            )
+                        group new { co, de, u, f, cl } by new
+                        {
+                            co.CourseImage,
+                            co.CourseTitle,
+                            co.CourseShortdescription,
+                            co.CourseDescription,
+                            co.CourseUpdateAt,
+                            de.DepartmentTitle,
+                            cl.ClassTitle,
+                            u.UsersName
+                        } into g
+                        select new
+                        {
+                            g.Key.CourseImage,
+                            g.Key.CourseTitle,
+                            g.Key.CourseShortdescription,
+                            g.Key.CourseDescription,
+                            g.Key.CourseUpdateAt,
+                            g.Key.DepartmentTitle,
+                            g.Key.ClassTitle,
+                            TeacherNames = g.Select(x => x.u.UsersName)
+                                            .Where(name => !string.IsNullOrEmpty(name))
+                                            .Distinct()
+                                            .ToList(),
+                            AvgRating = g.Any(x => x.f != null) ? g.Average(x => (double?)x.f.FeedbackRate) : (double?)0.0
+                        };
+
+
+            // Lọc theo số sao đánh giá nếu có
+            if (minRating.HasValue)
+            {
+                query = query.Where(x => x.AvgRating >= minRating.Value);
+            }
+
+            // Tổng số kết quả tìm thấy
+            int totalItems = await query.CountAsync();
+
+            var result = await query.OrderByDescending(x => x.CourseUpdateAt)
+                                    .Skip((page - 1) * pageSize)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+
+            // Trả về JSON
+            return Ok(new
+            {
+                TotalItems = totalItems,
+                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize),
+                CurrentPage = page,
+                PageSize = pageSize,
+                Data = result
+            });
+        }
+
+
+
         private ActionResult? KiemTraTokenAdmin()
         {
             var authorizationHeader = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
