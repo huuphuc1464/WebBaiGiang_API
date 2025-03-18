@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -29,9 +30,11 @@ namespace WebBaiGiangAPI.Models
         public int FeedbackStatus { get; set; }
 
         [ForeignKey("FeedbackUsersId")]
-        public Users User { get; set; } 
+        [JsonIgnore]
+        public Users? User { get; set; } 
 
         [ForeignKey("FeedbackClassId")]
-        public Class Classes { get; set; }
+        [JsonIgnore]
+        public Class? Classes { get; set; }
     }
 }

@@ -44,7 +44,6 @@ public class EmailService
             return false;
         }
     }
-
     public async Task<bool> SendClassInvitationEmail(string studentEmail, string studentName, string token)
     {
         try
@@ -74,7 +73,6 @@ public class EmailService
             return false;
         }
     }
-
     public async Task<bool> SendZoomEmail(Event dataEvent, string recipientEmail, string studentName, string classTitle, string  joinUrl, bool isTeacher, string password, string hostKey = "")
     {
         try
@@ -192,5 +190,132 @@ public class EmailService
         await client.SendAsync(message);
         await client.DisconnectAsync(true);
     }
+    public async Task<bool> SendEmailAddFeedback(Tuple<string, string> user, string lop, string subject, Feedback feedback)
+    {
+        try
+        {
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("Website bài giảng", _smtpUser));
+            email.To.Add(new MailboxAddress(user.Item2, user.Item1));
+            email.Subject = subject;
 
+            var body = $"Chào {user.Item2},\n\n"
+                        + $"{subject}: \"{lop}\".\n\n"
+                        + $"📄 Nội dung đánh giá: {feedback.FeedbackContent}\n"
+                        + $"⭐ Số sao đánh giá: {feedback.FeedbackRate}\n"
+                        + $"⌚ Thời gian đánh giá: {feedback.FeedbackDate}\n";
+            
+            email.Body = new TextPart("plain")
+            {
+                Text = body
+            };
+
+            using var client = new SmtpClient();
+            await client.ConnectAsync(_smtpServer, _smtpPort, false);
+            await client.AuthenticateAsync(_smtpUser, _smtpPass);
+            await client.SendAsync(email);
+            await client.DisconnectAsync(true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+    public async Task<bool> SendEmailUpdateFeedback(Tuple<string, string> user, string lop, string subject, Feedback oldFeedback ,Feedback newFeedback)
+    {
+        try
+        {
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("Website bài giảng", _smtpUser));
+            email.To.Add(new MailboxAddress(user.Item2, user.Item1));
+            email.Subject = subject;
+
+            var body = $"Chào {user.Item2},\n\n"
+                        + $"{subject}: \"{lop}\".\n\n"
+                        + $"📄 Nội dung đánh giá: {oldFeedback.FeedbackContent} ➝ {newFeedback.FeedbackContent}\n"
+                        + $"⭐ Số sao đánh giá: {oldFeedback.FeedbackRate} ➝ {newFeedback.FeedbackRate}\n"
+                        + $"⌚ Thời gian thay đổi đánh giá: {newFeedback.FeedbackDate}\n";
+
+            email.Body = new TextPart("plain")
+            {
+                Text = body
+            };
+
+            using var client = new SmtpClient();
+            await client.ConnectAsync(_smtpServer, _smtpPort, false);
+            await client.AuthenticateAsync(_smtpUser, _smtpPass);
+            await client.SendAsync(email);
+            await client.DisconnectAsync(true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+    public async Task<bool> SendEmailDeleteFeedback(
+        Tuple<string, string> student,
+        Tuple<string, string> teacher,
+        string className,
+        string subject,
+        Feedback feedback)
+    {
+        try
+        {
+            using var client = new SmtpClient();
+            await client.ConnectAsync(_smtpServer, _smtpPort, false);
+            await client.AuthenticateAsync(_smtpUser, _smtpPass);
+
+            // Gửi email cho sinh viên
+            if (student != null)
+            {
+                var studentEmail = new MimeMessage();
+                studentEmail.From.Add(new MailboxAddress("Website bài giảng", _smtpUser));
+                studentEmail.To.Add(new MailboxAddress(student.Item2, student.Item1));
+                studentEmail.Subject = subject;
+
+                studentEmail.Body = new TextPart("html")
+                {
+                    Text = $@"
+                <p>Chào {student.Item2},</p>
+                <p>Đánh giá của bạn về lớp học <b>{className}</b> đã bị xóa.</p>
+                <p>Nội dung đánh giá: {feedback.FeedbackContent}</p>
+                <p>Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ với giáo viên phụ trách lớp.</p>
+                <p>Trân trọng,<br>Hệ thống quản lý lớp học.</p>"
+                };
+
+                await client.SendAsync(studentEmail);
+            }
+
+            // Gửi email cho giáo viên
+            if (teacher != null)
+            {
+                var teacherEmail = new MimeMessage();
+                teacherEmail.From.Add(new MailboxAddress("Website bài giảng", _smtpUser));
+                teacherEmail.To.Add(new MailboxAddress(teacher.Item2, teacher.Item1));
+                teacherEmail.Subject = $"Thông báo: Một đánh giá trong lớp {className} đã bị xóa";
+
+                teacherEmail.Body = new TextPart("html")
+                {
+                    Text = $@"
+                <p>Chào {teacher.Item2},</p>
+                <p>Một đánh giá trong lớp học <b>{className}</b> đã bị xóa.</p>
+                <p>Nội dung đánh giá: {feedback.FeedbackContent}</p>
+                <p>Vui lòng kiểm tra lại nếu cần.</p>
+                <p>Trân trọng,<br>Hệ thống quản lý lớp học.</p>"
+                };
+
+                await client.SendAsync(teacherEmail);
+            }
+
+            await client.DisconnectAsync(true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Lỗi gửi email: {ex.Message}");
+            return false;
+        }
+    }
 }
