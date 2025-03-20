@@ -1,20 +1,12 @@
 {
   "Files": [
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phucth.jpg",
-      "PackagePath": "staticwebassets\\Users\\phucth.jpg"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\files\\CNPM_CDTH22WEBC.pdf",
+      "PackagePath": "staticwebassets\\files\\CNPM_CDTH22WEBC.pdf"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phucth1.jpg",
-      "PackagePath": "staticwebassets\\Users\\phucth1.jpg"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phucth2.jpg",
-      "PackagePath": "staticwebassets\\Users\\phucth2.jpg"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Users\\phucth3.jpg",
-      "PackagePath": "staticwebassets\\Users\\phucth3.jpg"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\files\\watermarked_CNPM_CDTH22WEBC.pdf",
+      "PackagePath": "staticwebassets\\files\\watermarked_CNPM_CDTH22WEBC.pdf"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebBaiGiangAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

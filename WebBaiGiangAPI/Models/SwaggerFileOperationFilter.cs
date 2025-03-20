@@ -7,15 +7,18 @@ public class SwaggerFileOperationFilter : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        // Chỉ xử lý các phương thức không phải GET
+        // Chỉ áp dụng cho các HTTP methods khác GET
         if (context.ApiDescription.HttpMethod == "GET")
         {
-            return; // Không thay đổi gì cho các phương thức GET
+            return;
         }
 
-        // Lấy danh sách các tham số từ [FromForm]
+        // Lấy danh sách các tham số có [FromForm]
         var formParameters = context.MethodInfo.GetParameters()
-            .Where(p => p.GetCustomAttribute<FromFormAttribute>() != null);
+            .Where(p => p.GetCustomAttribute<FromFormAttribute>() != null)
+            .ToList();
+
+        if (!formParameters.Any()) return;
 
         // Nếu RequestBody chưa khởi tạo, tạo mới
         if (operation.RequestBody == null)
@@ -26,7 +29,7 @@ public class SwaggerFileOperationFilter : IOperationFilter
             };
         }
 
-        // Khởi tạo nội dung "multipart/form-data" nếu chưa tồn tại
+        // Kiểm tra nếu "multipart/form-data" chưa tồn tại, tạo mới
         if (!operation.RequestBody.Content.ContainsKey("multipart/form-data"))
         {
             operation.RequestBody.Content["multipart/form-data"] = new OpenApiMediaType
@@ -42,33 +45,48 @@ public class SwaggerFileOperationFilter : IOperationFilter
         // Schema của "multipart/form-data"
         var schema = operation.RequestBody.Content["multipart/form-data"].Schema;
 
-        // Lặp qua các tham số có [FromForm]
         foreach (var parameter in formParameters)
         {
-            if (parameter.ParameterType == typeof(IFormFile) || typeof(IEnumerable<IFormFile>).IsAssignableFrom(parameter.ParameterType))
+            if (typeof(IFormFile).IsAssignableFrom(parameter.ParameterType))
             {
-                // Nếu là file, thêm trường với kiểu binary
+                // Nếu là file đơn
                 schema.Properties[parameter.Name] = new OpenApiSchema
                 {
                     Type = "string",
                     Format = "binary"
                 };
             }
+            else if (typeof(IEnumerable<IFormFile>).IsAssignableFrom(parameter.ParameterType) ||
+                     typeof(List<IFormFile>).IsAssignableFrom(parameter.ParameterType))
+            {
+                // Nếu là danh sách file (multiple files)
+                schema.Properties[parameter.Name] = new OpenApiSchema
+                {
+                    Type = "array",
+                    Items = new OpenApiSchema
+                    {
+                        Type = "string",
+                        Format = "binary"
+                    }
+                };
+            }
             else
             {
-                // Nếu là object, thêm từng thuộc tính của object
-                var objectProperties = parameter.ParameterType.GetProperties();
-                foreach (var prop in objectProperties)
+                // Nếu là tham số bình thường (string, int, ...)
+                schema.Properties[parameter.Name] = new OpenApiSchema
                 {
-                    if (!schema.Properties.ContainsKey(prop.Name))
-                    {
-                        schema.Properties[prop.Name] = new OpenApiSchema
-                        {
-                            Type = "string" // Mặc định dạng text input
-                        };
-                    }
-                }
+                    Type = GetOpenApiType(parameter.ParameterType)
+                };
             }
         }
+    }
+
+    // Phương thức xác định kiểu OpenAPI từ kiểu C#
+    private string GetOpenApiType(Type type)
+    {
+        if (type == typeof(int) || type == typeof(long)) return "integer";
+        if (type == typeof(float) || type == typeof(double) || type == typeof(decimal)) return "number";
+        if (type == typeof(bool)) return "boolean";
+        return "string"; // Mặc định là string nếu không thuộc các kiểu trên
     }
 }

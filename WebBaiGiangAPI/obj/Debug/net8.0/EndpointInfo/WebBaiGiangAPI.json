@@ -181,11 +181,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Announcement"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -216,11 +211,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Announcement"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -264,15 +254,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -532,6 +513,9 @@
                   "FileName": {
                     "type": "string"
                   },
+                  "assignmentDTO": {
+                    "type": "string"
+                  },
                   "file": {
                     "type": "string",
                     "format": "binary"
@@ -678,6 +662,9 @@
                   "FileName": {
                     "type": "string"
                   },
+                  "assignmentDTO": {
+                    "type": "string"
+                  },
                   "file": {
                     "type": "string",
                     "format": "binary"
@@ -776,15 +763,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -836,11 +814,6 @@
               "schema": {
                 "$ref": "#/components/schemas/AttendanceMarks"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -881,11 +854,6 @@
                   "$ref": "#/components/schemas/AttendanceMarks"
                 }
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -916,11 +884,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/AttendanceMarks"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -1153,15 +1116,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1195,15 +1149,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1232,15 +1177,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1269,15 +1205,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1350,15 +1277,6 @@
         "tags": [
           "Auth"
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1464,11 +1382,6 @@
               "schema": {
                 "$ref": "#/components/schemas/ClassCourse"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -1499,11 +1412,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ClassCourse"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -1547,15 +1455,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1732,11 +1631,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Class"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -1767,11 +1661,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Class"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -1815,15 +1704,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -1980,6 +1860,9 @@
                   "FileName": {
                     "type": "string"
                   },
+                  "courseDTO": {
+                    "type": "string"
+                  },
                   "image": {
                     "type": "string",
                     "format": "binary"
@@ -2112,6 +1995,9 @@
                   "FileName": {
                     "type": "string"
                   },
+                  "courseDTO": {
+                    "type": "string"
+                  },
                   "image": {
                     "type": "string",
                     "format": "binary"
@@ -2204,15 +2090,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -2348,11 +2225,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Department"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -2383,11 +2255,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Department"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -2431,15 +2298,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -2623,11 +2481,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Event"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -2659,11 +2512,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Event"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -2689,15 +2537,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -2881,11 +2720,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Exam"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -2916,11 +2750,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Exam"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -2964,15 +2793,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -3078,11 +2898,6 @@
               "schema": {
                 "$ref": "#/components/schemas/ExamType"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -3113,11 +2928,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ExamType"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -3161,15 +2971,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -3353,11 +3154,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Feedback"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -3388,11 +3184,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Feedback"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -3436,11 +3227,333 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/get-files": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/upload": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
               "schema": {
-                "type": "object"
+                "type": "object",
+                "properties": {
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "classId": {
+                    "type": "integer"
+                  },
+                  "teacherId": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                },
+                "title": {
+                  "style": "form"
+                },
+                "classId": {
+                  "style": "form"
+                },
+                "teacherId": {
+                  "style": "form"
+                },
+                "description": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/upload/multiple": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "classId": {
+                    "type": "integer"
+                  },
+                  "teacherId": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "files": {
+                  "style": "form"
+                },
+                "title": {
+                  "style": "form"
+                },
+                "classId": {
+                  "style": "form"
+                },
+                "teacherId": {
+                  "style": "form"
+                },
+                "description": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/get-file/{id}": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/download/{id}": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/delete-file/{id}": {
+      "delete": {
+        "tags": [
+          "Files"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/update/{id}": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ContentType": {
+                    "type": "string"
+                  },
+                  "ContentDisposition": {
+                    "type": "string"
+                  },
+                  "Headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "ContentType": {
+                  "style": "form"
+                },
+                "ContentDisposition": {
+                  "style": "form"
+                },
+                "Headers": {
+                  "style": "form"
+                },
+                "Length": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                },
+                "title": {
+                  "style": "form"
+                },
+                "description": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -3562,11 +3675,6 @@
               "schema": {
                 "$ref": "#/components/schemas/SchoolYear"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -3597,11 +3705,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/SchoolYear"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -3645,15 +3748,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -3759,11 +3853,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Semester"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -3794,11 +3883,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Semester"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -3842,15 +3926,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -3897,11 +3972,6 @@
                 "items": {
                   "type": "string"
                 }
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -3979,15 +4049,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -4067,11 +4128,6 @@
               "schema": {
                 "$ref": "#/components/schemas/StudentDTO"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -4102,11 +4158,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/StudentDTO"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -4305,11 +4356,6 @@
               "schema": {
                 "$ref": "#/components/schemas/Subject"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -4340,11 +4386,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Subject"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -4388,15 +4429,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -4577,6 +4609,9 @@
                     "type": "string"
                   },
                   "FileName": {
+                    "type": "string"
+                  },
+                  "user": {
                     "type": "string"
                   },
                   "anhdaidien": {
@@ -4768,6 +4803,9 @@
                     "type": "string"
                   },
                   "FileName": {
+                    "type": "string"
+                  },
+                  "user": {
                     "type": "string"
                   },
                   "anhdaidien": {
@@ -5053,11 +5091,6 @@
               "schema": {
                 "$ref": "#/components/schemas/TeacherClass"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -5088,11 +5121,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/TeacherClass"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -5136,15 +5164,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -5208,11 +5227,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Users"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -5310,11 +5324,6 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Users"
-              }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
               }
             }
           }
@@ -5433,6 +5442,9 @@
                   "FileName": {
                     "type": "string"
                   },
+                  "user": {
+                    "type": "string"
+                  },
                   "anhdaidien": {
                     "type": "string",
                     "format": "binary"
@@ -5545,15 +5557,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -5765,11 +5768,6 @@
               "schema": {
                 "$ref": "#/components/schemas/UsersLog"
               }
-            },
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
             }
           }
         },
@@ -5795,15 +5793,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
