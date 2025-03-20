@@ -467,6 +467,208 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "AddAttendance",
+    "RelativePath": "api/AttendanceMarks/add-attendance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attendance",
+        "Type": "WebBaiGiangAPI.Models.AttendanceMarks",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "GetAttendanceByClass",
+    "RelativePath": "api/AttendanceMarks/class/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "ExportAttendanceToExcel",
+    "RelativePath": "api/AttendanceMarks/export/excel/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "SendAttendanceReportEmail",
+    "RelativePath": "api/AttendanceMarks/export/mail/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "GetAttendanceHistory",
+    "RelativePath": "api/AttendanceMarks/history/{studentId}/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "SaveAttendance",
+    "RelativePath": "api/AttendanceMarks/save-attendance-marks",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attendanceMarks",
+        "Type": "System.Collections.Generic.List\u00601[[WebBaiGiangAPI.Models.AttendanceMarks, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "SendAbsenceWarnings",
+    "RelativePath": "api/AttendanceMarks/send-absence-warnings/class/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "SendWeeklyAttendanceReport",
+    "RelativePath": "api/AttendanceMarks/send-weekly-report",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "GetAttendanceStatistics",
+    "RelativePath": "api/AttendanceMarks/statistics/class/present/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "GetStatusAttendanceStatistics",
+    "RelativePath": "api/AttendanceMarks/statistics/status-attendance/class/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "GetStudentsByClass",
+    "RelativePath": "api/AttendanceMarks/students/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.AttendanceMarksController",
+    "Method": "UpdateAttendance",
+    "RelativePath": "api/AttendanceMarks/update-attendance",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedAttendance",
+        "Type": "WebBaiGiangAPI.Models.AttendanceMarks",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBaiGiangAPI.Controllers.AuthController",
     "Method": "GitHubResponse",
     "RelativePath": "api/Auth/github-response",
@@ -611,6 +813,22 @@
         "Name": "otp",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
+    "Method": "GetClassDetails",
+    "RelativePath": "api/ClassCourses/{classId}/details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -2290,6 +2508,22 @@
       {
         "Name": "subject",
         "Type": "WebBaiGiangAPI.Models.Subject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
+    "Method": "GetCurrentCourses",
+    "RelativePath": "api/Teacher/{teacherId}/current-courses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

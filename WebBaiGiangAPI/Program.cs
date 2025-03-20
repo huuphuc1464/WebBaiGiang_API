@@ -132,8 +132,9 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 builder.Services.AddHttpClient<ZoomService>();
-
-var app = builder.Build();
+//builder.Services.AddHostedService<AttendanceReportService>();
+//builder.Services.AddHostedService<AbsenceLateWarningService>();
+var app = builder.Build(); 
 app.UseCors("AllowAll");
 
 using (var scope = app.Services.CreateScope())

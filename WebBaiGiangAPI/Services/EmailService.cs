@@ -318,4 +318,28 @@ public class EmailService
             return false;
         }
     }
+
+    public async Task<bool> SendEmail(string toEmail, string subject, string body)
+    {
+        try
+        {
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("Hệ thống lớp học", _smtpUser));
+            email.To.Add(new MailboxAddress("", toEmail));
+            email.Subject = subject;
+            email.Body = new TextPart("html") { Text = body };
+
+            using var client = new SmtpClient();
+            await client.ConnectAsync(_smtpServer, _smtpPort, false);
+            await client.AuthenticateAsync(_smtpUser, _smtpPass);
+            await client.SendAsync(email);
+            await client.DisconnectAsync(true);
+
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

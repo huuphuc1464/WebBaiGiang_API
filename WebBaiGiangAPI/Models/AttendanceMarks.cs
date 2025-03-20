@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -23,10 +24,12 @@ namespace WebBaiGiangAPI.Models
         public string AttendanceStatus { get; set; }
 
         [ForeignKey("StudentId")]
-        public Student Student { get; set; }
+        [JsonIgnore]
+        public Student? Student { get; set; }
 
         [ForeignKey("ClassId")]
-        public Class Classes { get; set; }
+        [JsonIgnore]
+        public Class? Classes { get; set; }
 
     }
 }

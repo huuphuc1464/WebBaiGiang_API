@@ -16,7 +16,13 @@ namespace WebBaiGiangAPI.Models
         [MaxLength(255)]
         public string SemesterTitle { get; set; }
 
-        public string SemesterDescription { get; set; }
+        public string? SemesterDescription { get; set; }
+
+        [Required]
+        public DateTime SemesterStart { get; set; }
+
+        [Required]
+        public DateTime SemesterEnd { get; set; }
 
         [JsonIgnore]
         public ICollection<Class> Classes { get; set; } = new List<Class>();

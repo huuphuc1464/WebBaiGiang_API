@@ -166,8 +166,8 @@ namespace WebBaiGiangAPI.Data
                 {
                     var semesters = new Semester[]
                     {
-                    new Semester { SemesterTitle = "Học kỳ 1", SemesterDescription = "Học kỳ 1" },
-                    new Semester { SemesterTitle = "Học kỳ 2", SemesterDescription = "Học kỳ 2" }
+                    new Semester { SemesterTitle = "Học kỳ 1", SemesterDescription = "Học kỳ 1", SemesterStart = DateTime.Now.AddMonths(-9), SemesterEnd = DateTime.Now.AddMonths(-3) },
+                    new Semester { SemesterTitle = "Học kỳ 2", SemesterDescription = "Học kỳ 2", SemesterStart = DateTime.Now.AddMonths(-2), SemesterEnd = DateTime.Now.AddMonths(4) }
                     };
                     foreach (var sem in semesters)
                     {

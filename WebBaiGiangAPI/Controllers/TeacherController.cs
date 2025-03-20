@@ -551,6 +551,44 @@ namespace WebBaiGiangAPI.Controllers
             return null; // Không có lỗi
         }
 
+        [HttpGet("{teacherId}/current-courses")]
+        public async Task<IActionResult> GetCurrentCourses(int teacherId)
+        {
+            // Lấy học kỳ hiện tại
+            var currentSemester = await _context.Semesters
+                .Where(s => s.SemesterStart <= DateTime.Now && s.SemesterEnd >= DateTime.Now)
+                .FirstOrDefaultAsync();
+
+            if (currentSemester == null)
+            {
+                return NotFound("Không tìm thấy học kỳ hiện tại.");
+            }
+
+            // Lấy danh sách lớp học phần của giảng viên trong học kỳ hiện tại
+            var courses = await _context.TeacherClasses
+                .Join(_context.Classes,
+                      tc => tc.TcClassId,
+                      c => c.ClassId,
+                      (tc, c) => new { tc, c })
+                .Join(_context.Users,
+                      joined => joined.tc.TcUsersId,
+                      u => u.UsersId,
+                      (joined, u) => new
+                      {
+                          joined.c.ClassId,
+                          joined.c.ClassTitle,
+                          joined.tc.TcUsersId,
+                          TeacherName = u.UsersName,
+                          Semester = currentSemester.SemesterTitle
+                      })
+                .Where(joined => joined.TcUsersId == teacherId && joined.Semester == currentSemester.SemesterTitle)
+                .ToListAsync();
+            if (!courses.Any() || courses == null)
+            {
+                return BadRequest("Không tìm thấy lớp học phần nào.");
+            }
+            return Ok(courses);
+        }
 
     }
 }

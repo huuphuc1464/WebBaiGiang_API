@@ -153,7 +153,9 @@ namespace WebBaiGiangAPI.Migrations
                     SemesterId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SemesterTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    SemesterDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SemesterDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SemesterStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SemesterEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -705,8 +707,8 @@ namespace WebBaiGiangAPI.Migrations
                     MarksExamId = table.Column<int>(type: "int", nullable: true),
                     MarksStudentId = table.Column<int>(type: "int", nullable: true),
                     MarksSubjectId = table.Column<int>(type: "int", nullable: true),
-                    MarksWritten = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    MarksPractical = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    MarksWritten = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
+                    MarksPractical = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     MarksSemesterId = table.Column<int>(type: "int", nullable: true),
                     MarksDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

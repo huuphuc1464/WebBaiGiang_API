@@ -15,8 +15,10 @@ namespace WebBaiGiangAPI.Models
 
         public int? MarksSubjectId { get; set; }
 
+        [Column(TypeName = "decimal(10,2)")]
         public decimal? MarksWritten { get; set; }
 
+        [Column(TypeName = "decimal(10,2)")]
         public decimal? MarksPractical { get; set; }
 
         public int? MarksSemesterId { get; set; }

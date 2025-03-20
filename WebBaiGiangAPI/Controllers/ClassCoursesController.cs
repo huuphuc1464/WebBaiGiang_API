@@ -313,6 +313,65 @@ namespace WebBaiGiangAPI.Controllers
             });
         }
 
+        [HttpGet("{classId}/details")]
+        public async Task<IActionResult> GetClassDetails(int classId)
+        {
+            var classDetails = await _context.Classes
+            .Where(c => c.ClassId == classId)
+            .Select(c => new
+            {
+                c.ClassId,
+                c.ClassTitle,
+                c.ClassDescription,
+                c.ClassSemesterId,
+                c.ClassSyearId,
+                c.ClassUpdateAt,
+
+                // Danh sách sinh viên trong lớp
+                Students = _context.StudentClasses
+                    .Where(sc => sc.ScClassId == c.ClassId)
+                    .Join(_context.Users,
+                          sc => sc.ScStudentId,
+                          u => u.UsersId,
+                          (sc, u) => new
+                          {
+                              u.UsersId,
+                              u.UsersName,
+                              u.UsersEmail
+                          })
+                    .ToList(),
+
+                // Danh sách khóa học liên quan đến lớp
+                Courses = _context.ClassCourses
+                    .Where(cc => cc.ClassId == c.ClassId)
+                    .Join(_context.Courses,
+                          cc => cc.CourseId,
+                          co => co.CourseId,
+                          (cc, co) => new
+                          {
+                              cc.CcId,
+                              cc.CcDescription,
+                              co.CourseId,
+                              co.CourseTitle,
+                              co.CourseDepartmentId,
+                              co.CourseTotalSemester,
+                              co.CourseImage,
+                              co.CourseShortdescription,
+                              co.CourseDescription,
+                              co.CourseUpdateAt
+                          })
+                    .ToList()
+            })
+            .FirstOrDefaultAsync();
+
+
+            if (classDetails == null)
+            {
+                return NotFound("Không tìm thấy lớp học phần.");
+            }
+
+            return Ok(classDetails);
+        }
 
 
         private ActionResult? KiemTraTokenAdmin()
