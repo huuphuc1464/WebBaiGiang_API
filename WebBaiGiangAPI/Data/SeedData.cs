@@ -307,7 +307,9 @@ namespace WebBaiGiangAPI.Data
                             LessonCourseId = 1,
                             LessonName = "Bài học Cơ bản",
                             LessonDescription = "Mô tả bài học",
-                            LessonStatus = 1
+                            LessonStatus = true,
+                            LessonCreateAt = DateTime.Now,
+                            LessonUpdateAt = DateTime.Now
                         }
                     };
                     foreach (var l in lessons)
@@ -325,7 +327,7 @@ namespace WebBaiGiangAPI.Data
                         new LessonFile
                         {
                             LfLessonId = 1,
-                            LfFilename = "file1.png",
+                            LfPath = "file1.png",
                             LfType = "Hình ảnh"
                         }
                     };

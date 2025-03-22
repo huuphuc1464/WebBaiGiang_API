@@ -330,11 +330,15 @@ namespace WebBaiGiangAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LessonClassId = table.Column<int>(type: "int", nullable: false),
                     LessonCourseId = table.Column<int>(type: "int", nullable: false),
+                    LessonTeacherId = table.Column<int>(type: "int", nullable: false),
                     LessonDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LessonChapter = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    LessonWeek = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    LessonWeek = table.Column<int>(type: "int", nullable: true),
                     LessonName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    LessonStatus = table.Column<int>(type: "int", nullable: false)
+                    LessonStatus = table.Column<bool>(type: "bit", nullable: false),
+                    //LessonCourseStatus = table.Column<bool>(type: "bit", nullable: true),
+                    LessonCreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LessonUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -630,7 +634,7 @@ namespace WebBaiGiangAPI.Migrations
                     LfId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LfLessonId = table.Column<int>(type: "int", nullable: false),
-                    LfFilename = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LfPath = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     LfType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -859,6 +863,34 @@ namespace WebBaiGiangAPI.Migrations
                         column: x => x.SubmitStudentId,
                         principalTable: "Students",
                         principalColumn: "StudentId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StatusLearns",
+                columns: table => new
+                {
+                    SlId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SlStudentId = table.Column<int>(type: "int", nullable: false),
+                    SlLessonId = table.Column<int>(type: "int", nullable: false),
+                    SlStatus = table.Column<bool>(type: "bit", nullable: false),
+                    SlLearnedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StatusLearns", x => x.SlId);
+                    table.ForeignKey(
+                        name: "FK_StatusLearns_Students_SlStudentId",
+                        column: x => x.SlStudentId,
+                        principalTable: "Students",
+                        principalColumn: "StudentId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StatusLearns_Lessons_SlLessonId",
+                        column: x => x.SlLessonId,
+                        principalTable: "Lessons",
+                        principalColumn: "LessonId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -1209,6 +1241,9 @@ namespace WebBaiGiangAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserLogs");
+
+            migrationBuilder.DropTable(
+                name: "StatusLearns");
 
             migrationBuilder.DropTable(
                 name: "Lessons");

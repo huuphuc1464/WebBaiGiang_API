@@ -1,12 +1,16 @@
 {
   "Files": [
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\files\\CNPM_CDTH22WEBC.pdf",
-      "PackagePath": "staticwebassets\\files\\CNPM_CDTH22WEBC.pdf"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250322094853_logo.svg",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250322094853_logo.svg"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\files\\watermarked_CNPM_CDTH22WEBC.pdf",
-      "PackagePath": "staticwebassets\\files\\watermarked_CNPM_CDTH22WEBC.pdf"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250322095025_logo.svg",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250322095025_logo.svg"
+    },
+    {
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250322095910_logo.svg",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250322095910_logo.svg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebBaiGiangAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

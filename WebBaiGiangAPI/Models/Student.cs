@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebBaiGiangAPI.Models
@@ -36,6 +37,9 @@ namespace WebBaiGiangAPI.Models
         public ICollection<Submit> Submits { get; set; } = new List<Submit>();
 
         public ICollection<StudentClass> StudentClasses { get; set; } = new List<StudentClass>();
+
+        [JsonIgnore]
+        public ICollection<StatusLearn> StatusLearns { get; set; } = new List<StatusLearn>();
 
     }
 }

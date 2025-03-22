@@ -543,10 +543,10 @@ D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets\msbu
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.WebBaiGiangAPI.props
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.WebBaiGiangAPI.props
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets.pack.json
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\WebBaiGi.D3397BE3.Up2Date
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\WebBaiGiangAPI.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\refint\WebBaiGiangAPI.dll
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\WebBaiGiangAPI.pdb
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\WebBaiGiangAPI.genruntimeconfig.cache
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\ref\WebBaiGiangAPI.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

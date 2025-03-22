@@ -1,2 +1,3 @@
-wwwroot\files\CNPM_CDTH22WEBC.pdf
-wwwroot\files\watermarked_CNPM_CDTH22WEBC.pdf
+wwwroot\LessonFiles\20250322094853_logo.svg
+wwwroot\LessonFiles\20250322095025_logo.svg
+wwwroot\LessonFiles\20250322095910_logo.svg

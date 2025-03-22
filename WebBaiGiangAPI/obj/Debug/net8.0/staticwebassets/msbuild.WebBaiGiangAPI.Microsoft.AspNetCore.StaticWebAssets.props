@@ -1,40 +1,58 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\CNPM_CDTH22WEBC.pdf'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322094853_logo.svg'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>files/CNPM_CDTH22WEBC.pdf</RelativePath>
+      <RelativePath>LessonFiles/20250322094853_logo.svg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>rm8v8hxbhg</Fingerprint>
-      <Integrity>jQZJjEEfIhr3fU8mTptTe1jrHaGPmfd65HvtfIpwe+o=</Integrity>
+      <Fingerprint>mndbvy608x</Fingerprint>
+      <Integrity>4sAimpRPuRJXedzEs7u4L3TIhHzpiw0t4sCxrZCvO/s=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\CNPM_CDTH22WEBC.pdf'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322094853_logo.svg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\watermarked_CNPM_CDTH22WEBC.pdf'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095025_logo.svg'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>files/watermarked_CNPM_CDTH22WEBC.pdf</RelativePath>
+      <RelativePath>LessonFiles/20250322095025_logo.svg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>5ipweew5fc</Fingerprint>
-      <Integrity>47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=</Integrity>
+      <Fingerprint>mndbvy608x</Fingerprint>
+      <Integrity>4sAimpRPuRJXedzEs7u4L3TIhHzpiw0t4sCxrZCvO/s=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\watermarked_CNPM_CDTH22WEBC.pdf'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095025_logo.svg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095910_logo.svg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WebBaiGiangAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WebBaiGiangAPI</BasePath>
+      <RelativePath>LessonFiles/20250322095910_logo.svg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>mndbvy608x</Fingerprint>
+      <Integrity>4sAimpRPuRJXedzEs7u4L3TIhHzpiw0t4sCxrZCvO/s=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095910_logo.svg'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

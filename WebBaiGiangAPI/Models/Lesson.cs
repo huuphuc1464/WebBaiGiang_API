@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -15,27 +16,42 @@ namespace WebBaiGiangAPI.Models
         [Required]
         public int LessonCourseId { get; set; }
 
+        [Required]
+        public int LessonTeacherId { get; set; }
+
         public string? LessonDescription { get; set; }
 
         [MaxLength(10)]
         public string? LessonChapter { get; set; }
 
-        [MaxLength(10)]
-        public string? LessonWeek { get; set; }
+        public int? LessonWeek { get; set; }
 
         [Required]
         [MaxLength(100)]
         public string LessonName { get; set; }
 
         [Required]
-        public int LessonStatus { get; set; }
+        public bool LessonStatus { get; set; }
+
+        //public bool LessonCourseStatus { get; set; }
+
+        [Required]
+        public DateTime LessonCreateAt { get; set; }
+
+        [Required]
+        public DateTime LessonUpdateAt { get; set; }
 
         [ForeignKey("LessonClassId")]
-        public Class Classes { get; set; }
+        [JsonIgnore]
+        public Class? Classes { get; set; }
 
         [ForeignKey("LessonCourseId")]
-        public Course Course { get; set; }
+        [JsonIgnore]
+        public Course? Course { get; set; }
+        [JsonIgnore]
         public ICollection<LessonFile> LessonFiles { get; set; } = new List<LessonFile>();
 
+        [JsonIgnore]
+        public ICollection<StatusLearn> StatusLearns { get; set; } = new List<StatusLearn>();
     }
 }

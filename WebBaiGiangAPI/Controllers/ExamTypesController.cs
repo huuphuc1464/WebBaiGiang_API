@@ -21,7 +21,6 @@ namespace WebBaiGiangAPI.Controllers
         {
             _context = context;
         }
-
         [HttpGet("get-exam-types")]
         public async Task<ActionResult<IEnumerable<ExamType>>> GetExamTypes()
         {
@@ -32,7 +31,6 @@ namespace WebBaiGiangAPI.Controllers
             }
             return Ok(examTypes);
         }
-
         [HttpGet("get-exam-type")]
         public async Task<ActionResult<ExamType>> GetExamType(int id)
         {
@@ -45,7 +43,6 @@ namespace WebBaiGiangAPI.Controllers
 
             return examType;
         }
-
         [HttpPut("update-exam-type")]
         public async Task<IActionResult> UpdateExamType(ExamType examType)
         {
@@ -76,7 +73,6 @@ namespace WebBaiGiangAPI.Controllers
 
             return NoContent();
         }
-
         [HttpPost("add-exam-type")]
         public async Task<ActionResult<ExamType>> AddExamType(ExamType examType)
         {
@@ -96,7 +92,6 @@ namespace WebBaiGiangAPI.Controllers
                 data = examType
             });
         }
-
         [HttpDelete("delete-exam-type")]
         public async Task<IActionResult> DeleteExamType(int id)
         {

@@ -16,7 +16,6 @@ namespace WebBaiGiangAPI.Controllers
     public class ExamsController : ControllerBase
     {
         private readonly AppDbContext _context;
-
         public ExamsController(AppDbContext context)
         {
             _context = context;
@@ -49,7 +48,6 @@ namespace WebBaiGiangAPI.Controllers
                 exams = exams
             });
         }
-
         [HttpGet("get-exam-by-id")]
         public async Task<ActionResult<Exam>> GetExamById(int id)
         {
@@ -79,7 +77,6 @@ namespace WebBaiGiangAPI.Controllers
                 exam = exam
             });
         }
-
         [HttpGet("get-exam-by-type-id")]
         public async Task<ActionResult<Exam>> GetExamByTypeId(int id)
         {
@@ -108,7 +105,6 @@ namespace WebBaiGiangAPI.Controllers
                 exam = exam
             });
         }
-
         [HttpGet("get-exam-by-month-id")]
         public async Task<ActionResult<Exam>> GetExamByMonthId(int id)
         {
@@ -137,7 +133,6 @@ namespace WebBaiGiangAPI.Controllers
                 exam = exam
             });
         }
-
         [HttpPut("update-exam")]
         public async Task<IActionResult> UpdateExam(Exam exam)
         {
@@ -178,7 +173,6 @@ namespace WebBaiGiangAPI.Controllers
                 data = exam
             });
         }
-
         [HttpPost("add-exam")]
         public async Task<ActionResult<Exam>> PostExam(Exam exam)
         {
@@ -205,7 +199,6 @@ namespace WebBaiGiangAPI.Controllers
                 data = exam
             });
         }
-
         [HttpDelete("delete-exam")]
         public async Task<IActionResult> DeleteExam(int id)
         {

@@ -18,13 +18,11 @@ namespace WebBaiGiangAPI.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IJwtService _jwtService;
-
         public ClassCoursesController(AppDbContext context, IJwtService jwtService)
         {
             _context = context;
             _jwtService = jwtService;
         }
-
         [HttpGet("get-class-courses")]
         public async Task<ActionResult<IEnumerable<ClassCourse>>> GetClassCourses()
         {
@@ -66,7 +64,6 @@ namespace WebBaiGiangAPI.Controllers
                 data = classCourse
             });
         }
-
         [HttpGet("get-class-course")]
         public async Task<ActionResult<ClassCourse>> GetClassCourse(int id)
         {
@@ -107,7 +104,6 @@ namespace WebBaiGiangAPI.Controllers
 
             return Ok(classCourse);
         }
-
         [HttpPut("update-class-course")]
         public async Task<IActionResult> UpdateClassCourse(ClassCourse classCourse)
         {
@@ -158,7 +154,6 @@ namespace WebBaiGiangAPI.Controllers
 
             return Ok("Cập nhật lớp học phần thành công");
         }
-
         [HttpPost("add-class-course")]
         public async Task<ActionResult<ClassCourse>> AddClassCourse(ClassCourse classCourse)
         {
@@ -200,7 +195,6 @@ namespace WebBaiGiangAPI.Controllers
                 data = classCourse
             });
         }
-
         [HttpDelete("delete-course")]
         public async Task<IActionResult> DeleteClassCourse(int id)
         {
@@ -227,7 +221,6 @@ namespace WebBaiGiangAPI.Controllers
                 return BadRequest("Không thể xóa lớp học phần hiện tại");
             }
         }
-
         [HttpGet("search")]
         public async Task<IActionResult> Search(
         string? keyword = "",
@@ -312,7 +305,6 @@ namespace WebBaiGiangAPI.Controllers
                 Data = result
             });
         }
-
         [HttpGet("{classId}/details")]
         public async Task<IActionResult> GetClassDetails(int classId)
         {

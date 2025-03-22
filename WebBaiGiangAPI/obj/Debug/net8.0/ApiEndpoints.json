@@ -2220,6 +2220,149 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "GetLessonById",
+    "RelativePath": "api/Lessons/{lessonId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lessonId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "UploadFile",
+    "RelativePath": "api/Lessons/{lessonId}/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lessonId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "CreateLesson",
+    "RelativePath": "api/Lessons/create-lesson",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lesson",
+        "Type": "WebBaiGiangAPI.Models.Lesson",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "DeleteLesson",
+    "RelativePath": "api/Lessons/delete-lesson/{lessonId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lessonId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "DuplicateLesson",
+    "RelativePath": "api/Lessons/duplicate/{lessonId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lessonId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newClassId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "SearchLesson",
+    "RelativePath": "api/Lessons/search-lesson",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "UpdateLesson",
+    "RelativePath": "api/Lessons/update-lesson",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedLesson",
+        "Type": "WebBaiGiangAPI.Models.Lesson",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "ToggleLessonVisibility",
+    "RelativePath": "api/Lessons/visibility/{lessonId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lessonId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBaiGiangAPI.Controllers.SchoolYearsController",
     "Method": "AddSchoolYear",
     "RelativePath": "api/SchoolYears/add-school-year",

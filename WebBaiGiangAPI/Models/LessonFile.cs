@@ -14,7 +14,7 @@ namespace WebBaiGiangAPI.Models
 
         [Required]
         [MaxLength(255)]
-        public string LfFilename { get; set; }
+        public string LfPath { get; set; }
 
         [Required]
         [MaxLength(100)]

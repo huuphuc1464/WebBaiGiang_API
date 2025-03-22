@@ -3577,6 +3577,240 @@
         }
       }
     },
+    "/api/Lessons/create-lesson": {
+      "post": {
+        "tags": [
+          "Lessons"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Lessons/update-lesson": {
+      "put": {
+        "tags": [
+          "Lessons"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lesson"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Lessons/delete-lesson/{lessonId}": {
+      "delete": {
+        "tags": [
+          "Lessons"
+        ],
+        "parameters": [
+          {
+            "name": "lessonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Lessons/search-lesson": {
+      "get": {
+        "tags": [
+          "Lessons"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Lessons/{lessonId}": {
+      "get": {
+        "tags": [
+          "Lessons"
+        ],
+        "parameters": [
+          {
+            "name": "lessonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Lessons/duplicate/{lessonId}": {
+      "post": {
+        "tags": [
+          "Lessons"
+        ],
+        "parameters": [
+          {
+            "name": "lessonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "newClassId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Lessons/visibility/{lessonId}": {
+      "put": {
+        "tags": [
+          "Lessons"
+        ],
+        "parameters": [
+          {
+            "name": "lessonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Lessons/{lessonId}/upload": {
+      "post": {
+        "tags": [
+          "Lessons"
+        ],
+        "parameters": [
+          {
+            "name": "lessonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/SchoolYears/get-school-years": {
       "get": {
         "tags": [
@@ -6212,6 +6446,67 @@
           "feedbackStatus": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Lesson": {
+        "required": [
+          "lessonClassId",
+          "lessonCourseId",
+          "lessonCreateAt",
+          "lessonName",
+          "lessonStatus",
+          "lessonTeacherId",
+          "lessonUpdateAt"
+        ],
+        "type": "object",
+        "properties": {
+          "lessonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lessonClassId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lessonCourseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lessonTeacherId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lessonDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessonChapter": {
+            "maxLength": 10,
+            "type": "string",
+            "nullable": true
+          },
+          "lessonWeek": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lessonName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "lessonStatus": {
+            "type": "boolean"
+          },
+          "lessonCreateAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lessonUpdateAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

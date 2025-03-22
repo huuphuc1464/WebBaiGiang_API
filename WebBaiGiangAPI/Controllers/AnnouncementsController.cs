@@ -16,12 +16,10 @@ namespace WebBaiGiangAPI.Controllers
     public class AnnouncementsController : ControllerBase
     {
         private readonly AppDbContext _context;
-
         public AnnouncementsController(AppDbContext context)
         {
             _context = context;
         }
-
         [HttpGet("get-announcements")]
         public async Task<ActionResult<IEnumerable<Announcement>>> GetAnnouncements()
         {
@@ -46,7 +44,6 @@ namespace WebBaiGiangAPI.Controllers
             }
             return Ok(announcements);
         }
-
         [HttpGet("get-announcement-by-id")]
         public async Task<ActionResult<Announcement>> GetAnnouncementById(int id)
         {
@@ -72,7 +69,6 @@ namespace WebBaiGiangAPI.Controllers
             }
             return Ok(announcement);
         }
-
         [HttpGet("get-announcement-by-teacher-id")]
         public async Task<ActionResult<Announcement>> GetAnnouncementByTeacherId(int id)
         {
@@ -98,7 +94,6 @@ namespace WebBaiGiangAPI.Controllers
             }
                 return Ok(announcement);
         }
-
         [HttpGet("get-announcement-by-class-id")]
         public async Task<ActionResult<Announcement>> GetAnnouncementByClassId(int id)
         {
@@ -124,7 +119,6 @@ namespace WebBaiGiangAPI.Controllers
             }
             return Ok(announcement);
         }
-
         [HttpPut("update-announcement")]
         public async Task<IActionResult> UpdateAnnouncement(Announcement announcement)
         {
@@ -162,7 +156,6 @@ namespace WebBaiGiangAPI.Controllers
                 data = existingAnnouncement
             });
         }
-
         [HttpPost("add-announcement")]
         public async Task<ActionResult<Announcement>> AddAnnouncement(Announcement announcement)
         {
@@ -194,7 +187,6 @@ namespace WebBaiGiangAPI.Controllers
                 Data = announcement
             });
         }
-
         [HttpDelete("delete-announcement")]
         public async Task<IActionResult> DeleteAnnouncement(int id)
         {
