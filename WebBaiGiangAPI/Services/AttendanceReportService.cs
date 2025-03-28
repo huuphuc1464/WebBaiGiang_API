@@ -91,7 +91,7 @@ public class AttendanceReportService : BackgroundService
                 string subject = $"[Báo cáo điểm danh] - Lớp: {cls.ClassTitle}";
 
                 var teacher = await context.TeacherClasses
-                    .Where(tc => tc.TcClassId == cls.ClassId)
+                    .Where(tc => tc.ClassCourses.ClassId == cls.ClassId)
                     .Join(context.Users, tc => tc.TcUsersId, u => u.UsersId, (tc, u) => u)
                     .FirstOrDefaultAsync();
 

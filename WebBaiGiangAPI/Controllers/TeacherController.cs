@@ -567,7 +567,7 @@ namespace WebBaiGiangAPI.Controllers
             // Lấy danh sách lớp học phần của giảng viên trong học kỳ hiện tại
             var courses = await _context.TeacherClasses
                 .Join(_context.Classes,
-                      tc => tc.TcClassId,
+                      tc => tc.ClassCourses.ClassId,
                       c => c.ClassId,
                       (tc, c) => new { tc, c })
                 .Join(_context.Users,

@@ -1,58 +1,94 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322094853_logo.svg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325094809_14.png'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>LessonFiles/20250322094853_logo.svg</RelativePath>
+      <RelativePath>LessonFiles/20250325094809_14.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>mndbvy608x</Fingerprint>
-      <Integrity>4sAimpRPuRJXedzEs7u4L3TIhHzpiw0t4sCxrZCvO/s=</Integrity>
+      <Fingerprint>gisss7k757</Fingerprint>
+      <Integrity>WJfe2y2Mj/5QRH9siaY0x9V/IlpYEfuxPyIGgXv5PcI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322094853_logo.svg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325094809_14.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095025_logo.svg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325094809_14_1.png'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>LessonFiles/20250322095025_logo.svg</RelativePath>
+      <RelativePath>LessonFiles/20250325094809_14_1.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>mndbvy608x</Fingerprint>
-      <Integrity>4sAimpRPuRJXedzEs7u4L3TIhHzpiw0t4sCxrZCvO/s=</Integrity>
+      <Fingerprint>tueovlwtib</Fingerprint>
+      <Integrity>y2u3XlCi7b/7PM1ZCA0EyPTtlznUHVcdPtCzDziRKP8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095025_logo.svg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325094809_14_1.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095910_logo.svg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325094846_GDDD&amp;PTNN.pdf'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>LessonFiles/20250322095910_logo.svg</RelativePath>
+      <RelativePath>LessonFiles/20250325094846_GDDD&amp;PTNN.pdf</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>mndbvy608x</Fingerprint>
-      <Integrity>4sAimpRPuRJXedzEs7u4L3TIhHzpiw0t4sCxrZCvO/s=</Integrity>
+      <Fingerprint>lguvpr21k1</Fingerprint>
+      <Integrity>9RALNxVBEnYk+PQZF80mX9zrgVgREJqOcod+4xWqcZQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250322095910_logo.svg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325094846_GDDD&amp;PTNN.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325110519_z6437131345896_daa10c1bae1264f0aec219b616a28c4b.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WebBaiGiangAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WebBaiGiangAPI</BasePath>
+      <RelativePath>LessonFiles/20250325110519_z6437131345896_daa10c1bae1264f0aec219b616a28c4b.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>pf9278u30f</Fingerprint>
+      <Integrity>uzzLCSwvDwnp7rBKchttOeFsKW7BkWoa7jg/mZcqWHA=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325110519_z6437131345896_daa10c1bae1264f0aec219b616a28c4b.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325111155_z6437093258014_4864f40c756508a107b1f4516972bf2d.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WebBaiGiangAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WebBaiGiangAPI</BasePath>
+      <RelativePath>LessonFiles/20250325111155_z6437093258014_4864f40c756508a107b1f4516972bf2d.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>bvmj4c08rd</Fingerprint>
+      <Integrity>hy7FYtd81r8teZww48LpuuTZLbg84NNNj6HuW2T7c7A=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250325111155_z6437093258014_4864f40c756508a107b1f4516972bf2d.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

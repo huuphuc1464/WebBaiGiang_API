@@ -42,7 +42,7 @@ namespace WebBaiGiangAPI.Data
         public DbSet<Files> Files { get; set; }
         public DbSet<StudentClass> StudentClasses { get; set; }
         public DbSet<ClassCourse> ClassCourses { get; set; }
-
+        public DbSet<StatusLearn> StatusLearns { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // --- User Entity ---
@@ -143,9 +143,9 @@ namespace WebBaiGiangAPI.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TeacherClass>()
-                .HasOne(tc => tc.Classes)
+                .HasOne(tc => tc.ClassCourses)
                 .WithMany(c => c.TeacherClasses)
-                .HasForeignKey(tc => tc.TcClassId)
+                .HasForeignKey(tc => tc.TcClassCourseId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // --- Student (StudentId là FK đến User) ---

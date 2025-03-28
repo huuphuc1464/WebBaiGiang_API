@@ -238,7 +238,7 @@ namespace WebBaiGiangAPI.Controllers
                         from cc in classCourse.DefaultIfEmpty()
                         join cl in _context.Classes on cc.ClassId equals cl.ClassId into classes
                         from cl in classes.DefaultIfEmpty()
-                        join tc in _context.TeacherClasses on cl.ClassId equals tc.TcClassId into teacherClass
+                        join tc in _context.TeacherClasses on cl.ClassId equals tc.ClassCourses.ClassId into teacherClass
                         from tc in teacherClass.DefaultIfEmpty()
                         join u in _context.Users on tc.TcUsersId equals u.UsersId into users
                         from u in users.DefaultIfEmpty()
@@ -305,6 +305,7 @@ namespace WebBaiGiangAPI.Controllers
                 Data = result
             });
         }
+
         [HttpGet("{classId}/details")]
         public async Task<IActionResult> GetClassDetails(int classId)
         {
@@ -355,7 +356,6 @@ namespace WebBaiGiangAPI.Controllers
                     .ToList()
             })
             .FirstOrDefaultAsync();
-
 
             if (classDetails == null)
             {

@@ -48,6 +48,7 @@ namespace WebBaiGiangAPI.Models
         [ForeignKey("LessonCourseId")]
         [JsonIgnore]
         public Course? Course { get; set; }
+
         [JsonIgnore]
         public ICollection<LessonFile> LessonFiles { get; set; } = new List<LessonFile>();
 

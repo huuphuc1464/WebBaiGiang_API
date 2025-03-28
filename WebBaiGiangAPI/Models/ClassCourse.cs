@@ -25,5 +25,8 @@ namespace WebBaiGiangAPI.Models
         [ForeignKey("CourseId")]
         [JsonIgnore]
         public Course? Course { get; set; }
+
+        [JsonIgnore]
+        public ICollection<TeacherClass> TeacherClasses { get; set; } = new List<TeacherClass>();
     }
 }

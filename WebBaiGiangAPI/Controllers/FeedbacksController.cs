@@ -179,7 +179,7 @@ namespace WebBaiGiangAPI.Controllers
             var student = _context.Users.Where(u => u.UsersId == feedback.FeedbackUsersId).Select(c => new Tuple<string, string>(c.UsersEmail, c.UsersName)).FirstOrDefault();
             var lop = _context.ClassCourses.Where(c => c.ClassId == existingFeedback.FeedbackClassId).Select(c => c.Course.CourseTitle).FirstOrDefault();
             var teacher = _context.TeacherClasses
-                .Where(tc => tc.TcClassId == existingFeedback.FeedbackClassId)
+                .Where(tc => tc.ClassCourses.ClassId == existingFeedback.FeedbackClassId)
                 .Join(_context.Users, tc => tc.TcUsersId, u => u.UsersId, (tc, u) => new Tuple<string, string>(u.UsersEmail, u.UsersName))
                 .FirstOrDefault();
             try
@@ -239,7 +239,7 @@ namespace WebBaiGiangAPI.Controllers
             var student = _context.Users.Where(u => u.UsersId == feedback.FeedbackUsersId).Select(c => new Tuple<string, string>(c.UsersEmail, c.UsersName)).FirstOrDefault();
             var lop = _context.ClassCourses.Where(c => c.ClassId == feedback.FeedbackClassId).Select(c => c.Course.CourseTitle).FirstOrDefault();
             var teacher = _context.TeacherClasses
-                .Where(tc => tc.TcClassId == feedback.FeedbackClassId)
+                .Where(tc => tc.ClassCourses.ClassId == feedback.FeedbackClassId)
                 .Join(_context.Users, tc => tc.TcUsersId, u => u.UsersId, (tc, u) => new Tuple<string, string>(u.UsersEmail, u.UsersName))
                 .FirstOrDefault();
 
@@ -274,7 +274,7 @@ namespace WebBaiGiangAPI.Controllers
 
             // Lấy thông tin giáo viên dạy lớp đó
             var teacher = await _context.TeacherClasses
-                .Where(tc => tc.TcClassId == existingFeedback.FeedbackClassId)
+                .Where(tc => tc.ClassCourses.ClassId == existingFeedback.FeedbackClassId)
                 .Join(_context.Users, tc => tc.TcUsersId, u => u.UsersId, (tc, u) => new Tuple<string, string>(u.UsersEmail, u.UsersName))
                 .FirstOrDefaultAsync();
 

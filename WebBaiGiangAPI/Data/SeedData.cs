@@ -96,7 +96,7 @@ namespace WebBaiGiangAPI.Data
                     {
                     new Department { DepartmentTitle = "Rỗng", DepartmentCode = "NULL", DepartmentDescription = "Rỗng" },
                     new Department { DepartmentTitle = "Khoa CNTT", DepartmentCode = "IT", DepartmentDescription = "Khoa Công nghệ thông tin" },
-                    new Department { DepartmentTitle = "Khoa Kinh tế", DepartmentCode = "EC", DepartmentDescription = "Khoa Kinh tế" }
+                    new Department { DepartmentTitle = "Khoa Kế toán", DepartmentCode = "KT", DepartmentDescription = "Khoa Kế toán" }
                     };
                     foreach (var dept in departments)
                     {
@@ -206,7 +206,7 @@ namespace WebBaiGiangAPI.Data
                         UsersName = "Admin User",
                         UsersUsername = "admin",
                         UsersPassword = passwordHasher.HashPassword(null,"123"),
-                        UsersEmail = "admin@example.com",
+                        UsersEmail = "huuphucmeet@gmail.com",
                         UsersMobile = "0123456789"
                     },
                     new Users
@@ -217,7 +217,7 @@ namespace WebBaiGiangAPI.Data
                         UsersName = "Teacher User",
                         UsersUsername = "teacher",
                         UsersPassword = passwordHasher.HashPassword(null,"123"),
-                        UsersEmail = "teacher@example.com",
+                        UsersEmail = "huuphuc1702@gmail.com",
                         UsersMobile = "0987654321"
                     }
                     };
@@ -334,25 +334,6 @@ namespace WebBaiGiangAPI.Data
                     foreach (var lf in lessonFiles)
                     {
                         context.LessonFiles.Add(lf);
-                    }
-                    context.SaveChanges();
-                }
-
-                // ------------------ Seed TeacherClasses ------------------
-                if (!context.TeacherClasses.Any())
-                {
-                    var teacherClasses = new TeacherClass[]
-                    {
-                        new TeacherClass
-                        {
-                            TcUsersId = 2,
-                            TcClassId = 1,
-                            TcDescription = "Giảng dạy Toán"
-                        }
-                    };
-                    foreach (var tc in teacherClasses)
-                    {
-                        context.TeacherClasses.Add(tc);
                     }
                     context.SaveChanges();
                 }
@@ -691,6 +672,26 @@ namespace WebBaiGiangAPI.Data
                     }
                     context.SaveChanges();
                 }
+
+                // ------------------ Seed TeacherClasses ------------------
+                if (!context.TeacherClasses.Any())
+                {
+                    var teacherClasses = new TeacherClass[]
+                    {
+                        new TeacherClass
+                        {
+                            TcUsersId = 2,
+                            TcClassCourseId = 1,
+                            TcDescription = "Giảng dạy Toán"
+                        }
+                    };
+                    foreach (var tc in teacherClasses)
+                    {
+                        context.TeacherClasses.Add(tc);
+                    }
+                    context.SaveChanges();
+                }
+
             }
         }
     }

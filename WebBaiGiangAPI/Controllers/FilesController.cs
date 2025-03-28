@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
 using WebBaiGiangAPI.Data;
 using WebBaiGiangAPI.Models;
@@ -63,7 +64,7 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest("Giáo viên không tồn tại.");
             }
-            if (_context.TeacherClasses.Where(tc => tc.TcUsersId == teacherId && tc.TcClassId == classId).FirstOrDefault() == null)
+            if (_context.TeacherClasses.Where(tc => tc.TcUsersId == teacherId && tc.ClassCourses.ClassId == classId).FirstOrDefault() == null)
             {
                 return BadRequest("Giáo viên không dạy lớp này.");
             }
@@ -73,7 +74,7 @@ namespace WebBaiGiangAPI.Controllers
             string fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
 
             // Kiểm tra giới hạn dung lượng
-            long maxSize = videoExtensions.Contains(fileExtension) ? 100 * 1024 * 1024 : 5 * 1024 * 1024; // 100MB cho video, 5MB cho file khác
+            long maxSize = videoExtensions.Contains(fileExtension) ? 100 * 1024 * 1024 : 10 * 1024 * 1024; // 100MB cho video, 10MB cho file khác
             if (file.Length > maxSize)
             {
                 return BadRequest($"File quá lớn! {(videoExtensions.Contains(fileExtension) ? "Video" : $"File {fileExtension}")} không được vượt quá {(maxSize / (1024 * 1024))}MB.");
@@ -167,7 +168,7 @@ namespace WebBaiGiangAPI.Controllers
             {
                 message = "Quá trình tải lên hoàn tất.",
                 uploaded = uploadedFiles,
-                errors = errors.Count > 0 ? errors : null // Nếu không có lỗi, `errors` sẽ là `null`
+                errors = errors.Count > 0 ? errors : null
             });
         }
 

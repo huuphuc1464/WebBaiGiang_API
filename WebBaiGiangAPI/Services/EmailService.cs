@@ -190,38 +190,6 @@ public class EmailService
         await client.SendAsync(message);
         await client.DisconnectAsync(true);
     }
-    public async Task<bool> SendEmailAddFeedback(Tuple<string, string> user, string lop, string subject, Feedback feedback)
-    {
-        try
-        {
-            var email = new MimeMessage();
-            email.From.Add(new MailboxAddress("Website bài giảng", _smtpUser));
-            email.To.Add(new MailboxAddress(user.Item2, user.Item1));
-            email.Subject = subject;
-
-            var body = $"Chào {user.Item2},\n\n"
-                        + $"{subject}: \"{lop}\".\n\n"
-                        + $"📄 Nội dung đánh giá: {feedback.FeedbackContent}\n"
-                        + $"⭐ Số sao đánh giá: {feedback.FeedbackRate}\n"
-                        + $"⌚ Thời gian đánh giá: {feedback.FeedbackDate}\n";
-            
-            email.Body = new TextPart("plain")
-            {
-                Text = body
-            };
-
-            using var client = new SmtpClient();
-            await client.ConnectAsync(_smtpServer, _smtpPort, false);
-            await client.AuthenticateAsync(_smtpUser, _smtpPass);
-            await client.SendAsync(email);
-            await client.DisconnectAsync(true);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            return false;
-        }
-    }
     public async Task<bool> SendEmailUpdateFeedback(Tuple<string, string> user, string lop, string subject, Feedback oldFeedback ,Feedback newFeedback)
     {
         try
@@ -254,6 +222,39 @@ public class EmailService
             return false;
         }
     }
+    public async Task<bool> SendEmailAddFeedback(Tuple<string, string> user, string lop, string subject, Feedback feedback)
+    {
+        try
+        {
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("Website bài giảng", _smtpUser));
+            email.To.Add(new MailboxAddress(user.Item2, user.Item1));
+            email.Subject = subject;
+
+            var body = $"Chào {user.Item2},\n\n"
+                        + $"{subject}: \"{lop}\".\n\n"
+                        + $"📄 Nội dung đánh giá: {feedback.FeedbackContent}\n"
+                        + $"⭐ Số sao đánh giá: {feedback.FeedbackRate}\n"
+                        + $"⌚ Thời gian đánh giá: {feedback.FeedbackDate}\n";
+
+            email.Body = new TextPart("plain")
+            {
+                Text = body
+            };
+
+            using var client = new SmtpClient();
+            await client.ConnectAsync(_smtpServer, _smtpPort, false);
+            await client.AuthenticateAsync(_smtpUser, _smtpPass);
+            await client.SendAsync(email);
+            await client.DisconnectAsync(true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
     public async Task<bool> SendEmailDeleteFeedback(
         Tuple<string, string> student,
         Tuple<string, string> teacher,

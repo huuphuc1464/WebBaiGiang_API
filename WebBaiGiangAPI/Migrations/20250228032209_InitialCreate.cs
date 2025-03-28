@@ -585,17 +585,17 @@ namespace WebBaiGiangAPI.Migrations
                     TcId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TcUsersId = table.Column<int>(type: "int", nullable: false),
-                    TcClassId = table.Column<int>(type: "int", nullable: false),
+                    TcClassCourseId = table.Column<int>(type: "int", nullable: false),
                     TcDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TeacherClasses", x => x.TcId);
                     table.ForeignKey(
-                        name: "FK_TeacherClasses_Classes_TcClassId",
-                        column: x => x.TcClassId,
-                        principalTable: "Classes",
-                        principalColumn: "ClassId",
+                        name: "FK_TeacherClasses_ClasseCourse_TcClassCourseId",
+                        column: x => x.TcClassCourseId,
+                        principalTable: "ClassCourses",
+                        principalColumn: "CcId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TeacherClasses_Users_TcUsersId",
@@ -1134,9 +1134,9 @@ namespace WebBaiGiangAPI.Migrations
                 column: "SubmitStudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherClasses_TcClassId",
+                name: "IX_TeacherClasses_TcClassCourseId",
                 table: "TeacherClasses",
-                column: "TcClassId");
+                column: "TcClassCourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeacherClasses_TcUsersId",

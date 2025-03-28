@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.DependencyResolver;
+using OfficeOpenXml;
 using WebBaiGiangAPI.Data;
 using WebBaiGiangAPI.Models;
 
@@ -38,7 +39,7 @@ namespace WebBaiGiangAPI.Controllers
             if (_context.Users.Where(u => u.UsersId == lesson.LessonTeacherId && u.UsersRoleId == 2).FirstOrDefault() == null) return NotFound("Giáo viên không tồn tại.");
             if (lesson.LessonWeek < 1 || lesson.LessonWeek > 16) return BadRequest("Tuần học không hợp lệ.");
             if (_context.ClassCourses.Where(cc => cc.ClassId == lesson.LessonClassId && cc.CourseId == lesson.LessonCourseId).FirstOrDefault() == null) return NotFound("Khóa học không thuộc lớp học này.");
-            if (_context.TeacherClasses.Where(tc => tc.TcClassId == lesson.LessonClassId && tc.TcUsersId == lesson.LessonTeacherId).FirstOrDefault() == null) return NotFound("Giáo viên không thuộc lớp học này.");
+            if (_context.TeacherClasses.Where(tc => tc.ClassCourses.ClassId == lesson.LessonClassId && tc.TcUsersId == lesson.LessonTeacherId).FirstOrDefault() == null) return NotFound("Giáo viên không thuộc lớp học này.");
             if (lesson.LessonStatus != true && lesson.LessonStatus != false) return BadRequest("Trạng thái bài giảng không hợp lệ.");
             
             lesson.LessonDescription = Regex.Replace(lesson.LessonDescription.Trim(), @"\s+", " ");
@@ -329,7 +330,7 @@ namespace WebBaiGiangAPI.Controllers
 
             // Kiểm tra giáo viên có thuộc lớp mới không
             var teacherClass = await _context.TeacherClasses
-                .FirstOrDefaultAsync(tc => tc.TcClassId == newClassId && tc.TcUsersId == lesson.LessonTeacherId);
+                .FirstOrDefaultAsync(tc => tc.ClassCourses.ClassId == newClassId && tc.TcUsersId == lesson.LessonTeacherId);
             if (teacherClass == null) return BadRequest("Giáo viên của bài giảng không thuộc lớp mới.");
 
             // Kiểm tra lớp mới đã có bài giảng trùng tên chưa
@@ -478,68 +479,222 @@ namespace WebBaiGiangAPI.Controllers
             return Ok($"Trạng thái bài giảng đã được thay đổi thành {(lesson.LessonStatus ? "Hiện" : "Ẩn")}.");
         }
 
-
-        // Upload file cho bài giảng
-        [HttpPost("{lessonId}/upload")]
-        public async Task<IActionResult> UploadFile(int lessonId, IFormFile file)
+        // Xuất danh sách bài giảng theo lớp ra file Excel
+        [HttpGet("export-excel-by-class/{classId}")]
+        public async Task<IActionResult> ExportExcelByClass(int classId)
         {
-            if (file == null || file.Length == 0)
-                return BadRequest("File không hợp lệ.");
-
-            var lesson = await _context.Lessons.FindAsync(lessonId);
-            if (lesson == null)
-                return NotFound("Bài giảng không tồn tại.");
-
-            string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "LessonFiles");
-
-            if (!Directory.Exists(uploadFolder))
+            var lessons = _context.Lessons
+            .Where(l => l.LessonClassId == classId)
+            .GroupJoin(_context.LessonFiles,
+                lesson => lesson.LessonId,
+                file => file.LfLessonId,
+                (lesson, files) => new
+                {
+                    Lesson = lesson,
+                    Files = files.ToList()
+                })
+            .ToList();
+            if (lessons == null) return NotFound("Không có bài giảng nào trong lớp này.");
+            using (var package = new ExcelPackage())
             {
-                Directory.CreateDirectory(uploadFolder);
+                var worksheet = package.Workbook.Worksheets.Add("DanhSachBaiGiang");
+
+                // Tiêu đề cột
+                var headers = new string[]
+                {
+                    "LessonTeacherId", "LessonDescription", "LessonChapter", "LessonWeek",
+                    "LessonName", "LessonStatus", "LessonCreateAt", "LessonUpdateAt",
+                    "LfId", "LfPath", "LfType"
+                };
+
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = headers[i];
+                }
+
+                int row = 2;
+
+                foreach (var lesson in lessons)
+                {
+                    int startRow = row; // Ghi nhớ vị trí dòng bắt đầu của bài giảng
+
+                    // Ghi thông tin bài giảng vào dòng đầu tiên
+                    worksheet.Cells[row, 1].Value = lesson.Lesson.LessonTeacherId;
+                    worksheet.Cells[row, 2].Value = lesson.Lesson.LessonDescription;
+                    worksheet.Cells[row, 3].Value = lesson.Lesson.LessonChapter;
+                    worksheet.Cells[row, 4].Value = lesson.Lesson.LessonWeek;
+                    worksheet.Cells[row, 5].Value = lesson.Lesson.LessonName;
+                    worksheet.Cells[row, 6].Value = lesson.Lesson.LessonStatus;
+                    worksheet.Cells[row, 7].Value = lesson.Lesson.LessonCreateAt.ToString("yyyy-MM-dd HH:mm:ss");
+                    worksheet.Cells[row, 8].Value = lesson.Lesson.LessonUpdateAt.ToString("yyyy-MM-dd HH:mm:ss");
+
+                    if (lesson.Files.Any())
+                    {
+                        foreach (var file in lesson.Files)
+                        {
+                            worksheet.Cells[row, 9].Value = file.LfId;
+                            worksheet.Cells[row, 10].Value = file.LfPath;
+                            worksheet.Cells[row, 11].Value = file.LfType;
+                            row++; // Xuống dòng cho mỗi file
+                        }
+                    }
+                    else
+                    {
+                        worksheet.Cells[row, 9].Value = "N/A";
+                        worksheet.Cells[row, 10].Value = "N/A";
+                        worksheet.Cells[row, 11].Value = "N/A";
+                        row++;
+                    }
+
+                    // Merge các ô thông tin bài giảng
+                    if (row > startRow)
+                    {
+                        for (int col = 1; col <= 8; col++)
+                        {
+                            worksheet.Cells[startRow, col, row - 1, col].Merge = true;
+                            worksheet.Cells[startRow, col, row - 1, col].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                        }
+                    }
+                }
+
+                worksheet.Cells.AutoFitColumns();
+
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DanhSachBaiGiang.xlsx");
             }
-
-            // Tạo tên file mới: thời gian + tên gốc
-            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-            string fileExtension = Path.GetExtension(file.FileName).ToLower();
-            string newFileName = $"{timestamp}_{Path.GetFileNameWithoutExtension(file.FileName)}{fileExtension}";
-
-            string filePath = Path.Combine(uploadFolder, newFileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-
-            // Xác định loại file
-            string fileType = "File"; // Mặc định
-            if (new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp" }.Contains(fileExtension))
-            {
-                fileType = "Hình ảnh";
-            }
-            else if (new[] { ".mp4", ".avi", ".mov", ".wmv", ".flv", ".mkv" }.Contains(fileExtension))
-            {
-                fileType = "Video";
-            }
-            else if (new[] { ".mp3", ".wav", ".aac", ".ogg", ".flac" }.Contains(fileExtension))
-            {
-                fileType = "Âm thanh";
-            }
-            else if (new[] { ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".txt" }.Contains(fileExtension))
-            {
-                fileType = "Tài liệu";
-            }
-
-            var lessonFile = new LessonFile
-            {
-                LfLessonId = lessonId,
-                LfPath = newFileName,
-                LfType = fileType
-            };
-
-            _context.LessonFiles.Add(lessonFile);
-            await _context.SaveChangesAsync();
-
-            return Ok(lessonFile);
         }
 
+        [HttpGet("export-excel")]
+        public async Task<IActionResult> ExportLessonsToExcel()
+        {
+            var lessons = _context.Lessons
+                .Select(l => new
+                {
+                    l.LessonId,
+                    l.LessonName,
+                    l.LessonDescription,
+                    l.LessonChapter,
+                    l.LessonWeek,
+                    l.LessonStatus,
+                    l.LessonCreateAt,
+                    l.LessonUpdateAt,
+                    l.LessonTeacherId
+                })
+                .ToList();
+
+            var lessonFiles = _context.LessonFiles
+                .Select(f => new
+                {
+                    f.LfLessonId,
+                    f.LfId,
+                    f.LfPath,
+                    f.LfType
+                })
+                .ToList();
+
+            using (var package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Bài giảng");
+                worksheet.Cells["A1"].Value = "ID";
+                worksheet.Cells["B1"].Value = "Tên bài giảng";
+                worksheet.Cells["C1"].Value = "Mô tả";
+                worksheet.Cells["D1"].Value = "Chương";
+                worksheet.Cells["E1"].Value = "Tuần";
+                worksheet.Cells["F1"].Value = "Trạng thái";
+                worksheet.Cells["G1"].Value = "Ngày tạo";
+                worksheet.Cells["H1"].Value = "Ngày cập nhật";
+                worksheet.Cells["I1"].Value = "Giáo viên";
+
+                int row = 2;
+                foreach (var lesson in lessons)
+                {
+                    worksheet.Cells[row, 1].Value = lesson.LessonId;
+                    worksheet.Cells[row, 2].Value = lesson.LessonName;
+                    worksheet.Cells[row, 3].Value = lesson.LessonDescription;
+                    worksheet.Cells[row, 4].Value = lesson.LessonChapter;
+                    worksheet.Cells[row, 5].Value = lesson.LessonWeek;
+                    worksheet.Cells[row, 6].Value = lesson.LessonStatus ? "Hoạt động" : "Ẩn";
+                    worksheet.Cells[row, 7].Value = lesson.LessonCreateAt.ToString("yyyy-MM-dd");
+                    worksheet.Cells[row, 8].Value = lesson.LessonUpdateAt.ToString("yyyy-MM-dd");
+                    worksheet.Cells[row, 9].Value = await _context.Users.Where(u => u.UsersId == lesson.LessonTeacherId).Select(u => u.UsersName).FirstOrDefaultAsync();
+                    row++;
+                }
+
+                // Danh sách file bài giảng
+                ExcelWorksheet fileSheet = package.Workbook.Worksheets.Add("File bài giảng");
+                fileSheet.Cells["A1"].Value = "LessonId";
+                fileSheet.Cells["B1"].Value = "File ID";
+                fileSheet.Cells["C1"].Value = "Đường dẫn file";
+                fileSheet.Cells["D1"].Value = "Loại file";
+
+                int fileRow = 2;
+                foreach (var file in lessonFiles)
+                {
+                    fileSheet.Cells[fileRow, 1].Value = file.LfLessonId;
+                    fileSheet.Cells[fileRow, 2].Value = file.LfId;
+                    fileSheet.Cells[fileRow, 3].Value = file.LfPath;
+                    fileSheet.Cells[fileRow, 4].Value = file.LfType;
+                    fileRow++;
+                }
+
+                // Xuất file Excel
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                string fileName = $"BaiGiang_{DateTime.Now:yyyyMMddHHmmss}.xlsx";
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
+        }
+
+        // Thống kê số lượng bài giảng theo khóa học
+        [HttpGet("statistics-by-course")]
+        public async Task<IActionResult> StatisticsByCourse()
+        {
+            var statistics = await _context.Courses
+                .Select(c => new
+                {
+                    CourseId = c.CourseId,
+                    CourseName = c.CourseTitle,
+                    LessonCount = _context.Lessons.Count(l => l.LessonCourseId == c.CourseId)
+                })
+                .ToListAsync();
+            return Ok(statistics);
+        }
+
+        // Thống kê số lượng bài giảng theo lớp học
+        [HttpGet("statistics-by-class")]
+        public async Task<IActionResult> StatisticsByClass()
+        {
+            var statistics = await _context.Classes
+                .Select(cl => new
+                {
+                    ClassId = cl.ClassId,
+                    ClassName = cl.ClassTitle,
+                    LessonCount = _context.Lessons.Count(l => l.LessonClassId == cl.ClassId)
+                })
+                .ToListAsync();
+            return Ok(statistics);
+        }
+
+        // Thống kê số lượng bài giảng theo giáo viên
+        [HttpGet("statistics-by-teacher")]
+        public async Task<IActionResult> StatisticsByTeacher()
+        {
+            var statistics = await _context.Users
+                .Where(u => u.UsersRoleId == 2)
+                .Select(u => new
+                {
+                    TeacherId = u.UsersId,
+                    TeacherName = u.UsersName,
+                    TeacherEmail = u.UsersEmail,
+                    LessonCount = _context.Lessons.Count(l => l.LessonTeacherId == u.UsersId)
+                })
+                .ToListAsync();
+            return Ok(statistics);
+        }
     }
 }

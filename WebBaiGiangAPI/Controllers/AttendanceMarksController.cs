@@ -133,8 +133,6 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest(new { message = "Có lỗi xảy ra.", errors });
             }
-
-            _context.AttendanceMarks.Add(attendance);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Điểm danh thành công!", attendance });
@@ -329,6 +327,33 @@ namespace WebBaiGiangAPI.Controllers
             }
             return Ok(history);
         }
+        
+        // API lấy danh sách sinh viên trong lớp
+        [HttpGet("students/{classId}")]
+        public async Task<IActionResult> GetStudentsByClass(int classId)
+        {
+            var students = await _context.StudentClasses
+                .Where(sc => sc.ScClassId == classId && sc.ScStatus == 1)
+                .Join(_context.Users,
+                      sc => sc.ScStudentId,
+                      u => u.UsersId,
+                      (sc, u) => new
+                      {
+                          u.UsersId,
+                          u.UsersName,
+                          u.UsersEmail,
+                          sc.Student.StudentCode
+                      })
+                .OrderBy(s => s.StudentCode)
+                .ToListAsync();
+
+            if (students == null || students.Count == 0)
+            {
+                return NotFound("Không có sinh viên nào trong lớp này.");
+            }
+
+            return Ok(students);
+        }
 
         // Thống kê tỷ lệ điểm danh theo lớp: Tính toán tỷ lệ sinh viên có mặt trong lớp theo phần trăm.
         [HttpGet("statistics/class/present/{classId}")]
@@ -368,7 +393,7 @@ namespace WebBaiGiangAPI.Controllers
         {
             double absentRate = (double)totalAbsent / totalSessions * 100;
 
-            if (absentRate > 20) return 0;
+            if (absentRate > 20 && totalAbsent >= 5) return 0;
 
             // Chấm điểm theo tiêu chí
             if (totalAbsent == 0 && totalLate == 0)
@@ -441,7 +466,7 @@ namespace WebBaiGiangAPI.Controllers
                 string subject = $"[Báo cáo điểm danh] - Lớp: {cls.ClassTitle}";
 
                 var teacher = await _context.TeacherClasses
-                    .Where(tc => tc.TcClassId == cls.ClassId)
+                    .Where(tc => tc.TcClassCourseId == cls.ClassId)
                     .Join(_context.Users, tc => tc.TcUsersId, u => u.UsersId, (tc, u) => u)
                     .FirstOrDefaultAsync();
 
@@ -556,33 +581,6 @@ namespace WebBaiGiangAPI.Controllers
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"Attendance_Report_{className}.xlsx");
         }
 
-        // API lấy danh sách sinh viên trong lớp
-        [HttpGet("students/{classId}")]
-        public async Task<IActionResult> GetStudentsByClass(int classId)
-        {
-            var students = await _context.StudentClasses
-                .Where(sc => sc.ScClassId == classId && sc.ScStatus == 1)
-                .Join(_context.Users,
-                      sc => sc.ScStudentId,
-                      u => u.UsersId,
-                      (sc, u) => new
-                      {
-                          u.UsersId,
-                          u.UsersName,
-                          u.UsersEmail,
-                          sc.Student.StudentCode
-                      })
-                .OrderBy(s => s.StudentCode)
-                .ToListAsync();
-
-            if (students == null || students.Count == 0)
-            {
-                return NotFound("Không có sinh viên nào trong lớp này.");
-            }
-
-            return Ok(students);
-        }
-
         [HttpGet("export/mail/{classId}")]
         public async Task<IActionResult> SendAttendanceReportEmail(int classId)
         {
@@ -607,7 +605,7 @@ namespace WebBaiGiangAPI.Controllers
             }
 
             var teacher = await _context.TeacherClasses
-                .Where(tc => tc.TcClassId == classId)
+                .Where(tc => tc.ClassCourses.ClassId == classId)
                 .Join(_context.Users, tc => tc.TcUsersId, u => u.UsersId, (tc, u) => u)
                 .FirstOrDefaultAsync();
 

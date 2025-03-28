@@ -14,7 +14,7 @@ namespace WebBaiGiangAPI.Models
         public int TcUsersId { get; set; }
 
         [Required]
-        public int TcClassId { get; set; }
+        public int TcClassCourseId { get; set; }
 
         public string? TcDescription { get; set; }
 
@@ -22,8 +22,8 @@ namespace WebBaiGiangAPI.Models
         [JsonIgnore]
         public Users? User { get; set; } 
 
-        [ForeignKey("TcClassId")]
+        [ForeignKey("TcClassCourseId")]
         [JsonIgnore]
-        public Class? Classes { get; set; }
+        public ClassCourse? ClassCourses { get; set; }
     }
 }

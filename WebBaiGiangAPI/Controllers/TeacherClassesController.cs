@@ -34,7 +34,7 @@ namespace WebBaiGiangAPI.Controllers
             }
             var teacherClasses = from tc in _context.TeacherClasses
                                  join t in _context.Users on tc.TcUsersId equals t.UsersId
-                                 join c in _context.Classes on tc.TcClassId equals c.ClassId
+                                 join c in _context.Classes on tc.ClassCourses.ClassId equals c.ClassId
                                  select new { 
                                     tc.TcId,
                                     tc.TcDescription,
@@ -66,7 +66,7 @@ namespace WebBaiGiangAPI.Controllers
             }
             var result = from tc in _context.TeacherClasses
                          join t in _context.Users on tc.TcUsersId equals t.UsersId
-                         join c in _context.Classes on tc.TcClassId equals c.ClassId
+                         join c in _context.Classes on tc.ClassCourses.ClassId equals c.ClassId
                          where tc.TcId == id
                          select new
                          {
@@ -101,7 +101,7 @@ namespace WebBaiGiangAPI.Controllers
             }
             var result = from tc in _context.TeacherClasses
                          join t in _context.Users on tc.TcUsersId equals t.UsersId
-                         join c in _context.Classes on tc.TcClassId equals c.ClassId
+                         join c in _context.Classes on tc.ClassCourses.ClassId equals c.ClassId
                          where tc.TcUsersId == id 
                          select new
                          {
@@ -137,12 +137,12 @@ namespace WebBaiGiangAPI.Controllers
             }
             var result = from tc in _context.TeacherClasses
                          join t in _context.Users on tc.TcUsersId equals t.UsersId
-                         join c in _context.Classes on tc.TcClassId equals c.ClassId
-                         where tc.TcClassId == id
+                         join c in _context.Classes on tc.ClassCourses.ClassId equals c.ClassId
+                         where tc.ClassCourses.ClassId == id
                          select new
                          {
                              tc.TcId,
-                             tc.TcClassId,
+                             tc.ClassCourses.ClassId,
                              tc.TcDescription,
                              c.ClassTitle,
                              c.ClassDescription,
@@ -175,7 +175,7 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!_context.Classes.Any(c => c.ClassId == teacherClass.TcClassId))
+            if (!_context.Classes.Any(c => c.ClassId == teacherClass.ClassCourses.ClassId))
             {
                 return BadRequest(new
                 {
@@ -239,7 +239,19 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!_context.Classes.Any(c => c.ClassId == teacherClass.TcClassId))
+            
+            var classId = _context.ClassCourses.Where(c => c.CcId == teacherClass.TcClassCourseId).Select(c => c.ClassId).FirstOrDefault();
+
+            if (classId == null)
+            {
+                return BadRequest(new
+                {
+                    message = "Khóa học không tồn tại",
+                    data = teacherClass
+                });
+            }
+
+            if (!_context.Classes.Any(c => c.ClassId == classId))
             {
                 return BadRequest(new
                 {
@@ -256,6 +268,16 @@ namespace WebBaiGiangAPI.Controllers
                     data = teacherClass
                 });
             }
+
+            if (_context.TeacherClasses.Any(t => t.TcUsersId == teacherClass.TcUsersId && t.ClassCourses.ClassId == classId))
+            {
+                return BadRequest(new
+                {
+                    message = "Giáo viên đã được phân công cho lớp học này",
+                    data = teacherClass
+                });
+            }
+
             teacherClass.TcDescription = Regex.Replace(teacherClass.TcDescription.Trim(), @"\s+", " ");
             _context.TeacherClasses.Add(teacherClass);
             await _context.SaveChangesAsync();
