@@ -296,6 +296,25 @@ namespace WebBaiGiangAPI.Data
                     context.SaveChanges();
                 }
 
+                // ------------------ Seed ClassCourses ------------------
+                if (!context.ClassCourses.Any())
+                {
+                    var classCourses = new ClassCourse[]
+                    {
+                        new ClassCourse
+                        {
+                            ClassId = 1,
+                            CourseId = 1,
+                            CcDescription = "Lớp và học phần"
+                        }
+                    };
+                    foreach (var cc in classCourses)
+                    {
+                        context.ClassCourses.Add(cc);
+                    }
+                    context.SaveChanges();
+                }
+
                 // ------------------ Seed Lessons ------------------
                 if (!context.Lessons.Any())
                 {
@@ -303,8 +322,10 @@ namespace WebBaiGiangAPI.Data
                     {
                         new Lesson
                         {
-                            LessonClassId = 1,
-                            LessonCourseId = 1,
+                            //LessonClassId = 1,
+                            //LessonCourseId = 1,   
+                            LessonTeacherId = 2,
+                            LessonClassCourseId = 1,
                             LessonName = "Bài học Cơ bản",
                             LessonDescription = "Mô tả bài học",
                             LessonStatus = true,
@@ -650,25 +671,6 @@ namespace WebBaiGiangAPI.Data
                     foreach (var sc in studentClasses)
                     {
                         context.StudentClasses.Add(sc);
-                    }
-                    context.SaveChanges();
-                }
-
-                // ------------------ Seed ClassCourses ------------------
-                if (!context.ClassCourses.Any())
-                {
-                    var classCourses = new ClassCourse[]
-                    {
-                        new ClassCourse
-                        {
-                            ClassId = 1,
-                            CourseId = 1,
-                            CcDescription = "Lớp và học phần"
-                        }
-                    };
-                    foreach (var cc in classCourses)
-                    {
-                        context.ClassCourses.Add(cc);
                     }
                     context.SaveChanges();
                 }

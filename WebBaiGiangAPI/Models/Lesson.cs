@@ -10,14 +10,17 @@ namespace WebBaiGiangAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LessonId { get; set; }
 
-        [Required]
-        public int LessonClassId { get; set; }
+        //[Required]
+        //public int LessonClassId { get; set; }
 
-        [Required]
-        public int LessonCourseId { get; set; }
+        //[Required]
+        //public int LessonCourseId { get; set; }
 
         [Required]
         public int LessonTeacherId { get; set; }
+
+        [Required]
+        public int LessonClassCourseId { get; set; }
 
         public string? LessonDescription { get; set; }
 
@@ -41,13 +44,21 @@ namespace WebBaiGiangAPI.Models
         [Required]
         public DateTime LessonUpdateAt { get; set; }
 
-        [ForeignKey("LessonClassId")]
-        [JsonIgnore]
-        public Class? Classes { get; set; }
+        //[ForeignKey("LessonClassId")]
+        //[JsonIgnore]
+        //public Class? Classes { get; set; }
 
-        [ForeignKey("LessonCourseId")]
+        //[ForeignKey("LessonCourseId")]
+        //[JsonIgnore]
+        //public Course? Course { get; set; }
+
+        [ForeignKey("LessonClassCourseId")]
         [JsonIgnore]
-        public Course? Course { get; set; }
+        public ClassCourse? ClassCourse { get; set; }
+
+        [ForeignKey("LessonTeacherId")]
+        [JsonIgnore]
+        public Users? Teachers { get; set; }
 
         [JsonIgnore]
         public ICollection<LessonFile> LessonFiles { get; set; } = new List<LessonFile>();

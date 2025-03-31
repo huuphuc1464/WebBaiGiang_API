@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit.Tnef;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OfficeOpenXml;
@@ -86,7 +87,13 @@ namespace WebBaiGiangAPI.Controllers
                 return BadRequest("Không tìm thấy bài giảng");
             if (!_context.Students.Any(s => s.StudentId == statusLearn.SlStudentId))
                 return BadRequest("Không tìm thấy sinh viên");
-            var classId = _context.Lessons.FirstOrDefault(l => l.LessonId == statusLearn.SlLessonId).LessonClassId;
+            //var classId = _context.Lessons.FirstOrDefault(l => l.LessonId == statusLearn.SlLessonId).ClassCourse.ClassId;
+            var classId = _context.Lessons
+                .Join(_context.ClassCourses, l => l.LessonClassCourseId, cc => cc.CcId, (l, cc) => new { l, cc })
+                .Where(classId => classId.l.LessonId == statusLearn.SlLessonId)
+                .Select(lc => lc.cc.ClassId)
+                .FirstOrDefault();
+
             if (!_context.StudentClasses.Any(sc => sc.ScClassId == classId && sc.ScStudentId == statusLearn.SlStudentId))
                 return BadRequest("Sinh viên không thuộc lớp học này");
             statusLearn.SlLearnedDate = DateTime.Now;
@@ -98,11 +105,11 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Thống kê Tổng số sinh viên hoàn thành từng bài giảng theo lớp học phần.
-        [HttpGet("statistics-student-learned-by-class/{classId}/{courseId}")]
-        public async Task<IActionResult> StatisticsStudentLearnedByClass(int classId, int courseId)
+        [HttpGet("statistics-student-learned-by-class/{classCourseId}")]
+        public async Task<IActionResult> StatisticsStudentLearnedByClass(int classCourseId)
         {
             var result = await _context.Lessons
-                .Where(l => l.LessonClassId == classId && l.LessonCourseId == courseId)
+                .Where(l => l.LessonClassCourseId == classCourseId)
                 .Select(l => new
                 {
                     LessonId = l.LessonId,
@@ -140,7 +147,7 @@ namespace WebBaiGiangAPI.Controllers
             ClassName = cc.Classes.ClassTitle,
 
             Statistics = _context.Lessons
-                .Where(l => l.LessonClassId == cc.ClassId && l.LessonCourseId == cc.CourseId)
+                .Where(l => l.ClassCourse.ClassId == cc.ClassId && l.ClassCourse.CourseId == cc.CourseId)
                 .GroupJoin(
                     _context.StatusLearns.Where(sl => sl.SlStatus == true),
                     l => l.LessonId, 
@@ -162,10 +169,9 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Thống kê tỉ lệ hoàn thành bài học theo học viên ở lớp học phần (lọc theo thời gian nếu có).
-        [HttpGet("statistics-student-progress/{classId}/{courseId}")]
+        [HttpGet("statistics-student-progress/{classCourseId}")]
         public async Task<IActionResult> StatisticsStudentProgress(
-            int classId,
-            int courseId,
+            int classCourseId,
             [FromQuery] DateTime? fromDate,
             [FromQuery] DateTime? toDate)
         {
@@ -176,8 +182,7 @@ namespace WebBaiGiangAPI.Controllers
             // Lấy tổng số bài giảng trong lớp học phần (lọc theo thời gian nếu có)
             var lessonQuery = _context.Lessons
                 .Where(l => _context.ClassCourses
-                .Any(cc => cc.ClassId == classId && l.LessonClassId == cc.ClassId && l.LessonCourseId == cc.CourseId && cc.CourseId == courseId));
-
+                .Any(cc => cc.CcId == classCourseId && l.LessonClassCourseId == cc.CcId));
             if (fromDate.HasValue)
             {
                 DateTime fromDateOnly = fromDate.Value.Date;
@@ -192,6 +197,10 @@ namespace WebBaiGiangAPI.Controllers
 
             var totalLessons = await lessonQuery.CountAsync();
 
+            int classId = _context.ClassCourses
+                .Where(cc => cc.CcId == classCourseId)
+                .Select(cc => cc.ClassId)
+                .FirstOrDefault();
 
             // Lấy danh sách tất cả sinh viên trong lớp học phần
             var studentsInClass = await _context.Students
@@ -219,7 +228,7 @@ namespace WebBaiGiangAPI.Controllers
                     l => l.LessonId,
                     (ssl, l) => new { ssl.s, l, ssl.sl.SlLearnedDate })
                 .Where(x => _context.ClassCourses
-                    .Any(cc => cc.ClassId == classId && x.l.LessonClassId == cc.ClassId && x.l.LessonCourseId == cc.CourseId));
+                .Any(cc => cc.CcId == classCourseId && x.l.LessonClassCourseId == cc.CcId));
 
             if (fromDate.HasValue)
             {
@@ -262,10 +271,9 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Top 10 học viên tích cực (hoàn thành nhiều bài giảng nhất) theo bài giảng và lớp học phần
-        [HttpGet("top-students/{classId}/{courseId}")]
+        [HttpGet("top-students/{classCourseId}")]
         public async Task<IActionResult> GetTopStudents(
-            int classId,
-            int courseId,
+            int classCourseId,
             [FromQuery] DateTime? fromDate,
             [FromQuery] DateTime? toDate)
         {
@@ -277,8 +285,8 @@ namespace WebBaiGiangAPI.Controllers
             // Lấy danh sách bài giảng của lớp học phần
             var lessonQuery = _context.Lessons
                 .Where(l => _context.ClassCourses
-                    .Any(cc => cc.ClassId == classId && cc.CourseId == courseId &&
-                               l.LessonClassId == cc.ClassId && l.LessonCourseId == cc.CourseId));
+                    .Any(cc => cc.CcId == classCourseId &&
+                               l.LessonClassCourseId == cc.CcId));
 
             // Lọc bài giảng theo ngày nếu có fromDate hoặc toDate
             if (fromDate.HasValue)
@@ -343,24 +351,27 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Thống kê học sinh đã/ chưa xem bài giảng theo lớp học phần
-        [HttpGet("students-lesson-view-status/{classId}/{courseId}")]
-        public async Task<IActionResult> GetStudentsLessonViewStatus(int classId, int courseId)
+        [HttpGet("students-lesson-view-status/{classCourseId}")]
+        public async Task<IActionResult> GetStudentsLessonViewStatus(int classCourseId)
         {
             // Lấy danh sách bài giảng theo lớp và khóa học
             var lessons = await _context.Lessons
                 .Where(l => _context.ClassCourses.Any(cc =>
-                    cc.ClassId == classId && cc.CourseId == courseId &&
-                    l.LessonClassId == cc.ClassId &&
-                    l.LessonCourseId == cc.CourseId))
+                    cc.CcId == classCourseId &&
+                    l.LessonClassCourseId == cc.CcId))
                 .Select(l => new
                 {
                     l.LessonId,
                     l.LessonName,
-                    l.LessonCreateAt
+                    l.LessonCreateAt,
                 })
                 .ToListAsync();
 
             if (!lessons.Any()) return NotFound("Không tìm thấy bài giảng nào.");
+            
+            int classId = _context.ClassCourses.Where(cc => cc.CcId == classCourseId)
+                .Select(cc => cc.ClassId)
+                .FirstOrDefault();
 
             // Lấy danh sách sinh viên của lớp học
             var students = await _context.StudentClasses
@@ -404,15 +415,14 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Thống kê học sinh đã/ chưa xem bài giảng theo lớp học phần chi tiết
-        [HttpGet("students-lesson-view-status-detail/{classId}/{courseId}")]
-        public async Task<IActionResult> GetStudentsLessonViewStatusDetail(int classId, int courseId)
+        [HttpGet("students-lesson-view-status-detail/{classCourseId}")]
+        public async Task<IActionResult> GetStudentsLessonViewStatusDetail(int classCourseId)
         {
             // Lấy danh sách bài giảng theo lớp & khóa học
             var lessons = await _context.Lessons
                 .Where(l => _context.ClassCourses.Any(cc =>
-                    cc.ClassId == classId && cc.CourseId == courseId &&
-                    l.LessonClassId == cc.ClassId &&
-                    l.LessonCourseId == cc.CourseId))
+                    cc.CcId == classCourseId &&
+                    l.LessonClassCourseId == cc.CcId))
                 .Select(l => new
                 {
                     l.LessonId,
@@ -422,6 +432,11 @@ namespace WebBaiGiangAPI.Controllers
                 .ToListAsync();
 
             if (!lessons.Any()) return NotFound("Không tìm thấy bài giảng nào.");
+
+            int classId = _context.ClassCourses
+                .Where(cc => cc.CcId == classCourseId)
+                .Select(cc => cc.ClassId)
+                .FirstOrDefault();
 
             // Lấy danh sách sinh viên của lớp học
             var students = await _context.StudentClasses
@@ -508,8 +523,8 @@ namespace WebBaiGiangAPI.Controllers
             // Lấy danh sách bài giảng
             var classIds = teacherClasses.Select(c => c.ClassId).ToList();
             var lessons = await _context.Lessons
-                .Where(l => classIds.Contains(l.LessonClassId) && l.LessonCourseId == courseId)
-                .Select(l => new { l.LessonId, l.LessonName, l.LessonClassId, l.LessonCreateAt })
+                .Where(l => classIds.Contains(l.ClassCourse.ClassId) && l.ClassCourse.CourseId == courseId)
+                .Select(l => new { l.LessonId, l.LessonName, l.ClassCourse.ClassId, l.LessonCreateAt })
                 .ToListAsync();
 
             if (!lessons.Any())
@@ -531,7 +546,7 @@ namespace WebBaiGiangAPI.Controllers
                       (sl, l) => new
                       {
                           sl.SlLessonId,
-                          SlClassId = l.LessonClassId,
+                          SlClassId = l.ClassCourse.ClassId,
                           sl.SlLearnedDate
                       });
 
@@ -567,7 +582,7 @@ namespace WebBaiGiangAPI.Controllers
             var result = teacherClasses.Select(tc =>
             {
                 var totalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0;
-                var classLessons = lessons.Where(l => l.LessonClassId == tc.ClassId);
+                var classLessons = lessons.Where(l => l.ClassId == tc.ClassId);
 
                 var lessonStats = classLessons.Select(lesson =>
                 {
@@ -635,8 +650,8 @@ namespace WebBaiGiangAPI.Controllers
             // Lấy danh sách bài giảng của các lớp trong học phần
             var classIds = courseClasses.Select(c => c.ClassId).ToList();
             var lessons = await _context.Lessons
-                .Where(l => classIds.Contains(l.LessonClassId) && l.LessonCourseId == courseId)
-                .Select(l => new { l.LessonId, l.LessonName, l.LessonClassId, l.LessonCreateAt })
+                .Where(l => classIds.Contains(l.ClassCourse.ClassId) && l.ClassCourse.CourseId == courseId)
+                .Select(l => new { l.LessonId, l.LessonName, l.ClassCourse.ClassId, l.LessonCreateAt })
                 .ToListAsync();
 
             // Lấy số lượng sinh viên trong từng lớp
@@ -655,7 +670,7 @@ namespace WebBaiGiangAPI.Controllers
                       (sl, l) => new
                       {
                           sl.SlLessonId,
-                          SlClassId = l.LessonClassId,
+                          SlClassId = l.ClassCourse.ClassId,
                           sl.SlLearnedDate
                       });
 
@@ -691,7 +706,7 @@ namespace WebBaiGiangAPI.Controllers
             var result = courseClasses.Select(tc =>
             {
                 var totalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0;
-                var classLessons = lessons.Where(l => l.LessonClassId == tc.ClassId);
+                var classLessons = lessons.Where(l => l.ClassId == tc.ClassId);
 
                 var lessonStats = classLessons.Select(lesson =>
                 {
@@ -756,16 +771,35 @@ namespace WebBaiGiangAPI.Controllers
             if (timeUnit != null && timeUnit != "week" && timeUnit != "month")
                 return BadRequest("Đơn vị thời gian không hợp lệ. Chỉ hỗ trợ 'week', 'month' hoặc không truyền để lấy tất cả dữ liệu.");
 
+            DateTime? startDate = timeUnit switch
+            {
+                "week" => DateTime.UtcNow.AddDays(-7),
+                "month" => DateTime.UtcNow.AddMonths(-1),
+                _ => null // alltime (mặc định) => Không có giới hạn thời gian
+            };
+
             var courseClasses = await _context.ClassCourses
-    .Select(cc => new { cc.CourseId, cc.ClassId, cc.Classes.ClassTitle })
-    .Distinct() // Loại bỏ dữ liệu trùng
-    .ToListAsync();
+                .Select(cc => new { cc.CourseId, cc.ClassId, cc.Classes.ClassTitle, cc.CcId, cc.CcDescription})
+                .Distinct() // Loại bỏ dữ liệu trùng
+                .ToListAsync();
+
+            //var lessons = await _context.Lessons
+            //    .Where(l => courseClasses.Select(c => c.CcId).Contains(l.LessonClassCourseId))
+            //    .Select(l => new { l.LessonId, l.LessonName, l.LessonClassCourseId, l.LessonCreateAt })
+            //    .Distinct() // Tránh lặp bài giảng
+            //    .ToListAsync();
+
+            var courseClassesList = await _context.ClassCourses
+              .Select(cc => new { cc.CourseId, cc.ClassId, cc.Classes.ClassTitle, cc.CcId })
+              .ToListAsync(); // Chuyển sang danh sách
+
+            var courseClassIds = courseClassesList.Select(c => c.CcId).ToList();
 
             var lessons = await _context.Lessons
-                .Where(l => courseClasses.Select(c => c.ClassId).Contains(l.LessonClassId))
-                .Select(l => new { l.LessonId, l.LessonName, l.LessonClassId, l.LessonCreateAt })
-                .Distinct() // Tránh lặp bài giảng
+                .Where(l => courseClassIds.Contains(l.LessonClassCourseId))
+                .Select(l => new { l.LessonId, l.LessonName, l.LessonClassCourseId, l.LessonCreateAt })
                 .ToListAsync();
+
 
             var studentsPerClass = await _context.StudentClasses
                 .Where(sc => courseClasses.Select(c => c.ClassId).Contains(sc.ScClassId))
@@ -773,12 +807,33 @@ namespace WebBaiGiangAPI.Controllers
                 .Select(g => new { ClassId = g.Key, TotalStudents = g.Count() })
                 .ToListAsync();
 
-            // Đảm bảo không lấy dữ liệu bị lặp trong join
+            //// Đảm bảo không lấy dữ liệu bị lặp trong join
+            //var lessonViewData = await _context.StatusLearns
+            //    .Where(sl => sl.SlStatus == true && lessons.Select(l => l.LessonId).Contains(sl.SlLessonId))
+            //    .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date })
+            //    .Select(g => new { g.Key.SlLessonId, ViewedCount = g.Count() })
+            //    .Distinct() // Tránh lặp dữ liệu học tập
+            //    .ToListAsync();
+
+            var lessonIds = lessons.Select(l => l.LessonId).ToList(); // Lấy danh sách ID trước
+
+            var lessonViewDataQuery = _context.StatusLearns
+                .Where(sl => sl.SlStatus == true && lessonIds.Contains(sl.SlLessonId));
+
+            if (startDate.HasValue)
+            {
+                lessonViewDataQuery = lessonViewDataQuery.Where(sl => sl.SlLearnedDate >= startDate.Value);
+            }
+
             var lessonViewData = await _context.StatusLearns
-                .Where(sl => sl.SlStatus == true && lessons.Select(l => l.LessonId).Contains(sl.SlLessonId))
-                .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date })
-                .Select(g => new { g.Key.SlLessonId, ViewedCount = g.Count() })
-                .Distinct() // Tránh lặp dữ liệu học tập
+                .Where(sl => sl.SlStatus == true && lessonIds.Contains(sl.SlLessonId))
+                .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date }) // Nhóm theo ngày
+                .Select(g => new
+                {
+                    LessonId = g.Key.SlLessonId,
+                    ViewedCount = g.Count(),
+                    LearnedDate = g.Key.Date // Thêm ngày học
+                })
                 .ToListAsync();
 
             var courseData = courseClasses.GroupBy(cc => cc.CourseId)
@@ -789,25 +844,53 @@ namespace WebBaiGiangAPI.Controllers
                     {
                         ClassId = tc.ClassId,
                         ClassName = tc.ClassTitle,
+                        ClassDescription = tc.CcDescription,
                         TotalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0,
-                        Lessons = lessons.Where(l => l.LessonClassId == tc.ClassId).Select(lesson =>
+                        Lessons = lessons.Where(l => l.LessonClassCourseId == tc.CcId).Select(lesson =>
                         {
-                            var viewedCount = lessonViewData.FirstOrDefault(v => v.SlLessonId == lesson.LessonId)?.ViewedCount ?? 0;
+                            var viewedCount = lessonViewData.FirstOrDefault(v => v.LessonId == lesson.LessonId)?.ViewedCount ?? 0;
                             var totalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0;
+
+                             var viewedLastWeek = lessonViewData
+                                .Where(v => v.LessonId == lesson.LessonId && v.LearnedDate >= DateTime.UtcNow.AddDays(-7))
+                                .Sum(v => v.ViewedCount);
+
+                            var viewedLastMonth = lessonViewData
+                                .Where(v => v.LessonId == lesson.LessonId && v.LearnedDate >= DateTime.UtcNow.AddMonths(-1))
+                                .Sum(v => v.ViewedCount);
+
                             return new
                             {
                                 lesson.LessonId,
                                 lesson.LessonName,
                                 lesson.LessonCreateAt,
-                                CompletionOverTime = new[]
+                                CompletionOverTime = (timeUnit == "week") ? new[]
                                 {
-                        new
-                        {
-                            TimePeriod = "All Time",
-                            StudentsViewed = viewedCount,
-                            StudentsNotViewed = totalStudents - viewedCount,
-                            CompletionRate = totalStudents > 0 ? Math.Round((viewedCount * 100.0) / totalStudents, 2) : 0
-                        }
+                                    new
+                                    {
+                                        TimePeriod = "Last Week",
+                                        StudentsViewed = viewedLastWeek,
+                                        StudentsNotViewed = totalStudents - viewedLastWeek,
+                                        CompletionRate = totalStudents > 0 ? Math.Round((viewedLastWeek * 100.0) / totalStudents, 2) : 0
+                                    }
+                                } : (timeUnit == "month") ? new[]
+                                                            {
+                                    new
+                                    {
+                                        TimePeriod = "Last Month",
+                                        StudentsViewed = viewedLastMonth,
+                                        StudentsNotViewed = totalStudents - viewedLastMonth,
+                                        CompletionRate = totalStudents > 0 ? Math.Round((viewedLastMonth * 100.0) / totalStudents, 2) : 0
+                                    }
+                                } : new[] // Nếu không có timeUnit hoặc không hợp lệ, trả về tất cả
+                                                            {
+                                    new
+                                    {
+                                        TimePeriod = "All Time",
+                                        StudentsViewed = viewedCount,
+                                        StudentsNotViewed = totalStudents - viewedCount,
+                                        CompletionRate = totalStudents > 0 ? Math.Round((viewedCount * 100.0) / totalStudents, 2) : 0
+                                    }
                                 }
                             };
                         }).ToList()
@@ -818,10 +901,10 @@ namespace WebBaiGiangAPI.Controllers
 
         }
         // Xuất excel thống kê Tổng số sinh viên hoàn thành từng bài giảng theo lớp học phần.
-        [HttpGet("export-excel/statistics-student-learned-by-class/{classId}/{courseId}")]
-        public async Task<IActionResult> ExcelStudentLearnedByClass(int classId, int courseId)
+        [HttpGet("export-excel/statistics-student-learned-by-class/{classCourseId}")]
+        public async Task<IActionResult> ExcelStudentLearnedByClass(int classCourseId)
         {
-            var result = await StatisticsStudentLearnedByClass(classId, courseId) as OkObjectResult;
+            var result = await StatisticsStudentLearnedByClass(classCourseId) as OkObjectResult;
 
             if (result == null || result.Value == null)
                 return NotFound("Không có dữ liệu để xuất.");
@@ -830,8 +913,14 @@ namespace WebBaiGiangAPI.Controllers
             if (statisticsData == null || !statisticsData.Any())
                 return NotFound("Dữ liệu rỗng.");
 
-            string className = _context.Classes.Where(e => e.ClassId == classId).Select(c => c.ClassTitle).FirstOrDefault();
-
+            //string className = _context.Classes.Where(e => e.ClassId == classId).Select(c => c.ClassTitle).FirstOrDefault();
+            string className = _context.ClassCourses.Join(_context.Classes,
+                cc => cc.ClassId,
+                c => c.ClassId,
+                (cc, c) => new { cc.CcId, c.ClassTitle })
+                .Where(e => e.CcId == classCourseId)
+                .Select(c => c.ClassTitle)
+                .FirstOrDefault();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
             {
@@ -980,13 +1069,13 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Xuất excel thống kê tỉ lệ hoàn thành bài học theo học viên ở lớp học phần (lọc theo thời gian nếu có).
-        [HttpGet("export-excel/statistics-student-progress/{classId}/{courseId}")]
+        [HttpGet("export-excel/statistics-student-progress/{classCourseId}")]
         public async Task<IActionResult> ExportStudentProgress(
-            int classId, int courseId,
+            int classCourseId,
             [FromQuery] DateTime? fromDate,
             [FromQuery] DateTime? toDate)
         {
-            var result = await StatisticsStudentProgress(classId, courseId, fromDate, toDate) as OkObjectResult;
+            var result = await StatisticsStudentProgress(classCourseId, fromDate, toDate) as OkObjectResult;
 
             if (result == null || result.Value == null)
                 return NotFound("Không có dữ liệu để xuất.");
@@ -1048,14 +1137,13 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Xuất excel top 10 học viên tích cực (hoàn thành nhiều bài giảng nhất) theo bài giảng và lớp học phần
-        [HttpGet("export-excel/top-students/{classId}/{courseId}")]
+        [HttpGet("export-excel/top-students/{classCourseId}")]
         public async Task<IActionResult> ExportTopStudents(
-            int classId,
-            int courseId,
+            int classCourseId,
             [FromQuery] DateTime? fromDate,
             [FromQuery] DateTime? toDate)
         {
-            var result = await GetTopStudents(classId, courseId, fromDate, toDate) as OkObjectResult;
+            var result = await GetTopStudents(classCourseId, fromDate, toDate) as OkObjectResult;
 
             if (result == null || result.Value == null)
                 return NotFound("Không có dữ liệu để xuất.");
@@ -1117,10 +1205,10 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Xuất excel thống kê học sinh đã/ chưa xem bài giảng theo lớp học phần
-        [HttpGet("export-excel/lesson-view-status/{classId}/{courseId}")]
-        public async Task<IActionResult> ExportLessonViewStatus(int classId, int courseId)
+        [HttpGet("export-excel/lesson-view-status/{classCourseId}")]
+        public async Task<IActionResult> ExportLessonViewStatus(int classCourseId)
         {
-            var result = await GetStudentsLessonViewStatus(classId, courseId) as OkObjectResult;
+            var result = await GetStudentsLessonViewStatus(classCourseId) as OkObjectResult;
 
             if (result == null || result.Value == null)
                 return NotFound("Không có dữ liệu để xuất.");
@@ -1167,9 +1255,9 @@ namespace WebBaiGiangAPI.Controllers
                 var stream = new MemoryStream();
                 package.SaveAs(stream);
                 stream.Position = 0;
-
-                var className = _context.Classes.Where(c => c.ClassId == classId).Select(c => c.ClassTitle).FirstOrDefault();
-                var courseName = _context.Courses.Where(c => c.CourseId == courseId).Select(c => c.CourseTitle).FirstOrDefault();
+                var classCourseInfo = _context.ClassCourses.Where(cc => cc.CcId == classCourseId).Select(cc => new { cc.ClassId, cc.CourseId }).FirstOrDefault();
+                var className = _context.Classes.Where(c => c.ClassId == classCourseInfo.ClassId).Select(c => c.ClassTitle).FirstOrDefault();
+                var courseName = _context.Courses.Where(c => c.CourseId == classCourseInfo.CourseId).Select(c => c.CourseTitle).FirstOrDefault();
                 className = className.Replace(" ", "");
                 courseName = courseName.Replace(" ", "");
                 string fileName = $"LessonViewStatus_{className}_{courseName}.xlsx";
@@ -1178,10 +1266,10 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Xuất excel thống kê học sinh đã/ chưa xem bài giảng theo lớp học phần chi tiết
-        [HttpGet("export-excel/lesson-view-status-detail/{classId}/{courseId}")]
-        public async Task<IActionResult> ExportLessonViewStatusDetail(int classId, int courseId)
+        [HttpGet("export-excel/lesson-view-status-detail/{classCourseId}")]
+        public async Task<IActionResult> ExportLessonViewStatusDetail(int classCourseId)
         {
-            var result = await GetStudentsLessonViewStatusDetail(classId, courseId) as OkObjectResult;
+            var result = await GetStudentsLessonViewStatusDetail(classCourseId) as OkObjectResult;
 
             if (result == null || result.Value == null)
                 return NotFound("Không có dữ liệu để xuất.");
@@ -1266,8 +1354,9 @@ namespace WebBaiGiangAPI.Controllers
                 var stream = new MemoryStream();
                 package.SaveAs(stream);
                 stream.Position = 0;
-                var className = _context.Classes.Where(c => c.ClassId == classId).Select(c => c.ClassTitle).FirstOrDefault();
-                var courseName = _context.Courses.Where(c => c.CourseId == courseId).Select(c => c.CourseTitle).FirstOrDefault();
+                var classCourseInfo = _context.ClassCourses.Where(cc => cc.CcId == classCourseId).Select(cc => new { cc.ClassId, cc.CourseId }).FirstOrDefault();
+                var className = _context.Classes.Where(c => c.ClassId == classCourseInfo.ClassId).Select(c => c.ClassTitle).FirstOrDefault();
+                var courseName = _context.Courses.Where(c => c.CourseId == classCourseInfo.CourseId).Select(c => c.CourseTitle).FirstOrDefault();
                 className = className.Replace(" ", "");
                 courseName = courseName.Replace(" ", "");
 
@@ -1491,12 +1580,13 @@ namespace WebBaiGiangAPI.Controllers
             // Header
             worksheet.Cells["A1"].Value = "STT";
             worksheet.Cells["B1"].Value = "Tên lớp";
-            worksheet.Cells["C1"].Value = "Tên bài giảng";
-            worksheet.Cells["D1"].Value = "Ngày tạo";
-            worksheet.Cells["E1"].Value = "Khoảng thời gian";
-            worksheet.Cells["F1"].Value = "Số học sinh đã xem";
-            worksheet.Cells["G1"].Value = "Số học sinh chưa xem";
-            worksheet.Cells["H1"].Value = "Tỷ lệ hoàn thành (%)";
+            worksheet.Cells["C1"].Value = "Tên lớp học phần";
+            worksheet.Cells["D1"].Value = "Tên bài giảng";
+            worksheet.Cells["E1"].Value = "Ngày tạo";
+            worksheet.Cells["F1"].Value = "Khoảng thời gian";
+            worksheet.Cells["G1"].Value = "Số học sinh đã xem";
+            worksheet.Cells["H1"].Value = "Số học sinh chưa xem";
+            worksheet.Cells["I1"].Value = "Tỷ lệ hoàn thành (%)";
 
             int row = 2;
             int index = 1;
@@ -1506,22 +1596,22 @@ namespace WebBaiGiangAPI.Controllers
                 foreach (var classData in course["Classes"])
                 {
                     string className = classData["ClassName"].ToString();
-
+                    string classDescription = classData["ClassDescription"].ToString();
                     foreach (var lesson in classData["Lessons"])
                     {
                         string lessonName = lesson["LessonName"].ToString();
                         string lessonCreatedAt = lesson["LessonCreateAt"].ToString();
-
                         foreach (var stat in lesson["CompletionOverTime"])
                         {
                             worksheet.Cells[row, 1].Value = index++;
                             worksheet.Cells[row, 2].Value = className;
-                            worksheet.Cells[row, 3].Value = lessonName;
-                            worksheet.Cells[row, 4].Value = lessonCreatedAt;
-                            worksheet.Cells[row, 5].Value = stat["TimePeriod"].ToString();
-                            worksheet.Cells[row, 6].Value = stat["StudentsViewed"].ToString();
-                            worksheet.Cells[row, 7].Value = stat["StudentsNotViewed"].ToString();
-                            worksheet.Cells[row, 8].Value = stat["CompletionRate"].ToString();
+                            worksheet.Cells[row, 3].Value = classDescription;
+                            worksheet.Cells[row, 4].Value = lessonName;
+                            worksheet.Cells[row, 5].Value = lessonCreatedAt;
+                            worksheet.Cells[row, 6].Value = stat["TimePeriod"].ToString();
+                            worksheet.Cells[row, 7].Value = stat["StudentsViewed"].ToString();
+                            worksheet.Cells[row, 8].Value = stat["StudentsNotViewed"].ToString();
+                            worksheet.Cells[row, 9].Value = stat["CompletionRate"].ToString();
 
                             row++;
                         }
@@ -1530,11 +1620,11 @@ namespace WebBaiGiangAPI.Controllers
             }
 
             // Định dạng cột
-            worksheet.Cells["A:H"].AutoFitColumns();
-            worksheet.Cells["A1:H1"].Style.Font.Bold = true;
-            worksheet.Cells["A1:H1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            worksheet.Cells["A1:H1"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
-            worksheet.Cells["H2:H" + row].Style.Numberformat.Format = "0.00";
+            worksheet.Cells["A:I"].AutoFitColumns();
+            worksheet.Cells["A1:I1"].Style.Font.Bold = true;
+            worksheet.Cells["A1:I1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            worksheet.Cells["A1:I1"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+            worksheet.Cells["I2:I" + row].Style.Numberformat.Format = "0.00";
 
             // Xuất file Excel
             var stream = new MemoryStream();

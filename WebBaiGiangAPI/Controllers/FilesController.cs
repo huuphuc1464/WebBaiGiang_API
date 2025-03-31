@@ -52,7 +52,7 @@ namespace WebBaiGiangAPI.Controllers
                 return BadRequest("Vui lòng chọn một file.");
             }
 
-            if (string.IsNullOrWhiteSpace(title) || classId == null || teacherId == null)
+            if (string.IsNullOrWhiteSpace(title) || classId <= 0 || teacherId <= 0)
             {
                 return BadRequest("Vui lòng nhập đầy đủ thông tin.");
             }

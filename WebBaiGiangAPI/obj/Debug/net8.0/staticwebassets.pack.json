@@ -1,24 +1,8 @@
 {
   "Files": [
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250325094809_14.png",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250325094809_14.png"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250325094809_14_1.png",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250325094809_14_1.png"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250325094846_GDDD&PTNN.pdf",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250325094846_GDDD&PTNN.pdf"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250325110519_z6437131345896_daa10c1bae1264f0aec219b616a28c4b.jpg",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250325110519_z6437131345896_daa10c1bae1264f0aec219b616a28c4b.jpg"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250325111155_z6437093258014_4864f40c756508a107b1f4516972bf2d.jpg",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250325111155_z6437093258014_4864f40c756508a107b1f4516972bf2d.jpg"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250331101613_Trình tự phát triển phần mềm nghiệp vụ.docx",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250331101613_Trình tự phát triển phần mềm nghiệp vụ.docx"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebBaiGiangAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

@@ -328,9 +328,10 @@ namespace WebBaiGiangAPI.Migrations
                 {
                     LessonId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LessonClassId = table.Column<int>(type: "int", nullable: false),
-                    LessonCourseId = table.Column<int>(type: "int", nullable: false),
+                    //LessonClassId = table.Column<int>(type: "int", nullable: false),
+                    //LessonCourseId = table.Column<int>(type: "int", nullable: false),
                     LessonTeacherId = table.Column<int>(type: "int", nullable: false),
+                    LessonClassCourseId = table.Column<int>(type: "int", nullable: false),
                     LessonDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LessonChapter = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     LessonWeek = table.Column<int>(type: "int", nullable: true),
@@ -343,17 +344,25 @@ namespace WebBaiGiangAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lessons", x => x.LessonId);
+                    //table.ForeignKey(
+                    //    name: "FK_Lessons_Classes_LessonClassId",
+                    //    column: x => x.LessonClassId,
+                    //    principalTable: "Classes",
+                    //    principalColumn: "ClassId",
+                    //    onDelete: ReferentialAction.Restrict);
+
                     table.ForeignKey(
-                        name: "FK_Lessons_Classes_LessonClassId",
-                        column: x => x.LessonClassId,
-                        principalTable: "Classes",
-                        principalColumn: "ClassId",
+                        name: "FK_Lessons_Users_LessonTeacherId",
+                        column: x => x.LessonTeacherId,
+                        principalTable: "Users",
+                        principalColumn: "UsersId",
                         onDelete: ReferentialAction.Restrict);
+                    
                     table.ForeignKey(
-                        name: "FK_Lessons_Courses_LessonCourseId",
-                        column: x => x.LessonCourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
+                        name: "FK_Lessons_ClassCourses_LessonClassCourseId",
+                        column: x => x.LessonClassCourseId,
+                        principalTable: "ClassCourses",
+                        principalColumn: "CcId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -1007,15 +1016,20 @@ namespace WebBaiGiangAPI.Migrations
                 table: "LessonFiles",
                 column: "LfLessonId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Lessons_LessonClassId",
-                table: "Lessons",
-                column: "LessonClassId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Lessons_LessonClassId",
+            //    table: "Lessons",
+            //    column: "LessonClassId");
+
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Lessons_LessonCourseId",
+            //    table: "Lessons",
+            //    column: "LessonCourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lessons_LessonCourseId",
+                name: "IX_Lessons_LessonClassCourseId",
                 table: "Lessons",
-                column: "LessonCourseId");
+                column: "LessonClassCourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Marks_MarksExamId",
@@ -1207,9 +1221,6 @@ namespace WebBaiGiangAPI.Migrations
                 name: "AttendanceMarks");
 
             migrationBuilder.DropTable(
-                name: "ClassCourses");
-
-            migrationBuilder.DropTable(
                 name: "Events");
 
             migrationBuilder.DropTable(
@@ -1264,6 +1275,12 @@ namespace WebBaiGiangAPI.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
+                name: "TeacherClasses");
+
+            migrationBuilder.DropTable(
+                name: "ClassCourses");
+
+            migrationBuilder.DropTable(
                 name: "Courses");
 
             migrationBuilder.DropTable(
@@ -1271,9 +1288,6 @@ namespace WebBaiGiangAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Months");
-
-            migrationBuilder.DropTable(
-                name: "TeacherClasses");
 
             migrationBuilder.DropTable(
                 name: "Classes");
@@ -1304,6 +1318,7 @@ namespace WebBaiGiangAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "States");
+
         }
     }
 }

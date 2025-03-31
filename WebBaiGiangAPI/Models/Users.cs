@@ -100,5 +100,7 @@ namespace WebBaiGiangAPI.Models
         [JsonIgnore]
         public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
 
+        [JsonIgnore]
+        public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
     }
 }

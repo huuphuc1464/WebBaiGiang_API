@@ -2337,22 +2337,6 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
-    "Method": "GetLessonById",
-    "RelativePath": "api/Lessons/{lessonId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "lessonId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
     "Method": "CreateLesson",
     "RelativePath": "api/Lessons/create-lesson",
     "HttpMethod": "POST",
@@ -2429,6 +2413,22 @@
     "Parameters": [
       {
         "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.LessonsController",
+    "Method": "GetLessonById",
+    "RelativePath": "api/Lessons/lesson/{lessonId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lessonId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2866,18 +2866,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "ExportLessonViewStatusDetail",
-    "RelativePath": "api/StatusLearns/export-excel/lesson-view-status-detail/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/export-excel/lesson-view-status-detail/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2887,18 +2882,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "ExportLessonViewStatus",
-    "RelativePath": "api/StatusLearns/export-excel/lesson-view-status/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/export-excel/lesson-view-status/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2918,18 +2908,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "ExcelStudentLearnedByClass",
-    "RelativePath": "api/StatusLearns/export-excel/statistics-student-learned-by-class/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/export-excel/statistics-student-learned-by-class/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2939,18 +2924,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "ExportStudentProgress",
-    "RelativePath": "api/StatusLearns/export-excel/statistics-student-progress/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/export-excel/statistics-student-progress/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -2970,18 +2950,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "ExportTopStudents",
-    "RelativePath": "api/StatusLearns/export-excel/top-students/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/export-excel/top-students/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -3048,18 +3023,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "StatisticsStudentLearnedByClass",
-    "RelativePath": "api/StatusLearns/statistics-student-learned-by-class/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/statistics-student-learned-by-class/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -3069,18 +3039,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "StatisticsStudentProgress",
-    "RelativePath": "api/StatusLearns/statistics-student-progress/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/statistics-student-progress/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -3100,18 +3065,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "GetStudentsLessonViewStatusDetail",
-    "RelativePath": "api/StatusLearns/students-lesson-view-status-detail/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/students-lesson-view-status-detail/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -3121,18 +3081,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "GetStudentsLessonViewStatus",
-    "RelativePath": "api/StatusLearns/students-lesson-view-status/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/students-lesson-view-status/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -3142,18 +3097,13 @@
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StatusLearnsController",
     "Method": "GetTopStudents",
-    "RelativePath": "api/StatusLearns/top-students/{classId}/{courseId}",
+    "RelativePath": "api/StatusLearns/top-students/{classCourseId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "courseId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": true
       },

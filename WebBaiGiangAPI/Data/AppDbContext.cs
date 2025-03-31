@@ -116,16 +116,22 @@ namespace WebBaiGiangAPI.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             // --- Lesson ---
-            modelBuilder.Entity<Lesson>()
-                .HasOne(l => l.Classes)
-                .WithMany(c => c.Lessons)
-                .HasForeignKey(l => l.LessonClassId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Lesson>()
+            //    .HasOne(l => l.Classes)
+            //    .WithMany(c => c.Lessons)
+            //    .HasForeignKey(l => l.LessonClassId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Lesson>()
+            //    .HasOne(l => l.Course)
+            //    .WithMany(c => c.Lessons)
+            //    .HasForeignKey(l => l.LessonCourseId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Lesson>()
-                .HasOne(l => l.Course)
+                .HasOne(l => l.ClassCourse)
                 .WithMany(c => c.Lessons)
-                .HasForeignKey(l => l.LessonCourseId)
+                .HasForeignKey(l => l.LessonClassCourseId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // --- LessonFile ---

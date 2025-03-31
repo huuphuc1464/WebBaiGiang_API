@@ -34,12 +34,21 @@ namespace WebBaiGiangAPI.Controllers
             lesson.LessonCreateAt = DateTime.Now;
             lesson.LessonUpdateAt = DateTime.Now;
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            if (_context.Courses.Find(lesson.LessonCourseId) == null) return NotFound("Khóa học không tồn tại");
-            if (_context.Classes.Find(lesson.LessonClassId) == null) return NotFound("Lớp học không tồn tại.");
+            //if (_context.Courses.Find(lesson.ClassCourse.CourseId) == null) return NotFound("Khóa học không tồn tại");
+            //if (_context.Classes.Find(lesson.ClassCourse.ClassId) == null) return NotFound("Lớp học không tồn tại.");
+            if (_context.ClassCourses.Where(cc => cc.CcId == lesson.LessonClassCourseId).FirstOrDefault() == null) return NotFound("Khóa học không thuộc lớp học này.");
             if (_context.Users.Where(u => u.UsersId == lesson.LessonTeacherId && u.UsersRoleId == 2).FirstOrDefault() == null) return NotFound("Giáo viên không tồn tại.");
             if (lesson.LessonWeek < 1 || lesson.LessonWeek > 16) return BadRequest("Tuần học không hợp lệ.");
-            if (_context.ClassCourses.Where(cc => cc.ClassId == lesson.LessonClassId && cc.CourseId == lesson.LessonCourseId).FirstOrDefault() == null) return NotFound("Khóa học không thuộc lớp học này.");
-            if (_context.TeacherClasses.Where(tc => tc.ClassCourses.ClassId == lesson.LessonClassId && tc.TcUsersId == lesson.LessonTeacherId).FirstOrDefault() == null) return NotFound("Giáo viên không thuộc lớp học này.");
+            if (_context.ClassCourses.Where(cc => cc.ClassId == lesson.LessonClassCourseId).FirstOrDefault() == null) return NotFound("Khóa học không thuộc lớp học này.");
+            //if (_context.TeacherClasses.Where(tc => tc.ClassCourses.ClassId == lesson.ClassCourse.ClassId && tc.TcUsersId == lesson.LessonTeacherId).FirstOrDefault() == null) return NotFound("Giáo viên không thuộc lớp học này.");
+            bool exists = await _context.TeacherClasses
+                .Join(_context.ClassCourses,
+                      tc => tc.TcClassCourseId,
+                      cc => cc.CcId,
+                      (tc, cc) => new { tc.TcUsersId, cc.ClassId })
+                .AnyAsync(t => t.TcUsersId == lesson.LessonTeacherId && t.ClassId == lesson.LessonClassCourseId);
+
+            if (!exists) return NotFound("Giáo viên không thuộc lớp học này.");
             if (lesson.LessonStatus != true && lesson.LessonStatus != false) return BadRequest("Trạng thái bài giảng không hợp lệ.");
             
             lesson.LessonDescription = Regex.Replace(lesson.LessonDescription.Trim(), @"\s+", " ");
@@ -52,7 +61,7 @@ namespace WebBaiGiangAPI.Controllers
 
             var announcement = new Announcement
             {
-                AnnouncementClassId = lesson.LessonClassId,
+                AnnouncementClassId = lesson.ClassCourse.ClassId,
                 AnnouncementTitle = $"📢 Bài giảng mới: {lesson.LessonName} đã được tạo vào {lesson.LessonCreateAt} bởi giáo viên {teacher.UsersName}",
                 AnnouncementDescription = $"📚 Mô tả: {lesson.LessonDescription} \n📅 Tuần học: {lesson.LessonWeek} \n 📋 Chương học: {lesson.LessonChapter}",
                 AnnouncementDate = DateTime.Now,
@@ -61,7 +70,7 @@ namespace WebBaiGiangAPI.Controllers
             _context.Announcements.Add(announcement);
 
             var students = await _context.StudentClasses
-                .Where(sc => sc.ScClassId == lesson.LessonClassId && sc.ScStatus == 1)
+                .Where(sc => sc.ScClassId == lesson.ClassCourse.ClassId && sc.ScStatus == 1)
                 .Join(_context.Users,
                       sc => sc.ScStudentId,
                       u => u.UsersId,
@@ -72,8 +81,8 @@ namespace WebBaiGiangAPI.Controllers
                           u.UsersEmail,
                       })
                 .ToListAsync();
-            var courseName = _context.Courses.Find(lesson.LessonCourseId)?.CourseTitle;
-            var className = _context.Classes.Find(lesson.LessonClassId)?.ClassTitle;
+            var courseName = _context.Courses.Find(lesson.ClassCourse.CourseId)?.CourseTitle;
+            var className = _context.Classes.Find(lesson.ClassCourse.ClassId)?.ClassTitle;
             int emailCount = 0;
             string subject = $"Giáo viên {teacher.UsersName} đã thêm bài giảng mới!";
                             string body = $"<h3>Bài giảng mới: {lesson.LessonName}</h3>"
@@ -119,10 +128,10 @@ namespace WebBaiGiangAPI.Controllers
             _context.Lessons.Update(lesson);
 
             var teacher = await _context.Users.Where(u => u.UsersId == lesson.LessonTeacherId).Select(u => new { u.UsersName, u.UsersEmail }).FirstOrDefaultAsync();
-
+            var classId = await _context.ClassCourses.Where(cc => cc.CcId == lesson.LessonClassCourseId).Select(cc => cc.ClassId).FirstOrDefaultAsync();
             var announcement = new Announcement
             {
-                AnnouncementClassId = lesson.LessonClassId,
+                AnnouncementClassId = classId,
                 AnnouncementTitle = $"✏️ Bài giảng {lesson.LessonName} đã được cập nhật vào {DateTime.Now} bởi giáo viên {teacher.UsersName}",
                 AnnouncementDescription = $"🔄 **Cập nhật thông tin bài giảng**:\n\n" +
                                         $"📚 **Tên bài giảng:** {oldLesson.LessonName} ➝ {lesson.LessonName}\n" +
@@ -135,7 +144,7 @@ namespace WebBaiGiangAPI.Controllers
             _context.Announcements.Add(announcement);
 
             var students = await _context.StudentClasses
-                .Where(sc => sc.ScClassId == lesson.LessonClassId && sc.ScStatus == 1)
+                .Where(sc => sc.ScClassId == classId && sc.ScStatus == 1)
                 .Join(_context.Users,
                       sc => sc.ScStudentId,
                       u => u.UsersId,
@@ -147,8 +156,15 @@ namespace WebBaiGiangAPI.Controllers
                       })
                 .ToListAsync();
             if (students == null || students.Count == 0) return NotFound("Không có sinh viên nào trong lớp này.");
-            var courseName = _context.Courses.Find(lesson.LessonCourseId)?.CourseTitle;
-            var className = _context.Classes.Find(lesson.LessonClassId)?.ClassTitle;
+            //var courseName = _context.Courses.Find(lesson.ClassCourse.CourseId)?.CourseTitle;
+            var courseName = _context.Courses
+                .Join(_context.ClassCourses,
+                      c => c.CourseId,
+                      cc => cc.CourseId,
+                      (c, cc) => new { c.CourseTitle })
+                .Select(c => c.CourseTitle)
+                .FirstOrDefault();
+            var className = _context.Classes.Find(classId)?.ClassTitle;
             int emailCount = 0;
             string subject = $"Giáo viên {teacher.UsersName} đã cập nhật bài giảng!";
 
@@ -200,16 +216,27 @@ namespace WebBaiGiangAPI.Controllers
                 .Select(u => new { u.UsersName, u.UsersEmail })
                 .FirstOrDefaultAsync();
 
-                var courseName = _context.Courses.Find(lesson.LessonCourseId)?.CourseTitle;
-                var className = _context.Classes.Find(lesson.LessonClassId)?.ClassTitle;
-
+                //var courseName = _context.Courses.Find(lesson.ClassCourse.CourseId)?.CourseTitle;
+                //var className = _context.Classes.Find(lesson.ClassCourse.ClassId)?.ClassTitle;
+                var courseName = _context.Courses.Join(_context.ClassCourses,
+                                                      c => c.CourseId,
+                                                      cc => cc.CourseId,
+                                                      (c, cc) => new { c.CourseTitle })
+                                                      .Select(c => c.CourseTitle)
+                                                      .FirstOrDefault();
+                var classInfo = _context.Classes.Join(_context.ClassCourses,
+                                                    cl => cl.ClassId,
+                                                    cc => cc.ClassId,
+                                                    (cl, cc) => new { cl.ClassTitle, cl.ClassId })
+                                                    .Select(cl => new {cl.ClassId, cl.ClassTitle})
+                                                    .FirstOrDefault();
                 var announcement = new Announcement
                 {
-                    AnnouncementClassId = lesson.LessonClassId,
+                    AnnouncementClassId = classInfo.ClassId,
                     AnnouncementTitle = $"🗑️ Bài giảng {lesson.LessonName} đã bị xóa vào {DateTime.Now} bởi giáo viên {teacher.UsersName}",
                     AnnouncementDescription = $"❌ **Bài giảng đã bị xóa:** {lesson.LessonName}\n" +
                                             $"📚 **Khóa học:** {courseName}\n" +
-                                            $"🏛️ **Lớp:** {className}\n" +
+                                            $"🏛️ **Lớp:** {classInfo.ClassTitle}\n" +
                                             $"📅 **Tuần học:** {lesson.LessonWeek}\n" +
                                             $"📋 **Chương học:** {lesson.LessonChapter}",
                     AnnouncementDate = DateTime.Now,
@@ -219,7 +246,7 @@ namespace WebBaiGiangAPI.Controllers
 
                 // Lấy danh sách sinh viên trong lớp
                 var students = await _context.StudentClasses
-                    .Where(sc => sc.ScClassId == lesson.LessonClassId && sc.ScStatus == 1)
+                    .Where(sc => sc.ScClassId == classInfo.ClassId && sc.ScStatus == 1)
                     .Join(_context.Users,
                           sc => sc.ScStudentId,
                           u => u.UsersId,
@@ -231,7 +258,7 @@ namespace WebBaiGiangAPI.Controllers
 
                 string body = $"<h3>Bài giảng đã bị xóa: {lesson.LessonName}</h3>"
                             + $"<p><strong>📚 Khóa học:</strong> {courseName}</p>"
-                            + $"<p><strong>🏛️ Lớp:</strong> {className}</p>"
+                            + $"<p><strong>🏛️ Lớp:</strong> {classInfo.ClassTitle}</p>"
                             + $"<p><strong>📅 Tuần học:</strong> {lesson.LessonWeek}</p>"
                             + $"<p><strong>📋 Chương học:</strong> {lesson.LessonChapter}</p>"
                             + "<p>Vui lòng liên hệ giáo viên để biết thêm thông tin.</p>";
@@ -281,13 +308,13 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         // Xem chi tiết bài giảng
-        [HttpGet("{lessonId}")]
+        [HttpGet("lesson/{lessonId}")]
         public async Task<IActionResult> GetLessonById(int lessonId)
         {
             var lesson = await (from l in _context.Lessons
-                                join c in _context.Courses on l.LessonCourseId equals c.CourseId into courses
+                                join c in _context.Courses on l.ClassCourse.CourseId equals c.CourseId into courses
                                 from c in courses.DefaultIfEmpty()
-                                join cl in _context.Classes on l.LessonClassId equals cl.ClassId into classes
+                                join cl in _context.Classes on l.ClassCourse.ClassId equals cl.ClassId into classes
                                 from cl in classes.DefaultIfEmpty()
                                 join u in _context.Users on l.LessonTeacherId equals u.UsersId into teachers
                                 from u in teachers.DefaultIfEmpty()
@@ -322,27 +349,56 @@ namespace WebBaiGiangAPI.Controllers
             // Kiểm tra lớp mới có tồn tại không
             var newClass = await _context.Classes.FindAsync(newClassId);
             if (newClass == null) return NotFound("Lớp học mới không tồn tại.");
-            
+
             // Kiểm tra lớp mới có thuộc cùng học phần không
+            //var classCourse = await _context.ClassCourses
+            //    .FirstOrDefaultAsync(cc => cc.ClassId == newClassId && cc.CourseId == lesson.ClassCourse.CourseId);
             var classCourse = await _context.ClassCourses
-                .FirstOrDefaultAsync(cc => cc.ClassId == newClassId && cc.CourseId == lesson.LessonCourseId);
+                .Join(_context.Lessons,
+                      cc => cc.CcId,
+                      l => l.LessonClassCourseId,
+                      (cc, l) => new { cc.ClassId, l.LessonId })
+                .FirstOrDefaultAsync();
             if (classCourse == null) return BadRequest("Lớp học mới không thuộc cùng học phần với bài giảng.");
 
             // Kiểm tra giáo viên có thuộc lớp mới không
-            var teacherClass = await _context.TeacherClasses
-                .FirstOrDefaultAsync(tc => tc.ClassCourses.ClassId == newClassId && tc.TcUsersId == lesson.LessonTeacherId);
+            //var teacherClass = await _context.TeacherClasses
+            //    .FirstOrDefaultAsync(tc => tc.ClassCourses.ClassId == newClassId && tc.TcUsersId == lesson.LessonTeacherId);
+            var teacherClass = _context.TeacherClasses.Join(_context.ClassCourses,
+                                                            tc => tc.TcClassCourseId,
+                                                            cc => cc.CcId,
+                                                            (tc, cc) => new { tc.TcUsersId, cc.ClassId })
+                                                        .Where(x => x.TcUsersId == lesson.LessonTeacherId && x.ClassId == newClassId)
+                                                        .FirstOrDefault();
             if (teacherClass == null) return BadRequest("Giáo viên của bài giảng không thuộc lớp mới.");
 
             // Kiểm tra lớp mới đã có bài giảng trùng tên chưa
+            //var existingLesson = await _context.Lessons
+            //    .FirstOrDefaultAsync(l => l.ClassCourse.ClassId == newClassId && l.LessonName == lesson.LessonName);
             var existingLesson = await _context.Lessons
-                .FirstOrDefaultAsync(l => l.LessonClassId == newClassId && l.LessonName == lesson.LessonName);
+                .Join(_context.ClassCourses,
+                      l => l.LessonClassCourseId,
+                      cc => cc.CcId,
+                      (l, cc) => new { l.LessonName, cc.ClassId })
+                .Where (l => l.LessonName == lesson.LessonName && l.ClassId == newClassId)
+                .FirstOrDefaultAsync();
             if (existingLesson != null) return Conflict("Lớp học mới đã có bài giảng cùng tên.");
+            
+            var classInfo = _context.Classes.Join(_context.ClassCourses,
+                                    cl => cl.ClassId,
+                                    cc => cc.ClassId,
+                                    (cl, cc) => new { cl.ClassTitle, cl.ClassId, cc.CcId })
+                                    .Select(cl => new { cl.ClassId, cl.ClassTitle, cl.CcId })
+                                    .Where(cl => cl.ClassId == newClassId)
+                                    .FirstOrDefault();
+            if (classInfo == null) return NotFound("Lớp học mới không tồn tại");
 
             // Nhân bản bài giảng
             var duplicateLesson = new Lesson
             {
-                LessonClassId = newClassId,
-                LessonCourseId = lesson.LessonCourseId,
+                //LessonClassId = newClassId,
+                //LessonCourseId = lesson.LessonCourseId,
+                LessonClassCourseId = classInfo.CcId,
                 LessonTeacherId = lesson.LessonTeacherId,
                 LessonDescription = lesson.LessonDescription,
                 LessonChapter = lesson.LessonChapter,
@@ -415,11 +471,10 @@ namespace WebBaiGiangAPI.Controllers
                     await _context.SaveChangesAsync();
                 }
             }
-
             var teacher = await _context.Users.Where(u => u.UsersId == duplicateLesson.LessonTeacherId).Select(u => new { u.UsersName, u.UsersEmail }).FirstOrDefaultAsync();
             var announcement = new Announcement
             {
-                AnnouncementClassId = duplicateLesson.LessonClassId,
+                AnnouncementClassId = classInfo.ClassId,
                 AnnouncementTitle = $"📢 Bài giảng mới: {duplicateLesson.LessonName} đã được tạo vào {duplicateLesson.LessonCreateAt} bởi giáo viên {teacher.UsersName}",
                 AnnouncementDescription = $"📚 Mô tả: {duplicateLesson.LessonDescription} \n📅 Tuần học: {duplicateLesson.LessonWeek} \n 📋 Chương học: {duplicateLesson.LessonChapter}",
                 AnnouncementDate = DateTime.Now,
@@ -428,7 +483,7 @@ namespace WebBaiGiangAPI.Controllers
             _context.Announcements.Add(announcement);
 
             var students = await _context.StudentClasses
-                .Where(sc => sc.ScClassId == duplicateLesson.LessonClassId && sc.ScStatus == 1)
+                .Where(sc => sc.ScClassId == classInfo.ClassId && sc.ScStatus == 1)
                 .Join(_context.Users,
                       sc => sc.ScStudentId,
                       u => u.UsersId,
@@ -439,14 +494,17 @@ namespace WebBaiGiangAPI.Controllers
                           u.UsersEmail,
                       })
                 .ToListAsync();
-            var courseName = _context.Courses.Find(duplicateLesson.LessonCourseId)?.CourseTitle;
-            var className = _context.Classes.Find(duplicateLesson.LessonClassId)?.ClassTitle;
+            var courseName = _context.ClassCourses
+                .Join(_context.Courses, cc => cc.CourseId, c => c.CourseId, (cc, c) => new { c.CourseTitle, cc.CcId })
+                .Where(cc => cc.CcId == duplicateLesson.LessonClassCourseId)
+                .Select(c => c.CourseTitle)
+                .FirstOrDefault();
             int emailCount = 0;
             string subject = $"Giáo viên {teacher.UsersName} đã thêm bài giảng mới!";
             string body = $"<h3>Bài giảng mới: {duplicateLesson.LessonName}</h3>"
                         + $"<p>Mô tả: {duplicateLesson.LessonDescription}</p>"
                         + $"<p>Khóa học: {courseName}</p>"
-                        + $"<p>Lớp: {className}</p>"
+                        + $"<p>Lớp: {classInfo.ClassTitle}</p>"
                         + $"<p>Tuần: {duplicateLesson.LessonWeek}, Chương: {duplicateLesson.LessonChapter}</p>"
                         + "<p>Vui lòng đăng nhập để xem chi tiết.</p>";
             foreach (var student in students)
@@ -484,7 +542,7 @@ namespace WebBaiGiangAPI.Controllers
         public async Task<IActionResult> ExportExcelByClass(int classId)
         {
             var lessons = _context.Lessons
-            .Where(l => l.LessonClassId == classId)
+            .Where(l => l.ClassCourse.ClassId == classId)
             .GroupJoin(_context.LessonFiles,
                 lesson => lesson.LessonId,
                 file => file.LfLessonId,
@@ -659,7 +717,7 @@ namespace WebBaiGiangAPI.Controllers
                 {
                     CourseId = c.CourseId,
                     CourseName = c.CourseTitle,
-                    LessonCount = _context.Lessons.Count(l => l.LessonCourseId == c.CourseId)
+                    LessonCount = _context.Lessons.Count(l => l.ClassCourse.CourseId == c.CourseId)
                 })
                 .ToListAsync();
             return Ok(statistics);
@@ -674,7 +732,7 @@ namespace WebBaiGiangAPI.Controllers
                 {
                     ClassId = cl.ClassId,
                     ClassName = cl.ClassTitle,
-                    LessonCount = _context.Lessons.Count(l => l.LessonClassId == cl.ClassId)
+                    LessonCount = _context.Lessons.Count(l => l.ClassCourse.ClassId == cl.ClassId)
                 })
                 .ToListAsync();
             return Ok(statistics);

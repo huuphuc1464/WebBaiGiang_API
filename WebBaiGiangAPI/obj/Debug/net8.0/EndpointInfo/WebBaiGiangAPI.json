@@ -3884,7 +3884,7 @@
         }
       }
     },
-    "/api/Lessons/{lessonId}": {
+    "/api/Lessons/lesson/{lessonId}": {
       "get": {
         "tags": [
           "Lessons"
@@ -4474,23 +4474,14 @@
         }
       }
     },
-    "/api/StatusLearns/statistics-student-learned-by-class/{classId}/{courseId}": {
+    "/api/StatusLearns/statistics-student-learned-by-class/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4518,23 +4509,14 @@
         }
       }
     },
-    "/api/StatusLearns/statistics-student-progress/{classId}/{courseId}": {
+    "/api/StatusLearns/statistics-student-progress/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4566,23 +4548,14 @@
         }
       }
     },
-    "/api/StatusLearns/top-students/{classId}/{courseId}": {
+    "/api/StatusLearns/top-students/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4614,23 +4587,14 @@
         }
       }
     },
-    "/api/StatusLearns/students-lesson-view-status/{classId}/{courseId}": {
+    "/api/StatusLearns/students-lesson-view-status/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4646,23 +4610,14 @@
         }
       }
     },
-    "/api/StatusLearns/students-lesson-view-status-detail/{classId}/{courseId}": {
+    "/api/StatusLearns/students-lesson-view-status-detail/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4768,23 +4723,14 @@
         }
       }
     },
-    "/api/StatusLearns/export-excel/statistics-student-learned-by-class/{classId}/{courseId}": {
+    "/api/StatusLearns/export-excel/statistics-student-learned-by-class/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4812,23 +4758,14 @@
         }
       }
     },
-    "/api/StatusLearns/export-excel/statistics-student-progress/{classId}/{courseId}": {
+    "/api/StatusLearns/export-excel/statistics-student-progress/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4860,23 +4797,14 @@
         }
       }
     },
-    "/api/StatusLearns/export-excel/top-students/{classId}/{courseId}": {
+    "/api/StatusLearns/export-excel/top-students/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4908,23 +4836,14 @@
         }
       }
     },
-    "/api/StatusLearns/export-excel/lesson-view-status/{classId}/{courseId}": {
+    "/api/StatusLearns/export-excel/lesson-view-status/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4940,23 +4859,14 @@
         }
       }
     },
-    "/api/StatusLearns/export-excel/lesson-view-status-detail/{classId}/{courseId}": {
+    "/api/StatusLearns/export-excel/lesson-view-status-detail/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
         ],
         "parameters": [
           {
-            "name": "classId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "courseId",
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -7347,8 +7257,7 @@
       },
       "Lesson": {
         "required": [
-          "lessonClassId",
-          "lessonCourseId",
+          "lessonClassCourseId",
           "lessonCreateAt",
           "lessonName",
           "lessonStatus",
@@ -7361,15 +7270,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "lessonClassId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lessonCourseId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "lessonTeacherId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lessonClassCourseId": {
             "type": "integer",
             "format": "int32"
           },

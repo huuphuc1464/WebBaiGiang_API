@@ -34,8 +34,8 @@ namespace WebBaiGiangAPI.Models
         public SchoolYear? SchoolYear { get; set; }
         [JsonIgnore]
         public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
-        [JsonIgnore]
-        public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
+        //[JsonIgnore]
+        //public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
         [JsonIgnore]
         public ICollection<Subject> Subjects { get; set; } = new List<Subject>();
         [JsonIgnore]

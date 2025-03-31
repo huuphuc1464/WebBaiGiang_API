@@ -28,5 +28,8 @@ namespace WebBaiGiangAPI.Models
 
         [JsonIgnore]
         public ICollection<TeacherClass> TeacherClasses { get; set; } = new List<TeacherClass>();
+
+        [JsonIgnore]
+        public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
     }
 }

@@ -78,7 +78,24 @@ namespace WebBaiGiangAPI.Controllers
             if (file.Length > maxSize)
                 return BadRequest($"Dung lượng file vượt quá giới hạn ({maxSize / (1024 * 1024)}MB).");
             string teacherName = await _context.Users.Where(u => u.UsersId == lesson.LessonTeacherId).Select(u => u.UsersName).FirstOrDefaultAsync();
-            var className = await _context.Classes.Where(c => c.ClassId == lesson.LessonClassId).Select(c => c.ClassTitle).FirstOrDefaultAsync();
+
+            var classInfo = await _context.Classes
+                .Join(_context.ClassCourses,
+                      c => c.ClassId,
+                      cc => cc.ClassId,
+                      (c, cc) => new { c.ClassTitle, cc.CcId, c.ClassId })
+                .Where(x => x.CcId == lesson.LessonClassCourseId)
+                .Select(x => new { x.ClassTitle, x.ClassId })
+                .FirstOrDefaultAsync();
+
+            if (classInfo == null)
+            {
+                return NotFound("Lớp học không tồn tại");
+            }
+           
+            string className = classInfo.ClassTitle;
+            int classId = classInfo.ClassId;
+
             // Tạo tên file mới: thời gian + tên gốc
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
             string newFileName = $"{timestamp}_{Path.GetFileNameWithoutExtension(file.FileName)}{fileExtension}";
@@ -100,7 +117,7 @@ namespace WebBaiGiangAPI.Controllers
 
             var announcement = new Announcement
             {
-                AnnouncementClassId = lesson.LessonClassId,
+                AnnouncementClassId = classId,
                 AnnouncementTeacherId = lesson.LessonTeacherId,
                 AnnouncementTitle = $"Giáo viên: \"{teacherName}\" đã thêm file mới trong lớp: \"{className}\"",
                 AnnouncementDescription = $"Giáo viên: \"{teacherName}\" đã thêm file: \"{newFileName}\" vào bài giảng: \"{lesson.LessonName}\" chương: \"{lesson.LessonChapter}\" ",
@@ -266,7 +283,7 @@ namespace WebBaiGiangAPI.Controllers
             var codeFormats = new[] { ".html", ".css", ".js", ".json", ".xml", ".sql", ".md" };
 
             var files = _context.LessonFiles
-                .Where(lf => lf.Lesson.LessonClassId == classId)
+                .Where(lf => lf.Lesson.ClassCourse.ClassId == classId)
                 .AsEnumerable()
                 .Select(f => new
                 {
