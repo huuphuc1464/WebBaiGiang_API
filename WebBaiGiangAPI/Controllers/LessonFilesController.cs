@@ -228,12 +228,12 @@ namespace WebBaiGiangAPI.Controllers
             var lesson = await _context.Lessons.FindAsync(lessonId);
             if (lesson == null) return NotFound("Không tìm thấy bài giảng.");
 
-            if (lesson.LessonFiles == null || lesson.LessonFiles.Count == 0)
+            var lessonFiles = await _context.LessonFiles.Where(lf => lf.LfLessonId == lessonId).ToListAsync();
+            
+            if (lessonFiles == null || lessonFiles.Count == 0)
             {
                 return NotFound("Không có file nào cho bài giảng này.");
             }
-
-            var lessonFiles = await _context.LessonFiles.Where(lf => lf.LfLessonId == lessonId).ToListAsync();
             return Ok(lessonFiles);
         }
 

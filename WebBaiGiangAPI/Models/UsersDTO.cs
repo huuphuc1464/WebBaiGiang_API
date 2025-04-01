@@ -15,18 +15,18 @@ namespace WebBaiGiangAPI.Models
         [Required]
         public int UsersRoleId { get; set; }
 
-        [Required]
+        //[Required]
         [MaxLength(100)]
         public string UsersName { get; set; }
 
-        [Required]
+        //[Required]
         [MaxLength(255)]
         public string UsersUsername { get; set; }
 
         [MaxLength(255)]
         public string? UsersPassword { get; set; }
 
-        [Required]
+        //[Required]
         [MaxLength(255)]
         public string UsersEmail { get; set; }
 

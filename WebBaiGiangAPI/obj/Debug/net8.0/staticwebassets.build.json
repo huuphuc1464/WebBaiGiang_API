@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FI0Cz9nh3eyCkBwx21P23PnkIwzexVof2eouX9R7I9c=",
+  "Hash": "jZinPcD7ndtkdbuqKzk3ieiOgpvvWuttA2ZEA8GSVfQ=",
   "Source": "WebBaiGiangAPI",
   "BasePath": "_content/WebBaiGiangAPI",
   "Mode": "Default",
@@ -15,6 +15,317 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": [
+    {
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142733_Các loại hash.xlsx",
+      "SourceId": "WebBaiGiangAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
+      "BasePath": "_content/WebBaiGiangAPI",
+      "RelativePath": "LessonFiles/20250401142733_Các loại hash#[.{fingerprint}]?.xlsx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bj359k9abh",
+      "Integrity": "2dW7J5VMbzehcpwqNpHJtwR+hZgEwsOSVT+PP0ngF+Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\LessonFiles\\20250401142733_Các loại hash.xlsx"
+    },
+    {
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_lịch sử hình thành.docx",
+      "SourceId": "WebBaiGiangAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
+      "BasePath": "_content/WebBaiGiangAPI",
+      "RelativePath": "LessonFiles/20250401142847_lịch sử hình thành#[.{fingerprint}]?.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ip1vn7e3e7",
+      "Integrity": "mlKaL0naGibZjv0J3v9V3CIcAKdf8pT6rVUyvRxKF08=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\LessonFiles\\20250401142847_lịch sử hình thành.docx"
+    },
+    {
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_MauBaoCaoTT.docx",
+      "SourceId": "WebBaiGiangAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
+      "BasePath": "_content/WebBaiGiangAPI",
+      "RelativePath": "LessonFiles/20250401142847_MauBaoCaoTT#[.{fingerprint}]?.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "59h3s2ywq4",
+      "Integrity": "GX4H75KiycYvYjYut6fX5tl/8KqaIp8ThvRkaIKRVQE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\LessonFiles\\20250401142847_MauBaoCaoTT.docx"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "LessonFiles/20250401142733_Các loại hash.bj359k9abh.xlsx",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142733_Các loại hash.xlsx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16668"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2dW7J5VMbzehcpwqNpHJtwR+hZgEwsOSVT+PP0ngF+Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 07:27:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bj359k9abh"
+        },
+        {
+          "Name": "label",
+          "Value": "LessonFiles/20250401142733_Các loại hash.xlsx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2dW7J5VMbzehcpwqNpHJtwR+hZgEwsOSVT+PP0ngF+Y="
+        }
+      ]
+    },
+    {
+      "Route": "LessonFiles/20250401142733_Các loại hash.xlsx",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142733_Các loại hash.xlsx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16668"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2dW7J5VMbzehcpwqNpHJtwR+hZgEwsOSVT+PP0ngF+Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 07:27:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2dW7J5VMbzehcpwqNpHJtwR+hZgEwsOSVT+PP0ngF+Y="
+        }
+      ]
+    },
+    {
+      "Route": "LessonFiles/20250401142847_lịch sử hình thành.docx",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_lịch sử hình thành.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "102041"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mlKaL0naGibZjv0J3v9V3CIcAKdf8pT6rVUyvRxKF08=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 07:28:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mlKaL0naGibZjv0J3v9V3CIcAKdf8pT6rVUyvRxKF08="
+        }
+      ]
+    },
+    {
+      "Route": "LessonFiles/20250401142847_lịch sử hình thành.ip1vn7e3e7.docx",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_lịch sử hình thành.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "102041"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mlKaL0naGibZjv0J3v9V3CIcAKdf8pT6rVUyvRxKF08=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 07:28:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ip1vn7e3e7"
+        },
+        {
+          "Name": "label",
+          "Value": "LessonFiles/20250401142847_lịch sử hình thành.docx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mlKaL0naGibZjv0J3v9V3CIcAKdf8pT6rVUyvRxKF08="
+        }
+      ]
+    },
+    {
+      "Route": "LessonFiles/20250401142847_MauBaoCaoTT.59h3s2ywq4.docx",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_MauBaoCaoTT.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "111616"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GX4H75KiycYvYjYut6fX5tl/8KqaIp8ThvRkaIKRVQE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 07:28:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "59h3s2ywq4"
+        },
+        {
+          "Name": "label",
+          "Value": "LessonFiles/20250401142847_MauBaoCaoTT.docx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GX4H75KiycYvYjYut6fX5tl/8KqaIp8ThvRkaIKRVQE="
+        }
+      ]
+    },
+    {
+      "Route": "LessonFiles/20250401142847_MauBaoCaoTT.docx",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_MauBaoCaoTT.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "111616"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GX4H75KiycYvYjYut6fX5tl/8KqaIp8ThvRkaIKRVQE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 07:28:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GX4H75KiycYvYjYut6fX5tl/8KqaIp8ThvRkaIKRVQE="
+        }
+      ]
+    }
+  ]
 }

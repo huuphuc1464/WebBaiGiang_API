@@ -5554,10 +5554,7 @@
               "schema": {
                 "required": [
                   "UserLevelId",
-                  "UsersEmail",
-                  "UsersName",
-                  "UsersRoleId",
-                  "UsersUsername"
+                  "UsersRoleId"
                 ],
                 "type": "object",
                 "properties": {
@@ -5748,10 +5745,7 @@
               "schema": {
                 "required": [
                   "UserLevelId",
-                  "UsersEmail",
-                  "UsersName",
-                  "UsersRoleId",
-                  "UsersUsername"
+                  "UsersRoleId"
                 ],
                 "type": "object",
                 "properties": {
@@ -6385,10 +6379,7 @@
               "schema": {
                 "required": [
                   "UserLevelId",
-                  "UsersEmail",
-                  "UsersName",
-                  "UsersRoleId",
-                  "UsersUsername"
+                  "UsersRoleId"
                 ],
                 "type": "object",
                 "properties": {

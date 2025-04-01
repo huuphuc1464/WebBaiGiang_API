@@ -502,267 +502,257 @@ namespace WebBaiGiangAPI.Controllers
         {
             // Chuẩn hóa timeUnit
             timeUnit = string.IsNullOrEmpty(timeUnit) ? null : timeUnit.ToLower();
-
-            // Kiểm tra giá trị hợp lệ
             if (timeUnit != null && timeUnit != "week" && timeUnit != "month")
                 return BadRequest("Đơn vị thời gian không hợp lệ. Chỉ hỗ trợ 'week', 'month' hoặc không truyền để lấy tất cả dữ liệu.");
 
-            // Lấy danh sách lớp giảng viên dạy
+            DateTime? startDate = timeUnit switch
+            {
+                "week" => DateTime.UtcNow.AddDays(-7),
+                "month" => DateTime.UtcNow.AddMonths(-1),
+                _ => null
+            };
+
+            // Lấy danh sách lớp mà giáo viên dạy thuộc courseId
             var teacherClasses = await _context.ClassCourses
                 .Where(cc => cc.CourseId == courseId)
                 .Join(_context.TeacherClasses,
                       cc => cc.ClassId,
                       tc => tc.ClassCourses.ClassId,
-                      (cc, tc) => new { cc.ClassId, tc.ClassCourses.Classes.ClassTitle, tc.TcUsersId })
+                      (cc, tc) => new { cc.ClassId, cc.CcId, tc.ClassCourses.Classes.ClassTitle, tc.TcUsersId })
                 .Where(tc => tc.TcUsersId == teacherId)
                 .ToListAsync();
 
             if (!teacherClasses.Any())
-                return NotFound("Giảng viên không có lớp nào dạy khóa học này.");
+            {
+                return NotFound("Không tìm thấy lớp nào của giáo viên trong khóa học này.");
+            }
 
-            // Lấy danh sách bài giảng
-            var classIds = teacherClasses.Select(c => c.ClassId).ToList();
+            var classIds = teacherClasses.Select(tc => tc.ClassId).ToList();
+            var courseClassIds = teacherClasses.Select(tc => tc.CcId).ToList();
+
+            // Lấy danh sách bài giảng theo các lớp học của giáo viên
             var lessons = await _context.Lessons
-                .Where(l => classIds.Contains(l.ClassCourse.ClassId) && l.ClassCourse.CourseId == courseId)
-                .Select(l => new { l.LessonId, l.LessonName, l.ClassCourse.ClassId, l.LessonCreateAt })
+                .Where(l => courseClassIds.Contains(l.LessonClassCourseId))
+                .Select(l => new { l.LessonId, l.LessonName, l.LessonClassCourseId, l.LessonCreateAt })
                 .ToListAsync();
 
-            if (!lessons.Any())
-                return NotFound("Không có bài giảng nào.");
-
-            // Lấy số lượng sinh viên trong từng lớp
             var studentsPerClass = await _context.StudentClasses
                 .Where(sc => classIds.Contains(sc.ScClassId))
                 .GroupBy(sc => sc.ScClassId)
                 .Select(g => new { ClassId = g.Key, TotalStudents = g.Count() })
                 .ToListAsync();
 
-            // Truy vấn dữ liệu học tập
-            var viewDataQuery = _context.StatusLearns
-                .Where(sl => sl.SlStatus == true && lessons.Select(l => l.LessonId).Contains(sl.SlLessonId))
-                .Join(_context.Lessons,
-                      sl => sl.SlLessonId,
-                      l => l.LessonId,
-                      (sl, l) => new
-                      {
-                          sl.SlLessonId,
-                          SlClassId = l.ClassCourse.ClassId,
-                          sl.SlLearnedDate
-                      });
+            var lessonIds = lessons.Select(l => l.LessonId).ToList();
 
-            List<dynamic> lessonViewData;
+            var lessonViewDataQuery = _context.StatusLearns
+                .Where(sl => sl.SlStatus == true && lessonIds.Contains(sl.SlLessonId));
 
-            // Lọc theo đơn vị thời gian nếu có
-            if (timeUnit == "week")
+            if (startDate.HasValue)
             {
-                lessonViewData = await viewDataQuery
-                    .Where(sl => sl.SlLearnedDate >= DateTime.Now.AddDays(-30))
-                    .GroupBy(sl => new { sl.SlLessonId, sl.SlClassId, TimePeriod = EF.Functions.DateDiffWeek(sl.SlLearnedDate, DateTime.Now) })
-                    .Select(g => new { g.Key.SlLessonId, g.Key.SlClassId, g.Key.TimePeriod, ViewedCount = g.Count() })
-                    .ToListAsync<dynamic>();
-            }
-            else if (timeUnit == "month")
-            {
-                lessonViewData = await viewDataQuery
-                    .Where(sl => sl.SlLearnedDate >= DateTime.Now.AddMonths(-6))
-                    .GroupBy(sl => new { sl.SlLessonId, sl.SlClassId, TimePeriod = EF.Functions.DateDiffMonth(sl.SlLearnedDate, DateTime.Now) })
-                    .Select(g => new { g.Key.SlLessonId, g.Key.SlClassId, g.Key.TimePeriod, ViewedCount = g.Count() })
-                    .ToListAsync<dynamic>();
-            }
-            else
-            {
-                lessonViewData = await viewDataQuery
-                    .GroupBy(sl => new { sl.SlLessonId, sl.SlClassId, TimePeriod = 0 })
-                    .Select(g => new { g.Key.SlLessonId, g.Key.SlClassId, g.Key.TimePeriod, ViewedCount = g.Count() })
-                    .ToListAsync<dynamic>();
+                lessonViewDataQuery = lessonViewDataQuery.Where(sl => sl.SlLearnedDate >= startDate.Value);
             }
 
-            var classCompletionRates = new List<object>();
-
-            var result = teacherClasses.Select(tc =>
-            {
-                var totalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0;
-                var classLessons = lessons.Where(l => l.ClassId == tc.ClassId);
-
-                var lessonStats = classLessons.Select(lesson =>
+            var lessonViewData = await lessonViewDataQuery
+                .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date })
+                .Select(g => new
                 {
-                    var lessonViews = lessonViewData
-                        .Where(v => v.SlLessonId == lesson.LessonId && v.SlClassId == tc.ClassId)
-                        .OrderBy(v => v.TimePeriod)
-                        .ToList();
+                    LessonId = g.Key.SlLessonId,
+                    ViewedCount = g.Count(),
+                    LearnedDate = g.Key.Date
+                })
+                .ToListAsync();
 
-                    var timeStats = lessonViews.Select(lv => new
-                    {
-                        TimePeriod = timeUnit == null ? "All Time" : lv.TimePeriod.ToString(),
-                        StudentsViewed = lv.ViewedCount,
-                        StudentsNotViewed = totalStudents - lv.ViewedCount,
-                        CompletionRate = totalStudents > 0 ? Math.Round((lv.ViewedCount * 100.0) / totalStudents, 2) : 0
-                    }).ToList();
+            var courseData = teacherClasses
+                .GroupBy(tc => courseId)
+                .Select(courseGroup => new
+                {
+                    CourseId = courseGroup.Key,
+                    Classes = courseGroup
+                        .GroupBy(tc => tc.ClassId) // Nhóm theo ClassId để tránh bị trùng lặp
+                        .Select(classGroup => new
+                        {
+                            ClassId = classGroup.Key,
+                            ClassName = classGroup.First().ClassTitle, // Lấy tên lớp từ phần tử đầu tiên
+                            TotalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == classGroup.Key)?.TotalStudents ?? 0,
+                            Lessons = lessons.Where(l => classGroup.Select(cg => cg.CcId).Contains(l.LessonClassCourseId))
+                                             .Select(lesson =>
+                                             {
+                                                 var viewedCount = lessonViewData.FirstOrDefault(v => v.LessonId == lesson.LessonId)?.ViewedCount ?? 0;
+                                                 var totalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == classGroup.Key)?.TotalStudents ?? 0;
 
-                    return new
-                    {
-                        lesson.LessonId,
-                        lesson.LessonName,
-                        lesson.LessonCreateAt,
-                        CompletionOverTime = timeStats
-                    };
+                                                 var viewedLastWeek = lessonViewData
+                                                     .Where(v => v.LessonId == lesson.LessonId && v.LearnedDate >= DateTime.UtcNow.AddDays(-7))
+                                                     .Sum(v => v.ViewedCount);
+
+                                                 var viewedLastMonth = lessonViewData
+                                                     .Where(v => v.LessonId == lesson.LessonId && v.LearnedDate >= DateTime.UtcNow.AddMonths(-1))
+                                                     .Sum(v => v.ViewedCount);
+
+                                                 return new
+                                                 {
+                                                     lesson.LessonId,
+                                                     lesson.LessonName,
+                                                     lesson.LessonCreateAt,
+                                                     CompletionOverTime = (timeUnit == "week") ? new[]
+                                                     {
+                                             new
+                                             {
+                                                 TimePeriod = "Last Week",
+                                                 StudentsViewed = viewedLastWeek,
+                                                 StudentsNotViewed = totalStudents - viewedLastWeek,
+                                                 CompletionRate = totalStudents > 0 ? Math.Round((viewedLastWeek * 100.0) / totalStudents, 2) : 0
+                                             }
+                                                     } : (timeUnit == "month") ? new[]
+                                                     {
+                                             new
+                                             {
+                                                 TimePeriod = "Last Month",
+                                                 StudentsViewed = viewedLastMonth,
+                                                 StudentsNotViewed = totalStudents - viewedLastMonth,
+                                                 CompletionRate = totalStudents > 0 ? Math.Round((viewedLastMonth * 100.0) / totalStudents, 2) : 0
+                                             }
+                                                     } : new[]
+                                                     {
+                                             new
+                                             {
+                                                 TimePeriod = "All Time",
+                                                 StudentsViewed = viewedCount,
+                                                 StudentsNotViewed = totalStudents - viewedCount,
+                                                 CompletionRate = totalStudents > 0 ? Math.Round((viewedCount * 100.0) / totalStudents, 2) : 0
+                                             }
+                                                     }
+                                                 };
+                                             }).ToList()
+                        }).ToList()
                 }).ToList();
 
-                var avgCompletion = lessonStats
-                    .SelectMany(l => l.CompletionOverTime)
-                    .Where(t => t.CompletionRate > 0)
-                    .GroupBy(t => t.TimePeriod)
-                    .Select(g => new { 
-                        TimePeriod = g.Key,
-                        AvgCompletionRate = g.Average(x => (double)x.CompletionRate)
-                    })
-                    .OrderBy(x => x.TimePeriod)
-                    .ToList();
-
-                classCompletionRates.Add(new { ClassId = tc.ClassId, ClassName = tc.ClassTitle, AvgCompletionRate = avgCompletion });
-
-                return new { ClassId = tc.ClassId, ClassName = tc.ClassTitle, TotalStudents = totalStudents, Lessons = lessonStats };
-            }).ToList();
-
-            return Ok(new { ClassData = result, ClassComparison = classCompletionRates });
+            return Ok(new { Courses = courseData });
         }
 
         // So sánh mức độ hoàn thành bài giảng giữa các lớp chung học phần(admin)
         [HttpGet("compare-lesson-completion/{courseId}")]
         public async Task<IActionResult> CompareLessonCompletion(int courseId, string? timeUnit = null)
+
         {
             // Chuẩn hóa timeUnit
             timeUnit = string.IsNullOrEmpty(timeUnit) ? null : timeUnit.ToLower();
-
-            // Kiểm tra giá trị hợp lệ
             if (timeUnit != null && timeUnit != "week" && timeUnit != "month")
                 return BadRequest("Đơn vị thời gian không hợp lệ. Chỉ hỗ trợ 'week', 'month' hoặc không truyền để lấy tất cả dữ liệu.");
 
-            // Lấy danh sách lớp trong học phần
+            DateTime? startDate = timeUnit switch
+            {
+                "week" => DateTime.UtcNow.AddDays(-7),
+                "month" => DateTime.UtcNow.AddMonths(-1),
+                _ => null
+            };
+
             var courseClasses = await _context.ClassCourses
-                .Where(cc => cc.CourseId == courseId)
-                .Select(cc => new { cc.ClassId, cc.Classes.ClassTitle })
+                .Where(cc => cc.CourseId == courseId) // Lọc theo courseId
+                .Select(cc => new { cc.CourseId, cc.ClassId, cc.Classes.ClassTitle, cc.CcId, cc.CcDescription })
+                .Distinct()
                 .ToListAsync();
 
-            if (!courseClasses.Any())
-                return NotFound("Không có lớp nào trong học phần này.");
 
-            // Lấy danh sách bài giảng của các lớp trong học phần
-            var classIds = courseClasses.Select(c => c.ClassId).ToList();
+            var courseClassIds = courseClasses.Select(c => c.CcId).ToList();
+
             var lessons = await _context.Lessons
-                .Where(l => classIds.Contains(l.ClassCourse.ClassId) && l.ClassCourse.CourseId == courseId)
-                .Select(l => new { l.LessonId, l.LessonName, l.ClassCourse.ClassId, l.LessonCreateAt })
+                .Where(l => courseClassIds.Contains(l.LessonClassCourseId))
+                .Select(l => new { l.LessonId, l.LessonName, l.LessonClassCourseId, l.LessonCreateAt })
                 .ToListAsync();
 
-            // Lấy số lượng sinh viên trong từng lớp
             var studentsPerClass = await _context.StudentClasses
-                .Where(sc => classIds.Contains(sc.ScClassId))
+                .Where(sc => courseClasses.Select(c => c.ClassId).Contains(sc.ScClassId))
                 .GroupBy(sc => sc.ScClassId)
                 .Select(g => new { ClassId = g.Key, TotalStudents = g.Count() })
                 .ToListAsync();
 
-            // Truy vấn dữ liệu học tập
-            var viewDataQuery = _context.StatusLearns
-                .Where(sl => sl.SlStatus == true && lessons.Select(l => l.LessonId).Contains(sl.SlLessonId))
-                .Join(_context.Lessons,
-                      sl => sl.SlLessonId,
-                      l => l.LessonId,
-                      (sl, l) => new
-                      {
-                          sl.SlLessonId,
-                          SlClassId = l.ClassCourse.ClassId,
-                          sl.SlLearnedDate
-                      });
+            var lessonIds = lessons.Select(l => l.LessonId).ToList();
 
-            List<dynamic> lessonViewData;
+            var lessonViewDataQuery = _context.StatusLearns
+                .Where(sl => sl.SlStatus == true && lessonIds.Contains(sl.SlLessonId));
 
-            // Lọc theo đơn vị thời gian nếu có
-            if (timeUnit == "week")
+            if (startDate.HasValue)
             {
-                lessonViewData = await viewDataQuery
-                    .Where(sl => sl.SlLearnedDate >= DateTime.Now.AddDays(-30))
-                    .GroupBy(sl => new { sl.SlLessonId, sl.SlClassId, TimePeriod = EF.Functions.DateDiffWeek(sl.SlLearnedDate, DateTime.Now) })
-                    .Select(g => new { g.Key.SlLessonId, g.Key.SlClassId, g.Key.TimePeriod, ViewedCount = g.Count() })
-                    .ToListAsync<dynamic>();
-            }
-            else if (timeUnit == "month")
-            {
-                lessonViewData = await viewDataQuery
-                    .Where(sl => sl.SlLearnedDate >= DateTime.Now.AddMonths(-6))
-                    .GroupBy(sl => new { sl.SlLessonId, sl.SlClassId, TimePeriod = EF.Functions.DateDiffMonth(sl.SlLearnedDate, DateTime.Now) })
-                    .Select(g => new { g.Key.SlLessonId, g.Key.SlClassId, g.Key.TimePeriod, ViewedCount = g.Count() })
-                    .ToListAsync<dynamic>();
-            }
-            else
-            {
-                lessonViewData = await viewDataQuery
-                    .GroupBy(sl => new { sl.SlLessonId, sl.SlClassId, TimePeriod = 0 })
-                    .Select(g => new { g.Key.SlLessonId, g.Key.SlClassId, g.Key.TimePeriod, ViewedCount = g.Count() })
-                    .ToListAsync<dynamic>();
+                lessonViewDataQuery = lessonViewDataQuery.Where(sl => sl.SlLearnedDate >= startDate.Value);
             }
 
-            var classCompletionRates = new List<object>();
-
-            var result = courseClasses.Select(tc =>
-            {
-                var totalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0;
-                var classLessons = lessons.Where(l => l.ClassId == tc.ClassId);
-
-                var lessonStats = classLessons.Select(lesson =>
+            var lessonViewData = await lessonViewDataQuery
+                .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date })
+                .Select(g => new
                 {
-                    var lessonViews = lessonViewData
-                        .Where(v => v.SlLessonId == lesson.LessonId && v.SlClassId == tc.ClassId)
-                        .OrderBy(v => v.TimePeriod)
-                        .ToList();
+                    LessonId = g.Key.SlLessonId,
+                    ViewedCount = g.Count(),
+                    LearnedDate = g.Key.Date
+                })
+                .ToListAsync();
 
-                    var timeStats = lessonViews.Select(lv => (dynamic)new
+            var courseData = courseClasses
+                .Where(cc => cc.CourseId == courseId) // Lọc chỉ lấy courseId cần tìm
+                .GroupBy(cc => cc.CourseId)
+                .Select(courseGroup => new
+                {
+                    CourseId = courseGroup.Key,
+                    Classes = courseGroup.Select(tc => new
                     {
-                        TimePeriod = timeUnit == null ? "All Time" : lv.TimePeriod.ToString(),
-                        StudentsViewed = lv.ViewedCount,
-                        StudentsNotViewed = totalStudents - lv.ViewedCount,
-                        CompletionRate = totalStudents > 0 ? Math.Round((lv.ViewedCount * 100.0) / totalStudents, 2) : 0
-                    }).ToList();
-
-                    if (!timeStats.Any())
-                    {
-                        timeStats.Add(new
+                        ClassId = tc.ClassId,
+                        ClassName = tc.ClassTitle,
+                        ClassDescription = tc.CcDescription,
+                        TotalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0,
+                        Lessons = lessons.Where(l => l.LessonClassCourseId == tc.CcId).Select(lesson =>
                         {
-                            TimePeriod = "All Time",
-                            StudentsViewed = 0,
-                            StudentsNotViewed = totalStudents,
-                            CompletionRate = 0
-                        });
-                    }
+                            var viewedCount = lessonViewData.FirstOrDefault(v => v.LessonId == lesson.LessonId)?.ViewedCount ?? 0;
+                            var totalStudents = studentsPerClass.FirstOrDefault(s => s.ClassId == tc.ClassId)?.TotalStudents ?? 0;
 
-                    return new
-                    {
-                        lesson.LessonId,
-                        lesson.LessonName,
-                        lesson.LessonCreateAt,
-                        CompletionOverTime = timeStats
-                    };
+                            var viewedLastWeek = lessonViewData
+                                .Where(v => v.LessonId == lesson.LessonId && v.LearnedDate >= DateTime.UtcNow.AddDays(-7))
+                                .Sum(v => v.ViewedCount);
+
+                            var viewedLastMonth = lessonViewData
+                                .Where(v => v.LessonId == lesson.LessonId && v.LearnedDate >= DateTime.UtcNow.AddMonths(-1))
+                                .Sum(v => v.ViewedCount);
+
+                            return new
+                            {
+                                lesson.LessonId,
+                                lesson.LessonName,
+                                lesson.LessonCreateAt,
+                                CompletionOverTime = (timeUnit == "week") ? new[]
+                                {
+                                    new
+                                    {
+                                        TimePeriod = "Last Week",
+                                        StudentsViewed = viewedLastWeek,
+                                        StudentsNotViewed = totalStudents - viewedLastWeek,
+                                        CompletionRate = totalStudents > 0 ? Math.Round((viewedLastWeek * 100.0) / totalStudents, 2) : 0
+                                    }
+                                            } : (timeUnit == "month") ? new[]
+                                            {
+                                    new
+                                    {
+                                        TimePeriod = "Last Month",
+                                        StudentsViewed = viewedLastMonth,
+                                        StudentsNotViewed = totalStudents - viewedLastMonth,
+                                        CompletionRate = totalStudents > 0 ? Math.Round((viewedLastMonth * 100.0) / totalStudents, 2) : 0
+                                    }
+                                            } : new[]
+                                            {
+                                    new
+                                    {
+                                        TimePeriod = "All Time",
+                                        StudentsViewed = viewedCount,
+                                        StudentsNotViewed = totalStudents - viewedCount,
+                                        CompletionRate = totalStudents > 0 ? Math.Round((viewedCount * 100.0) / totalStudents, 2) : 0
+                                    }
+                                }
+                            };
+                        }).ToList()
+                    }).ToList()
                 }).ToList();
 
-                var avgCompletion = lessonStats
-                    .SelectMany(l => l.CompletionOverTime)
-                    .Where(t => t.CompletionRate > 0)
-                    .GroupBy(t => t.TimePeriod)
-                    .Select(g => new {
-                        TimePeriod = g.Key,
-                        AvgCompletionRate = g.Average(x => (double)x.CompletionRate)
-                    })
-                    .OrderBy(x => x.TimePeriod)
-                    .ToList();
+            return Ok(new { Courses = courseData });
 
-                classCompletionRates.Add(new { ClassId = tc.ClassId, ClassName = tc.ClassTitle, AvgCompletionRate = avgCompletion });
-
-                return new { ClassId = tc.ClassId, ClassName = tc.ClassTitle, TotalStudents = totalStudents, Lessons = lessonStats };
-            }).ToList();
-
-            return Ok(new { ClassData = result, ClassComparison = classCompletionRates });
         }
 
-        // So sánh mức độ hoàn thành bài giảng giữa tất cả các lớp (admin)
         [HttpGet("compare-lesson-completion")]
         public async Task<IActionResult> CompareLessonCompletion(string? timeUnit = null)
         {
@@ -775,31 +765,20 @@ namespace WebBaiGiangAPI.Controllers
             {
                 "week" => DateTime.UtcNow.AddDays(-7),
                 "month" => DateTime.UtcNow.AddMonths(-1),
-                _ => null // alltime (mặc định) => Không có giới hạn thời gian
+                _ => null
             };
 
             var courseClasses = await _context.ClassCourses
                 .Select(cc => new { cc.CourseId, cc.ClassId, cc.Classes.ClassTitle, cc.CcId, cc.CcDescription})
-                .Distinct() // Loại bỏ dữ liệu trùng
+                .Distinct()
                 .ToListAsync();
 
-            //var lessons = await _context.Lessons
-            //    .Where(l => courseClasses.Select(c => c.CcId).Contains(l.LessonClassCourseId))
-            //    .Select(l => new { l.LessonId, l.LessonName, l.LessonClassCourseId, l.LessonCreateAt })
-            //    .Distinct() // Tránh lặp bài giảng
-            //    .ToListAsync();
-
-            var courseClassesList = await _context.ClassCourses
-              .Select(cc => new { cc.CourseId, cc.ClassId, cc.Classes.ClassTitle, cc.CcId })
-              .ToListAsync(); // Chuyển sang danh sách
-
-            var courseClassIds = courseClassesList.Select(c => c.CcId).ToList();
+            var courseClassIds = courseClasses.Select(c => c.CcId).ToList();
 
             var lessons = await _context.Lessons
                 .Where(l => courseClassIds.Contains(l.LessonClassCourseId))
                 .Select(l => new { l.LessonId, l.LessonName, l.LessonClassCourseId, l.LessonCreateAt })
                 .ToListAsync();
-
 
             var studentsPerClass = await _context.StudentClasses
                 .Where(sc => courseClasses.Select(c => c.ClassId).Contains(sc.ScClassId))
@@ -807,15 +786,7 @@ namespace WebBaiGiangAPI.Controllers
                 .Select(g => new { ClassId = g.Key, TotalStudents = g.Count() })
                 .ToListAsync();
 
-            //// Đảm bảo không lấy dữ liệu bị lặp trong join
-            //var lessonViewData = await _context.StatusLearns
-            //    .Where(sl => sl.SlStatus == true && lessons.Select(l => l.LessonId).Contains(sl.SlLessonId))
-            //    .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date })
-            //    .Select(g => new { g.Key.SlLessonId, ViewedCount = g.Count() })
-            //    .Distinct() // Tránh lặp dữ liệu học tập
-            //    .ToListAsync();
-
-            var lessonIds = lessons.Select(l => l.LessonId).ToList(); // Lấy danh sách ID trước
+            var lessonIds = lessons.Select(l => l.LessonId).ToList(); 
 
             var lessonViewDataQuery = _context.StatusLearns
                 .Where(sl => sl.SlStatus == true && lessonIds.Contains(sl.SlLessonId));
@@ -827,12 +798,12 @@ namespace WebBaiGiangAPI.Controllers
 
             var lessonViewData = await _context.StatusLearns
                 .Where(sl => sl.SlStatus == true && lessonIds.Contains(sl.SlLessonId))
-                .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date }) // Nhóm theo ngày
+                .GroupBy(sl => new { sl.SlLessonId, sl.SlLearnedDate.Date }) 
                 .Select(g => new
                 {
                     LessonId = g.Key.SlLessonId,
                     ViewedCount = g.Count(),
-                    LearnedDate = g.Key.Date // Thêm ngày học
+                    LearnedDate = g.Key.Date 
                 })
                 .ToListAsync();
 
@@ -1375,11 +1346,11 @@ namespace WebBaiGiangAPI.Controllers
                 return NotFound("Không có dữ liệu để xuất.");
 
             var data = result.Value as dynamic;
-            if (data == null || data.ClassData == null || data.ClassComparison == null)
+            if (data == null || data.Courses == null || data.Courses.Count == 0)
                 return NotFound("Dữ liệu rỗng.");
 
-            var classData = data.ClassData as IEnumerable<dynamic>;
-            var classComparison = data.ClassComparison as IEnumerable<dynamic>;
+            var course = data.Courses[0];
+            var classData = course.Classes as IEnumerable<dynamic>;
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
@@ -1420,36 +1391,7 @@ namespace WebBaiGiangAPI.Controllers
                     }
                 }
 
-                // Sheet tổng quan so sánh
-                var summarySheet = package.Workbook.Worksheets.Add("Completion Summary");
-
-                string[] summaryHeaders = { "Mã Lớp", "Tên Lớp", "Thời Gian", "Tỷ Lệ Hoàn Thành Trung Bình (%)" };
-                for (int i = 0; i < summaryHeaders.Length; i++)
-                {
-                    summarySheet.Cells[1, i + 1].Value = summaryHeaders[i];
-                    summarySheet.Cells[1, i + 1].Style.Font.Bold = true;
-                    summarySheet.Cells[1, i + 1].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                    summarySheet.Cells[1, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
-                    summarySheet.Cells[1, i + 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                }
-
-                int summaryRow = 2;
-                foreach (var classSummary in classComparison)
-                {
-                    foreach (var avgCompletion in classSummary.AvgCompletionRate)
-                    {
-                        summarySheet.Cells[summaryRow, 1].Value = classSummary.ClassId;
-                        summarySheet.Cells[summaryRow, 2].Value = classSummary.ClassName;
-                        summarySheet.Cells[summaryRow, 3].Value = avgCompletion.TimePeriod;
-                        summarySheet.Cells[summaryRow, 4].Value = avgCompletion.AvgCompletionRate;
-
-                        summarySheet.Cells[summaryRow, 1, summaryRow, 4].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-                        summaryRow++;
-                    }
-                }
-
                 worksheet.Cells.AutoFitColumns();
-                summarySheet.Cells.AutoFitColumns();
 
                 var stream = new MemoryStream();
                 package.SaveAs(stream);
@@ -1470,11 +1412,14 @@ namespace WebBaiGiangAPI.Controllers
                 return NotFound("Không có dữ liệu để xuất.");
 
             var data = result.Value as dynamic;
-            if (data == null || data.ClassData == null || data.ClassComparison == null)
+            if (data == null || data.Courses == null)
                 return NotFound("Dữ liệu rỗng.");
 
-            var classData = data.ClassData as IEnumerable<dynamic>;
-            var classComparison = data.ClassComparison as IEnumerable<dynamic>;
+            var courses = data.Courses as IEnumerable<dynamic>;
+            var course = courses?.FirstOrDefault();
+
+            if (course == null || course.Classes == null)
+                return NotFound("Không có lớp học trong khóa học này.");
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
@@ -1491,7 +1436,7 @@ namespace WebBaiGiangAPI.Controllers
                 }
 
                 int row = 2;
-                foreach (var classItem in classData)
+                foreach (var classItem in course.Classes)
                 {
                     foreach (var lesson in classItem.Lessons)
                     {
@@ -1511,46 +1456,7 @@ namespace WebBaiGiangAPI.Controllers
                     }
                 }
 
-                var summarySheet = package.Workbook.Worksheets.Add("Completion Summary");
-                string[] summaryHeaders = { "Mã Lớp", "Tên Lớp", "Thời Gian", "Tỷ Lệ Hoàn Thành Trung Bình (%)" };
-                for (int i = 0; i < summaryHeaders.Length; i++)
-                {
-                    summarySheet.Cells[1, i + 1].Value = summaryHeaders[i];
-                    summarySheet.Cells[1, i + 1].Style.Font.Bold = true;
-                    summarySheet.Cells[1, i + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    summarySheet.Cells[1, i + 1].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
-                    summarySheet.Cells[1, i + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                }
-
-                int summaryRow = 2;
-                foreach (var classSummary in classComparison)
-                {
-                    var avgCompletionRates = (classSummary.AvgCompletionRate as IEnumerable<dynamic>)?.ToList() ?? new List<dynamic>();
-                    if (avgCompletionRates.Count > 0)
-                    {
-                        foreach (var avgCompletion in avgCompletionRates)
-                        {
-                            summarySheet.Cells[summaryRow, 1].Value = classSummary.ClassId;
-                            summarySheet.Cells[summaryRow, 2].Value = classSummary.ClassName;
-                            summarySheet.Cells[summaryRow, 3].Value = avgCompletion.TimePeriod;
-                            summarySheet.Cells[summaryRow, 4].Value = avgCompletion.AvgCompletionRate;
-                            summaryRow++;
-                        }
-                    }
-                    else
-                    {
-                        // Thêm dòng mặc định với tỷ lệ hoàn thành là 0%
-                        summarySheet.Cells[summaryRow, 1].Value = classSummary.ClassId;
-                        summarySheet.Cells[summaryRow, 2].Value = classSummary.ClassName;
-                        summarySheet.Cells[summaryRow, 3].Value = "All Time"; // Hoặc giá trị mặc định
-                        summarySheet.Cells[summaryRow, 4].Value = 0;
-                        summaryRow++;
-                    }
-
-                }
-
                 worksheet.Cells.AutoFitColumns();
-                summarySheet.Cells.AutoFitColumns();
 
                 var stream = new MemoryStream();
                 package.SaveAs(stream);

@@ -1,22 +1,58 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250331101613_Trình tự phát triển phần mềm nghiệp vụ.docx'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250401142733_Các loại hash.xlsx'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>LessonFiles/20250331101613_Trình tự phát triển phần mềm nghiệp vụ.docx</RelativePath>
+      <RelativePath>LessonFiles/20250401142733_Các loại hash.xlsx</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>r8wcgq1bbq</Fingerprint>
-      <Integrity>O7YGlmYPFNNZwgf9OjuVHDjJCcgUsRNfmWYcIKnQWdQ=</Integrity>
+      <Fingerprint>bj359k9abh</Fingerprint>
+      <Integrity>2dW7J5VMbzehcpwqNpHJtwR+hZgEwsOSVT+PP0ngF+Y=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250331101613_Trình tự phát triển phần mềm nghiệp vụ.docx'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250401142733_Các loại hash.xlsx'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250401142847_lịch sử hình thành.docx'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WebBaiGiangAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WebBaiGiangAPI</BasePath>
+      <RelativePath>LessonFiles/20250401142847_lịch sử hình thành.docx</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>ip1vn7e3e7</Fingerprint>
+      <Integrity>mlKaL0naGibZjv0J3v9V3CIcAKdf8pT6rVUyvRxKF08=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250401142847_lịch sử hình thành.docx'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250401142847_MauBaoCaoTT.docx'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WebBaiGiangAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WebBaiGiangAPI</BasePath>
+      <RelativePath>LessonFiles/20250401142847_MauBaoCaoTT.docx</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>59h3s2ywq4</Fingerprint>
+      <Integrity>GX4H75KiycYvYjYut6fX5tl/8KqaIp8ThvRkaIKRVQE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\LessonFiles\20250401142847_MauBaoCaoTT.docx'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

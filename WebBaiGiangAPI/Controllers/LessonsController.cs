@@ -34,21 +34,39 @@ namespace WebBaiGiangAPI.Controllers
             lesson.LessonCreateAt = DateTime.Now;
             lesson.LessonUpdateAt = DateTime.Now;
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            //if (_context.Courses.Find(lesson.ClassCourse.CourseId) == null) return NotFound("Khóa học không tồn tại");
-            //if (_context.Classes.Find(lesson.ClassCourse.ClassId) == null) return NotFound("Lớp học không tồn tại.");
-            if (_context.ClassCourses.Where(cc => cc.CcId == lesson.LessonClassCourseId).FirstOrDefault() == null) return NotFound("Khóa học không thuộc lớp học này.");
-            if (_context.Users.Where(u => u.UsersId == lesson.LessonTeacherId && u.UsersRoleId == 2).FirstOrDefault() == null) return NotFound("Giáo viên không tồn tại.");
+            
+            var existingCourse = _context.Courses.Join(_context.ClassCourses,
+                                                      c => c.CourseId,
+                                                      cc => cc.CourseId,
+                                                      (c, cc) => new { c.CourseId, cc.CcId })
+                                                      .Where(cc => cc.CcId == lesson.LessonClassCourseId)
+                                                      .FirstOrDefault();
+            if (existingCourse == null) return NotFound("Khóa học không tồn tại");
+
+            var existingClass = _context.Classes.Join(_context.ClassCourses,
+                                                    cl => cl.ClassId,
+                                                    cc => cc.ClassId,
+                                                    (cl, cc) => new { cl.ClassId, cc.CcId })
+                                                    .Where(cl => cl.CcId == lesson.LessonClassCourseId)
+                                                    .FirstOrDefault();
+            if (existingClass == null) return NotFound("Lớp học không tồn tại.");
+
+            if (_context.ClassCourses.Where(cc => cc.CcId == lesson.LessonClassCourseId).FirstOrDefault() == null) 
+                return NotFound("Khóa học không thuộc lớp học này.");
+
+            if (_context.Users.Where(u => u.UsersId == lesson.LessonTeacherId && u.UsersRoleId == 2).FirstOrDefault() == null) 
+                return NotFound("Giáo viên không tồn tại.");
+
             if (lesson.LessonWeek < 1 || lesson.LessonWeek > 16) return BadRequest("Tuần học không hợp lệ.");
-            if (_context.ClassCourses.Where(cc => cc.ClassId == lesson.LessonClassCourseId).FirstOrDefault() == null) return NotFound("Khóa học không thuộc lớp học này.");
-            //if (_context.TeacherClasses.Where(tc => tc.ClassCourses.ClassId == lesson.ClassCourse.ClassId && tc.TcUsersId == lesson.LessonTeacherId).FirstOrDefault() == null) return NotFound("Giáo viên không thuộc lớp học này.");
+
             bool exists = await _context.TeacherClasses
                 .Join(_context.ClassCourses,
                       tc => tc.TcClassCourseId,
                       cc => cc.CcId,
-                      (tc, cc) => new { tc.TcUsersId, cc.ClassId })
-                .AnyAsync(t => t.TcUsersId == lesson.LessonTeacherId && t.ClassId == lesson.LessonClassCourseId);
-
+                      (tc, cc) => new { tc.TcUsersId})
+                .AnyAsync(t => t.TcUsersId == lesson.LessonTeacherId);
             if (!exists) return NotFound("Giáo viên không thuộc lớp học này.");
+
             if (lesson.LessonStatus != true && lesson.LessonStatus != false) return BadRequest("Trạng thái bài giảng không hợp lệ.");
             
             lesson.LessonDescription = Regex.Replace(lesson.LessonDescription.Trim(), @"\s+", " ");
@@ -155,8 +173,6 @@ namespace WebBaiGiangAPI.Controllers
                           u.UsersEmail,
                       })
                 .ToListAsync();
-            if (students == null || students.Count == 0) return NotFound("Không có sinh viên nào trong lớp này.");
-            //var courseName = _context.Courses.Find(lesson.ClassCourse.CourseId)?.CourseTitle;
             var courseName = _context.Courses
                 .Join(_context.ClassCourses,
                       c => c.CourseId,
@@ -209,80 +225,88 @@ namespace WebBaiGiangAPI.Controllers
                 var lesson = await _context.Lessons.FindAsync(lessonId);
                 if (lesson == null) return NotFound("Bài giảng không tồn tại.");
                 if (lesson.LessonTeacherId != teacherId) return Unauthorized("Bạn không có quyền xóa bài giảng này.");
-                _context.Lessons.Remove(lesson);
+
+                // Kiểm tra xem bài giảng có đang được sử dụng ở bảng khác không trước khi xóa
+                bool isLinked = await _context.StatusLearns.AnyAsync(sl => sl.SlLessonId == lessonId);
+                if (isLinked)
+                {
+                    return BadRequest("Bài giảng đang được liên kết với dữ liệu khác, không thể xóa!");
+                }
+
+                // Lấy thông tin cần thiết trong một truy vấn duy nhất
+                var lessonInfo = await (
+                    from cc in _context.ClassCourses
+                    join c in _context.Courses on cc.CourseId equals c.CourseId
+                    join cl in _context.Classes on cc.ClassId equals cl.ClassId
+                    where cc.CcId == lesson.LessonClassCourseId
+                    select new
+                    {
+                        c.CourseTitle,
+                        cl.ClassId,
+                        cl.ClassTitle
+                    }
+                ).FirstOrDefaultAsync();
+
+                if (lessonInfo == null) return NotFound("Không tìm thấy thông tin khóa học và lớp.");
 
                 var teacher = await _context.Users
-                .Where(u => u.UsersId == lesson.LessonTeacherId)
-                .Select(u => new { u.UsersName, u.UsersEmail })
-                .FirstOrDefaultAsync();
+                    .Where(u => u.UsersId == lesson.LessonTeacherId)
+                    .Select(u => new { u.UsersName, u.UsersEmail })
+                    .FirstOrDefaultAsync();
 
-                //var courseName = _context.Courses.Find(lesson.ClassCourse.CourseId)?.CourseTitle;
-                //var className = _context.Classes.Find(lesson.ClassCourse.ClassId)?.ClassTitle;
-                var courseName = _context.Courses.Join(_context.ClassCourses,
-                                                      c => c.CourseId,
-                                                      cc => cc.CourseId,
-                                                      (c, cc) => new { c.CourseTitle })
-                                                      .Select(c => c.CourseTitle)
-                                                      .FirstOrDefault();
-                var classInfo = _context.Classes.Join(_context.ClassCourses,
-                                                    cl => cl.ClassId,
-                                                    cc => cc.ClassId,
-                                                    (cl, cc) => new { cl.ClassTitle, cl.ClassId })
-                                                    .Select(cl => new {cl.ClassId, cl.ClassTitle})
-                                                    .FirstOrDefault();
+                if (teacher == null) return NotFound("Không tìm thấy thông tin giáo viên.");
+
+                // Tạo thông báo xóa bài giảng
                 var announcement = new Announcement
                 {
-                    AnnouncementClassId = classInfo.ClassId,
-                    AnnouncementTitle = $"🗑️ Bài giảng {lesson.LessonName} đã bị xóa vào {DateTime.Now} bởi giáo viên {teacher.UsersName}",
+                    AnnouncementClassId = lessonInfo.ClassId,
+                    AnnouncementTitle = $"🗑️ Bài giảng {lesson.LessonName} đã bị xóa bởi giáo viên {teacher.UsersName}",
                     AnnouncementDescription = $"❌ **Bài giảng đã bị xóa:** {lesson.LessonName}\n" +
-                                            $"📚 **Khóa học:** {courseName}\n" +
-                                            $"🏛️ **Lớp:** {classInfo.ClassTitle}\n" +
-                                            $"📅 **Tuần học:** {lesson.LessonWeek}\n" +
-                                            $"📋 **Chương học:** {lesson.LessonChapter}",
+                                              $"📚 **Khóa học:** {lessonInfo.CourseTitle}\n" +
+                                              $"🏛️ **Lớp:** {lessonInfo.ClassTitle}\n" +
+                                              $"📅 **Tuần học:** {lesson.LessonWeek}\n" +
+                                              $"📋 **Chương học:** {lesson.LessonChapter}",
                     AnnouncementDate = DateTime.Now,
                     AnnouncementTeacherId = lesson.LessonTeacherId
                 };
                 _context.Announcements.Add(announcement);
 
-                // Lấy danh sách sinh viên trong lớp
-                var students = await _context.StudentClasses
-                    .Where(sc => sc.ScClassId == classInfo.ClassId && sc.ScStatus == 1)
-                    .Join(_context.Users,
-                          sc => sc.ScStudentId,
-                          u => u.UsersId,
-                          (sc, u) => new { u.UsersEmail })
+                // Lấy danh sách sinh viên trong lớp để gửi email
+                var studentEmails = await _context.StudentClasses
+                    .Where(sc => sc.ScClassId == lessonInfo.ClassId && sc.ScStatus == 1)
+                    .Join(_context.Users, sc => sc.ScStudentId, u => u.UsersId, (sc, u) => u.UsersEmail)
                     .ToListAsync();
 
-                int emailCount = 0;
-                string subject = $"Giáo viên {teacher.UsersName} đã xóa bài giảng!";
+                // Xóa bài giảng
+                _context.Lessons.Remove(lesson);
+                await _context.SaveChangesAsync();
 
+                // Gửi email thông báo
+                string subject = $"Giáo viên {teacher.UsersName} đã xóa bài giảng!";
                 string body = $"<h3>Bài giảng đã bị xóa: {lesson.LessonName}</h3>"
-                            + $"<p><strong>📚 Khóa học:</strong> {courseName}</p>"
-                            + $"<p><strong>🏛️ Lớp:</strong> {classInfo.ClassTitle}</p>"
+                            + $"<p><strong>📚 Khóa học:</strong> {lessonInfo.CourseTitle}</p>"
+                            + $"<p><strong>🏛️ Lớp:</strong> {lessonInfo.ClassTitle}</p>"
                             + $"<p><strong>📅 Tuần học:</strong> {lesson.LessonWeek}</p>"
                             + $"<p><strong>📋 Chương học:</strong> {lesson.LessonChapter}</p>"
                             + "<p>Vui lòng liên hệ giáo viên để biết thêm thông tin.</p>";
 
-                foreach (var student in students)
+                int emailCount = 0;
+                foreach (var studentEmail in studentEmails)
                 {
-                    bool isSent = await _emailService.SendEmail(student.UsersEmail, subject, body);
-                    if (isSent)
-                    {
-                        emailCount++;
-                    }
+                    bool isSent = await _emailService.SendEmail(studentEmail, subject, body);
+                    if (isSent) emailCount++;
                 }
 
-                // Gửi email cho giáo viên xác nhận bài giảng đã bị xóa
+                // Gửi email xác nhận cho giáo viên
                 await _emailService.SendEmail(teacher.UsersEmail,
                     "Thông báo: Bài giảng đã bị xóa",
                     $"Bài giảng {lesson.LessonName} đã bị xóa thành công và thông báo đã được gửi đến {emailCount} sinh viên.");
 
-                await _context.SaveChangesAsync();
-                return Ok(new {Message = "Xóa bài giảng thành công."});
+                return Ok(new { Message = "Xóa bài giảng thành công." });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest("Bài giảng đang được liên kết bảng khác, không thể xóa!");
+                return StatusCode(500, $"Lỗi máy chủ: {ex.Message}");
             }
         }
 
