@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -547,6 +548,10 @@ namespace WebBaiGiangAPI.Migrations
                     QuizClassId = table.Column<int>(type: "int", nullable: false),
                     QuizTeacherId = table.Column<int>(type: "int", nullable: false),
                     QuizTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    QuizCreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuizUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuizStartAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuizEndAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     QuizDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

@@ -150,7 +150,6 @@ namespace WebBaiGiangAPI.Controllers
             return Ok(ass);
         }
 
-
         [HttpPut("update-assignment")]
         public async Task<IActionResult> UpdateAssignment([FromForm]AssignmentDTO assignmentDTO, [FromForm]IFormFile? file)
         {

@@ -408,8 +408,12 @@ namespace WebBaiGiangAPI.Data
                     {
                         QuizClassId = 1,
                         QuizTeacherId = 2,
-                        QuizTitle = "Kiểm tra Toán",
-                        QuizDescription = "Mô tả bài kiểm tra"
+                        QuizTitle = "Kiểm tra lập trình C#",
+                        QuizDescription = "Mô tả bài kiểm tra",
+                        QuizCreateAt = DateTime.Now.AddHours(-1),
+                        QuizUpdateAt = DateTime.Now.AddHours(-1),
+                        QuizStartAt = DateTime.Now,
+                        QuizEndAt = DateTime.Now.AddHours(1)
                     }
                     };
                     foreach (var q in quizzes)

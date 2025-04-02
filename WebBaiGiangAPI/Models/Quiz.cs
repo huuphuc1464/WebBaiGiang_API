@@ -21,6 +21,18 @@ namespace WebBaiGiangAPI.Models
 
         public string? QuizDescription { get; set; }
 
+        [Required]
+        public DateTime QuizCreateAt { get; set; }
+
+        [Required]
+        public DateTime QuizUpdateAt { get; set; }
+
+        [Required]
+        public DateTime QuizStartAt { get; set; }
+
+        [Required]
+        public DateTime QuizEndAt { get; set; }
+
         [ForeignKey("QuizClassId")]
         public Class Classes { get; set; } 
 
