@@ -399,6 +399,25 @@ namespace WebBaiGiangAPI.Data
                     context.SaveChanges();
                 }
 
+                // ------------------ Seed TeacherClasses ------------------
+                if (!context.TeacherClasses.Any())
+                {
+                    var teacherClasses = new TeacherClass[]
+                    {
+                        new TeacherClass
+                        {
+                            TcUsersId = 2,
+                            TcClassCourseId = 1,
+                            TcDescription = "Giảng dạy Toán"
+                        }
+                    };
+                    foreach (var tc in teacherClasses)
+                    {
+                        context.TeacherClasses.Add(tc);
+                    }
+                    context.SaveChanges();
+                }
+
                 // ------------------ Seed Quizzes ------------------
                 if (!context.Quizzes.Any())
                 {
@@ -406,8 +425,9 @@ namespace WebBaiGiangAPI.Data
                     {
                     new Quiz
                     {
-                        QuizClassId = 1,
-                        QuizTeacherId = 2,
+                        //QuizClassId = 1,
+                        //QuizTeacherId = 2,
+                        QuizClassCourseId = 1,
                         QuizTitle = "Kiểm tra lập trình C#",
                         QuizDescription = "Mô tả bài kiểm tra",
                         QuizCreateAt = DateTime.Now.AddHours(-1),
@@ -675,25 +695,6 @@ namespace WebBaiGiangAPI.Data
                     foreach (var sc in studentClasses)
                     {
                         context.StudentClasses.Add(sc);
-                    }
-                    context.SaveChanges();
-                }
-
-                // ------------------ Seed TeacherClasses ------------------
-                if (!context.TeacherClasses.Any())
-                {
-                    var teacherClasses = new TeacherClass[]
-                    {
-                        new TeacherClass
-                        {
-                            TcUsersId = 2,
-                            TcClassCourseId = 1,
-                            TcDescription = "Giảng dạy Toán"
-                        }
-                    };
-                    foreach (var tc in teacherClasses)
-                    {
-                        context.TeacherClasses.Add(tc);
                     }
                     context.SaveChanges();
                 }

@@ -31,5 +31,8 @@ namespace WebBaiGiangAPI.Models
 
         [JsonIgnore]
         public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
+
+        [JsonIgnore]
+        public ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
     }
 }

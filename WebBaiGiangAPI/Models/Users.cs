@@ -85,8 +85,8 @@ namespace WebBaiGiangAPI.Models
         public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
         [JsonIgnore]
         public ICollection<TeacherClass> TeacherClasses { get; set; } = new List<TeacherClass>();
-        [JsonIgnore]
-        public ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
+        //[JsonIgnore]
+        //public ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
         [JsonIgnore]
         public ICollection<Announcement> Announcements { get; set; } = new List<Announcement>();
         [JsonIgnore]

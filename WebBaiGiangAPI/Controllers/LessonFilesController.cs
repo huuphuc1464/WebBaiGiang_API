@@ -18,12 +18,10 @@ namespace WebBaiGiangAPI.Controllers
     public class LessonFilesController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly EmailService _emailService;
 
-        public LessonFilesController(AppDbContext context, EmailService emailService)
+        public LessonFilesController(AppDbContext context)
         {
             _context = context;
-            _emailService = emailService;
         }
 
         // Upload file cho bài giảng

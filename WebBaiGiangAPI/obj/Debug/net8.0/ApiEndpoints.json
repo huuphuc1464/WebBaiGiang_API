@@ -2386,7 +2386,7 @@
         "IsRequired": true
       },
       {
-        "Name": "newClassId",
+        "Name": "classCourseId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -2515,54 +2515,202 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
-    "Method": "GetQuizzes",
-    "RelativePath": "api/QuizzesContronller",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.Quiz, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
-    "Method": "PostQuiz",
-    "RelativePath": "api/QuizzesContronller",
+    "Method": "AddQuestion",
+    "RelativePath": "api/QuizzesContronller/add-question",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "quiz",
-        "Type": "WebBaiGiangAPI.Models.Quiz",
+        "Name": "question",
+        "Type": "WebBaiGiangAPI.Models.QuizQuestion",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "CreateQuiz",
+    "RelativePath": "api/QuizzesContronller/create-quiz",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "WebBaiGiangAPI.Models.Quiz",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "request",
+        "Type": "WebBaiGiangAPI.Controllers.QuizzesContronller\u002BQuizRequest",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "DeleteQuiz",
+    "RelativePath": "api/QuizzesContronller/delete-quiz/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "DuplicateQuiz",
+    "RelativePath": "api/QuizzesContronller/duplicate/{quizId}/{classCourseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "quizId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "classCourseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ExportQuizResultsByClassCourse",
+    "RelativePath": "api/QuizzesContronller/export-excel/quiz-results-by-classcourse/{classCourseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classCourseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ExportQuizResultsByQuiz",
+    "RelativePath": "api/QuizzesContronller/export-excel/quiz-results-by-quiz/{quizId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quizId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ExportQuizAll",
+    "RelativePath": "api/QuizzesContronller/export-quiz-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ExportQuizByClassCourseId",
+    "RelativePath": "api/QuizzesContronller/export-quiz-by-classcourseid/{classCourseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classCourseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ExportQuizByQuizId",
+    "RelativePath": "api/QuizzesContronller/export-quiz-by-quizid/{quizId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quizId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ExportQuizByTeacherId",
+    "RelativePath": "api/QuizzesContronller/export-quiz-by-teacherid/{teacherId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "GetAllQuiz",
+    "RelativePath": "api/QuizzesContronller/get-all-quiz",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
     "Method": "GetQuiz",
-    "RelativePath": "api/QuizzesContronller/{id}",
+    "RelativePath": "api/QuizzesContronller/get-quiz/{id}/{teacherId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2571,24 +2719,197 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "WebBaiGiangAPI.Models.Quiz",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
-    "Method": "PutQuiz",
-    "RelativePath": "api/QuizzesContronller/{id}",
+    "Method": "GetQuizzesByClassTeacher",
+    "RelativePath": "api/QuizzesContronller/get-quizzes-by-class-teacher/{classId}/{teacherId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "GetQuizzesByClassId",
+    "RelativePath": "api/QuizzesContronller/get-quizzes-by-classId/{classId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "GetQuizzesByTeacherId",
+    "RelativePath": "api/QuizzesContronller/get-quizzes-by-teacherId/{teacherId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ImportExcel",
+    "RelativePath": "api/QuizzesContronller/import-excel",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "classCourse",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "QuizResultsByClassCourse",
+    "RelativePath": "api/QuizzesContronller/quiz-results-by-classcourse/{classCourseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classCourseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "QuizResultsByQuiz",
+    "RelativePath": "api/QuizzesContronller/quiz-results-by-quiz/{quizId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quizId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "SearchQuizzes",
+    "RelativePath": "api/QuizzesContronller/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyword",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "classCourseId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "UpdateQuiz",
+    "RelativePath": "api/QuizzesContronller/update-quiz/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "WebBaiGiangAPI.Controllers.QuizzesContronller\u002BQuizRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
+    "Method": "ToggleQuizVisibility",
+    "RelativePath": "api/QuizzesContronller/visibility/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -2599,25 +2920,9 @@
         "IsRequired": true
       },
       {
-        "Name": "quiz",
-        "Type": "WebBaiGiangAPI.Models.Quiz",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.QuizzesContronller",
-    "Method": "DeleteQuiz",
-    "RelativePath": "api/QuizzesContronller/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
+        "Name": "teacherId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

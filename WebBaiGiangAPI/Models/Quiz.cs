@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -9,11 +10,14 @@ namespace WebBaiGiangAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuizId { get; set; }
 
-        [Required]
-        public int QuizClassId { get; set; }
+        //[Required]
+        //public int QuizClassId { get; set; }
+
+        //[Required]
+        //public int QuizTeacherId { get; set; }
 
         [Required]
-        public int QuizTeacherId { get; set; }
+        public int QuizClassCourseId { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -33,13 +37,21 @@ namespace WebBaiGiangAPI.Models
         [Required]
         public DateTime QuizEndAt { get; set; }
 
-        [ForeignKey("QuizClassId")]
-        public Class Classes { get; set; } 
+        [Required]
+        public bool QuizStatus { get; set; }
 
-        [ForeignKey("QuizTeacherId")]
-        public Users Teacher { get; set; }
+        //[ForeignKey("QuizClassId")]
+        //public Class Classes { get; set; } 
+
+        //[ForeignKey("QuizTeacherId")]
+        //public Users Teacher { get; set; }
+
+        [JsonIgnore]
+        [ForeignKey("QuizClassCourseId")]
+        public ClassCourse? ClassCourse { get; set; }
+        [JsonIgnore]
         public ICollection<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
+        [JsonIgnore]
         public ICollection<QuizResult> QuizResults { get; set; } = new List<QuizResult>();
-
     }
 }

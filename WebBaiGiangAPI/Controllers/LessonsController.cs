@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -182,7 +182,7 @@ namespace WebBaiGiangAPI.Controllers
                 .FirstOrDefault();
             var className = _context.Classes.Find(classId)?.ClassTitle;
             int emailCount = 0;
-            string subject = $"Giáo viên {teacher.UsersName} đã cập nhật bài giảng!";
+            string subject = $"Giáo viên \"{teacher.UsersName}\" đã cập nhật bài giảng!";
 
             string body = $"<h3>Bài giảng đã được cập nhật: {lesson.LessonName}</h3>"
                         + $"<p><strong>🔄 Thông tin cập nhật:</strong></p>"
@@ -362,67 +362,47 @@ namespace WebBaiGiangAPI.Controllers
 
             return Ok(lesson);
         }
-        
+
         [HttpPost("duplicate/{lessonId}")]
-        public async Task<IActionResult> DuplicateLesson(int lessonId, [FromQuery] int newClassId)
+        public async Task<IActionResult> DuplicateLesson(int lessonId, [FromQuery] int classCourseId)
         {
             // Kiểm tra bài giảng có tồn tại không
             var lesson = await _context.Lessons.FindAsync(lessonId);
             if (lesson == null) return NotFound("Bài giảng không tồn tại.");
 
-            // Kiểm tra lớp mới có tồn tại không
-            var newClass = await _context.Classes.FindAsync(newClassId);
-            if (newClass == null) return NotFound("Lớp học mới không tồn tại.");
+            // Kiểm tra lớp học mới có tồn tại không
+            var newClassCourse = await _context.ClassCourses.FindAsync(classCourseId);
+            if (newClassCourse == null) return NotFound("Lớp học phần mới không tồn tại.");
 
-            // Kiểm tra lớp mới có thuộc cùng học phần không
-            //var classCourse = await _context.ClassCourses
-            //    .FirstOrDefaultAsync(cc => cc.ClassId == newClassId && cc.CourseId == lesson.ClassCourse.CourseId);
-            var classCourse = await _context.ClassCourses
-                .Join(_context.Lessons,
-                      cc => cc.CcId,
-                      l => l.LessonClassCourseId,
-                      (cc, l) => new { cc.ClassId, l.LessonId })
+            // Kiểm tra lớp học mới có cùng CourseId không
+            var courseId = await _context.ClassCourses
+                .Where(cc => cc.CcId == lesson.LessonClassCourseId)
+                .Select(cc => cc.CourseId)
                 .FirstOrDefaultAsync();
-            if (classCourse == null) return BadRequest("Lớp học mới không thuộc cùng học phần với bài giảng.");
+
+            if (courseId == null) return BadRequest("Không tìm thấy học phần của bài giảng.");
+
+            bool exists = await _context.ClassCourses
+                .AnyAsync(cc => cc.CcId == classCourseId && cc.CourseId == courseId);
+
+            if (!exists) return BadRequest("Lớp học mới không thuộc cùng học phần với bài giảng.");
 
             // Kiểm tra giáo viên có thuộc lớp mới không
-            //var teacherClass = await _context.TeacherClasses
-            //    .FirstOrDefaultAsync(tc => tc.ClassCourses.ClassId == newClassId && tc.TcUsersId == lesson.LessonTeacherId);
-            var teacherClass = _context.TeacherClasses.Join(_context.ClassCourses,
-                                                            tc => tc.TcClassCourseId,
-                                                            cc => cc.CcId,
-                                                            (tc, cc) => new { tc.TcUsersId, cc.ClassId })
-                                                        .Where(x => x.TcUsersId == lesson.LessonTeacherId && x.ClassId == newClassId)
-                                                        .FirstOrDefault();
-            if (teacherClass == null) return BadRequest("Giáo viên của bài giảng không thuộc lớp mới.");
+            bool teacherExists = await _context.TeacherClasses
+                .AnyAsync(tc => tc.TcClassCourseId == classCourseId && tc.TcUsersId == lesson.LessonTeacherId);
+
+            if (!teacherExists) return BadRequest("Giáo viên của bài giảng không thuộc lớp mới.");
 
             // Kiểm tra lớp mới đã có bài giảng trùng tên chưa
-            //var existingLesson = await _context.Lessons
-            //    .FirstOrDefaultAsync(l => l.ClassCourse.ClassId == newClassId && l.LessonName == lesson.LessonName);
-            var existingLesson = await _context.Lessons
-                .Join(_context.ClassCourses,
-                      l => l.LessonClassCourseId,
-                      cc => cc.CcId,
-                      (l, cc) => new { l.LessonName, cc.ClassId })
-                .Where (l => l.LessonName == lesson.LessonName && l.ClassId == newClassId)
-                .FirstOrDefaultAsync();
-            if (existingLesson != null) return Conflict("Lớp học mới đã có bài giảng cùng tên.");
-            
-            var classInfo = _context.Classes.Join(_context.ClassCourses,
-                                    cl => cl.ClassId,
-                                    cc => cc.ClassId,
-                                    (cl, cc) => new { cl.ClassTitle, cl.ClassId, cc.CcId })
-                                    .Select(cl => new { cl.ClassId, cl.ClassTitle, cl.CcId })
-                                    .Where(cl => cl.ClassId == newClassId)
-                                    .FirstOrDefault();
-            if (classInfo == null) return NotFound("Lớp học mới không tồn tại");
+            bool lessonExists = await _context.Lessons
+                .AnyAsync(l => l.LessonClassCourseId == classCourseId && l.LessonName == lesson.LessonName);
+
+            if (lessonExists) return Conflict("Lớp học mới đã có bài giảng cùng tên.");
 
             // Nhân bản bài giảng
             var duplicateLesson = new Lesson
             {
-                //LessonClassId = newClassId,
-                //LessonCourseId = lesson.LessonCourseId,
-                LessonClassCourseId = classInfo.CcId,
+                LessonClassCourseId = classCourseId,
                 LessonTeacherId = lesson.LessonTeacherId,
                 LessonDescription = lesson.LessonDescription,
                 LessonChapter = lesson.LessonChapter,
@@ -435,15 +415,12 @@ namespace WebBaiGiangAPI.Controllers
 
             _context.Lessons.Add(duplicateLesson);
             await _context.SaveChangesAsync();
-            
-            var lessonFiles = await _context.LessonFiles.Where(f => f.LfLessonId == lessonId).ToListAsync();
 
-            // Sao chép file đính kèm của bài giảng
+            // Nhân bản tệp đính kèm
+            var lessonFiles = await _context.LessonFiles.Where(f => f.LfLessonId == lessonId).ToListAsync();
             if (lessonFiles.Any())
             {
                 string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "LessonFiles");
-
-                // Kiểm tra thư mục tồn tại
                 if (!Directory.Exists(uploadFolder))
                 {
                     Directory.CreateDirectory(uploadFolder);
@@ -451,32 +428,17 @@ namespace WebBaiGiangAPI.Controllers
 
                 foreach (var file in lessonFiles)
                 {
-                    string originalFileName = Path.GetFileNameWithoutExtension(file.LfPath);
                     string fileExtension = Path.GetExtension(file.LfPath);
-
-                    string pattern = @"^\d{14}_"; // Regex cho timestamp: YYYYMMDDHHMMSS_
-                    originalFileName = System.Text.RegularExpressions.Regex.Replace(originalFileName, pattern, "");
-
-                    // Tạo tên file mới: thời gian + tên gốc (không có timestamp cũ)
                     string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    string newFileName = $"{timestamp}_{originalFileName}{fileExtension}";
-
-                    // Xác định đường dẫn đầy đủ
+                    string newFileName = $"{timestamp}_{Path.GetFileName(file.LfPath)}";
                     string oldPath = Path.Combine(uploadFolder, file.LfPath);
                     string newPath = Path.Combine(uploadFolder, newFileName);
 
                     try
                     {
-                        // Kiểm tra file gốc tồn tại
                         if (System.IO.File.Exists(oldPath))
                         {
-                            // Sao chép file sang đường dẫn mới
                             System.IO.File.Copy(oldPath, newPath);
-                        }
-                        else
-                        {
-                            Console.WriteLine($"File không tồn tại: {oldPath}");
-                            continue;
                         }
                     }
                     catch (Exception ex)
@@ -485,67 +447,54 @@ namespace WebBaiGiangAPI.Controllers
                         continue;
                     }
 
-                    var copiedFile = new LessonFile
+                    _context.LessonFiles.Add(new LessonFile
                     {
                         LfLessonId = duplicateLesson.LessonId,
-                        LfPath = newFileName, 
+                        LfPath = newFileName,
                         LfType = file.LfType
-                    };
-                    _context.LessonFiles.Add(copiedFile);
-                    await _context.SaveChangesAsync();
+                    });
                 }
+
+                await _context.SaveChangesAsync();
             }
-            var teacher = await _context.Users.Where(u => u.UsersId == duplicateLesson.LessonTeacherId).Select(u => new { u.UsersName, u.UsersEmail }).FirstOrDefaultAsync();
+
+            // Gửi thông báo
+            var teacher = await _context.Users
+                .Where(u => u.UsersId == duplicateLesson.LessonTeacherId)
+                .Select(u => new { u.UsersName, u.UsersEmail })
+                .FirstOrDefaultAsync();
+
             var announcement = new Announcement
             {
-                AnnouncementClassId = classInfo.ClassId,
+                AnnouncementClassId = newClassCourse.ClassId,
                 AnnouncementTitle = $"📢 Bài giảng mới: {duplicateLesson.LessonName} đã được tạo vào {duplicateLesson.LessonCreateAt} bởi giáo viên {teacher.UsersName}",
-                AnnouncementDescription = $"📚 Mô tả: {duplicateLesson.LessonDescription} \n📅 Tuần học: {duplicateLesson.LessonWeek} \n 📋 Chương học: {duplicateLesson.LessonChapter}",
+                AnnouncementDescription = $"📚 Mô tả: {duplicateLesson.LessonDescription} \n📅 Tuần học: {duplicateLesson.LessonWeek} \n📋 Chương học: {duplicateLesson.LessonChapter}",
                 AnnouncementDate = DateTime.Now,
                 AnnouncementTeacherId = duplicateLesson.LessonTeacherId
             };
-            _context.Announcements.Add(announcement);
 
+            _context.Announcements.Add(announcement);
+            await _context.SaveChangesAsync();
+
+            // Gửi email thông báo đến sinh viên
             var students = await _context.StudentClasses
-                .Where(sc => sc.ScClassId == classInfo.ClassId && sc.ScStatus == 1)
-                .Join(_context.Users,
-                      sc => sc.ScStudentId,
-                      u => u.UsersId,
-                      (sc, u) => new
-                      {
-                          u.UsersId,
-                          u.UsersName,
-                          u.UsersEmail,
-                      })
+                .Where(sc => sc.ScClassId == newClassCourse.ClassId && sc.ScStatus == 1)
+                .Join(_context.Users, sc => sc.ScStudentId, u => u.UsersId, (sc, u) => u.UsersEmail)
                 .ToListAsync();
-            var courseName = _context.ClassCourses
-                .Join(_context.Courses, cc => cc.CourseId, c => c.CourseId, (cc, c) => new { c.CourseTitle, cc.CcId })
-                .Where(cc => cc.CcId == duplicateLesson.LessonClassCourseId)
-                .Select(c => c.CourseTitle)
-                .FirstOrDefault();
-            int emailCount = 0;
+
             string subject = $"Giáo viên {teacher.UsersName} đã thêm bài giảng mới!";
             string body = $"<h3>Bài giảng mới: {duplicateLesson.LessonName}</h3>"
                         + $"<p>Mô tả: {duplicateLesson.LessonDescription}</p>"
-                        + $"<p>Khóa học: {courseName}</p>"
-                        + $"<p>Lớp: {classInfo.ClassTitle}</p>"
                         + $"<p>Tuần: {duplicateLesson.LessonWeek}, Chương: {duplicateLesson.LessonChapter}</p>"
                         + "<p>Vui lòng đăng nhập để xem chi tiết.</p>";
-            foreach (var student in students)
-            {
-                bool isSent = await _emailService.SendEmail(student.UsersEmail, subject, body);
-                if (isSent)
-                {
-                    emailCount++;
-                }
-            }
-            await _emailService.SendEmail(teacher.UsersEmail, "Thông báo: Bài giảng mới đã được tạo", $"Bài giảng {duplicateLesson.LessonName} đã được tạo thành công và đã được gửi đến {emailCount} sinh viên.");
-            await _context.SaveChangesAsync();
-            return Ok(new
-            {
-                Message = "Nhân bản bài giảng thành công.",
-                DuplicateLesson = duplicateLesson
-            });
+
+            var emailTasks = students.Select(email => _emailService.SendEmail(email, subject, body)).ToList();
+            await Task.WhenAll(emailTasks);
+
+            await _emailService.SendEmail(teacher.UsersEmail, "Thông báo: Bài giảng mới đã được tạo",
+                $"Bài giảng {duplicateLesson.LessonName} đã được tạo thành công và đã gửi đến {students.Count} sinh viên.");
+
+            return Ok(new { Message = "Nhân bản bài giảng thành công.", DuplicateLesson = duplicateLesson });
         }
 
         // Ẩn/Hiện bài giảng

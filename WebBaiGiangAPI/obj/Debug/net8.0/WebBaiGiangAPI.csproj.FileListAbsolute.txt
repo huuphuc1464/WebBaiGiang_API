@@ -549,3 +549,4 @@ D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\refint\WebBaiGiangAP
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\WebBaiGiangAPI.pdb
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\WebBaiGiangAPI.genruntimeconfig.cache
 D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\ref\WebBaiGiangAPI.dll
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

@@ -540,38 +540,6 @@ namespace WebBaiGiangAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Quizzes",
-                columns: table => new
-                {
-                    QuizId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    QuizClassId = table.Column<int>(type: "int", nullable: false),
-                    QuizTeacherId = table.Column<int>(type: "int", nullable: false),
-                    QuizTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    QuizCreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    QuizUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    QuizStartAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    QuizEndAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    QuizDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Quizzes", x => x.QuizId);
-                    table.ForeignKey(
-                        name: "FK_Quizzes_Classes_QuizClassId",
-                        column: x => x.QuizClassId,
-                        principalTable: "Classes",
-                        principalColumn: "ClassId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Quizzes_Users_QuizTeacherId",
-                        column: x => x.QuizTeacherId,
-                        principalTable: "Users",
-                        principalColumn: "UsersId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -617,6 +585,47 @@ namespace WebBaiGiangAPI.Migrations
                         principalTable: "Users",
                         principalColumn: "UsersId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Quizzes",
+                columns: table => new
+                {
+                    QuizId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    //QuizClassId = table.Column<int>(type: "int", nullable: false),
+                    //QuizTeacherId = table.Column<int>(type: "int", nullable: false),
+                    QuizClassCourseId = table.Column<int>(type: "int", nullable: false),
+                    QuizTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    QuizCreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuizUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuizStartAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuizEndAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuizDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuizStatus = table.Column<bool>(type: "bit", nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Quizzes", x => x.QuizId);
+                    //table.ForeignKey(
+                    //    name: "FK_Quizzes_Classes_QuizClassId",
+                    //    column: x => x.QuizClassId,
+                    //    principalTable: "Classes",
+                    //    principalColumn: "ClassId",
+                    //    onDelete: ReferentialAction.Restrict);
+                    //table.ForeignKey(
+                    //    name: "FK_Quizzes_Users_QuizTeacherId",
+                    //    column: x => x.QuizTeacherId,
+                    //    principalTable: "Users",
+                    //    principalColumn: "UsersId",
+                    //    onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Quizzes_ClassCourses_QuizClassCourseId",
+                        column: x => x.QuizClassCourseId,
+                        principalTable: "ClassCourses",
+                        principalColumn: "CcId",
+                        onDelete: ReferentialAction.Restrict);
+
                 });
 
             migrationBuilder.CreateTable(
@@ -674,7 +683,7 @@ namespace WebBaiGiangAPI.Migrations
                     QqOption2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QqOption3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QqOption4 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QqCorrect = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    QqCorrect = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QqDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -1087,15 +1096,20 @@ namespace WebBaiGiangAPI.Migrations
                 table: "QuizResults",
                 column: "QrStudentId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Quizzes_QuizClassId",
-                table: "Quizzes",
-                column: "QuizClassId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Quizzes_QuizClassId",
+            //    table: "Quizzes",
+            //    column: "QuizClassId");
+
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Quizzes_QuizTeacherId",
+            //    table: "Quizzes",
+            //    column: "QuizTeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quizzes_QuizTeacherId",
+                name: "IX_Quizzes_QuizClassCourseId",
                 table: "Quizzes",
-                column: "QuizTeacherId");
+                column: "QuizClassCourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_RoleName",

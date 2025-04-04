@@ -1,16 +1,28 @@
 {
   "Files": [
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142733_Các loại hash.xlsx",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250401142733_Các loại hash.xlsx"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164342_Các loại hash.xlsx",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250403164342_Các loại hash.xlsx"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_MauBaoCaoTT.docx",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250401142847_MauBaoCaoTT.docx"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164343_SQLQuery1.sql",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250403164343_SQLQuery1.sql"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250401142847_lịch sử hình thành.docx",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250401142847_lịch sử hình thành.docx"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164343_logo.svg",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250403164343_logo.svg"
+    },
+    {
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164411_Các loại hash.xlsx",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250403164411_Các loại hash.xlsx"
+    },
+    {
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164411_SQLQuery1.sql",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250403164411_SQLQuery1.sql"
+    },
+    {
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164411_logo.svg",
+      "PackagePath": "staticwebassets\\LessonFiles\\20250403164411_logo.svg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebBaiGiangAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

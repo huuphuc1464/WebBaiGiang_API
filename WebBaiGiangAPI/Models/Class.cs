@@ -38,8 +38,8 @@ namespace WebBaiGiangAPI.Models
         //public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
         [JsonIgnore]
         public ICollection<Subject> Subjects { get; set; } = new List<Subject>();
-        [JsonIgnore]
-        public ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
+        //[JsonIgnore]
+        //public ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
         [JsonIgnore]
         public ICollection<AttendanceMarks> AttendanceMarks { get; set; } = new List<AttendanceMarks>();
         [JsonIgnore]

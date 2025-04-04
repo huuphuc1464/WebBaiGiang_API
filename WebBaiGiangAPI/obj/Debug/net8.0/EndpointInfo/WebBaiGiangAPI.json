@@ -3923,7 +3923,7 @@
             }
           },
           {
-            "name": "newClassId",
+            "name": "classCourseId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -4032,43 +4032,98 @@
         }
       }
     },
-    "/api/QuizzesContronller": {
-      "get": {
+    "/api/QuizzesContronller/create-quiz": {
+      "post": {
         "tags": [
           "QuizzesContronller"
         ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuizRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuizRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuizRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Quiz"
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/import-excel": {
+      "post": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "classCourse",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Quiz"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Quiz"
-                  }
+              "encoding": {
+                "file": {
+                  "style": "form"
                 }
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
         }
-      },
+      }
+    },
+    "/api/QuizzesContronller/add-question": {
       "post": {
         "tags": [
           "QuizzesContronller"
@@ -4077,46 +4132,41 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Quiz"
+                "$ref": "#/components/schemas/QuizQuestion"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Quiz"
+                "$ref": "#/components/schemas/QuizQuestion"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Quiz"
+                "$ref": "#/components/schemas/QuizQuestion"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Quiz"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Quiz"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Quiz"
-                }
-              }
-            }
+            "description": "Success"
           }
         }
       }
     },
-    "/api/QuizzesContronller/{id}": {
+    "/api/QuizzesContronller/get-all-quiz": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/get-quiz/{id}/{teacherId}": {
       "get": {
         "tags": [
           "QuizzesContronller"
@@ -4130,31 +4180,153 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "teacherId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Quiz"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Quiz"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Quiz"
-                }
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/get-quizzes-by-teacherId/{teacherId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/get-quizzes-by-classId/{classId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/get-quizzes-by-class-teacher/{classId}/{teacherId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/update-quiz/{id}": {
+      "put": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuizRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuizRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuizRequest"
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
         }
-      },
+      }
+    },
+    "/api/QuizzesContronller/visibility/{id}": {
       "put": {
         "tags": [
           "QuizzesContronller"
@@ -4168,33 +4340,24 @@
               "type": "integer",
               "format": "int32"
             }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Quiz"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Quiz"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Quiz"
-              }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success"
           }
         }
-      },
+      }
+    },
+    "/api/QuizzesContronller/delete-quiz/{id}": {
       "delete": {
         "tags": [
           "QuizzesContronller"
@@ -4202,6 +4365,306 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/duplicate/{quizId}/{classCourseId}": {
+      "post": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "classCourseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/search": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "classCourseId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/export-quiz-by-quizid/{quizId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/export-quiz-by-classcourseid/{classCourseId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "classCourseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teacherId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/export-quiz-by-teacherid/{teacherId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/export-quiz-all": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/quiz-results-by-classcourse/{classCourseId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "classCourseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/quiz-results-by-quiz/{quizId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/export-excel/quiz-results-by-quiz/{quizId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizzesContronller/export-excel/quiz-results-by-classcourse/{classCourseId}": {
+      "get": {
+        "tags": [
+          "QuizzesContronller"
+        ],
+        "parameters": [
+          {
+            "name": "classCourseId",
             "in": "path",
             "required": true,
             "schema": {
@@ -7545,11 +8008,11 @@
       },
       "Quiz": {
         "required": [
-          "quizClassId",
+          "quizClassCourseId",
           "quizCreateAt",
           "quizEndAt",
           "quizStartAt",
-          "quizTeacherId",
+          "quizStatus",
           "quizTitle",
           "quizUpdateAt"
         ],
@@ -7559,11 +8022,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "quizClassId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quizTeacherId": {
+          "quizClassCourseId": {
             "type": "integer",
             "format": "int32"
           },
@@ -7592,25 +8051,8 @@
             "type": "string",
             "format": "date-time"
           },
-          "classes": {
-            "$ref": "#/components/schemas/Class"
-          },
-          "teacher": {
-            "$ref": "#/components/schemas/Users"
-          },
-          "quizQuestions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuizQuestion"
-            },
-            "nullable": true
-          },
-          "quizResults": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuizResult"
-            },
-            "nullable": true
+          "quizStatus": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -7656,16 +8098,28 @@
             "type": "string"
           },
           "qqCorrect": {
-            "maxLength": 10,
             "minLength": 1,
             "type": "string"
           },
           "qqDescription": {
             "type": "string",
             "nullable": true
-          },
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizRequest": {
+        "type": "object",
+        "properties": {
           "quiz": {
             "$ref": "#/components/schemas/Quiz"
+          },
+          "quizQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuizQuestion"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

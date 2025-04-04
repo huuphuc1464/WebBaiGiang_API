@@ -169,16 +169,22 @@ namespace WebBaiGiangAPI.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             // --- Quiz ---
-            modelBuilder.Entity<Quiz>()
-                .HasOne(q => q.Classes)
-                .WithMany(c => c.Quizzes)
-                .HasForeignKey(q => q.QuizClassId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Quiz>()
+            //    .HasOne(q => q.Classes)
+            //    .WithMany(c => c.Quizzes)
+            //    .HasForeignKey(q => q.QuizClassId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Quiz>()
+            //    .HasOne(q => q.Teacher)
+            //    .WithMany(u => u.Quizzes)
+            //    .HasForeignKey(q => q.QuizTeacherId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Quiz>()
-                .HasOne(q => q.Teacher)
+                .HasOne(q => q.ClassCourse)
                 .WithMany(u => u.Quizzes)
-                .HasForeignKey(q => q.QuizTeacherId)
+                .HasForeignKey(q => q.QuizClassCourseId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // --- QuizQuestion ---

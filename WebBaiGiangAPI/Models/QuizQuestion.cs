@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -28,12 +29,12 @@ namespace WebBaiGiangAPI.Models
         public string QqOption4 { get; set; }
 
         [Required]
-        [MaxLength(10)]
         public string QqCorrect { get; set; }
 
         public string? QqDescription { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("QqQuizId")]
-        public Quiz Quiz { get; set; }
+        public Quiz? Quiz { get; set; }
     }
 }

@@ -326,11 +326,11 @@ namespace WebBaiGiangAPI.Controllers
         [HttpPost("add-student")]
         public async Task<ActionResult<Student>> AddStudent(StudentDTO studentDTO)
         {
-            var errorResult = KiemTraTokenTeacher();
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
 
             if (!ModelState.IsValid)
             {
@@ -503,11 +503,11 @@ namespace WebBaiGiangAPI.Controllers
         [HttpPost("import-student")]
         public async Task<IActionResult> ImportStudents([FromForm] IFormFile file)
         {
-            var errorResult = KiemTraTokenTeacher();
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
 
             if (file == null || file.Length == 0)
             {
@@ -630,10 +630,6 @@ namespace WebBaiGiangAPI.Controllers
             return null;
         }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.StudentId == id);
-        }
         private ActionResult? KiemTraTokenTeacher()
         {
             var authorizationHeader = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
