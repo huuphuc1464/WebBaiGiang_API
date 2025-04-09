@@ -4814,98 +4814,6 @@
         }
       }
     },
-    "/api/QuizzesContronller/quiz-results-by-classcourse/{classCourseId}": {
-      "get": {
-        "tags": [
-          "QuizzesContronller"
-        ],
-        "parameters": [
-          {
-            "name": "classCourseId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/QuizzesContronller/quiz-results-by-quiz/{quizId}": {
-      "get": {
-        "tags": [
-          "QuizzesContronller"
-        ],
-        "parameters": [
-          {
-            "name": "quizId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/QuizzesContronller/export-excel/quiz-results-by-quiz/{quizId}": {
-      "get": {
-        "tags": [
-          "QuizzesContronller"
-        ],
-        "parameters": [
-          {
-            "name": "quizId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/QuizzesContronller/export-excel/quiz-results-by-classcourse/{classCourseId}": {
-      "get": {
-        "tags": [
-          "QuizzesContronller"
-        ],
-        "parameters": [
-          {
-            "name": "classCourseId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/api/SchoolYears/get-school-years": {
       "get": {
         "tags": [
@@ -5254,6 +5162,249 @@
               "format": "int32"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/total-quiz-question": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/quiz-submissions": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/completion-rate/{quizId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/score-trend/{classCourseId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "classCourseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/export-score-trend/{classCourseId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "classCourseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/quiz-results-by-classcourse/{classCourseId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "classCourseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/quiz-results-by-quiz/{quizId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/export-excel/quiz-results-by-quiz/{quizId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/export-excel/quiz-results-by-classcourse/{classCourseId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "classCourseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/questions/most-incorrect/{quizId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/students/not-submitted/{quizId}": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/StatisticQuiz/export/overview": {
+      "get": {
+        "tags": [
+          "StatisticQuiz"
         ],
         "responses": {
           "200": {

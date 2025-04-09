@@ -294,6 +294,8 @@ namespace WebBaiGiangAPI.Controllers
                 .Include(qr => qr.Student).ThenInclude(s => s.Users)
                 .Include(qr => qr.QuizResultDetails).ThenInclude(qrd => qrd.QuizQuestion)
                 .Where(qr => qr.QrQuizId == quizId)
+                .OrderByDescending(qr => ((double)qr.QrAnswer/qr.QrTotalQuestion))
+                .OrderByDescending(qr => qr.QrDate)
                 .ToListAsync();
 
             if (!quizResults.Any())
