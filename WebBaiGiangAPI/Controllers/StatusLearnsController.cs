@@ -753,6 +753,7 @@ namespace WebBaiGiangAPI.Controllers
 
         }
 
+        // So sánh mức độ hoàn thành bài giảng giữa tất cả các lớp (admin)
         [HttpGet("compare-lesson-completion")]
         public async Task<IActionResult> CompareLessonCompletion(string? timeUnit = null)
         {
@@ -871,6 +872,7 @@ namespace WebBaiGiangAPI.Controllers
             return Ok(new { Courses = courseData });
 
         }
+
         // Xuất excel thống kê Tổng số sinh viên hoàn thành từng bài giảng theo lớp học phần.
         [HttpGet("export-excel/statistics-student-learned-by-class/{classCourseId}")]
         public async Task<IActionResult> ExcelStudentLearnedByClass(int classCourseId)
@@ -1038,7 +1040,7 @@ namespace WebBaiGiangAPI.Controllers
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Thống kê trạng thái học.xlsx");
             }
         }
-
+        
         // Xuất excel thống kê tỉ lệ hoàn thành bài học theo học viên ở lớp học phần (lọc theo thời gian nếu có).
         [HttpGet("export-excel/statistics-student-progress/{classCourseId}")]
         public async Task<IActionResult> ExportStudentProgress(

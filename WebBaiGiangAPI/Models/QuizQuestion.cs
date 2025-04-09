@@ -36,5 +36,9 @@ namespace WebBaiGiangAPI.Models
         [JsonIgnore]
         [ForeignKey("QqQuizId")]
         public Quiz? Quiz { get; set; }
+
+        [JsonIgnore]
+        public ICollection<QuizResultDetail> QuizResultDetails { get; set; } = new List<QuizResultDetail>();
+
     }
 }

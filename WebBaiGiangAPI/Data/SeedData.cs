@@ -487,6 +487,27 @@ namespace WebBaiGiangAPI.Data
                     context.SaveChanges();
                 }
 
+                // ------------------ Seed QuizResultDetails ------------------
+                if (!context.QuizResultDetails.Any())
+                {
+                    var quizResultDetails = new QuizResultDetail[]
+                    {
+                        new QuizResultDetail
+                        {
+                            QrdResultId = 1,
+                            QrdQuestionId = 1,
+                            QrdStudentAnswer = "4",
+                            QrdIsCorrect = true
+                        }
+                    };
+                    foreach (var qr in quizResultDetails)
+                    {
+                        context.QuizResultDetails.Add(qr);
+                    }
+                    context.SaveChanges();
+                }
+
+
                 // ------------------ Seed Exams ------------------
                 if (!context.Exams.Any())
                 {

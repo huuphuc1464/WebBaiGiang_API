@@ -43,6 +43,7 @@ namespace WebBaiGiangAPI.Data
         public DbSet<StudentClass> StudentClasses { get; set; }
         public DbSet<ClassCourse> ClassCourses { get; set; }
         public DbSet<StatusLearn> StatusLearns { get; set; }
+        public DbSet<QuizResultDetail> QuizResultDetails { get; set; } 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // --- User Entity ---
@@ -361,6 +362,21 @@ namespace WebBaiGiangAPI.Data
                 .WithMany(c => c.ClassCourses)
                 .HasForeignKey(cc => cc.CourseId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // --- QuizResultDetail ---
+            modelBuilder.Entity<QuizResultDetail>()
+                .HasOne(e => e.QuizResult)
+                .WithMany(qr => qr.QuizResultDetails) 
+                .HasForeignKey(e => e.QrdResultId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<QuizResultDetail>()
+                .HasOne(e => e.QuizQuestion)
+                .WithMany(qq => qq.QuizResultDetails)
+                .HasForeignKey(e => e.QrdQuestionId)
+                .OnDelete(DeleteBehavior.Restrict);
+           
+
 
             base.OnModelCreating(modelBuilder);
         }

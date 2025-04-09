@@ -4032,6 +4032,232 @@
         }
       }
     },
+    "/api/QuizResults/submit/{quizId}/{studentId}": {
+      "post": {
+        "tags": [
+          "QuizResults"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "studentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QuizResultDetail"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QuizResultDetail"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QuizResultDetail"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizResults/get-quiz-results-by-quizid/{quizId}": {
+      "get": {
+        "tags": [
+          "QuizResults"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizResults/get-quiz-result-detail/{resultId}": {
+      "get": {
+        "tags": [
+          "QuizResults"
+        ],
+        "parameters": [
+          {
+            "name": "resultId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizResults/delete-quiz-result/{resultId}": {
+      "delete": {
+        "tags": [
+          "QuizResults"
+        ],
+        "parameters": [
+          {
+            "name": "resultId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizResults/export-quiz-result/{quizId}": {
+      "get": {
+        "tags": [
+          "QuizResults"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizResults/compare-quiz-results/{teacherId}": {
+      "get": {
+        "tags": [
+          "QuizResults"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/QuizResults/update-quiz-result/{quizId}": {
+      "put": {
+        "tags": [
+          "QuizResults"
+        ],
+        "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QuizQuestion"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QuizQuestion"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QuizQuestion"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/QuizzesContronller/create-quiz": {
       "post": {
         "tags": [
@@ -8157,12 +8383,35 @@
           "qrDate": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizResultDetail": {
+        "required": [
+          "qrdQuestionId",
+          "qrdResultId"
+        ],
+        "type": "object",
+        "properties": {
+          "qrdId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "quiz": {
-            "$ref": "#/components/schemas/Quiz"
+          "qrdResultId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "student": {
-            "$ref": "#/components/schemas/Student"
+          "qrdQuestionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qrdStudentAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "qrdIsCorrect": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

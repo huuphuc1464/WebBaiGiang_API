@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -24,10 +25,15 @@ namespace WebBaiGiangAPI.Models
         [Required]
         public DateTime QrDate { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("QrQuizId")]
         public Quiz Quiz { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("QrStudentId")]
         public Student Student { get; set; }
+
+        [JsonIgnore]
+        public ICollection<QuizResultDetail> QuizResultDetails { get; set; } = new List<QuizResultDetail>();
     }
 }

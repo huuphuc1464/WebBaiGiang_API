@@ -917,6 +917,34 @@ namespace WebBaiGiangAPI.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "QuizResultDetails",
+                columns: table => new
+                {
+                    QrdId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QrdResultId = table.Column<int>(type: "int", nullable: false),
+                    QrdQuestionId = table.Column<int>(type: "int", nullable: false),
+                    QrdStudentAnswer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QrdIsCorrect = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuizResultDetails", x => x.QrdId);
+                    table.ForeignKey(
+                        name: "FK_QuizResultDetails_QuizQuestions_QrdQuestionId",
+                        column: x => x.QrdQuestionId,
+                        principalTable: "QuizQuestions",
+                        principalColumn: "QqId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_QuizResultDetails_QuizResults_QrdResultId",
+                        column: x => x.QrdResultId,
+                        principalTable: "QuizResults",
+                        principalColumn: "QrId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Announcements_AnnouncementClassId",
                 table: "Announcements",
@@ -1228,6 +1256,16 @@ namespace WebBaiGiangAPI.Migrations
                 table: "Users",
                 column: "UsersUsername",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+               name: "IX_QuizResultDetails_QrdQuestionId",
+               table: "QuizResultDetails",
+               column: "QrdQuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuizResultDetails_QrdResultId",
+                table: "QuizResultDetails",
+                column: "QrdResultId");
         }
 
         /// <inheritdoc />
@@ -1338,6 +1376,8 @@ namespace WebBaiGiangAPI.Migrations
             migrationBuilder.DropTable(
                 name: "States");
 
+            migrationBuilder.DropTable(
+                name: "QuizResultDetails");
         }
     }
 }
