@@ -579,8 +579,9 @@ namespace WebBaiGiangAPI.Data
                         new Assignment
                         {
                             AssignmentTitle = "Bài tập Toán",
-                            AssignmentClassId = 1,
-                            AssignmentTeacherId = 1,
+                            //AssignmentClassId = 1,
+                            //AssignmentTeacherId = 1,
+                            AssignmentClassCourseId = 1,
                             AssignmentCreateAt = DateTime.Now,
                             AssignmentStart = DateTime.Now,
                             AssignmentStatus = 1

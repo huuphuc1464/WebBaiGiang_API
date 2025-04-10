@@ -18,10 +18,13 @@ namespace WebBaiGiangAPI.Models
 
         public string? AssignmentDescription { get; set; }
 
-        public int? AssignmentTeacherId { get; set; }
+        //public int? AssignmentTeacherId { get; set; }
+
+        //[Required]
+        //public int AssignmentClassId { get; set; }
 
         [Required]
-        public int AssignmentClassId { get; set; }
+        public int AssignmentClassCourseId { get; set; }
 
         public DateTime? AssignmentDeadline { get; set; }
 

@@ -268,7 +268,7 @@
         ],
         "parameters": [
           {
-            "name": "tID",
+            "name": "teacherId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -443,7 +443,7 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "AssignmentClassId",
+                  "AssignmentClassCourseId",
                   "AssignmentStart",
                   "AssignmentTitle"
                 ],
@@ -464,11 +464,7 @@
                   "AssignmentDescription": {
                     "type": "string"
                   },
-                  "AssignmentTeacherId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "AssignmentClassId": {
+                  "AssignmentClassCourseId": {
                     "type": "integer",
                     "format": "int32"
                   },
@@ -535,10 +531,7 @@
                 "AssignmentDescription": {
                   "style": "form"
                 },
-                "AssignmentTeacherId": {
-                  "style": "form"
-                },
-                "AssignmentClassId": {
+                "AssignmentClassCourseId": {
                   "style": "form"
                 },
                 "AssignmentDeadline": {
@@ -592,7 +585,7 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "AssignmentClassId",
+                  "AssignmentClassCourseId",
                   "AssignmentStart",
                   "AssignmentTitle"
                 ],
@@ -613,11 +606,7 @@
                   "AssignmentDescription": {
                     "type": "string"
                   },
-                  "AssignmentTeacherId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "AssignmentClassId": {
+                  "AssignmentClassCourseId": {
                     "type": "integer",
                     "format": "int32"
                   },
@@ -684,10 +673,7 @@
                 "AssignmentDescription": {
                   "style": "form"
                 },
-                "AssignmentTeacherId": {
-                  "style": "form"
-                },
-                "AssignmentClassId": {
+                "AssignmentClassCourseId": {
                   "style": "form"
                 },
                 "AssignmentDeadline": {
@@ -5401,18 +5387,6 @@
         }
       }
     },
-    "/api/StatisticQuiz/export/overview": {
-      "get": {
-        "tags": [
-          "StatisticQuiz"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/api/StatusLearns/get-status-learn-by-lesson/{lessonId}": {
       "get": {
         "tags": [
@@ -5783,7 +5757,7 @@
         }
       }
     },
-    "/api/StatusLearns/export-excel/statistics-student-progress/{classCourseId}": {
+    "/api/StatusLearns/export-excel/top-students/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
@@ -5822,7 +5796,7 @@
         }
       }
     },
-    "/api/StatusLearns/export-excel/top-students/{classCourseId}": {
+    "/api/StatusLearns/export-excel/statistics-student-progress/{classCourseId}": {
       "get": {
         "tags": [
           "StatusLearns"
@@ -7897,7 +7871,7 @@
       },
       "Assignment": {
         "required": [
-          "assignmentClassId",
+          "assignmentClassCourseId",
           "assignmentCreateAt",
           "assignmentStart",
           "assignmentTitle"
@@ -7922,12 +7896,7 @@
             "type": "string",
             "nullable": true
           },
-          "assignmentTeacherId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "assignmentClassId": {
+          "assignmentClassCourseId": {
             "type": "integer",
             "format": "int32"
           },
@@ -7948,6 +7917,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "classCourse": {
+            "$ref": "#/components/schemas/ClassCourse"
           }
         },
         "additionalProperties": false

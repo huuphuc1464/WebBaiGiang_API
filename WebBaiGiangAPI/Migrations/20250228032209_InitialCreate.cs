@@ -836,8 +836,9 @@ namespace WebBaiGiangAPI.Migrations
                     AssignmentTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     AssignmentFilename = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     AssignmentDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AssignmentTeacherId = table.Column<int>(type: "int", nullable: true),
-                    AssignmentClassId = table.Column<int>(type: "int", nullable: false),
+                    //AssignmentTeacherId = table.Column<int>(type: "int", nullable: true),
+                    //AssignmentClassId = table.Column<int>(type: "int", nullable: false),
+                    AssignmentClassCourseId = table.Column<int>(type: "int", nullable: false),
                     AssignmentDeadline = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AssignmentCreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AssignmentStart = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -846,17 +847,23 @@ namespace WebBaiGiangAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
+                    //table.ForeignKey(
+                    //    name: "FK_Assignments_Classes_AssignmentClassId",
+                    //    column: x => x.AssignmentClassId,
+                    //    principalTable: "Classes",
+                    //    principalColumn: "ClassId",
+                    //    onDelete: ReferentialAction.Restrict);
+                    //table.ForeignKey(
+                    //    name: "FK_Assignments_Users_AssignmentTeacherId",
+                    //    column: x => x.AssignmentTeacherId,
+                    //    principalTable: "Users",
+                    //    principalColumn: "UsersId",
+                    //    onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Assignments_Classes_AssignmentClassId",
-                        column: x => x.AssignmentClassId,
-                        principalTable: "Classes",
-                        principalColumn: "ClassId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Assignments_Users_AssignmentTeacherId",
-                        column: x => x.AssignmentTeacherId,
-                        principalTable: "Users",
-                        principalColumn: "UsersId",
+                        name: "FK_Assignments_ClassCourses_AssignmentClassCourseId",
+                        column: x => x.AssignmentClassCourseId,
+                        principalTable: "ClassCourses",
+                        principalColumn: "CcId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -955,15 +962,20 @@ namespace WebBaiGiangAPI.Migrations
                 table: "Announcements",
                 column: "AnnouncementTeacherId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Assignments_AssignmentClassId",
-                table: "Assignments",
-                column: "AssignmentClassId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Assignments_AssignmentClassId",
+            //    table: "Assignments",
+            //    column: "AssignmentClassId");
+
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Assignments_AssignmentTeacherId",
+            //    table: "Assignments",
+            //    column: "AssignmentTeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assignments_AssignmentTeacherId",
+                name: "IX_Assignments_AssignmentClassCourseId",
                 table: "Assignments",
-                column: "AssignmentTeacherId");
+                column: "AssignmentClassCourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AttendanceMarks_ClassId",
@@ -1296,6 +1308,9 @@ namespace WebBaiGiangAPI.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
+                name: "QuizResultDetails");
+
+            migrationBuilder.DropTable(
                 name: "QuizQuestions");
 
             migrationBuilder.DropTable(
@@ -1375,9 +1390,6 @@ namespace WebBaiGiangAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "States");
-
-            migrationBuilder.DropTable(
-                name: "QuizResultDetails");
         }
     }
 }

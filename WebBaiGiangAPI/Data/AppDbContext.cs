@@ -261,16 +261,23 @@ namespace WebBaiGiangAPI.Data
 
             // --- Assignment ---
             modelBuilder.Entity<Assignment>()
-                .HasOne(a => a.Users)
-                .WithMany(tc => tc.Assignments)
-                .HasForeignKey(a => a.AssignmentTeacherId)
+                .HasOne(a => a.ClassCourse)
+                .WithMany(s => s.Assignments)
+                .HasForeignKey(a => a.AssignmentClassCourseId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Assignment>()
-                .HasOne(a => a.Classes)
-                .WithMany(c => c.Assignments)
-                .HasForeignKey(a => a.AssignmentClassId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Assignment>()
+            //    .HasOne(a => a.Users)
+            //    .WithMany(tc => tc.Assignments)
+            //    .HasForeignKey(a => a.AssignmentTeacherId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Assignment>()
+            //    .HasOne(a => a.Classes)
+            //    .WithMany(c => c.Assignments)
+            //    .HasForeignKey(a => a.AssignmentClassId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
 
             // --- Submit ---
             modelBuilder.Entity<Submit>()

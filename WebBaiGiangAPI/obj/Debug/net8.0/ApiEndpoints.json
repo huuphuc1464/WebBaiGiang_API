@@ -184,12 +184,7 @@
         "IsRequired": false
       },
       {
-        "Name": "AssignmentTeacherId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "AssignmentClassId",
+        "Name": "AssignmentClassCourseId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -358,7 +353,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "tID",
+        "Name": "teacherId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -404,12 +399,7 @@
         "IsRequired": false
       },
       {
-        "Name": "AssignmentTeacherId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "AssignmentClassId",
+        "Name": "AssignmentClassCourseId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -3260,16 +3250,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.StatisticQuizController",
-    "Method": "ExportQuizSystemOverview",
-    "RelativePath": "api/StatisticQuiz/export/overview",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

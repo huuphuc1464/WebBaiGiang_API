@@ -97,8 +97,8 @@ namespace WebBaiGiangAPI.Models
         public ICollection<Message> ReceivedMessages { get; set; } = new List<Message>();
         [JsonIgnore]
         public ICollection<Files> Files { get; set; } = new List<Files>();
-        [JsonIgnore]
-        public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
+        //[JsonIgnore]
+        //public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
 
         [JsonIgnore]
         public ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();

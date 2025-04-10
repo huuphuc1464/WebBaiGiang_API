@@ -19,10 +19,13 @@ namespace WebBaiGiangAPI.Models
 
         public string? AssignmentDescription { get; set; }
 
-        public int? AssignmentTeacherId { get; set; }
+        //public int? AssignmentTeacherId { get; set; }
+
+        //[Required]
+        //public int AssignmentClassId { get; set; }
 
         [Required]
-        public int AssignmentClassId { get; set; }
+        public int AssignmentClassCourseId { get; set; }
 
         public DateTime? AssignmentDeadline { get; set; }
 
@@ -34,13 +37,17 @@ namespace WebBaiGiangAPI.Models
 
         public int? AssignmentStatus { get; set; }
 
-        [ForeignKey("AssignmentTeacherId")]
-        [JsonIgnore]
-        public Users? Users { get; set; }
+        //[ForeignKey("AssignmentTeacherId")]
+        //[JsonIgnore]
+        //public Users? Users { get; set; }
 
-        [ForeignKey("AssignmentClassId")]
-        [JsonIgnore]
-        public Class? Classes { get; set; }
+        //[ForeignKey("AssignmentClassId")]
+        //[JsonIgnore]
+        //public Class? Classes { get; set; }
+
+        [ForeignKey("AssignmentClassCourseId")]
+        public ClassCourse? ClassCourse { get; set; }
+
         [JsonIgnore]
         public ICollection<Submit> Submits { get; set; } = new List<Submit>();
 

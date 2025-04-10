@@ -25,14 +25,19 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         [HttpGet("get-assignments")]
-        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignments(int tID)
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignments(int teacherId)
         {
-            var errorResult = KiemTraTokenTeacher();
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-            var ass = await _context.Assignments.Where(a => a.AssignmentTeacherId == tID).ToListAsync();
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
+            var ass = (from assi in _context.Assignments
+                      join cc in _context.ClassCourses on assi.AssignmentClassCourseId equals cc.CourseId
+                      join tc in _context.TeacherClasses on cc.CcId equals tc.TcClassCourseId
+                      where tc.TcUsersId == teacherId
+                      select assi)
+                      .ToList();
             if (ass == null || !ass.Any())
             {
                 return NotFound(new
@@ -50,33 +55,35 @@ namespace WebBaiGiangAPI.Controllers
         [HttpGet("get-assignment")]
         public async Task<ActionResult<Assignment>> GetAssignment(int teacherID, int assignmentID)
         {
-            var errorResult = KiemTraTokenTeacher();
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
             var ass = from a in _context.Assignments
-                         join u in _context.Users on a.AssignmentTeacherId equals u.UsersId
-                         join c in _context.Classes on a.AssignmentClassId equals c.ClassId
-                         where a.AssignmentId == assignmentID && a.AssignmentTeacherId == teacherID
-                         select new
-                         {
-                             a.AssignmentId,
-                             a.AssignmentTitle,
-                             a.AssignmentDescription,
-                             a.AssignmentFilename,
-                             a.AssignmentDeadline,
-                             a.AssignmentCreateAt,
-                             a.AssignmentStart,
-                             a.AssignmentStatus,
-                             c.ClassTitle,
-                             c.ClassDescription,
-                             u.UsersName,
-                             u.UsersEmail,
-                             u.UsersMobile,
-                             u.UsersDob,
-                             u.UsersImage,
-                         };
+                      join cc in _context.ClassCourses on a.AssignmentClassCourseId equals cc.CcId
+                      join tc in _context.TeacherClasses on cc.CcId equals tc.TcClassCourseId
+                      join u in _context.Users on tc.TcUsersId equals u.UsersId
+                      join c in _context.Classes on cc.ClassId equals c.ClassId
+                      where a.AssignmentId == assignmentID && tc.TcUsersId == teacherID
+                      select new
+                      {
+                          a.AssignmentId,
+                          a.AssignmentTitle,
+                          a.AssignmentDescription,
+                          a.AssignmentFilename,
+                          a.AssignmentDeadline,
+                          a.AssignmentCreateAt,
+                          a.AssignmentStart,
+                          a.AssignmentStatus,
+                          c.ClassTitle,
+                          c.ClassDescription,
+                          u.UsersName,
+                          u.UsersEmail,
+                          u.UsersMobile,
+                          u.UsersDob,
+                          u.UsersImage,
+                      };
             if (ass == null || !ass.Any())
             {
                 return NotFound(new
@@ -90,11 +97,11 @@ namespace WebBaiGiangAPI.Controllers
         [HttpGet("get-all-assignments")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignments()
         {
-            var errorResult = KiemTraTokenAdmin();
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            //var errorResult = KiemTraTokenAdmin();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
             var ass = await _context.Assignments.ToListAsync();
             if (ass == null || !ass.Any())
             {
@@ -113,14 +120,16 @@ namespace WebBaiGiangAPI.Controllers
         [HttpGet("get-all-assignment")]
         public async Task<ActionResult<Assignment>> GetAllAssignment(int assignmentID)
         {
-            var errorResult = KiemTraTokenAdmin();
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            //var errorResult = KiemTraTokenAdmin();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
             var ass = from a in _context.Assignments
-                      join u in _context.Users on a.AssignmentTeacherId equals u.UsersId
-                      join c in _context.Classes on a.AssignmentClassId equals c.ClassId
+                      join cc in _context.ClassCourses on a.AssignmentClassCourseId equals cc.CcId
+                      join tc in _context.TeacherClasses on cc.CcId equals tc.TcClassCourseId
+                      join u in _context.Users on tc.TcUsersId equals u.UsersId
+                      join c in _context.Classes on cc.ClassId equals c.ClassId
                       where a.AssignmentId == assignmentID
                       select new
                       {
@@ -151,13 +160,13 @@ namespace WebBaiGiangAPI.Controllers
         }
 
         [HttpPut("update-assignment")]
-        public async Task<IActionResult> UpdateAssignment([FromForm]AssignmentDTO assignmentDTO, [FromForm]IFormFile? file)
+        public async Task<IActionResult> UpdateAssignment([FromForm] AssignmentDTO assignmentDTO, [FromForm] IFormFile? file)
         {
-            var errorResult = KiemTraTokenTeacher();
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -165,26 +174,17 @@ namespace WebBaiGiangAPI.Controllers
 
             var assignment = await _context.Assignments.SingleOrDefaultAsync(a => a.AssignmentId == assignmentDTO.AssignmentId);
 
-            if (!_context.Classes.Any(c => c.ClassId == assignmentDTO.AssignmentClassId))
+            if (!_context.ClassCourses.Any(c => c.ClassId == assignmentDTO.AssignmentClassCourseId))
             {
                 return BadRequest(new
                 {
-                    message = "Lớp học không tồn tại",
+                    message = "Lớp học phần không tồn tại",
                     data = assignmentDTO
                 });
             }
-            assignment.AssignmentClassId = assignmentDTO.AssignmentClassId;
 
-            if (!_context.Users.Any(t => t.UsersId == assignmentDTO.AssignmentTeacherId && t.UsersRoleId == 2))
-            {
-                return BadRequest(new
-                {
-                    message = "Giáo viên không tồn tại",
-                    data = assignmentDTO
-                });
-            }
-            assignment.AssignmentTeacherId = assignmentDTO.AssignmentTeacherId;
-            assignment.AssignmentCreateAt = DateTime.Now;
+            assignment.AssignmentClassCourseId = assignmentDTO.AssignmentClassCourseId;
+              assignment.AssignmentCreateAt = DateTime.Now;
 
             if (assignmentDTO.AssignmentStart == null)
             {
@@ -221,7 +221,7 @@ namespace WebBaiGiangAPI.Controllers
 
                 // Tạo tên file duy nhất
                 string timestamp = assignment.AssignmentCreateAt.ToString("yyyyMMddHHmmss") ?? DateTime.Now.ToString("yyyyMMddHHmmss");
-                string uniqueFileName = $"{assignment.AssignmentTeacherId}_{assignment.AssignmentClassId}_{timestamp}{fileExtension}";
+                string uniqueFileName = $"{assignment.AssignmentClassCourseId}_{timestamp}{fileExtension}";
                 // Đường dẫn thư mục lưu file
                 string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Assignments");
 
@@ -280,11 +280,11 @@ namespace WebBaiGiangAPI.Controllers
                 }
             }
 
-            return Ok( new { message = "Thay đổi thông tin bài tập thành công."});
+            return Ok(new { message = "Thay đổi thông tin bài tập thành công." });
         }
 
         [HttpPost("add-assignment")]
-        public async Task<ActionResult<Assignment>> AddAssignment([FromForm]AssignmentDTO assignmentDTO, [FromForm]IFormFile? file)
+        public async Task<ActionResult<Assignment>> AddAssignment([FromForm] AssignmentDTO assignmentDTO, [FromForm] IFormFile? file)
         {
             var errorResult = KiemTraTokenTeacher();
             if (errorResult != null)
@@ -295,28 +295,19 @@ namespace WebBaiGiangAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             Assignment assignment = new Assignment();
 
-            if (!_context.Classes.Any(c => c.ClassId == assignmentDTO.AssignmentClassId))
+            if (!_context.ClassCourses.Any(c => c.ClassId == assignmentDTO.AssignmentClassCourseId))
             {
                 return BadRequest(new
                 {
-                    message = "Lớp học không tồn tại",
+                    message = "Lớp học phần không tồn tại",
                     data = assignmentDTO
                 });
             }
-            assignment.AssignmentClassId = assignmentDTO.AssignmentClassId;
+            assignment.AssignmentClassCourseId = assignmentDTO.AssignmentClassCourseId;
 
-            if (!_context.Users.Any(t => t.UsersId == assignmentDTO.AssignmentTeacherId && t.UsersRoleId == 2))
-            {
-                return BadRequest(new
-                {
-                    message = "Giáo viên không tồn tại",
-                    data = assignmentDTO
-                });
-            }
-            assignment.AssignmentTeacherId = assignmentDTO.AssignmentTeacherId;
             assignment.AssignmentCreateAt = DateTime.Now;
 
             if (assignmentDTO.AssignmentStart == null)
@@ -354,7 +345,7 @@ namespace WebBaiGiangAPI.Controllers
 
                 // Tạo tên file duy nhất
                 string timestamp = assignment.AssignmentCreateAt.ToString("yyyyMMddHHmmss") ?? DateTime.Now.ToString("yyyyMMddHHmmss");
-                string uniqueFileName = $"{assignment.AssignmentTeacherId}_{assignment.AssignmentClassId}_{timestamp}{fileExtension}";
+                string uniqueFileName = $"{assignment.AssignmentClassCourseId}_{timestamp}{fileExtension}";
                 // Đường dẫn thư mục lưu file
                 string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Assignments");
 

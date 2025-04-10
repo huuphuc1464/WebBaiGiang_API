@@ -1040,75 +1040,7 @@ namespace WebBaiGiangAPI.Controllers
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Thống kê trạng thái học.xlsx");
             }
         }
-        
-        // Xuất excel thống kê tỉ lệ hoàn thành bài học theo học viên ở lớp học phần (lọc theo thời gian nếu có).
-        [HttpGet("export-excel/statistics-student-progress/{classCourseId}")]
-        public async Task<IActionResult> ExportStudentProgress(
-            int classCourseId,
-            [FromQuery] DateTime? fromDate,
-            [FromQuery] DateTime? toDate)
-        {
-            var result = await StatisticsStudentProgress(classCourseId, fromDate, toDate) as OkObjectResult;
-
-            if (result == null || result.Value == null)
-                return NotFound("Không có dữ liệu để xuất.");
-
-            var statisticsData = result.Value as IEnumerable<dynamic>;
-            if (statisticsData == null || !statisticsData.Any())
-                return NotFound("Dữ liệu rỗng.");
-
-            string thoiGian = null;
-            if (fromDate != null && toDate != null)
-                thoiGian = $"_{fromDate.Value:yyyyMMdd}_{toDate.Value:yyyyMMdd}";
-            else if (fromDate != null)
-                thoiGian = $"_from_{fromDate.Value:yyyyMMdd}";
-            else if (toDate != null)
-                thoiGian = $"_to_{toDate.Value:yyyyMMdd}";
-
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (var package = new ExcelPackage())
-            {
-                var worksheet = package.Workbook.Worksheets.Add("Thống kê tiến độ");
-
-                // Tiêu đề cột
-                string[] headers = { "ID Sinh viên", "Mã Sinh viên", "Tên Sinh viên", "Số bài đã học", "Tổng số bài", "Tỷ lệ hoàn thành (%)" };
-
-                for (int i = 0; i < headers.Length; i++)
-                {
-                    worksheet.Cells[1, i + 1].Value = headers[i];
-                    worksheet.Cells[1, i + 1].Style.Font.Bold = true;
-                    worksheet.Cells[1, i + 1].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                    worksheet.Cells[1, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
-                    worksheet.Cells[1, i + 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                    worksheet.Cells[1, i + 1].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                }
-
-                int row = 2;
-
-                foreach (var student in statisticsData)
-                {
-                    worksheet.Cells[row, 1].Value = student.StudentId;
-                    worksheet.Cells[row, 2].Value = student.StudentCode;
-                    worksheet.Cells[row, 3].Value = student.UsersName;
-                    worksheet.Cells[row, 4].Value = student.CompletedLessons;
-                    worksheet.Cells[row, 5].Value = student.TotalLessons;
-                    worksheet.Cells[row, 6].Value = student.CompletionRate;
-
-                    worksheet.Cells[row, 1, row, 6].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                    worksheet.Cells[row, 1, row, 6].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                    row++;
-                }
-
-                worksheet.Cells.AutoFitColumns();
-
-                var stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
-
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"ThongKeTienDo{thoiGian}.xlsx");
-            }
-        }
-
+              
         // Xuất excel top 10 học viên tích cực (hoàn thành nhiều bài giảng nhất) theo bài giảng và lớp học phần
         [HttpGet("export-excel/top-students/{classCourseId}")]
         public async Task<IActionResult> ExportTopStudents(
@@ -1174,6 +1106,74 @@ namespace WebBaiGiangAPI.Controllers
 
                 string fileName = $"Top 10 Sinh Viên Tích Cực{thoiGian}.xlsx";
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
+        }
+
+        // Xuất excel thống kê tỉ lệ hoàn thành bài học theo học viên ở lớp học phần (lọc theo thời gian nếu có).
+        [HttpGet("export-excel/statistics-student-progress/{classCourseId}")]
+        public async Task<IActionResult> ExportStudentProgress(
+            int classCourseId,
+            [FromQuery] DateTime? fromDate,
+            [FromQuery] DateTime? toDate)
+        {
+            var result = await StatisticsStudentProgress(classCourseId, fromDate, toDate) as OkObjectResult;
+
+            if (result == null || result.Value == null)
+                return NotFound("Không có dữ liệu để xuất.");
+
+            var statisticsData = result.Value as IEnumerable<dynamic>;
+            if (statisticsData == null || !statisticsData.Any())
+                return NotFound("Dữ liệu rỗng.");
+
+            string thoiGian = null;
+            if (fromDate != null && toDate != null)
+                thoiGian = $"_{fromDate.Value:yyyyMMdd}_{toDate.Value:yyyyMMdd}";
+            else if (fromDate != null)
+                thoiGian = $"_from_{fromDate.Value:yyyyMMdd}";
+            else if (toDate != null)
+                thoiGian = $"_to_{toDate.Value:yyyyMMdd}";
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Thống kê tiến độ");
+
+                // Tiêu đề cột
+                string[] headers = { "ID Sinh viên", "Mã Sinh viên", "Tên Sinh viên", "Số bài đã học", "Tổng số bài", "Tỷ lệ hoàn thành (%)" };
+
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = headers[i];
+                    worksheet.Cells[1, i + 1].Style.Font.Bold = true;
+                    worksheet.Cells[1, i + 1].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    worksheet.Cells[1, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                    worksheet.Cells[1, i + 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                    worksheet.Cells[1, i + 1].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                }
+
+                int row = 2;
+
+                foreach (var student in statisticsData)
+                {
+                    worksheet.Cells[row, 1].Value = student.StudentId;
+                    worksheet.Cells[row, 2].Value = student.StudentCode;
+                    worksheet.Cells[row, 3].Value = student.UsersName;
+                    worksheet.Cells[row, 4].Value = student.CompletedLessons;
+                    worksheet.Cells[row, 5].Value = student.TotalLessons;
+                    worksheet.Cells[row, 6].Value = student.CompletionRate;
+
+                    worksheet.Cells[row, 1, row, 6].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                    worksheet.Cells[row, 1, row, 6].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                    row++;
+                }
+
+                worksheet.Cells.AutoFitColumns();
+
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"ThongKeTienDo{thoiGian}.xlsx");
             }
         }
 
