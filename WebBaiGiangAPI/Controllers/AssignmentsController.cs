@@ -210,6 +210,19 @@ namespace WebBaiGiangAPI.Controllers
                     data = assignmentDTO
                 });
             }
+            if (assignmentDTO.AssignmentStatus != 0 && // ẩn
+               assignmentDTO.AssignmentStatus != 1 && // hiện và ko có dealine
+               assignmentDTO.AssignmentStatus != 2 && // hiện và cho phép nộp trễ
+               assignmentDTO.AssignmentStatus != 3) // hiện và không cho phép nộp trễ
+                return BadRequest(new
+                {
+                    message = "Trạng thái không hợp lệ",
+                    data = assignmentDTO
+                });
+            if (assignmentDTO.AssignmentDeadline == null)
+            {
+                assignmentDTO.AssignmentStatus = 1;
+            }
             assignment.AssignmentDeadline = assignmentDTO.AssignmentDeadline;
             assignment.AssignmentTitle = Regex.Replace(assignmentDTO.AssignmentTitle.Trim(), @"\s+", " ");
             assignment.AssignmentDescription = Regex.Replace(assignmentDTO.AssignmentDescription.Trim(), @"\s+", " ");
@@ -334,6 +347,21 @@ namespace WebBaiGiangAPI.Controllers
                     data = assignmentDTO
                 });
             }
+
+            if (assignmentDTO.AssignmentStatus != 0 && // ẩn
+               assignmentDTO.AssignmentStatus != 1 && // hiện và ko có dealine
+               assignmentDTO.AssignmentStatus != 2 && // hiện và cho phép nộp trễ
+               assignmentDTO.AssignmentStatus != 3) // hiện và không cho phép nộp trễ
+                return BadRequest(new
+                {
+                    message = "Trạng thái không hợp lệ",
+                    data = assignmentDTO
+                });
+            if (assignmentDTO.AssignmentDeadline == null)
+            {
+                assignmentDTO.AssignmentStatus = 1;
+            }
+
             assignment.AssignmentDeadline = assignmentDTO.AssignmentDeadline;
             assignment.AssignmentTitle = Regex.Replace(assignmentDTO.AssignmentTitle.Trim(), @"\s+", " ");
             assignment.AssignmentDescription = Regex.Replace(assignmentDTO.AssignmentDescription.Trim(), @"\s+", " ");

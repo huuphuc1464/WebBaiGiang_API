@@ -33,196 +33,6 @@ namespace WebBaiGiangAPI.Controllers
             public List<QuizQuestion> QuizQuestions { get; set; }
         }
 
-        // Thêm bài kiểm tra quiz mới
-        [HttpPost("create-quiz")]
-        public async Task<IActionResult> CreateQuiz(int teacherId, [FromBody] QuizRequest request)
-        {
-            request.Quiz.QuizCreateAt = DateTime.Now;
-            request.Quiz.QuizUpdateAt = DateTime.Now;
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            if (_context.Users.Find(teacherId) == null) return NotFound("Giáo viên không tồn tại.");
-            var existClassCourse = _context.ClassCourses
-                .Join(_context.TeacherClasses, cc => cc.CcId, tc => tc.TcClassCourseId, (cc, tc) => new { cc, tc.TcUsersId })
-                .Where(x => x.TcUsersId == teacherId && x.cc.CcId == request.Quiz.QuizClassCourseId)
-                .FirstOrDefault();
-            if (existClassCourse == null) return Unauthorized("Khóa học không tồn tại hoặc không thuộc quyền quản lý của giáo viên.");
-            if (request.Quiz.QuizStartAt < DateTime.Now)
-            {
-                return BadRequest("Thời gian bắt đầu không hợp lệ.");
-            }
-            if (request.Quiz.QuizEndAt < DateTime.Now)
-            {
-                return BadRequest("Thời gian kết thúc không hợp lệ.");
-            }
-            if (request.Quiz.QuizStartAt > request.Quiz.QuizEndAt)
-            {
-                return BadRequest("Thời gian kết thúc phải sau thời gian bắt đầu.");
-            }
-            request.Quiz.QuizTitle = Regex.Replace(request.Quiz.QuizTitle.Trim(), @"\s+", " ");
-            request.Quiz.QuizDescription = request.Quiz.QuizDescription != null ? Regex.Replace(request.Quiz.QuizDescription.Trim(), @"\s+", " ") : null;
-            _context.Quizzes.Add(request.Quiz);
-            await _context.SaveChangesAsync();
-
-            if (request.Quiz.QuizStatus == true)
-            {
-
-                int quizId = request.Quiz.QuizId;
-
-                foreach (var question in request.QuizQuestions)
-                {
-                    if (question.QqCorrect != question.QqOption1
-                        && question.QqCorrect != question.QqOption2
-                        && question.QqCorrect != question.QqOption3
-                        && question.QqCorrect != question.QqOption4)
-                    {
-                        return BadRequest($"Câu trả lời đúng không hợp lệ.\n Câu hỏi: \"{question.QqQuestion}\"");
-                    }
-                }
-
-                foreach (var question in request.QuizQuestions)
-                {
-                    question.QqQuizId = quizId;
-                    question.QqQuestion = Regex.Replace(question.QqQuestion.Trim(), @"\s+", " ");
-                    question.QqOption1 = Regex.Replace(question.QqOption1.Trim(), @"\s+", " ");
-                    question.QqOption2 = Regex.Replace(question.QqOption2.Trim(), @"\s+", " ");
-                    question.QqOption3 = Regex.Replace(question.QqOption3.Trim(), @"\s+", " ");
-                    question.QqOption4 = Regex.Replace(question.QqOption4.Trim(), @"\s+", " ");
-                    question.QqCorrect = Regex.Replace(question.QqCorrect.Trim(), @"\s+", " ");
-                    _context.QuizQuestions.Add(question);
-                }
-                _context.SaveChanges();
-
-                var teacher = await _context.Users.Where(u => u.UsersId == teacherId).Select(u => new { u.UsersName, u.UsersEmail }).FirstOrDefaultAsync();
-                var className = await _context.Classes.Where(c => c.ClassId == existClassCourse.cc.ClassId).Select(c => c.ClassTitle).FirstOrDefaultAsync();
-
-                var announcement = new Announcement
-                {
-                    AnnouncementClassId = existClassCourse.cc.ClassId,
-                    AnnouncementTitle = $"📝 Bài kiểm tra mới: {request.Quiz.QuizTitle} đã được tạo vào {request.Quiz.QuizCreateAt} bởi giáo viên {teacher.UsersName}",
-                    AnnouncementDescription = $"📖 Mô tả: {request.Quiz.QuizDescription} \n🏫 Lớp học: {className} \n⏳ Thời gian làm bài: {(request.Quiz.QuizStartAt - request.Quiz.QuizEndAt).TotalMinutes} phút \n📅 Ngày mở: {request.Quiz.QuizStartAt} - Ngày đóng: {request.Quiz.QuizEndAt}",
-                    AnnouncementDate = DateTime.Now,
-                    AnnouncementTeacherId = teacherId
-                };
-
-                var students = await _context.StudentClasses
-                   .Where(sc => sc.ScClassId == existClassCourse.cc.ClassId && sc.ScStatus == 1)
-                   .Join(_context.Users,
-                         sc => sc.ScStudentId,
-                         u => u.UsersId,
-                         (sc, u) => new
-                         {
-                             u.UsersId,
-                             u.UsersName,
-                             u.UsersEmail,
-                         })
-                   .ToListAsync();
-                var courseName = _context.Courses.Find(existClassCourse.cc.CourseId)?.CourseTitle;
-                int emailCount = 0;
-                string subject = $"Giáo viên {teacher.UsersName} đã thêm bài kiểm tra mới!";
-                string body = $"<h3>Bài kiểm tra mới: {request.Quiz.QuizTitle}</h3>"
-                            + $"<p>Mô tả: {request.Quiz.QuizDescription}</p>"
-                            + $"<p>Khóa học: {courseName}</p>"
-                            + $"<p>Lớp: {className}</p>"
-                            + $"<p>Thời gian làm bài: {(request.Quiz.QuizEndAt - request.Quiz.QuizStartAt).TotalMinutes} phút</p>"
-                            + $"<p>Thời gian mở: {request.Quiz.QuizStartAt} - Thời gian đóng: {request.Quiz.QuizEndAt}</p>"
-                            + "<p>Vui lòng đăng nhập để làm bài kiểm tra.</p>";
-
-                foreach (var student in students)
-                {
-                    bool isSent = await _emailService.SendEmail(student.UsersEmail, subject, body);
-                    if (isSent)
-                    {
-                        emailCount++;
-                    }
-                }
-                await _emailService.SendEmail(
-                    teacher.UsersEmail,
-                    "Thông báo: Bài kiểm tra mới đã được tạo",
-                    $"Bài kiểm tra: \"{request.Quiz.QuizTitle}\" đã được tạo thành công và đã được gửi đến {emailCount} sinh viên."
-                );
-                _context.Announcements.Add(announcement);
-                await _context.SaveChangesAsync();
-            }
-            return Ok(new { Message = " Thêm bài kiểm tra thành công" });
-        }
-
-        // Upload file Excel chứa câu hỏi cho bài kiểm tra quiz
-        [HttpPost("import-excel")]
-        public async Task<IActionResult> ImportExcel(int teacherId, int classCourse, IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-                return BadRequest("File không hợp lệ.");
-
-            try
-            {
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                using var stream = new MemoryStream();
-                await file.CopyToAsync(stream);
-
-                using var package = new ExcelPackage(stream);
-                var worksheet = package.Workbook.Worksheets[0];
-
-                // Đọc thông tin bài kiểm tra
-                var quiz = new Quiz
-                {
-                    QuizClassCourseId = classCourse,
-                    QuizTitle = worksheet.Cells["B1"].Text.Trim(),
-                    QuizStartAt = DateTime.Parse(worksheet.Cells["B2"].Text.Trim()),
-                    QuizEndAt = DateTime.Parse(worksheet.Cells["B3"].Text.Trim()),
-                    QuizDescription = worksheet.Cells["B4"].Text.Trim(),
-                    QuizStatus = worksheet.Cells["B5"].Text.Trim().ToLower() == "hiện"
-                };
-
-                var questions = new List<QuizQuestion>();
-
-                int rowCount = worksheet.Dimension.Rows;
-                for (int row = 7; row <= rowCount; row++)
-                {
-                    if (string.IsNullOrWhiteSpace(worksheet.Cells[row, 1].Text)) continue;
-
-                    var question = new QuizQuestion
-                    {
-                        QqQuestion = worksheet.Cells[row, 1].Text.Trim(),
-                        QqOption1 = worksheet.Cells[row, 2].Text.Trim(),
-                        QqOption2 = worksheet.Cells[row, 3].Text.Trim(),
-                        QqOption3 = worksheet.Cells[row, 4].Text.Trim(),
-                        QqOption4 = worksheet.Cells[row, 5].Text.Trim(),
-                        QqCorrect = worksheet.Cells[row, 6].Text.Trim(),
-                        QqDescription = worksheet.Cells[row, 7].Text.Trim()
-                    };
-                    questions.Add(question);
-                }
-
-                // Gọi lại CreateQuiz để lưu vào DB
-                return await CreateQuiz(teacherId, new QuizRequest { Quiz = quiz, QuizQuestions = questions });
-            }
-            catch (DbUpdateException ex)
-            {
-                return BadRequest(new { message = "Lỗi khi lưu dữ liệu", error = ex.InnerException?.Message });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "Lỗi hệ thống", error = ex.Message });
-            }
-        }
-
-        // Thêm môt câu hỏi cho bài kiểm tra quiz
-        [HttpPost("add-question")]
-        public async Task<IActionResult> AddQuestion(QuizQuestion question)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            if (_context.Quizzes.Find(question.QqQuizId) == null) return NotFound("Bài kiểm tra không tồn tại.");
-            question.QqQuestion = Regex.Replace(question.QqQuestion.Trim(), @"\s+", " ");
-            question.QqOption1 = Regex.Replace(question.QqOption1.Trim(), @"\s+", " ");
-            question.QqOption2 = Regex.Replace(question.QqOption2.Trim(), @"\s+", " ");
-            question.QqOption3 = Regex.Replace(question.QqOption3.Trim(), @"\s+", " ");
-            question.QqOption4 = Regex.Replace(question.QqOption4.Trim(), @"\s+", " ");
-            question.QqCorrect = Regex.Replace(question.QqCorrect.Trim(), @"\s+", " ");
-            _context.QuizQuestions.Add(question);
-            await _context.SaveChangesAsync();
-            return Ok(new { Message = "Thêm câu hỏi thành công" });
-        }
-
         // Lấy danh sách tất cả bài kiểm tra quiz
         [HttpGet("get-all-quiz")]
         public async Task<IActionResult> GetAllQuiz()
@@ -417,6 +227,207 @@ namespace WebBaiGiangAPI.Controllers
                 return NotFound("Không có bài kiểm tra nào cho giáo viên trong lớp này.");
 
             return Ok(quizzes);
+        }
+        
+        // Tìm kiếm bài Quiz theo kĩ thuật full-search text
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchQuizzes(
+            string? keyword = "",
+            int? teacherId = null,
+            int? classCourseId = null,
+            string? status = null,
+            int page = 1,
+            int pageSize = 10)
+        {
+            // Chuẩn hóa từ khóa và tách thành danh sách từ
+            var keywords = keyword?.ToLower().Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+
+            var query = from quiz in _context.Quizzes
+                        join classCourse in _context.ClassCourses on quiz.QuizClassCourseId equals classCourse.CcId
+                        join teacherClass in _context.TeacherClasses on classCourse.CcId equals teacherClass.TcClassCourseId
+                        join teacher in _context.Users on teacherClass.TcUsersId equals teacher.UsersId
+                        select new
+                        {
+                            quiz.QuizId,
+                            quiz.QuizClassCourseId,
+                            quiz.QuizTitle,
+                            quiz.QuizDescription,
+                            quiz.QuizStartAt,
+                            quiz.QuizEndAt,
+                            quiz.QuizStatus,
+                            quiz.QuizCreateAt,
+                            quiz.QuizUpdateAt,
+                            TeacherName = teacher.UsersName,
+                            TeacherId = teacher.UsersId,
+                        };
+
+            // Tìm kiếm theo tiêu chí (Full-Text Search)
+            if (keywords.Length > 0)
+            {
+                query = query.Where(q => keywords.Any(kw =>
+                    (q.QuizTitle != null && q.QuizTitle.ToLower().Contains(kw)) ||
+                    (q.QuizDescription != null && q.QuizDescription.ToLower().Contains(kw)) ||
+                    (q.TeacherName != null && q.TeacherName.ToLower().Contains(kw))
+                ));
+            }
+            // Lọc theo giáo viên
+            if (teacherId.HasValue)
+            {
+                query = query.Where(q => q.TeacherId == teacherId);
+            }
+            // Lọc theo lớp học phần
+            if (classCourseId.HasValue)
+            {
+                query = query.Where(q => q.QuizClassCourseId == classCourseId);
+            }
+            // Lọc theo trạng thái
+            if (!string.IsNullOrEmpty(status))
+            {
+                switch (status.ToLower())
+                {
+                    case "1": //hiển thị
+                        query = query.Where(q => q.QuizStatus == true);
+                        break;
+                    case "0": //ẩn
+                        query = query.Where(q => q.QuizStatus == false);
+                        break;
+                    case "2": //đang diễn ra
+                        query = query.Where(q => q.QuizStartAt <= DateTime.Now && q.QuizEndAt >= DateTime.Now);
+                        break;
+                    case "3": //đã kết thúc
+                        query = query.Where(q => q.QuizEndAt < DateTime.Now);
+                        break;
+                }
+            }
+            // Tổng số kết quả tìm thấy
+            int totalItems = await query.CountAsync();
+
+            // Phân trang
+            var result = await query.OrderByDescending(q => q.QuizUpdateAt)
+                                    .Skip((page - 1) * pageSize)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            return Ok(new
+            {
+                TotalItems = totalItems,
+                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize),
+                CurrentPage = page,
+                PageSize = pageSize,
+                Data = result
+            });
+        }
+
+        // Thêm bài kiểm tra quiz mới
+        [HttpPost("create-quiz")]
+        public async Task<IActionResult> CreateQuiz(int teacherId, [FromBody] QuizRequest request)
+        {
+            request.Quiz.QuizCreateAt = DateTime.Now;
+            request.Quiz.QuizUpdateAt = DateTime.Now;
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (_context.Users.Find(teacherId) == null) return NotFound("Giáo viên không tồn tại.");
+            var existClassCourse = _context.ClassCourses
+                .Join(_context.TeacherClasses, cc => cc.CcId, tc => tc.TcClassCourseId, (cc, tc) => new { cc, tc.TcUsersId })
+                .Where(x => x.TcUsersId == teacherId && x.cc.CcId == request.Quiz.QuizClassCourseId)
+                .FirstOrDefault();
+            if (existClassCourse == null) return Unauthorized("Khóa học không tồn tại hoặc không thuộc quyền quản lý của giáo viên.");
+            if (request.Quiz.QuizStartAt < DateTime.Now)
+            {
+                return BadRequest("Thời gian bắt đầu không hợp lệ.");
+            }
+            if (request.Quiz.QuizEndAt < DateTime.Now)
+            {
+                return BadRequest("Thời gian kết thúc không hợp lệ.");
+            }
+            if (request.Quiz.QuizStartAt > request.Quiz.QuizEndAt)
+            {
+                return BadRequest("Thời gian kết thúc phải sau thời gian bắt đầu.");
+            }
+            request.Quiz.QuizTitle = Regex.Replace(request.Quiz.QuizTitle.Trim(), @"\s+", " ");
+            request.Quiz.QuizDescription = request.Quiz.QuizDescription != null ? Regex.Replace(request.Quiz.QuizDescription.Trim(), @"\s+", " ") : null;
+            _context.Quizzes.Add(request.Quiz);
+            await _context.SaveChangesAsync();
+
+            if (request.Quiz.QuizStatus == true)
+            {
+
+                int quizId = request.Quiz.QuizId;
+
+                foreach (var question in request.QuizQuestions)
+                {
+                    if (question.QqCorrect != question.QqOption1
+                        && question.QqCorrect != question.QqOption2
+                        && question.QqCorrect != question.QqOption3
+                        && question.QqCorrect != question.QqOption4)
+                    {
+                        return BadRequest($"Câu trả lời đúng không hợp lệ.\n Câu hỏi: \"{question.QqQuestion}\"");
+                    }
+                }
+
+                foreach (var question in request.QuizQuestions)
+                {
+                    question.QqQuizId = quizId;
+                    question.QqQuestion = Regex.Replace(question.QqQuestion.Trim(), @"\s+", " ");
+                    question.QqOption1 = Regex.Replace(question.QqOption1.Trim(), @"\s+", " ");
+                    question.QqOption2 = Regex.Replace(question.QqOption2.Trim(), @"\s+", " ");
+                    question.QqOption3 = Regex.Replace(question.QqOption3.Trim(), @"\s+", " ");
+                    question.QqOption4 = Regex.Replace(question.QqOption4.Trim(), @"\s+", " ");
+                    question.QqCorrect = Regex.Replace(question.QqCorrect.Trim(), @"\s+", " ");
+                    _context.QuizQuestions.Add(question);
+                }
+                _context.SaveChanges();
+
+                var teacher = await _context.Users.Where(u => u.UsersId == teacherId).Select(u => new { u.UsersName, u.UsersEmail }).FirstOrDefaultAsync();
+                var className = await _context.Classes.Where(c => c.ClassId == existClassCourse.cc.ClassId).Select(c => c.ClassTitle).FirstOrDefaultAsync();
+
+                var announcement = new Announcement
+                {
+                    AnnouncementClassId = existClassCourse.cc.ClassId,
+                    AnnouncementTitle = $"📝 Bài kiểm tra mới: {request.Quiz.QuizTitle} đã được tạo vào {request.Quiz.QuizCreateAt} bởi giáo viên {teacher.UsersName}",
+                    AnnouncementDescription = $"📖 Mô tả: {request.Quiz.QuizDescription} \n🏫 Lớp học: {className} \n⏳ Thời gian làm bài: {(request.Quiz.QuizStartAt - request.Quiz.QuizEndAt).TotalMinutes} phút \n📅 Ngày mở: {request.Quiz.QuizStartAt} - Ngày đóng: {request.Quiz.QuizEndAt}",
+                    AnnouncementDate = DateTime.Now,
+                    AnnouncementTeacherId = teacherId
+                };
+
+                var students = await _context.StudentClasses
+                   .Where(sc => sc.ScClassId == existClassCourse.cc.ClassId && sc.ScStatus == 1)
+                   .Join(_context.Users,
+                         sc => sc.ScStudentId,
+                         u => u.UsersId,
+                         (sc, u) => new
+                         {
+                             u.UsersId,
+                             u.UsersName,
+                             u.UsersEmail,
+                         })
+                   .ToListAsync();
+                var courseName = _context.Courses.Find(existClassCourse.cc.CourseId)?.CourseTitle;
+                int emailCount = 0;
+                string subject = $"Giáo viên {teacher.UsersName} đã thêm bài kiểm tra mới!";
+                string body = $"<h3>Bài kiểm tra mới: {request.Quiz.QuizTitle}</h3>"
+                            + $"<p>Mô tả: {request.Quiz.QuizDescription}</p>"
+                            + $"<p>Khóa học: {courseName}</p>"
+                            + $"<p>Lớp: {className}</p>"
+                            + $"<p>Thời gian làm bài: {(request.Quiz.QuizEndAt - request.Quiz.QuizStartAt).TotalMinutes} phút</p>"
+                            + $"<p>Thời gian mở: {request.Quiz.QuizStartAt} - Thời gian đóng: {request.Quiz.QuizEndAt}</p>"
+                            + "<p>Vui lòng đăng nhập để làm bài kiểm tra.</p>";
+
+                foreach (var student in students)
+                {
+                    bool isSent = await _emailService.SendEmail(student.UsersEmail, subject, body);
+                    if (isSent)
+                    {
+                        emailCount++;
+                    }
+                }
+                await _emailService.SendEmail(
+                    teacher.UsersEmail,
+                    "Thông báo: Bài kiểm tra mới đã được tạo",
+                    $"Bài kiểm tra: \"{request.Quiz.QuizTitle}\" đã được tạo thành công và đã được gửi đến {emailCount} sinh viên."
+                );
+                _context.Announcements.Add(announcement);
+                await _context.SaveChangesAsync();
+            }
+            return Ok(new { Message = " Thêm bài kiểm tra thành công" });
         }
 
         // Cập nhật bài Quiz
@@ -703,6 +714,83 @@ namespace WebBaiGiangAPI.Controllers
             return Ok("Xóa bài kiểm tra thành công");
         }
 
+        // Upload file Excel chứa câu hỏi cho bài kiểm tra quiz
+        [HttpPost("import-excel")]
+        public async Task<IActionResult> ImportExcel(int teacherId, int classCourse, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("File không hợp lệ.");
+
+            try
+            {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                using var stream = new MemoryStream();
+                await file.CopyToAsync(stream);
+
+                using var package = new ExcelPackage(stream);
+                var worksheet = package.Workbook.Worksheets[0];
+
+                // Đọc thông tin bài kiểm tra
+                var quiz = new Quiz
+                {
+                    QuizClassCourseId = classCourse,
+                    QuizTitle = worksheet.Cells["B1"].Text.Trim(),
+                    QuizStartAt = DateTime.Parse(worksheet.Cells["B2"].Text.Trim()),
+                    QuizEndAt = DateTime.Parse(worksheet.Cells["B3"].Text.Trim()),
+                    QuizDescription = worksheet.Cells["B4"].Text.Trim(),
+                    QuizStatus = worksheet.Cells["B5"].Text.Trim().ToLower() == "hiện"
+                };
+
+                var questions = new List<QuizQuestion>();
+
+                int rowCount = worksheet.Dimension.Rows;
+                for (int row = 7; row <= rowCount; row++)
+                {
+                    if (string.IsNullOrWhiteSpace(worksheet.Cells[row, 1].Text)) continue;
+
+                    var question = new QuizQuestion
+                    {
+                        QqQuestion = worksheet.Cells[row, 1].Text.Trim(),
+                        QqOption1 = worksheet.Cells[row, 2].Text.Trim(),
+                        QqOption2 = worksheet.Cells[row, 3].Text.Trim(),
+                        QqOption3 = worksheet.Cells[row, 4].Text.Trim(),
+                        QqOption4 = worksheet.Cells[row, 5].Text.Trim(),
+                        QqCorrect = worksheet.Cells[row, 6].Text.Trim(),
+                        QqDescription = worksheet.Cells[row, 7].Text.Trim()
+                    };
+                    questions.Add(question);
+                }
+
+                // Gọi lại CreateQuiz để lưu vào DB
+                return await CreateQuiz(teacherId, new QuizRequest { Quiz = quiz, QuizQuestions = questions });
+            }
+            catch (DbUpdateException ex)
+            {
+                return BadRequest(new { message = "Lỗi khi lưu dữ liệu", error = ex.InnerException?.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Lỗi hệ thống", error = ex.Message });
+            }
+        }
+
+        // Thêm môt câu hỏi cho bài kiểm tra quiz
+        [HttpPost("add-question")]
+        public async Task<IActionResult> AddQuestion(QuizQuestion question)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (_context.Quizzes.Find(question.QqQuizId) == null) return NotFound("Bài kiểm tra không tồn tại.");
+            question.QqQuestion = Regex.Replace(question.QqQuestion.Trim(), @"\s+", " ");
+            question.QqOption1 = Regex.Replace(question.QqOption1.Trim(), @"\s+", " ");
+            question.QqOption2 = Regex.Replace(question.QqOption2.Trim(), @"\s+", " ");
+            question.QqOption3 = Regex.Replace(question.QqOption3.Trim(), @"\s+", " ");
+            question.QqOption4 = Regex.Replace(question.QqOption4.Trim(), @"\s+", " ");
+            question.QqCorrect = Regex.Replace(question.QqCorrect.Trim(), @"\s+", " ");
+            _context.QuizQuestions.Add(question);
+            await _context.SaveChangesAsync();
+            return Ok(new { Message = "Thêm câu hỏi thành công" });
+        }
+
         // Nhân bản bài Quiz sang lớp khác
         [HttpPost("duplicate/{quizId}/{classCourseId}")]
         public async Task<IActionResult> DuplicateQuiz(int teacherId, int quizId, int classCourseId)
@@ -819,94 +907,6 @@ namespace WebBaiGiangAPI.Controllers
                 await _context.SaveChangesAsync();
             }
             return Ok(new { Message = "Nhân bản bài kiểm tra thành công", QuizId = newQuiz });
-        }
-
-        // Tìm kiếm bài Quiz theo kĩ thuật full-search text
-        [HttpGet("search")]
-        public async Task<IActionResult> SearchQuizzes(
-            string? keyword = "",
-            int? teacherId = null,
-            int? classCourseId = null,
-            string? status = null,
-            int page = 1,
-            int pageSize = 10)
-        {
-            // Chuẩn hóa từ khóa và tách thành danh sách từ
-            var keywords = keyword?.ToLower().Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
-
-            var query = from quiz in _context.Quizzes
-                        join classCourse in _context.ClassCourses on quiz.QuizClassCourseId equals classCourse.CcId
-                        join teacherClass in _context.TeacherClasses on classCourse.CcId equals teacherClass.TcClassCourseId
-                        join teacher in _context.Users on teacherClass.TcUsersId equals teacher.UsersId
-                        select new
-                        {
-                            quiz.QuizId,
-                            quiz.QuizClassCourseId,
-                            quiz.QuizTitle,
-                            quiz.QuizDescription,
-                            quiz.QuizStartAt,
-                            quiz.QuizEndAt,
-                            quiz.QuizStatus,
-                            quiz.QuizCreateAt,
-                            quiz.QuizUpdateAt,
-                            TeacherName = teacher.UsersName,
-                            TeacherId = teacher.UsersId,
-                        };
-
-            // Tìm kiếm theo tiêu chí (Full-Text Search)
-            if (keywords.Length > 0)
-            {
-                query = query.Where(q => keywords.Any(kw =>
-                    (q.QuizTitle != null && q.QuizTitle.ToLower().Contains(kw)) ||
-                    (q.QuizDescription != null && q.QuizDescription.ToLower().Contains(kw)) ||
-                    (q.TeacherName != null && q.TeacherName.ToLower().Contains(kw))
-                ));
-            }
-            // Lọc theo giáo viên
-            if (teacherId.HasValue)
-            {
-                query = query.Where(q => q.TeacherId == teacherId);
-            }
-            // Lọc theo lớp học phần
-            if (classCourseId.HasValue)
-            {
-                query = query.Where(q => q.QuizClassCourseId == classCourseId);
-            }
-            // Lọc theo trạng thái
-            if (!string.IsNullOrEmpty(status))
-            {
-                switch (status.ToLower())
-                {
-                    case "1": //hiển thị
-                        query = query.Where(q => q.QuizStatus == true);
-                        break;
-                    case "0": //ẩn
-                        query = query.Where(q => q.QuizStatus == false);
-                        break;
-                    case "2": //đang diễn ra
-                        query = query.Where(q => q.QuizStartAt <= DateTime.Now && q.QuizEndAt >= DateTime.Now);
-                        break;
-                    case "3": //đã kết thúc
-                        query = query.Where(q => q.QuizEndAt < DateTime.Now);
-                        break;
-                }
-            }
-            // Tổng số kết quả tìm thấy
-            int totalItems = await query.CountAsync();
-
-            // Phân trang
-            var result = await query.OrderByDescending(q => q.QuizUpdateAt)
-                                    .Skip((page - 1) * pageSize)
-                                    .Take(pageSize)
-                                    .ToListAsync();
-            return Ok(new
-            {
-                TotalItems = totalItems,
-                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize),
-                CurrentPage = page,
-                PageSize = pageSize,
-                Data = result
-            });
         }
 
         // Xuất bài kiểm tra và câu hỏi ra file excel theo mã bài kiểm tra quiz

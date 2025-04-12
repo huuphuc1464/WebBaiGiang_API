@@ -45,6 +45,7 @@ namespace WebBaiGiangAPI.Models
         //[JsonIgnore]
         //public Class? Classes { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("AssignmentClassCourseId")]
         public ClassCourse? ClassCourse { get; set; }
 

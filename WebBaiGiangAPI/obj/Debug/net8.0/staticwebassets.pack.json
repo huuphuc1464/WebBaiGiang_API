@@ -1,28 +1,24 @@
 {
   "Files": [
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164342_Các loại hash.xlsx",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250403164342_Các loại hash.xlsx"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221124_20250411101742.docx",
+      "PackagePath": "staticwebassets\\Assignments\\1_0306221124_20250411101742.docx"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164343_SQLQuery1.sql",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250403164343_SQLQuery1.sql"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221210_20250411102155.docx",
+      "PackagePath": "staticwebassets\\Assignments\\1_0306221210_20250411102155.docx"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164343_logo.svg",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250403164343_logo.svg"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221464_20250411101033.docx",
+      "PackagePath": "staticwebassets\\Assignments\\1_0306221464_20250411101033.docx"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164411_Các loại hash.xlsx",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250403164411_Các loại hash.xlsx"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221492_20250411101628.docx",
+      "PackagePath": "staticwebassets\\Assignments\\1_0306221492_20250411101628.docx"
     },
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164411_SQLQuery1.sql",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250403164411_SQLQuery1.sql"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\LessonFiles\\20250403164411_logo.svg",
-      "PackagePath": "staticwebassets\\LessonFiles\\20250403164411_logo.svg"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\2_0306221464_20250411160404.docx",
+      "PackagePath": "staticwebassets\\Assignments\\2_0306221464_20250411160404.docx"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebBaiGiangAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

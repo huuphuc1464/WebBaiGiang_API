@@ -1,6 +1,5 @@
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\LessonFiles\20250403164342_Các loại hash.xlsx
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\LessonFiles\20250403164343_logo.svg
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\LessonFiles\20250403164343_SQLQuery1.sql
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\LessonFiles\20250403164411_Các loại hash.xlsx
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\LessonFiles\20250403164411_logo.svg
-D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\LessonFiles\20250403164411_SQLQuery1.sql
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\Assignments\1_0306221124_20250411101742.docx
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\Assignments\1_0306221210_20250411102155.docx
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\Assignments\1_0306221464_20250411101033.docx
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\Assignments\1_0306221492_20250411101628.docx
+D:\HK6\TTTN\WebBaiGiang_API\WebBaiGiangAPI\wwwroot\Assignments\2_0306221464_20250411160404.docx
