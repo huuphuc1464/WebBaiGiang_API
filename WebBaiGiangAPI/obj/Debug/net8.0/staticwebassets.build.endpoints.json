@@ -1,5 +1,334 @@
 {
   "Version": 1,
   "ManifestType": "Build",
-  "Endpoints": []
+  "Endpoints": [
+    {
+      "Route": "Assignments/1_0306221464_20250415092419.docx",
+      "AssetFile": "Assignments/1_0306221464_20250415092419.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19907"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:24:20 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc="
+        }
+      ]
+    },
+    {
+      "Route": "Assignments/1_0306221464_20250415092419.fo4u3sa52i.docx",
+      "AssetFile": "Assignments/1_0306221464_20250415092419.docx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19907"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:24:20 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fo4u3sa52i"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc="
+        },
+        {
+          "Name": "label",
+          "Value": "Assignments/1_0306221464_20250415092419.docx"
+        }
+      ]
+    },
+    {
+      "Route": "Assignments/1_0306221492_20250415092829.l5zfvmvpzr.pdf",
+      "AssetFile": "Assignments/1_0306221492_20250415092829.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "261144"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:28:29 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "l5zfvmvpzr"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk="
+        },
+        {
+          "Name": "label",
+          "Value": "Assignments/1_0306221492_20250415092829.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "Assignments/1_0306221492_20250415092829.pdf",
+      "AssetFile": "Assignments/1_0306221492_20250415092829.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "261144"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:28:29 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk="
+        }
+      ]
+    },
+    {
+      "Route": "Assignments/Bài tập Toán_20250415092653.mvjnxuxh1z.zip",
+      "AssetFile": "Assignments/Bài tập Toán_20250415092653.zip",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17245"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-zip-compressed"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:26:53 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mvjnxuxh1z"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc="
+        },
+        {
+          "Name": "label",
+          "Value": "Assignments/Bài tập Toán_20250415092653.zip"
+        }
+      ]
+    },
+    {
+      "Route": "Assignments/Bài tập Toán_20250415092653.zip",
+      "AssetFile": "Assignments/Bài tập Toán_20250415092653.zip",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17245"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-zip-compressed"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:26:53 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc="
+        }
+      ]
+    },
+    {
+      "Route": "Assignments/Bài tập Toán_20250415092936.yvf5w6wbky.zip",
+      "AssetFile": "Assignments/Bài tập Toán_20250415092936.zip",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "234838"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-zip-compressed"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:29:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yvf5w6wbky"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo="
+        },
+        {
+          "Name": "label",
+          "Value": "Assignments/Bài tập Toán_20250415092936.zip"
+        }
+      ]
+    },
+    {
+      "Route": "Assignments/Bài tập Toán_20250415092936.zip",
+      "AssetFile": "Assignments/Bài tập Toán_20250415092936.zip",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "234838"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-zip-compressed"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 15 Apr 2025 02:29:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo="
+        }
+      ]
+    }
+  ]
 }

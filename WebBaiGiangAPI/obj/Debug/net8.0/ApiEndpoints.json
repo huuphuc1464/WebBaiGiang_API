@@ -4194,6 +4194,86 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SubmitsController",
+    "Method": "DownloadSubmission",
+    "RelativePath": "api/Submits/submissions/download/{submitId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "submitId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SubmitsController",
+    "Method": "DownloadAllSubmissions",
+    "RelativePath": "api/Submits/submissions/download/all/{assignmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assignmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SubmitsController",
+    "Method": "StatisticsByAssignment",
+    "RelativePath": "api/Submits/submissions/statistics/{assignmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assignmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SubmitsController",
+    "Method": "ExportAssignmentStatisticsFull",
+    "RelativePath": "api/Submits/submissions/statistics/export/{assignmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assignmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.SubmitsController",
+    "Method": "StatisticsByStudent",
+    "RelativePath": "api/Submits/submissions/statistics/student/{studentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
     "Method": "GetCurrentCourses",
     "RelativePath": "api/Teacher/{teacherId}/current-courses",

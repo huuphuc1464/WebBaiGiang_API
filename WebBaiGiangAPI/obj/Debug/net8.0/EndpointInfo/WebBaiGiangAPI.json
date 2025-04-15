@@ -6715,6 +6715,121 @@
         }
       }
     },
+    "/api/Submits/submissions/statistics/{assignmentId}": {
+      "get": {
+        "tags": [
+          "Submits"
+        ],
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Submits/submissions/statistics/student/{studentId}": {
+      "get": {
+        "tags": [
+          "Submits"
+        ],
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Submits/submissions/download/{submitId}": {
+      "get": {
+        "tags": [
+          "Submits"
+        ],
+        "parameters": [
+          {
+            "name": "submitId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Submits/submissions/download/all/{assignmentId}": {
+      "get": {
+        "tags": [
+          "Submits"
+        ],
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Submits/submissions/statistics/export/{assignmentId}": {
+      "get": {
+        "tags": [
+          "Submits"
+        ],
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Teacher/get-teachers": {
       "get": {
         "tags": [
