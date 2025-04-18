@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebBaiGiangAPI.Models
 {
@@ -9,9 +10,9 @@ namespace WebBaiGiangAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MessageId { get; set; }
 
-        public int? MessageSenderId { get; set; }
+        public int MessageSenderId { get; set; }
 
-        public int? MessageReceiverId { get; set; }
+        public int MessageReceiverId { get; set; }
 
         [MaxLength(50)]
         public string? MessageType { get; set; }
@@ -26,10 +27,12 @@ namespace WebBaiGiangAPI.Models
 
         public string? MessageContent { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("MessageSenderId")]
-        public Users Sender { get; set; }
+        public Users? Sender { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("MessageReceiverId")]
-        public Users Receiver { get; set; }
+        public Users? Receiver { get; set; }
     }
 }

@@ -1,20 +1,8 @@
 {
   "Files": [
     {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221464_20250415092419.docx",
-      "PackagePath": "staticwebassets\\Assignments\\1_0306221464_20250415092419.docx"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221492_20250415092829.pdf",
-      "PackagePath": "staticwebassets\\Assignments\\1_0306221492_20250415092829.pdf"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092653.zip",
-      "PackagePath": "staticwebassets\\Assignments\\Bài tập Toán_20250415092653.zip"
-    },
-    {
-      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092936.zip",
-      "PackagePath": "staticwebassets\\Assignments\\Bài tập Toán_20250415092936.zip"
+      "Id": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Message\\2_20250418105004.pdf",
+      "PackagePath": "staticwebassets\\Message\\2_20250418105004.pdf"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebBaiGiangAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

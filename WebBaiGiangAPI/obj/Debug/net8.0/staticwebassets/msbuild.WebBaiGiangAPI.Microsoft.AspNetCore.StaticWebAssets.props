@@ -1,76 +1,22 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\1_0306221464_20250415092419.docx'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Message\2_20250418105004.pdf'))">
       <SourceType>Package</SourceType>
       <SourceId>WebBaiGiangAPI</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>Assignments/1_0306221464_20250415092419.docx</RelativePath>
+      <RelativePath>Message/2_20250418105004.pdf</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>fo4u3sa52i</Fingerprint>
-      <Integrity>0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc=</Integrity>
+      <Fingerprint>9ffdsl7q4v</Fingerprint>
+      <Integrity>VY+CCUuzBAJsTy1txNLq9UyCLUuYQOahpuugQCqBUoo=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\1_0306221464_20250415092419.docx'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\1_0306221492_20250415092829.pdf'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>Assignments/1_0306221492_20250415092829.pdf</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>l5zfvmvpzr</Fingerprint>
-      <Integrity>uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\1_0306221492_20250415092829.pdf'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\Bài tập Toán_20250415092653.zip'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>Assignments/Bài tập Toán_20250415092653.zip</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>mvjnxuxh1z</Fingerprint>
-      <Integrity>nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\Bài tập Toán_20250415092653.zip'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\Bài tập Toán_20250415092936.zip'))">
-      <SourceType>Package</SourceType>
-      <SourceId>WebBaiGiangAPI</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/WebBaiGiangAPI</BasePath>
-      <RelativePath>Assignments/Bài tập Toán_20250415092936.zip</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>yvf5w6wbky</Fingerprint>
-      <Integrity>rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Assignments\Bài tập Toán_20250415092936.zip'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Message\2_20250418105004.pdf'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

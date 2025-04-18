@@ -157,8 +157,8 @@ namespace WebBaiGiangAPI.Controllers
             }
 
             var existUserId = await _context.Users.SingleOrDefaultAsync(u => u.UsersId == studentDTO.UsersId && u.UsersRoleId == 3);
-            var existStudent = await _context.Students.SingleOrDefaultAsync( s => s.StudentId == studentDTO.UsersId);
-            if (existUserId ==  null || existStudent == null)
+            var existStudent = await _context.Students.SingleOrDefaultAsync(s => s.StudentId == studentDTO.UsersId);
+            if (existUserId == null || existStudent == null)
             {
                 return BadRequest("Sinh viên không tồn tại");
             }
@@ -672,5 +672,106 @@ namespace WebBaiGiangAPI.Controllers
             return null; // Không có lỗi
         }
 
+        // Giáo viên có thể xóa hồ sơ của học sinh.
+        [HttpDelete("delete-student")]
+        public async Task<IActionResult> DeleteStudent(int id)
+        {
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
+            var student = await _context.Students
+                .Include(s => s.Users)
+                .FirstOrDefaultAsync(s => s.StudentId == id && s.Users.UsersId == id && s.Users.UsersRoleId == 3 && (s.Users.UsersState == 1 || s.Users.UsersState == 2));
+
+            if (student == null)
+            {
+                return NotFound(new { message = "Sinh viên không tồn tại" });
+            }
+
+            student.Users.UsersState = 3;
+            _context.Users.Update(student.Users);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Xóa sinh viên thành công" });
+           
+        }
+
+        // Chuyển trạng thái sinh viên
+        [HttpPut("change-student-status")]
+        public async Task<IActionResult> ChangeStudentStatus(int id, int status)
+        {
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
+            var student = await _context.Students
+                .Include(s => s.Users)
+                .FirstOrDefaultAsync(s => s.StudentId == id && s.Users.UsersId == id && s.Users.UsersRoleId == 3);
+            if (student == null)
+            {
+                return NotFound(new { message = "Sinh viên không tồn tại" });
+            }
+            student.Users.UsersState = status;
+            _context.Users.Update(student.Users);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Thay đổi trạng thái sinh viên thành công" });
+        }
+
+        // Thay đổi ảnh đại diện
+        [HttpPut("change-student-image")]
+        public async Task<IActionResult> ChangeStudentImage(int id, IFormFile file)
+        {
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
+            var student = await _context.Students
+                .Include(s => s.Users)
+                .FirstOrDefaultAsync(s => s.StudentId == id && s.Users.UsersId == id && s.Users.UsersRoleId == 3);
+            if (student == null)
+            {
+                return NotFound(new { message = "Sinh viên không tồn tại" });
+            }
+            if (file != null && file.Length > 0)
+            {
+                var fileExtension = Path.GetExtension(file.FileName).ToLower();
+                // Kiểm tra định dạng file
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                if (!allowedExtensions.Contains(fileExtension))
+                {
+                    return BadRequest(new { message = "Chỉ chấp nhận file ảnh định dạng .jpg, .jpeg, .png" });
+                }   
+                var fileName = $"{student.Users.UsersUsername}{fileExtension}";
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Users");
+
+                // Xóa ảnh cũ nếu có
+                if (!string.IsNullOrEmpty(student.Users.UsersImage))
+                {
+                    var oldFilePath = Path.Combine(filePath, student.Users.UsersImage);
+                    if (System.IO.File.Exists(oldFilePath))
+                    {
+                        System.IO.File.Delete(oldFilePath);
+                    }
+                }
+
+                // Lưu ảnh mới
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                student.Users.UsersImage = fileName;
+                _context.Users.Update(student.Users);
+                await _context.SaveChangesAsync();
+            }
+            return Ok(new { message = "Thay đổi ảnh đại diện thành công" });
+        }
     }
 }

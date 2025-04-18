@@ -136,6 +136,7 @@ builder.WebHost.ConfigureKestrel(options =>
     options.Limits.MaxRequestBodySize = 1024 * 1024 * 100; // 100MB
 });
 builder.Services.AddHttpClient<ZoomService>();
+
 //builder.Services.AddHostedService<AttendanceReportService>();
 //builder.Services.AddHostedService<AbsenceLateWarningService>();
 var app = builder.Build(); 

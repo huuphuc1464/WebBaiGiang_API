@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dMbD2UKrAUNv9RAjJsb8wqox5K6LYEGMTW0iC0gg46g=",
+  "Hash": "ne9GmyZADfppZzIukLyL6rpMCK86a5qXIqwl6DhWxYI=",
   "Source": "WebBaiGiangAPI",
   "BasePath": "_content/WebBaiGiangAPI",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221464_20250415092419.docx",
+      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Message\\2_20250418105004.pdf",
       "SourceId": "WebBaiGiangAPI",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
       "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "Assignments/1_0306221464_20250415092419#[.{fingerprint}]?.docx",
+      "RelativePath": "Message/2_20250418105004#[.{fingerprint}]?.pdf",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,80 +31,17 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "fo4u3sa52i",
-      "Integrity": "0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc=",
+      "Fingerprint": "9ffdsl7q4v",
+      "Integrity": "VY+CCUuzBAJsTy1txNLq9UyCLUuYQOahpuugQCqBUoo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assignments\\1_0306221464_20250415092419.docx"
-    },
-    {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221492_20250415092829.pdf",
-      "SourceId": "WebBaiGiangAPI",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
-      "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "Assignments/1_0306221492_20250415092829#[.{fingerprint}]?.pdf",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "l5zfvmvpzr",
-      "Integrity": "uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assignments\\1_0306221492_20250415092829.pdf"
-    },
-    {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092653.zip",
-      "SourceId": "WebBaiGiangAPI",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
-      "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "Assignments/Bài tập Toán_20250415092653#[.{fingerprint}]?.zip",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "mvjnxuxh1z",
-      "Integrity": "nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assignments\\Bài tập Toán_20250415092653.zip"
-    },
-    {
-      "Identity": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092936.zip",
-      "SourceId": "WebBaiGiangAPI",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\",
-      "BasePath": "_content/WebBaiGiangAPI",
-      "RelativePath": "Assignments/Bài tập Toán_20250415092936#[.{fingerprint}]?.zip",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "yvf5w6wbky",
-      "Integrity": "rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assignments\\Bài tập Toán_20250415092936.zip"
+      "OriginalItemSpec": "wwwroot\\Message\\2_20250418105004.pdf"
     }
   ],
   "Endpoints": [
     {
-      "Route": "Assignments/1_0306221464_20250415092419.docx",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221464_20250415092419.docx",
+      "Route": "Message/2_20250418105004.9ffdsl7q4v.pdf",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Message\\2_20250418105004.pdf",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -113,89 +50,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "19907"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:24:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc="
-        }
-      ]
-    },
-    {
-      "Route": "Assignments/1_0306221464_20250415092419.fo4u3sa52i.docx",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221464_20250415092419.docx",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "19907"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:24:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "fo4u3sa52i"
-        },
-        {
-          "Name": "label",
-          "Value": "Assignments/1_0306221464_20250415092419.docx"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-0dmbR39dsCTYGl8YXoJ0xCOekeq368NMIZQgHs3fDuc="
-        }
-      ]
-    },
-    {
-      "Route": "Assignments/1_0306221492_20250415092829.l5zfvmvpzr.pdf",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221492_20250415092829.pdf",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "261144"
+          "Value": "99001"
         },
         {
           "Name": "Content-Type",
@@ -203,11 +58,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk=\""
+          "Value": "\"VY+CCUuzBAJsTy1txNLq9UyCLUuYQOahpuugQCqBUoo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:28:29 GMT"
+          "Value": "Fri, 18 Apr 2025 03:50:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -217,21 +72,21 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "l5zfvmvpzr"
+          "Value": "9ffdsl7q4v"
         },
         {
           "Name": "label",
-          "Value": "Assignments/1_0306221492_20250415092829.pdf"
+          "Value": "Message/2_20250418105004.pdf"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk="
+          "Value": "sha256-VY+CCUuzBAJsTy1txNLq9UyCLUuYQOahpuugQCqBUoo="
         }
       ]
     },
     {
-      "Route": "Assignments/1_0306221492_20250415092829.pdf",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\1_0306221492_20250415092829.pdf",
+      "Route": "Message/2_20250418105004.pdf",
+      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Message\\2_20250418105004.pdf",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -240,7 +95,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "261144"
+          "Value": "99001"
         },
         {
           "Name": "Content-Type",
@@ -248,11 +103,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk=\""
+          "Value": "\"VY+CCUuzBAJsTy1txNLq9UyCLUuYQOahpuugQCqBUoo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:28:29 GMT"
+          "Value": "Fri, 18 Apr 2025 03:50:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -262,171 +117,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-uSZW785QSVYni2g7bvnSMc5EXWXE3sIF0JVOToIImqk="
-        }
-      ]
-    },
-    {
-      "Route": "Assignments/Bài tập Toán_20250415092653.mvjnxuxh1z.zip",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092653.zip",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "17245"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/x-zip-compressed"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:26:53 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "mvjnxuxh1z"
-        },
-        {
-          "Name": "label",
-          "Value": "Assignments/Bài tập Toán_20250415092653.zip"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc="
-        }
-      ]
-    },
-    {
-      "Route": "Assignments/Bài tập Toán_20250415092653.zip",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092653.zip",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "17245"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/x-zip-compressed"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:26:53 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-nvLhRnuncmiB/BO53ekhFnc8/dSMCLaw+VWowUerhoc="
-        }
-      ]
-    },
-    {
-      "Route": "Assignments/Bài tập Toán_20250415092936.yvf5w6wbky.zip",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092936.zip",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "234838"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/x-zip-compressed"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:29:36 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "yvf5w6wbky"
-        },
-        {
-          "Name": "label",
-          "Value": "Assignments/Bài tập Toán_20250415092936.zip"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo="
-        }
-      ]
-    },
-    {
-      "Route": "Assignments/Bài tập Toán_20250415092936.zip",
-      "AssetFile": "D:\\HK6\\TTTN\\WebBaiGiang_API\\WebBaiGiangAPI\\wwwroot\\Assignments\\Bài tập Toán_20250415092936.zip",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "234838"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/x-zip-compressed"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 02:29:36 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-rpfCujF0qggDSMX0q+2HhIdokVjtnBJpuSSkRrMt0yo="
+          "Value": "sha256-VY+CCUuzBAJsTy1txNLq9UyCLUuYQOahpuugQCqBUoo="
         }
       ]
     }

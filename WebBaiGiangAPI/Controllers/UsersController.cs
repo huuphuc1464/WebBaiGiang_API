@@ -32,77 +32,7 @@ namespace WebBaiGiangAPI.Controllers
             _jwtService = jwtService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
-        {
-            try
-            {
-                var users = await _context.Users.ToListAsync();
-
-                if (!users.Any())
-                {
-                    return NoContent();
-                }
-
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Lỗi khi lấy danh sách người dùng: " + ex.Message);
-            }
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUsers(int id)
-        {
-            var users = await _context.Users.FindAsync(id);
-
-            if (users == null)
-            {
-                return NotFound();
-            }
-
-            return users;
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(int id, Users users)
-        {
-            if (id != users.UsersId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(users).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
-        {
-            _context.Users.Add(users);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUsers", new { id = users.UsersId }, users);
-        }
-
+        // Đăng ký tài khoản giáo viên
         [HttpPost("sign-in")]
         public async Task<IActionResult> SignIn([FromForm] UsersDTO user, [FromForm] IFormFile? anhdaidien)
         {
@@ -220,12 +150,14 @@ namespace WebBaiGiangAPI.Controllers
             if (_context.Users.Any(u => u.UsersEmail == user.UsersEmail))
             {
                 return Conflict(new { message = "Email đã tồn tại trong hệ thống." });
-            };
+            }
+            ;
 
             if (_context.Users.Any(u => u.UsersMobile == user.UsersMobile))
             {
                 return Conflict(new { message = "SDT đã tồn tại trong hệ thống." });
-            };
+            }
+            ;
 
             //Xử lý upload ảnh
             if (anhdaidien != null && anhdaidien.Length > 0)
@@ -300,6 +232,7 @@ namespace WebBaiGiangAPI.Controllers
             return _context.Users.Any(e => e.UsersId == id);
         }
 
+        // Thay đổi mật khẩu
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(string oldPass, string newPass, string rePass)
         {
@@ -349,7 +282,7 @@ namespace WebBaiGiangAPI.Controllers
             }
 
             // Kiểm tra trùng khớp giữa mật khẩu cũ mà mật khẩu mới
-            if (oldPass == newPass )
+            if (oldPass == newPass)
             {
                 return Unauthorized(new
                 {
@@ -391,5 +324,104 @@ namespace WebBaiGiangAPI.Controllers
                 data = user,
             });
         }
+
+        [HttpPut("UpdateProfile/{userId}")]
+        public async Task<IActionResult> UpdateProfile(
+            [FromRoute] int userId,
+            [FromForm] string? hoTen,
+            [FromForm] string? email,
+            [FromForm] string? phone,
+            [FromForm] IFormFile? anhdaidien)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.UsersId == userId);
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Người dùng không tồn tại" });
+            }
+
+            // Kiểm tra email
+            if (!string.IsNullOrEmpty(email))
+            {
+                if (!Regex.IsMatch(email, patternEmail))
+                {
+                    return BadRequest(new { message = "Email không hợp lệ", data = email });
+                }
+                user.UsersEmail = email;
+            }
+
+            // Kiểm tra số điện thoại
+            if (!string.IsNullOrEmpty(phone))
+            {
+                if (!Regex.IsMatch(phone, patternSDT))
+                {
+                    return BadRequest(new { message = "Số điện thoại không hợp lệ", data = phone });
+                }
+                user.UsersMobile = phone;
+            }
+
+            // Cập nhật họ tên
+            if (!string.IsNullOrEmpty(hoTen))
+            {
+                user.UsersName = Regex.Replace(hoTen.Trim(), @"\\s+", " ");
+            }
+
+            // Xử lý ảnh đại diện nếu có
+            if (anhdaidien != null && anhdaidien.Length > 0)
+            {
+                var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
+                var fileExtension = Path.GetExtension(anhdaidien.FileName).ToLower();
+                if (!allowedExtensions.Contains(fileExtension))
+                {
+                    return BadRequest(new { message = "Chỉ chấp nhận file ảnh định dạng PNG, JPG, JPEG." });
+                }
+                // Xóa ảnh cũ nếu có
+                if (!string.IsNullOrEmpty(user.UsersImage))
+                {
+                    string oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Users", user.UsersImage);
+                    if (System.IO.File.Exists(oldFilePath))
+                    {
+                        System.IO.File.Delete(oldFilePath);
+                    }
+                }
+
+                string uniqueFileName = $"{user.UsersUsername}{fileExtension}";
+                string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Users");
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                string filePath = Path.Combine(uploadPath, uniqueFileName);
+                try
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await anhdaidien.CopyToAsync(stream);
+                    }
+                    user.UsersImage = uniqueFileName;
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, new { message = "Lỗi khi lưu ảnh.", error = ex.Message });
+                }
+            }
+
+            // Cập nhật DB
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = "Cập nhật thông tin thành công",
+                data = new
+                {
+                    user.UsersUsername,
+                    user.UsersName,
+                    user.UsersEmail,
+                    user.UsersMobile,
+                    Image = user.UsersImage
+                }
+            });
+        }
+
     }
 }

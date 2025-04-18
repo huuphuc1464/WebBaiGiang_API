@@ -809,22 +809,6 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
-    "Method": "GetClassDetails",
-    "RelativePath": "api/ClassCourses/{classId}/details",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "classId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
     "Method": "AddClassCourse",
     "RelativePath": "api/ClassCourses/add-class-course",
     "HttpMethod": "POST",
@@ -848,6 +832,53 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
+    "Method": "GetClassCourseDetail",
+    "RelativePath": "api/ClassCourses/classcourse/detail/{classCourseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classCourseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
+    "Method": "GetClassCourseList",
+    "RelativePath": "api/ClassCourses/classcourse/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "teacherId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.ClassCoursesController",
@@ -2210,6 +2241,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBaiGiangAPI.Controllers.HomeController",
+    "Method": "GetSystemOverviewReport",
+    "RelativePath": "api/Home/report/overview",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBaiGiangAPI.Controllers.LessonFilesController",
     "Method": "UploadFile",
     "RelativePath": "api/LessonFiles/{lessonId}/upload",
@@ -2499,6 +2551,198 @@
         "Name": "lessonId",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "DeleteMessageById",
+    "RelativePath": "api/Messages/delete-message-by-id/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "DeleteMessagesBySubject",
+    "RelativePath": "api/Messages/delete-messages-by-subject",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "senderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "subject",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "ExportMessage",
+    "RelativePath": "api/Messages/export-message",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "GetAllMessages",
+    "RelativePath": "api/Messages/get-all-messages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "GetMessages",
+    "RelativePath": "api/Messages/get-messages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "senderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "subject",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "SearchMessages",
+    "RelativePath": "api/Messages/search-messages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "keyword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "SendMessage",
+    "RelativePath": "api/Messages/send-message",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "senderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "subject",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.MessagesController",
+    "Method": "StatisticMessages",
+    "RelativePath": "api/Messages/statistic-messages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -3853,6 +4097,64 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.StudentsController",
+    "Method": "ChangeStudentImage",
+    "RelativePath": "api/Students/change-student-image",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.StudentsController",
+    "Method": "ChangeStudentStatus",
+    "RelativePath": "api/Students/change-student-status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.StudentsController",
+    "Method": "DeleteStudent",
+    "RelativePath": "api/Students/delete-student",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.StudentsController",
     "Method": "GetStudent",
     "RelativePath": "api/Students/get-student",
     "HttpMethod": "GET",
@@ -4412,6 +4714,22 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
+    "Method": "DeleteTeacher",
+    "RelativePath": "api/Teacher/delete-teacher",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
     "Method": "GetTeacher",
     "RelativePath": "api/Teacher/get-teacher",
     "HttpMethod": "GET",
@@ -4438,6 +4756,22 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
+    "Method": "GetTeacherClasses",
+    "RelativePath": "api/Teacher/get-teacher-classes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
     "Method": "GetListTeachers",
     "RelativePath": "api/Teacher/get-teachers",
     "HttpMethod": "GET",
@@ -4455,6 +4789,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
+    "Method": "RestoreTeacher",
+    "RelativePath": "api/Teacher/restore-teacher",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.TeacherController",
@@ -4735,99 +5085,6 @@
   },
   {
     "ContainingType": "WebBaiGiangAPI.Controllers.UsersController",
-    "Method": "GetUsers",
-    "RelativePath": "api/Users",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBaiGiangAPI.Models.Users, WebBaiGiangAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.UsersController",
-    "Method": "PostUsers",
-    "RelativePath": "api/Users",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "users",
-        "Type": "WebBaiGiangAPI.Models.Users",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "WebBaiGiangAPI.Models.Users",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.UsersController",
-    "Method": "GetUsers",
-    "RelativePath": "api/Users/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "WebBaiGiangAPI.Models.Users",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.UsersController",
-    "Method": "PutUsers",
-    "RelativePath": "api/Users/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "users",
-        "Type": "WebBaiGiangAPI.Models.Users",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBaiGiangAPI.Controllers.UsersController",
     "Method": "ChangePassword",
     "RelativePath": "api/Users/ChangePassword",
     "HttpMethod": "POST",
@@ -4937,6 +5194,67 @@
       },
       {
         "Name": "UserGender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBaiGiangAPI.Controllers.UsersController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Users/UpdateProfile/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "hoTen",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "phone",
         "Type": "System.String",
         "IsRequired": false
       },

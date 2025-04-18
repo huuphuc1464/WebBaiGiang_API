@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using WebBaiGiangAPI.Data;
 using WebBaiGiangAPI.Models;
 
@@ -45,6 +47,92 @@ namespace WebBaiGiangAPI.Controllers
               .ToList();
             return Ok(result);
         }
-        
+
+        /*
+         BÁO CÁO CỦA HỆ THỐNG QUẢN LÝ E-LEARNING: Báo cáo về Nhật ký hoạt động, Giáo viên, Lớp học, Bài tập, Khoa, Sự kiện, File, Sinh viên và Môn học.
+         */
+        [HttpGet("report/overview")]
+        public async Task<IActionResult> GetSystemOverviewReport([FromQuery] DateTime? fromDate, [FromQuery] DateTime? toDate)
+        {
+            var from = fromDate ?? DateTime.MinValue;
+            var to = toDate ?? DateTime.MaxValue;
+
+            var totalActivities = await _context.UserLogs
+                .Where(x => x.UlogLoginDate >= from && x.UlogLoginDate <= to)
+                .CountAsync();
+
+            var totalTeachers = await _context.Users
+                .Where(x => x.UsersRoleId == 2)
+                .CountAsync();
+
+            var totalClasses = await _context.Classes.CountAsync();
+
+            var totalClassCourses = await _context.ClassCourses.CountAsync();
+
+            var totalCourses = await _context.Courses.CountAsync();
+
+            var totalAssignments = await _context.Assignments.CountAsync();
+
+            var totalEvents = await _context.Events
+                .Where(x => x.EventDateStart >= from && x.EventDateEnd <= to)
+                .CountAsync();
+
+            var totalFiles = await _context.Files.CountAsync();
+
+            var totalStudents = await _context.Users
+                .Where(x => x.UsersRoleId == 3)
+                .CountAsync();
+
+            var totalSubjects = await _context.Subjects.CountAsync();
+
+            var topActiveUsers = await _context.UserLogs
+                .Include(x => x.Users)
+                .Where(x => x.UlogLoginDate >= from && x.UlogLoginDate <= to)
+                .GroupBy(x => x.UlogUsersId)
+                .Select(g => new
+                {
+                    Username = g.FirstOrDefault().Users.UsersUsername, // Lấy username từ Users
+                    ActivityCount = g.Count()
+                })
+                .OrderByDescending(x => x.ActivityCount)
+                .Take(5)
+                .ToListAsync();
+
+            var monthlyActivityRaw = await _context.UserLogs
+             .Where(x => x.UlogLoginDate >= from && x.UlogLoginDate <= to)
+             .GroupBy(x => new { x.UlogLoginDate.Year, x.UlogLoginDate.Month })
+             .Select(g => new
+             {
+                 Year = g.Key.Year,
+                 Month = g.Key.Month,
+                 Count = g.Count()
+             })
+             .OrderBy(x => x.Year)
+             .ThenBy(x => x.Month)
+             .ToListAsync();
+
+            var monthlyActivity = monthlyActivityRaw
+                .Select(x => new
+                {
+                    Label = $"{x.Month:D2}/{x.Year}",
+                    x.Count
+                })
+                .ToList();
+
+
+            return Ok(new
+            {
+                TotalActivities = totalActivities,
+                TotalTeachers = totalTeachers,
+                TotalClasses = totalClasses,
+                TotalAssignments = totalAssignments,
+                TotalEvents = totalEvents,
+                TotalFiles = totalFiles,
+                TotalStudents = totalStudents,
+                TotalSubjects = totalSubjects,
+                TopActiveUsers = topActiveUsers,
+                MonthlyActivityChart = monthlyActivity
+            });
+        }
     }
 }

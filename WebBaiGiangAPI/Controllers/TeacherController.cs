@@ -96,7 +96,7 @@ namespace WebBaiGiangAPI.Controllers
                 .Include(u => u.Role)
                 .Include(u => u.LoginLevel)
                 .Include(u => u.State)
-                .Select (u => new
+                .Select(u => new
                 {
                     u.UsersId,
                     u.UsersName,
@@ -119,12 +119,12 @@ namespace WebBaiGiangAPI.Controllers
                 .FirstOrDefaultAsync();
             if (user == null)
             {
-                return NotFound( new
+                return NotFound(new
                 {
                     message = "Giáo viên không tồn tại"
                 });
             }
-            return Ok (user);
+            return Ok(user);
         }
 
         [HttpPut("update-teacher")]
@@ -210,12 +210,14 @@ namespace WebBaiGiangAPI.Controllers
             if (_context.Users.Any(u => u.UsersEmail == user.UsersEmail) && (saveuser.UsersEmail != user.UsersEmail))
             {
                 return Conflict(new { message = "Email đã tồn tại trong hệ thống." });
-            };
+            }
+            ;
 
             if (_context.Users.Any(u => u.UsersMobile == user.UsersMobile) && (saveuser.UsersMobile != user.UsersMobile))
             {
                 return Conflict(new { message = "SDT đã tồn tại trong hệ thống." });
-            };
+            }
+            ;
 
             //Xử lý upload ảnh
             if (anhdaidien != null && anhdaidien.Length > 0)
@@ -303,7 +305,7 @@ namespace WebBaiGiangAPI.Controllers
                 }
             }
 
-            return Ok( new
+            return Ok(new
             {
                 message = "Thay đổi thông tin giáo viên thành công",
                 data = saveuser
@@ -431,12 +433,14 @@ namespace WebBaiGiangAPI.Controllers
             if (_context.Users.Any(u => u.UsersEmail == user.UsersEmail))
             {
                 return Conflict(new { message = "Email đã tồn tại trong hệ thống." });
-            };
+            }
+            ;
 
             if (_context.Users.Any(u => u.UsersMobile == user.UsersMobile))
             {
                 return Conflict(new { message = "SDT đã tồn tại trong hệ thống." });
-            };
+            }
+            ;
 
             //Xử lý upload ảnh
             if (anhdaidien != null && anhdaidien.Length > 0)
@@ -588,6 +592,78 @@ namespace WebBaiGiangAPI.Controllers
                 return BadRequest("Không tìm thấy lớp học phần nào.");
             }
             return Ok(courses);
+        }
+
+        // Quản trị viên sẽ có thể xóa hồ sơ của giáo viên.
+        [HttpDelete("delete-teacher")]
+        public async Task<IActionResult> DeleteTeacher(int id)
+        {
+            //var errorResult = KiemTraTokenAdmin();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
+            var user = await _context.Users.Where(u => u.UsersId == id && u.UsersRoleId == 2 && u.UsersState == 1).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound(new { message = "Giáo viên không tồn tại" });
+            }
+            user.UsersState = 3;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Xóa giáo viên thành công" });
+        }
+
+        // Quản trị viên sẽ có thể khôi phục hồ sơ của giáo viên.
+        [HttpPut("restore-teacher")]
+        public async Task<IActionResult> RestoreTeacher(int id)
+        {
+            //var errorResult = KiemTraTokenAdmin();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
+            var user = await _context.Users.Where(u => u.UsersId == id && u.UsersRoleId == 2 && u.UsersState == 3).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound(new { message = "Giáo viên không tồn tại" });
+            }
+            user.UsersState = 1;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Khôi phục giáo viên thành công" });
+        }
+
+        // Xem danh sách học phần, lớp học phần do mình tạo và giảng dạy.
+        [HttpGet("get-teacher-classes")]
+        public async Task<IActionResult> GetTeacherClasses(int teacherId)
+        {
+            //var errorResult = KiemTraTokenTeacher();
+            //if (errorResult != null)
+            //{
+            //    return errorResult;
+            //}
+            var classes = await _context.TeacherClasses
+                .Include(tc => tc.ClassCourses)
+                    .ThenInclude(cc => cc.Classes)
+                    .ThenInclude(c => c.Semester)
+                .Include(tc => tc.ClassCourses)
+                    .ThenInclude(cc => cc.Course)
+                .Where(tc => tc.TcUsersId == teacherId)
+                .Select(tc => new
+                {
+                    tc.TcId,
+                    ClassTitle = tc.ClassCourses.Classes.ClassTitle,
+                    ClassId = tc.ClassCourses.Classes.ClassId,
+                    CourseTitle = tc.ClassCourses.Course.CourseTitle,
+                    Semester = tc.ClassCourses.Classes.Semester.SemesterTitle
+                })
+                .ToListAsync();
+            if (classes == null || !classes.Any())
+            {
+                return NotFound(new { message = "Không tìm thấy lớp học phần nào." });
+            }
+            return Ok(new { message = "Danh sách lớp học phần", data = classes });
         }
 
     }
